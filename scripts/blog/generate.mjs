@@ -61,8 +61,20 @@ ${groundingContext}
 ALREADY-PUBLISHED TITLES (write about something meaningfully different from all of these):
 ${existingTitles.length ? existingTitles.map((t) => `- ${t}`).join("\n") : "(none yet)"}
 
-CANDIDATE TOPIC PILLARS (pick the one least covered by the titles above, and narrow it to one specific, concrete angle):
-${TOPIC_PILLARS.map((t) => `- ${t}`).join("\n")}
+CANDIDATE TOPIC PILLARS — pick the one least covered by the titles above, narrow it to one concrete angle, and follow its SEO brief:
+${TOPIC_PILLARS.map((p, i) => `[${i}] ${p.title}
+    main keyword: ${p.seo.mainKeyword}
+    long-tail: ${p.seo.longTailKeywords.join(", ")}
+    audience: ${p.seo.audience}
+    outline: ${p.outline.join(" → ")}`).join("\n\n")}
+
+SEO WRITING RULES:
+1. Use the main keyword naturally in the first paragraph, the H1 title, and at least one H2 heading.
+2. Sprinkle 2–3 long-tail keywords across H2/H3 headings and body prose — never stuff them.
+3. Structure: H1 title → intro (keyword in first sentence) → H2 sections matching the outline → conclusion with internal links.
+4. Each H2 should be a clear, scannable heading (problem, architecture, implementation, pitfalls, conclusion pattern).
+5. Include at least one code block per major H2 section — tested, runnable code ranks higher than prose alone.
+6. End with a conclusion that links to 1–2 related pillar articles (use the relatedTo indices above).
 
 WRITING RULES:
 1. First person, as Samir. Technical, specific, and grounded in the real projects/stack in the context above.
@@ -86,9 +98,11 @@ ANTI-PATTERNS (never do these):
 - Repeating the same sentence structure multiple times
 
 OUTPUT FORMAT: Respond with ONLY the following structure (no markdown fences, no preamble). The <markdown> block MUST be the very last thing in your response — nothing after the closing </markdown> tag.
-<title>Post Title</title>
+<title>SEO-optimized post title (main keyword near start, under 65 chars)</title>
 <slug>url-safe-slug</slug>
-<excerpt>one or two sentence summary, under 200 characters</excerpt>
+<excerpt>one or two sentence summary, under 200 characters, includes main keyword</excerpt>
+<metaTitle>SEO meta title for Google (under 60 chars, includes main keyword)</metaTitle>
+<metaDescription>SEO meta description for Google (under 160 chars, includes main keyword and a call to action)</metaDescription>
 <tags>comma-separated relevant tags, lowercase</tags>
 <markdown>
 # Post Title
@@ -133,6 +147,8 @@ Full markdown body here...
     title: getTag("title"),
     slug: getTag("slug"),
     excerpt: getTag("excerpt"),
+    metaTitle: getTag("metaTitle"),
+    metaDescription: getTag("metaDescription"),
     tags: getTag("tags"),
     markdown: getTag("markdown"),
   };
@@ -156,6 +172,14 @@ Full markdown body here...
       console.warn("[generatePost] Could not derive excerpt fallback; markdown structure unexpected.");
     }
     parsed.excerpt = firstParagraph.slice(0, 197).trim() + "...";
+  }
+
+  // SEO fallbacks: metaTitle from title, metaDescription from excerpt
+  if (!parsed.metaTitle) {
+    parsed.metaTitle = parsed.title?.slice(0, 60) || "";
+  }
+  if (!parsed.metaDescription) {
+    parsed.metaDescription = parsed.excerpt?.slice(0, 160) || "";
   }
 
   parsed.slug = slugify(parsed.slug || parsed.title);
