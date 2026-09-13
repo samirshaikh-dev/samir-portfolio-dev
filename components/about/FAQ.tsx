@@ -3,22 +3,27 @@ export default function FAQ() {
     {
       question: "What is your primary tech stack?",
       answer:
-        "My primary stack is Node.js, Express.js, NestJS, and PostgreSQL for backend development, plus the Vercel AI SDK, Google Gemini embeddings, and pgvector for RAG systems. I also use Redis for caching, BullMQ for background jobs, and Apache Kafka for event-driven architectures. I can turn a monolith into microservices or build event-driven systems with Kafka and Redis.",
+        "My primary tech stack is Node.js, TypeScript, PostgreSQL (with pgvector), Next.js, Express.js, and NestJS, coupled with Redis, MongoDB, Docker, and the Vercel AI SDK. For distributed and event-driven architectures, I use Apache Kafka and BullMQ. I architect high-performance APIs, production RAG pipelines, and scalable microservices.",
     },
     {
       question: "Do you have experience building AI-powered applications?",
       answer:
-        "Yes, I have hands-on experience building AI-powered applications, including this portfolio chatbot. It is a production RAG system I built from scratch that embeds site content with Google Gemini via the Vercel AI SDK, retrieves context using pgvector cosine similarity search, and grounds every answer in exact URLs and titles to reduce hallucinations. This is the same approach used to build a RAG system that stops your chatbot from hallucinating. I also explore agentic AI workflows — building AI agents that can reason, use tools, and orchestrate multi-step tasks autonomously.",
+        "Yes, I have hands-on experience building production AI systems, including this portfolio's RAG assistant. It indexes ~10,000 document chunks using PostgreSQL pgvector with Gemini 3072d vector embeddings, achieving sub-300ms retrieval latencies with strict cosine distance filtering (<= 0.5) to eliminate hallucinations. I also build autonomous agentic workflows that leverage multi-step reasoning, tool execution, and dynamic context grounding.",
+    },
+    {
+      question: "Are you interested in Forward Deployed Engineer (FDE) roles?",
+      answer:
+        "Yes, I am actively targeting Forward Deployed Engineer roles that combine deep backend engineering with direct customer ownership. I excel at navigating ambiguous requirements, conducting technical discovery with stakeholders, prototyping working AI solutions in days, and taking end-to-end accountability for production deployments.",
     },
     {
       question: "Are you open to remote work or freelance projects?",
       answer:
-        "Yes, I am open to remote AI Backend Engineer, AI SDE, and Agentic AI Engineer roles, as well as freelance backend engineering projects globally.",
+        "Yes, I am open to full-time remote AI Backend Engineer, AI SDE, Agentic AI Engineer, and Forward Deployed Engineer roles globally, as well as on-site or hybrid opportunities in India.",
     },
     {
       question: "Who is Samir Shaikh?",
       answer:
-        "Samir Shaikh is an AI Backend Engineer and AI SDE based in Gujarat, India. He specializes in building RAG pipelines, LLM-powered chatbots, agentic AI systems, and scalable Node.js backends. He holds a B.Tech in Information Technology from Uka Tarsadia University and has production experience from a 9-month internship at Logicwind, where he shipped backend services across monolithic and microservice architectures.",
+        "Samir Shaikh is an AI Backend Engineer, AI SDE, and Full Stack Engineer based in Gujarat, India. He holds a B.Tech in Information Technology from Uka Tarsadia University (2026) and brings hands-on production experience from engineering internships at Xira Infotech (Full Stack Engineer Intern) and LOGICWIND (Back End Developer Intern), building production RAG pipelines, microservices, and web platforms.",
     },
     {
       question: "How can I contact Samir?",
@@ -26,19 +31,19 @@ export default function FAQ() {
         "You can reach Samir via email at shaikh.samir.work@gmail.com, through the contact form on this website, or on LinkedIn at linkedin.com/in/samir-shaikh-760b932a8. He typically responds within 24-48 hours.",
     },
     {
-      question: "What kind of projects have you worked on?",
+      question: "What kind of production projects have you worked on?",
       answer:
-        "I have built a production RAG chatbot with vector search, architected scalable microservices, built secure REST and GraphQL APIs, and developed platforms such as a WhatsApp campaign system and an AI-driven customer ticket triage system. I also explore agentic AI — building autonomous agents that use tools, chain reasoning, and orchestrate across multiple LLM calls.",
+        "Key projects include a dynamic job portal with Next.js, PostgreSQL, and RBAC at Xira Infotech; a production RAG assistant with Gemini embeddings and pgvector; an active WhatsApp business campaign platform processing 1,000+ messages/week; an event-driven AI ticket triage system with Kafka, BullMQ, and OpenTelemetry; and a transactional event management GraphQL platform (Eventify).",
     },
     {
       question: "What is your experience with DevOps and deployment?",
       answer:
-        "I regularly use Docker and Docker Compose for containerization, GitHub Actions for CI/CD pipelines, and implement observability using OpenTelemetry, Prometheus, and Grafana.",
+        "I regularly containerize microservices using Docker and Docker Compose, build automated CI/CD workflows with GitHub Actions, and implement full-stack observability with OpenTelemetry, Prometheus, and Grafana.",
     },
     {
       question: "Where are you based?",
       answer:
-        "I am based in Vapi / Surat, Gujarat, India, but I am comfortable working in remote environments across different time zones.",
+        "I am based in Vapi / Surat, Gujarat, India, and work effectively with remote engineering teams across global time zones.",
     },
   ];
 
