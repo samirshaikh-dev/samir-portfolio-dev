@@ -9,7 +9,8 @@ interface ContactMessage {
   subject: string;
   message: string;
   seen: boolean;
-  created_at: string;
+  createdAt?: string | Date;
+  created_at?: string | Date;
 }
 
 export default function ContactAdminPage() {
@@ -144,7 +145,9 @@ export default function ContactAdminPage() {
                   </div>
                   <div className="flex items-center gap-3 self-end sm:self-auto">
                     <span className="text-xs text-text-muted">
-                      {new Date(msg.created_at).toLocaleString()}
+                      {msg.createdAt || msg.created_at
+                        ? new Date(msg.createdAt || msg.created_at!).toLocaleString()
+                        : "Just now"}
                     </span>
                     <button
                       onClick={() => toggleSeen(msg.id, msg.seen)}
