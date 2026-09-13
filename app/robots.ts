@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: '*',
-        allow: ['/', '/api/feed', '/llms.txt'],
+        allow: ['/', '/api/feed', '/llms.txt', '/llms-full.txt'],
         disallow: ['/admin/', '/api/', '/login/'],
       },
       {
@@ -18,7 +18,7 @@ export default function robots(): MetadataRoute.Robots {
           'Google-Extended',
           'Applebot-Extended',
         ],
-        allow: ['/', '/llms.txt', '/api/feed'],
+        allow: ['/', '/llms.txt', '/llms-full.txt', '/api/feed'],
         disallow: ['/admin/', '/api/', '/login/'],
       },
     ],

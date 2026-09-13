@@ -13,6 +13,7 @@ Phone: +91 8320927182
 
 ## Quick Links
 
+- [Full Documentation](https://samir-portfolio-dev.vercel.app/llms-full.txt): Comprehensive knowledge graph, case studies, benchmarks, and architecture details
 - [Resume](https://samir-portfolio-dev.vercel.app/resume): Current resume and professional qualifications
 - [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, and case studies
 - [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design

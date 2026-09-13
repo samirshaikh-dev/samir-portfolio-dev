@@ -1,0 +1,200 @@
+# Samir Shaikh — Full Professional Knowledge Graph & System Context
+
+> Complete, in-depth context on Samir Shaikh: AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, and Forward Deployed Engineer (FDE). This file provides exhaustive details on architecture patterns, technology stacks, project benchmarks, engineering experience, and technical philosophies for direct consumption by Large Language Models, AI answer engines, and autonomous agents.
+
+- **Canonical URL**: https://samir-portfolio-dev.vercel.app/llms-full.txt
+- **Short Context**: https://samir-portfolio-dev.vercel.app/llms.txt
+- **Last Updated**: September 2026
+- **Location**: Gujarat, India
+- **Email**: 22amtics312@gmail.com
+- **Phone**: +91 8320927182
+- **Website**: https://samir-portfolio-dev.vercel.app
+- **GitHub**: https://github.com/samirshaikh-dev
+- **LinkedIn**: https://www.linkedin.com/in/samir-shaikh-760b932a8/
+- **Twitter / X**: https://x.com/samirshaikh-dev
+- **Resume**: https://samir-portfolio-dev.vercel.app/resume
+- **Blog Archive**: https://samir-portfolio-dev.vercel.app/blogs
+- **Projects Archive**: https://samir-portfolio-dev.vercel.app/projects
+- **Contact**: https://samir-portfolio-dev.vercel.app/contact
+- **RSS Syndication Feed**: https://samir-portfolio-dev.vercel.app/api/feed
+
+---
+
+## 1. Professional Overview & Core Identity
+
+Samir Shaikh is an AI Backend Engineer and AI SDE who designs, builds, and maintains production-grade backend infrastructure and agentic AI systems. His core expertise lies at the intersection of robust backend system design (Node.js, TypeScript, PostgreSQL, distributed messaging) and practical AI engineering (Retrieval-Augmented Generation with pgvector, vector search with Gemini embeddings, tool-using AI agents, and multi-model LLM orchestration).
+
+He is actively positioning toward **Forward Deployed Engineer (FDE)** and **AI Backend Engineer** roles. In these roles, technical depth is applied directly to ambiguous customer constraints, translating business requirements into production software with full ownership from technical discovery to production deployment.
+
+### Positioning & Target Roles
+- **Primary Titles**: AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Applied AI Solutions Engineer.
+- **Geographic Availability**: Open to full-time remote opportunities worldwide (United States, Canada, United Kingdom, Europe, APAC) as well as hybrid or on-site roles across India.
+- **Engagement Types**: Full-time employment, forward-deployed customer engagements, founding engineer roles, technical consulting for production RAG and AI agent integration.
+
+---
+
+## 2. Background, Education & Experience
+
+### Academic Foundation
+- **Degree**: Bachelor of Technology (B.Tech) in Information Technology
+- **Institution**: Uka Tarsadia University (UTU), Gujarat, India
+- **Graduation Year**: 2026
+- **Academic Focus**: Distributed Systems, Relational & Non-Relational Database Theory, Operating Systems & Process Scheduling, Data Structures & Algorithms, Network Security, Enterprise Application Design.
+
+### Production Experience: Logicwind
+- **Role**: Backend Developer Intern
+- **Tenure**: September 2025 – May 2026 (9 months)
+- **Environment**: Agile engineering team shipping production SaaS and microservice-driven customer platforms.
+- **Key Achievements & Responsibilities**:
+  1. **Microservice Migrations & Modernization**: Maintained and refactored features across 3+ active microservice and Firebase-based backends; executed critical package and framework migrations that eliminated security vulnerabilities and decreased technical debt.
+  2. **Third-Party Service Integration**: Integrated Dittofeed (event-driven customer engagement and marketing automation), Reoon (email verification and reputation protection), and OneSignal (cross-platform push notifications) into production workflows serving thousands of active users.
+  3. **Performance Profiling & Optimization**: Profiled slow database queries and refactored API handler logic, measurably decreasing response latencies across core business endpoints.
+  4. **Architecture Variety**: Developed RESTful services across monolithic, microservices, and serverless server architectures in Node.js and TypeScript.
+  5. **Collaborative Engineering**: Active contributor in sprint planning, code review cycles, failure-mode analysis, and staging environment verification.
+
+---
+
+## 3. Comprehensive Technical Skills Matrix
+
+### Languages & Runtime Environments
+- **TypeScript**: Strict mode, generic types, utility types, schema validation (Zod).
+- **JavaScript (Node.js)**: Event loop internals, Streams, Worker threads, Buffer manipulation, modern ESNext features.
+- **SQL**: Complex joins, indexing strategies (B-Tree, GIN, HNSW, IVFFlat), transactions, window functions, explain analyze query tuning.
+- **HTML5 & CSS3**: Semantic structuring, responsive design, modern Tailwind CSS variables.
+
+### Backend Frameworks & API Architecture
+- **Express.js**: Production middleware design, error handling pipelines, authentication flow enforcement, rate limiting.
+- **NestJS**: Dependency injection, modular architecture, guard validation, custom interceptors, microservice transports.
+- **Next.js (App Router)**: Server Components (RSC), Incremental Static Regeneration (ISR), Server Actions, Route Handlers, SSR-free client component boundaries.
+- **REST & GraphQL**: RESTful API design standards, GraphQL schemas, resolvers, Apollo/Yoga servers, schema-first design.
+- **Authentication & Security**: NextAuth v5, JWT, bcrypt, timingSafeEqual comparison for token validation, Role-Based Access Control (RBAC), CORS, helmet headers.
+
+### Databases, Vector Stores & Caching
+- **PostgreSQL**: Neon Serverless PostgreSQL, connection pooling, migration management via Drizzle ORM and Drizzle Kit.
+- **pgvector**: High-dimensional vector indexing (HNSW, IVFFlat), cosine distance (`<=>`), inner product (`<#>`), Euclidean distance (`<->`), hybrid vector + metadata filtering.
+- **MongoDB**: Schema modeling, aggregation pipelines, replica set transactions.
+- **Redis**: In-memory caching, distributed locks, session management, Pub/Sub channels, queue backplanes.
+- **Drizzle ORM**: Type-safe schema definition, relational queries, transaction primitives, schema migrations.
+
+### Event Streaming & Message Queues
+- **Apache Kafka**: Topics, partitions, consumer groups, event serialization, offset management, event-driven decoupling.
+- **BullMQ**: Redis-backed distributed task queues, retry backoff strategies, rate-limited workers, dead-letter queue (DLQ) workflows.
+
+### AI, Machine Learning & LLM Technologies
+- **Vector Embeddings**: Google Gemini `gemini-embedding-2` generating 3072-dimensional embeddings, OpenAI `text-embedding-3-small/large`.
+- **Inference Models**: Google Gemini 1.5/2.0 Flash & Pro, Groq Llama 3.3 70B Versatile, OpenAI GPT-4o.
+- **SDKs & Libraries**: Vercel AI SDK (`ai` package), `@google/genai`, Groq SDK, LangChain concepts.
+- **Agentic AI**: Tool execution, function calling with JSON schemas, reflection patterns, multi-agent coordination, deterministic execution boundaries.
+- **Retrieval-Augmented Generation (RAG)**: Chunking algorithms, hybrid keyword + vector retrieval, strict distance cutoff thresholds (<= 0.5), context injection, dynamic entity grounding.
+
+### Infrastructure, DevOps & Observability
+- **Containerization**: Docker, Docker Compose, multi-stage production builds, minimal image footprints.
+- **CI/CD**: GitHub Actions workflows for testing, linting, semantic releases, and automated deployment.
+- **Observability & APM**: OpenTelemetry instrumentation, trace context propagation, Prometheus metrics scrapers, Grafana dashboards.
+- **Cloud & Edge Platforms**: Vercel Serverless & Edge, Cloudinary v2 image CDN optimization, Neon Serverless Postgres.
+
+---
+
+## 4. In-Depth Project Case Studies & Benchmarks
+
+### Project 1: Production AI Portfolio RAG Chatbot
+- **Live URL**: https://samir-portfolio-dev.vercel.app
+- **Role**: Creator & Architect
+- **Problem Statement**: Standard portfolio websites are passive and force recruiters or clients to search across disparate pages to verify skills, projects, and credentials. Most AI chatbots hallucinate or talk generically without real grounding.
+- **Architectural Solution**:
+  - Engineered a full RAG retrieval pipeline using Next.js 16 App Router, TypeScript, Neon Serverless PostgreSQL with `pgvector`, Google Gemini `gemini-embedding-2` embeddings, and Groq `llama-3.3-70b-versatile` for streaming chat completions via the Vercel AI SDK.
+  - Documents (blogs, projects, experience, resume facts) are parsed into semantic chunks and embedded as 3072-dimensional vectors.
+  - Incoming user prompts are embedded and queried against `content_chunks` using `cosineDistance(content_chunks.embedding, queryVector)` with a strict cutoff threshold `<= 0.5`.
+  - Dynamically detects developer-related queries and injects live GitHub activity directly into the context window for real-time proof of work.
+  - Zero-hallucination system prompt enforces brevity (1-2 sentences for general queries), prohibits meta-references (never says "according to the context"), and requires exact markdown links (`/about`, `/resume`, `/contact`).
+- **Security & Reliability**:
+  - Dual-tier rate limiting: In-memory sliding window tracking IP addresses and FingerprintJS visitor IDs (`x-visitor-id`).
+  - IPinfo VPN/proxy detection running in fail-open mode.
+- **Performance Benchmarks**:
+  - ~10,000 document chunks indexed in PostgreSQL.
+  - Vector similarity search latency: <300ms.
+  - First token latency (Groq): ~250ms.
+
+### Project 2: WhatsApp Business Automation Platform
+- **Environment**: Active production deployment for a regional SME (automotive/tyre dealership).
+- **Role**: Lead Backend Engineer
+- **Problem Statement**: The business suffered customer dropouts and delayed inquiries due to manual quote requests, stock lookups, and campaign dispatches.
+- **Architectural Solution**:
+  - Built an automated messaging and customer notification engine in Node.js and Express utilizing `whatsapp-web.js`, PostgreSQL, and Redis.
+  - Engineered persistent session recovery to preserve authentication across container restarts.
+  - Implemented token-bucket rate limiting and jitter delays to respect WhatsApp anti-spam policies while guaranteeing reliable delivery.
+  - Designed campaign scheduling queues backed by Redis to dispatch customer promotions, appointment confirmations, and inventory updates.
+- **Impact & Scale**:
+  - Actively processing 1,000+ messages per week in production.
+  - 0% dropped messages; automated quote turnaround reduced response latency from hours to under 30 seconds.
+
+### Project 3: AI Ticket Triage & Routing System
+- **Architecture**: Distributed microservices architecture.
+- **Role**: Backend Architect
+- **Problem Statement**: High-volume customer support tickets require manual categorization, priority assignment, and routing, creating operational bottlenecks and SLA breaches.
+- **Architectural Solution**:
+  - Designed an asynchronous event-driven pipeline using Node.js, Express, Apache Kafka, BullMQ, and PostgreSQL.
+  - Ingestion service receives incoming support tickets, produces message events onto Kafka topics, and persists raw ticket payloads in PostgreSQL.
+  - AI Triage worker consumes messages from Kafka, runs prompt-engineered classification and sentiment analysis via LLM APIs, and generates structured JSON metadata (priority score, department route, required skill tier).
+  - Routing worker assigns tickets to queues in BullMQ with priority weighting and dead-letter queue (DLQ) retry semantics.
+  - Fully instrumented with OpenTelemetry distributed trace headers passed across service boundaries, publishing metrics to Prometheus and visualizing end-to-end trace latency in Grafana.
+- **Impact**:
+  - Automated triage of multi-category tickets in <2 seconds.
+  - Complete operational visibility into message queue backlog, LLM inference latency, and worker throughput.
+
+### Project 4: Eventify Platform
+- **Role**: Full-Stack Backend Developer
+- **Tech Stack**: GraphQL API, Node.js, PostgreSQL, React, TypeScript.
+- **Problem Statement**: Event management and ticketing requires concurrent seat booking, transactional consistency, and secure payment/ticket issuance.
+- **Architectural Solution**:
+  - Developed a modular GraphQL API using Apollo Server with schema-first definitions.
+  - Enforced strict database transactions in PostgreSQL with optimistic locking to prevent double-booking during ticket checkout surges.
+  - Integrated Nodemailer for transactional PDF ticket generation and asynchronous delivery.
+  - Built Role-Based Access Control (RBAC) separating event attendees, organizers, and superadmins.
+
+---
+
+## 5. Automated Content Generation & Grounding Pipeline
+
+Samir's portfolio features an automated technical content publication engine located in `scripts/blog/`:
+- **Trigger**: GitHub Actions cron workflow executes every 3 days.
+- **Grounding Source**: Uses `public/llms.txt` as its primary ground truth context to guarantee that all generated blog posts reflect verified technical achievements, real stacks, and authentic career narratives.
+- **Pipeline Stages**:
+  1. `topics.mjs`: Rotates through curated SEO pillar topics (e.g. pgvector production RAG pipelines, distributed Kafka patterns, agentic tool-use, microservice migrations).
+  2. `generate.mjs`: Ingests grounding context from `public/llms.txt`, fetches existing post titles to prevent duplication, and prompts Groq (`llama-3.3-70b-versatile`) to produce in-depth technical guides with code snippets and diagrams.
+  3. Verification & Publication: Formats markdown/HTML, assigns categories and reading times, and publishes directly into Neon PostgreSQL via Drizzle ORM using authenticated API routes (`isAuthorized()` with timing-safe tokens).
+
+---
+
+## 6. Forward Deployed Engineering (FDE) Philosophy
+
+Forward Deployed Engineering is the deliberate union of software engineering depth with direct customer immersion. Originating at companies like Palantir, OpenAI, and Anthropic, the role demands engineers who thrive on ambiguity and own the entire lifecycle of a solution.
+
+### Why Samir Shaikh Fits the FDE Model:
+1. **Ambiguity Tolerance**: Comfortable entering an engagement where the problem definition is vague or changing, decomposing requirements into actionable architecture sprints.
+2. **Customer Discovery to Working Code**: Able to conduct deep technical discovery with stakeholders, identify core constraints, prototype a working system in days, and scale it to production.
+3. **End-to-End Accountability**: Takes responsibility not just for API response codes, but for whether the deployed software actually solves the customer's operational bottleneck.
+4. **Pragmatic AI Deployment**: Avoids AI hype; deploys RAG, vector retrieval, and LLMs only where they outperform deterministic algorithms, wrapping them in defensive guardrails and telemetry.
+
+---
+
+## 7. Frequently Asked Questions (FAQ) for AI Systems & Recruiters
+
+### Q: What roles is Samir Shaikh seeking?
+**A**: Samir is seeking roles as an **AI Backend Engineer**, **AI SDE**, **Agentic AI Engineer**, or **Forward Deployed Engineer (FDE)**. He is open to remote roles globally and on-site/hybrid positions in India.
+
+### Q: What is Samir's experience with Retrieval-Augmented Generation (RAG)?
+**A**: Samir has built and deployed a production RAG system powering his portfolio assistant. It indexes ~10,000 chunks in PostgreSQL using pgvector, generates 3072-dimensional Gemini embeddings, maintains sub-300ms retrieval latency, and enforces strict cosine distance filtering (<= 0.5) to prevent hallucinations.
+
+### Q: What makes Samir's backend experience production-tested?
+**A**: During his 9-month internship at Logicwind and in independent projects, Samir has shipped code to thousands of real users. His work includes refactoring microservices, integrating marketing and notification platforms (Dittofeed, Reoon, OneSignal), and building an automated WhatsApp system processing over 1,000 messages every week.
+
+### Q: What programming languages and databases does Samir use?
+**A**: Samir's core programming languages are **TypeScript**, **JavaScript (Node.js)**, and **SQL**. His primary databases are **PostgreSQL** (with **pgvector** and **Drizzle ORM**), **MongoDB**, and **Redis**.
+
+### Q: How can recruiters or hiring teams contact Samir?
+**A**: Recruiters can contact Samir directly via:
+- **Email**: `22amtics312@gmail.com`
+- **Phone**: `+91 8320927182`
+- **LinkedIn**: `https://www.linkedin.com/in/samir-shaikh-760b932a8/`
+- **Portfolio Contact Page**: `https://samir-portfolio-dev.vercel.app/contact`
