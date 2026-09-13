@@ -6,61 +6,24 @@ import { AUTHOR_PHONE } from "@/lib/site-config";
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
-  const [loadingType, setLoadingType] = useState<"standard" | "whatsapp" | null>(null);
+  const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  function getFormData() {
-    if (!formRef.current) return null;
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!formRef.current) return;
+    if (!formRef.current.reportValidity()) return;
+
     const formData = new FormData(formRef.current);
-    return {
+    const data = {
       name: String(formData.get("name") || "").trim(),
       email: String(formData.get("email") || "").trim(),
       subject: String(formData.get("subject") || "").trim(),
       message: String(formData.get("message") || "").trim(),
     };
-  }
 
-  async function handleStandardSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (!formRef.current) return;
-    if (!formRef.current.reportValidity()) return;
-
-    const data = getFormData();
-    if (!data) return;
-
-    setLoadingType("standard");
-    setError(null);
-    setSuccessMessage(null);
-
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to send message");
-      }
-
-      setSuccessMessage("Message sent successfully! I'll get back to you soon.");
-      formRef.current.reset();
-    } catch (err: any) {
-      setError(err.message || "Something went wrong.");
-    } finally {
-      setLoadingType(null);
-    }
-  }
-
-  async function handleWhatsAppSubmit() {
-    if (!formRef.current) return;
-    if (!formRef.current.reportValidity()) return;
-
-    const data = getFormData();
-    if (!data) return;
-
-    setLoadingType("whatsapp");
+    setLoading(true);
     setError(null);
     setSuccessMessage(null);
 
@@ -77,24 +40,29 @@ ${data.message}`;
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(whatsappText)}`;
 
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+
+      if (!res.ok) {
+        throw new Error("Failed to save message");
+      }
+
       setSuccessMessage("Inquiry saved! Opening WhatsApp to message Samir directly...");
     } catch {
-      // Still open WhatsApp even if DB logging encounters an issue
+      // Still open WhatsApp so visitor can reach out even if API encounters an issue
       setSuccessMessage("Opening WhatsApp to message Samir directly...");
     } finally {
       window.open(whatsappUrl, "_blank", "noopener,noreferrer");
       formRef.current.reset();
-      setLoadingType(null);
+      setLoading(false);
     }
   }
 
   return (
-    <form ref={formRef} className="flex flex-col gap-6" onSubmit={handleStandardSubmit}>
+    <form ref={formRef} className="flex flex-col gap-6" onSubmit={handleSubmit}>
       {successMessage && (
         <div
           role="status"
@@ -125,7 +93,7 @@ ${data.message}`;
             required
             className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all disabled:opacity-50"
             placeholder="John Doe"
-            disabled={Boolean(loadingType)}
+            disabled={loading}
           />
         </div>
         <div className="flex-1">
@@ -139,7 +107,7 @@ ${data.message}`;
             required
             className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all disabled:opacity-50"
             placeholder="john@example.com"
-            disabled={Boolean(loadingType)}
+            disabled={loading}
           />
         </div>
       </div>
@@ -155,7 +123,7 @@ ${data.message}`;
           required
           className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all disabled:opacity-50"
           placeholder="What is this regarding?"
-          disabled={Boolean(loadingType)}
+          disabled={loading}
         />
       </div>
 
@@ -170,30 +138,19 @@ ${data.message}`;
           required
           className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all resize-y min-h-[120px] disabled:opacity-50"
           placeholder="Your message here..."
-          disabled={Boolean(loadingType)}
+          disabled={loading}
         />
       </div>
 
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mt-2">
-        <button
-          type="submit"
-          disabled={Boolean(loadingType)}
-          className="rounded-lg bg-foreground px-6 py-3 text-sm font-medium text-background hover:opacity-90 transition-opacity w-full sm:w-auto text-center disabled:opacity-50 cursor-pointer"
-        >
-          {loadingType === "standard" ? "Sending..." : "Send Message"}
-        </button>
-
-        <button
-          type="button"
-          onClick={handleWhatsAppSubmit}
-          disabled={Boolean(loadingType)}
-          aria-label="Send inquiry via WhatsApp"
-          className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#128C7E] hover:bg-[#0c6b60] dark:bg-[#25D366] dark:hover:bg-[#20ba59] dark:text-neutral-950 text-white font-medium px-6 py-3 text-sm transition-all shadow-sm hover:shadow-md disabled:opacity-50 w-full sm:w-auto cursor-pointer"
-        >
-          <FaWhatsapp className="text-lg flex-shrink-0" aria-hidden="true" />
-          <span>{loadingType === "whatsapp" ? "Opening WhatsApp..." : "Send via WhatsApp"}</span>
-        </button>
-      </div>
+      <button
+        type="submit"
+        disabled={loading}
+        aria-label="Send inquiry via WhatsApp"
+        className="inline-flex items-center justify-center gap-2 rounded-lg bg-foreground text-background font-medium px-6 py-3 text-sm hover:opacity-90 transition-opacity disabled:opacity-50 w-full sm:w-auto self-start mt-2 cursor-pointer"
+      >
+        <FaWhatsapp className="text-lg flex-shrink-0" aria-hidden="true" />
+        <span>{loading ? "Opening WhatsApp..." : "Send via WhatsApp"}</span>
+      </button>
     </form>
   );
 }
