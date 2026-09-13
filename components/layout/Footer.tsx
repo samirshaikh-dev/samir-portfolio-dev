@@ -8,6 +8,7 @@ const pageLinks = [
   { label: "About", href: "/about" },
   { label: "Projects", href: "/projects" },
   { label: "Blog", href: "/blogs" },
+  { label: "Services", href: "/services" },
   { label: "Contact", href: "/contact" },
   { label: "Resume", href: "/resume" },
 ];

@@ -3,11 +3,12 @@ import ContactForm from "./ContactForm";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { APP_URL } from "@/lib/site-config";
-import { getServiceJsonLd } from "@/lib/seo/structured-data";
+import { getContactPageJsonLd } from "@/lib/seo/structured-data";
 
 export const metadata: Metadata = {
   title: "Contact | Samir Shaikh",
-  description: "Get in touch with Samir Shaikh — a Node.js Backend Developer open to remote opportunities, freelance projects, and collaborations. Reach out via email or the contact form.",
+  description:
+    "Get in touch with Samir Shaikh — an AI Backend Engineer and Forward Deployed Engineer open to remote opportunities, contract projects, and collaborations. Reach out via email or the contact form.",
   keywords: [
     "contact Samir Shaikh",
     "hire Node.js developer",
@@ -30,26 +31,27 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Contact | Samir Shaikh",
-    description: "Get in touch with Samir Shaikh — open to remote roles, freelance work, and collaborations in AI backend and Node.js engineering.",
+    description:
+      "Get in touch with Samir Shaikh — open to remote roles, contract work, and collaborations in AI backend and Forward Deployed Engineering.",
     url: `${APP_URL}/contact`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Contact | Samir Shaikh",
-    description: "Get in touch with Samir Shaikh — open to remote roles, freelance work, and collaborations.",
+    description:
+      "Get in touch with Samir Shaikh — open to remote roles, freelance work, and collaborations.",
   },
 };
 
-
 export default function ContactPage() {
-  const serviceJsonLd = getServiceJsonLd();
+  const contactJsonLd = getContactPageJsonLd();
 
   return (
     <main className="flex flex-col flex-1 px-6 pb-20 md:px-10">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
       />
       <div className="max-w-2xl mx-auto w-full pt-6 md:pt-10">
         <Breadcrumbs
@@ -59,9 +61,12 @@ export default function ContactPage() {
           ]}
         />
       </div>
-      <PageHeader title="Get in Touch" subtitle="Have a question or want to work together? Leave a message below." />
+      <PageHeader
+        title="Get in Touch"
+        subtitle="Have a question or want to work together? Leave a message below."
+      />
       <p className="sr-only">
-        Looking to hire a backend engineer for an AI project? Need someone to ship an AI feature into your SaaS product? Samir Shaikh is a Node.js and TypeScript backend developer available for remote roles, freelance projects, and contract work.
+        Looking to hire an AI backend engineer or forward deployed engineer for an AI project? Need someone to ship an AI feature into your SaaS product? Samir Shaikh is an AI Backend Engineer and Full Stack Engineer available for remote roles, contract projects, and advisory.
       </p>
       <div className="max-w-2xl mx-auto w-full">
         <ContactForm />
@@ -69,4 +74,3 @@ export default function ContactPage() {
     </main>
   );
 }
-

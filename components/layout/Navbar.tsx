@@ -10,6 +10,7 @@ const links = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/projects" },
   { label: "Blogs", href: "/blogs" },
+  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
   { label: "Resume", href: "/resume" },
@@ -18,6 +19,13 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [prevPathname, setPrevPathname] = useState(pathname);
+
+  // Close menu on route change without effect cascading renders
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setMenuOpen(false);
+  }
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -26,11 +34,6 @@ export default function Navbar() {
       document.body.style.overflow = "";
     };
   }, [menuOpen]);
-
-  // Close menu on route change
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
 
   return (
     <>

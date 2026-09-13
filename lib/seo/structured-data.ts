@@ -97,39 +97,39 @@ export const AREA_SERVED = [
 /** Concrete, problem-oriented services offered. */
 export const SERVICES = [
   {
-    name: "Backend API Development",
+    name: "RAG Systems & Knowledge Retrieval",
     description:
-      "Design and build production REST and GraphQL APIs with Node.js, Express, and NestJS — solving slow, unscalable, or unmaintainable backend problems.",
+      "Build grounded AI systems with vector search, embeddings, document retrieval, and relevance-focused responses.",
   },
   {
-    name: "RAG System Development",
+    name: "AI Agents & Tool Orchestration",
     description:
-      "Build Retrieval-Augmented Generation pipelines with pgvector semantic search so LLM answers stay grounded in your data and stop hallucinating.",
+      "Develop AI workflows that use tools, APIs, structured outputs, and guardrails to automate multi-step tasks.",
   },
   {
-    name: "LLM Integration",
+    name: "AI Product Development & Integration",
     description:
-      "Integrate LLMs (Google Gemini, OpenAI) into products for chat, automation, and content generation via the Vercel AI SDK.",
+      "Turn AI use cases into working product features, from proof of concept to integration with existing applications and workflows.",
   },
   {
-    name: "AI Agent Development",
+    name: "Production Backend APIs & System Design",
     description:
-      "Design tool-using, multi-step autonomous AI agents that reason and orchestrate tasks across multiple LLM calls.",
+      "Design and build reliable backend systems, REST/GraphQL APIs, authentication, database architecture, caching, and performance improvements.",
   },
   {
-    name: "Microservices Architecture",
+    name: "Event-Driven Systems & Background Processing",
     description:
-      "Architect event-driven, scalable microservices using Apache Kafka, BullMQ, and Redis for high-throughput workloads.",
+      "Build scalable asynchronous workflows using queues, event-driven architecture, scheduled jobs, and distributed processing.",
   },
   {
-    name: "DevOps & Observability",
+    name: "LLM Integration & AI User Experiences",
     description:
-      "Containerize with Docker, ship CI/CD with GitHub Actions, and add OpenTelemetry, Prometheus, and Grafana observability.",
+      "Integrate LLMs into applications with streaming responses, conversation workflows, usage controls, structured responses, and reliable API handling.",
   },
   {
-    name: "Forward Deployed AI Engineering",
+    name: "Cloud, DevOps & Observability",
     description:
-      "Bridge customer requirements directly to production code — rapid prototyping, enterprise deployment, RAG integration, and end-to-end AI product ownership.",
+      "Containerize applications and establish CI/CD, logging, monitoring, metrics, tracing, and production reliability practices.",
   },
 ] as const;
 
@@ -374,15 +374,15 @@ export function getCollectionPageJsonLd(opts: {
 
 /**
  * Standalone ProfessionalService JSON-LD describing the services, industries,
- * and markets served. Wire onto the contact/home pages to reinforce the
- * service + industry entity graph for AI answer engines.
+ * and markets served. Wire onto the /services page to reinforce the
+ * service + industry entity graph for search and AI answer engines.
  */
 export function getServiceJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
     name: `${AUTHOR_NAME} — Backend & AI Engineering`,
-    url: APP_URL,
+    url: `${APP_URL}/services`,
     image: `${APP_URL}/Filled_Logo.png`,
     description:
       "Backend and AI engineering services: production APIs, RAG systems, LLM integration, AI agents, microservices, and DevOps for startups and SaaS products.",
@@ -398,6 +398,27 @@ export function getServiceJsonLd() {
       "@type": "OfferCatalog",
       name: "Backend & AI Engineering Services",
       itemListElement: SERVICE_OFFERS,
+    },
+  };
+}
+
+/**
+ * ContactPage JSON-LD for the /contact page.
+ */
+export function getContactPageJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    name: `Contact ${AUTHOR_NAME}`,
+    url: `${APP_URL}/contact`,
+    description:
+      "Get in touch with Samir Shaikh for AI backend engineering, RAG development, and forward deployed engineering roles.",
+    mainEntity: {
+      "@type": "Person",
+      name: AUTHOR_NAME,
+      email: AUTHOR_EMAIL,
+      telephone: AUTHOR_PHONE,
+      url: APP_URL,
     },
   };
 }
