@@ -22,7 +22,7 @@ export default function BlogShareButtons({ title, slug, compact = false }: BlogS
     const params = new URLSearchParams({
       text: title,
       url: postUrl,
-      via: 'ShaikhSamir786',
+      via: 'samirshaikh-dev',
     });
     window.open(`https://twitter.com/intent/tweet?${params.toString()}`, '_blank', 'noopener,noreferrer,width=550,height=450');
   };

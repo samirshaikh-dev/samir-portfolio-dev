@@ -310,7 +310,7 @@ export default async function BlogPostPage({ params }: Props) {
                   url: APP_URL,
                   sameAs: [
                     "https://linkedin.com/in/samir-shaikh-760b932a8",
-                    "https://github.com/ShaikhSamir786",
+                    "https://github.com/samirshaikh-dev",
                   ],
                 }
               ]

@@ -25,7 +25,7 @@ async function getGithubEventsCached(): Promise<string | null> {
   }
   const result = await getRecentGithubEvents(
     process.env.GITHUB_TOKEN || '',
-    'ShaikhSamir786'
+    'samirshaikh-dev'
   );
   if (result.ok) {
     githubEventsCache = result;

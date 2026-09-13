@@ -13,7 +13,7 @@ export default async function Hero() {
 
   try {
     if (token) {
-      stats = await getGithubStats(token, "ShaikhSamir786");
+      stats = await getGithubStats(token, "samirshaikh-dev");
     } else {
       error = "GitHub token not configured";
     }

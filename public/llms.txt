@@ -4,7 +4,7 @@ Location: Gujarat, India
 Last Updated: July 2026
 
 Website: https://samir-portfolio-dev.vercel.app
-GitHub: https://github.com/ShaikhSamir786
+GitHub: https://github.com/samirshaikh-dev
 LinkedIn: https://www.linkedin.com/in/samir-shaikh-760b932a8/
 Email: 22amtics312@gmail.com
 Resume: https://samir-portfolio-dev.vercel.app/resume
