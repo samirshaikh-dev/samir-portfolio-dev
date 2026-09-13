@@ -108,6 +108,19 @@ export default function SocialsAdminPage() {
 
   const usedPlatforms = socials.map(s => s.name);
 
+  const linkConfig = (name: string) => {
+    switch (name) {
+      case "WhatsApp":
+        return { type: "url" as const, placeholder: "https://wa.me/919876543210" };
+      case "Gmail":
+        return { type: "text" as const, placeholder: "mailto:samir.shaikh@gmail.com" };
+      case "Phone":
+        return { type: "text" as const, placeholder: "tel:+919876543210" };
+      default:
+        return { type: "url" as const, placeholder: "https://..." };
+    }
+  };
+
   const filteredCategories = SOCIAL_CATEGORIES.map(c => ({
     ...c,
     platforms: c.platforms.filter(p => !usedPlatforms.includes(p) && p.toLowerCase().includes(searchQuery.toLowerCase()))
@@ -176,8 +189,8 @@ export default function SocialsAdminPage() {
                 {/* Input */}
                 <div className="flex-1">
                   <input
-                    type="url"
-                    placeholder="https://..."
+                    type={linkConfig(social.name).type}
+                    placeholder={linkConfig(social.name).placeholder}
                     value={social.url}
                     onChange={(e) => updateSocial(index, e.target.value)}
                     className="w-full px-4 py-3 rounded-lg border border-border-primary bg-footer-bg text-sm focus:bg-background focus:ring-2 focus:ring-border-primary focus:border-transparent placeholder:text-text-muted transition-all"
