@@ -112,6 +112,11 @@ export const SERVICES = [
       "Turn AI use cases into working product features, from proof of concept to integration with existing applications and workflows.",
   },
   {
+    name: "LLM Integration & AI User Experiences",
+    description:
+      "Integrate LLMs into applications with streaming responses, conversation workflows, usage controls, structured responses, and reliable API handling.",
+  },
+  {
     name: "Production Backend APIs & System Design",
     description:
       "Design and build reliable backend systems, REST/GraphQL APIs, authentication, database architecture, caching, and performance improvements.",
@@ -122,14 +127,19 @@ export const SERVICES = [
       "Build scalable asynchronous workflows using queues, event-driven architecture, scheduled jobs, and distributed processing.",
   },
   {
-    name: "LLM Integration & AI User Experiences",
-    description:
-      "Integrate LLMs into applications with streaming responses, conversation workflows, usage controls, structured responses, and reliable API handling.",
-  },
-  {
     name: "Cloud, DevOps & Observability",
     description:
       "Containerize applications and establish CI/CD, logging, monitoring, metrics, tracing, and production reliability practices.",
+  },
+  {
+    name: "Full-Stack Web & Application Development",
+    description:
+      "Build fast, responsive, and modern web applications with Next.js, React, and solid backend systems.",
+  },
+  {
+    name: "Technical SEO, AEO & Web Performance",
+    description:
+      "Optimize web applications for Google search rankings, AI answer engines (AEO/GEO), and fast Core Web Vitals.",
   },
 ] as const;
 

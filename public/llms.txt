@@ -16,7 +16,7 @@ Phone: +91 8320927182
 - [Full Documentation](https://samir-portfolio-dev.vercel.app/llms-full.txt): Comprehensive knowledge graph, case studies, benchmarks, and architecture details
 - [Resume](https://samir-portfolio-dev.vercel.app/resume): Current resume and professional qualifications
 - [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, and case studies
-- [Services](https://samir-portfolio-dev.vercel.app/services): Engineering services (RAG systems, AI agents, backend APIs, event-driven systems)
+- [Services](https://samir-portfolio-dev.vercel.app/services): Engineering services (AI & RAG systems, backend architecture, full-stack web development, technical SEO)
 - [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design
 - [About](https://samir-portfolio-dev.vercel.app/about): Background, timeline, and engineering principles
 - [Contact](https://samir-portfolio-dev.vercel.app/contact): Get in touch for roles, consulting, or technical advisory
