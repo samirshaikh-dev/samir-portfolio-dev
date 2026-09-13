@@ -41,16 +41,30 @@ He is actively positioning toward **Forward Deployed Engineer (FDE)** and **AI B
 - **Graduation Year**: 2026
 - **Academic Focus**: Distributed Systems, Relational & Non-Relational Database Theory, Operating Systems & Process Scheduling, Data Structures & Algorithms, Network Security, Enterprise Application Design.
 
-### Production Experience: Logicwind
-- **Role**: Backend Developer Intern
-- **Tenure**: September 2025 – May 2026 (9 months)
-- **Environment**: Agile engineering team shipping production SaaS and microservice-driven customer platforms.
+### Production Experience
+
+#### Xira Infotech — Full Stack Engineer Intern
+- **Role**: Full Stack Engineer Intern
+- **Tenure**: August 2026 – Present (Current)
+- **Location**: Vapi, Gujarat, India (On-site)
+- **Company**: Xira Infotech - Digital Marketing & Software Development Agency
 - **Key Achievements & Responsibilities**:
-  1. **Microservice Migrations & Modernization**: Maintained and refactored features across 3+ active microservice and Firebase-based backends; executed critical package and framework migrations that eliminated security vulnerabilities and decreased technical debt.
-  2. **Third-Party Service Integration**: Integrated Dittofeed (event-driven customer engagement and marketing automation), Reoon (email verification and reputation protection), and OneSignal (cross-platform push notifications) into production workflows serving thousands of active users.
-  3. **Performance Profiling & Optimization**: Profiled slow database queries and refactored API handler logic, measurably decreasing response latencies across core business endpoints.
-  4. **Architecture Variety**: Developed RESTful services across monolithic, microservices, and serverless server architectures in Node.js and TypeScript.
-  5. **Collaborative Engineering**: Active contributor in sprint planning, code review cycles, failure-mode analysis, and staging environment verification.
+  1. **End-to-End Job Portal Delivery**: Owned complete engineering delivery of a dynamic job portal — from PostgreSQL relational schema design through the Next.js frontend UI. Built job listings, advanced search/filtering, applicant resume management, and application-tracking workflows.
+  2. **Role-Based Access Control & Admin Dashboards**: Implemented secure role-based authentication, authorization (RBAC), and admin dashboards, giving internal teams direct operational control over listings, applications, and users without engineering bottlenecks.
+  3. **Transactional Workflows & Real-Time Alerts**: Integrated real-time notifications and payment gateway workflows, transforming the portal from a static directory into a transactional recruitment product.
+  4. **API Architecture & Latency Profiling**: Designed modular REST APIs and backend architecture with continuous query profiling and performance refactoring, keeping response times low as feature surface expanded.
+
+#### LOGICWIND — Back End Developer Intern
+- **Role**: Back End Developer Intern
+- **Tenure**: September 2025 – May 2026 (9 months)
+- **Location**: Surat, Gujarat, India (On-site)
+- **Company**: LOGICWIND — Digital Product Engineering Agency
+- **Key Achievements & Responsibilities**:
+  1. **Microservice Migrations & Modernization**: Migrated legacy packages and re-engineered core modules across 5+ production microservice and Firebase-based applications, cutting technical debt and improving deployment reliability across active codebases.
+  2. **Third-Party Integration Pipelines**: Integrated Dittofeed, Reoon, and OneSignal into existing backend systems, enabling customer engagement pipelines and reducing invalid signups at the API layer.
+  3. **Architecture Exposure & Distributed Systems**: Worked across microservice, monolithic, and serverless (Firebase) architectures, gaining direct production exposure to distributed service communication patterns.
+  4. **Performance Profiling & Latency Reduction**: Profiled and refactored API integration patterns and query paths, reducing response latency on key service endpoints.
+  5. **Agile Team Collaboration**: Shipped backend features within sprint cycles in an Agile team, participating in code reviews with minimal post-release defects.
 
 ---
 

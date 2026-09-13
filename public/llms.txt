@@ -27,12 +27,18 @@ Samir Shaikh is an AI Backend Engineer and AI SDE based in Gujarat, India, with 
 
 ## Background & Experience
 
-### Logicwind — Backend Developer Intern (Sep 2025 – May 2026)
-- Engineered backend features and spearheaded legacy package migrations across 3+ active microservice and Firebase-based codebases, substantially reducing technical debt.
-- Integrated third-party automation systems (Dittofeed marketing automation, Reoon email verification, OneSignal web push) into live products, serving thousands of active users.
-- Designed and maintained RESTful APIs and asynchronous workers across microservice, monolithic, and serverless architectures.
-- Collaborated cross-functionally in an Agile environment participating in sprint planning, code reviews, and latency profiling.
-- Profiled database queries and refactored integration bottlenecks, measurably reducing API response latencies.
+### Xira Infotech — Full Stack Engineer Intern (Aug 2026 – Present)
+- Owned end-to-end delivery of a dynamic job portal from PostgreSQL schema design through the Next.js UI, covering job listings, advanced search/filtering, resume management, and application-tracking workflows.
+- Built secure role-based authentication, authorization (RBAC), and admin dashboards, giving internal teams direct operational control without engineering bottlenecks.
+- Integrated real-time notifications and payment gateway workflows, turning the portal into a transactional product.
+- Designed REST APIs and backend architecture with continuous latency profiling and performance tuning to keep response times low.
+
+### LOGICWIND — Back End Developer Intern (Sep 2025 – May 2026 · Surat, Gujarat, India)
+- Migrated legacy packages and re-engineered core modules across 5+ production microservice and Firebase-based applications, cutting technical debt and improving deployment reliability across active codebases.
+- Integrated Dittofeed, Reoon, and OneSignal into existing backend systems, enabling customer engagement pipelines and reducing invalid signups at the API layer.
+- Worked across microservice, monolithic, and serverless (Firebase) architectures, gaining direct production exposure to distributed service communication patterns.
+- Profiled and refactored API integration patterns and query paths, reducing response latency on key service endpoints.
+- Shipped backend features within sprint cycles in an Agile team, participating in code reviews with minimal post-release defects.
 
 ### Education
 - **Bachelor of Technology (B.Tech) in Information Technology** (2022 – 2026)

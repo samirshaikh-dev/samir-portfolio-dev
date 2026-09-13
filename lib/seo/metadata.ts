@@ -78,6 +78,8 @@ export const metadata: Metadata = {
     "Web Developer",
     "Open to Remote",
     "Logicwind",
+    "Xira Infotech",
+    "Full Stack Engineer",
     "Uka Tarsadia University",
     "Gujarat Developer",
     "API Integration",
