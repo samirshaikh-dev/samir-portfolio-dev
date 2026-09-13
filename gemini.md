@@ -18,14 +18,24 @@ Personal portfolio, technical publication platform, and interactive engineering 
 - **Analytics & Security:** Google Analytics (`@/components/analytics/GoogleAnalytics`), FingerprintJS (`@fingerprintjs/fingerprintjs`), IPinfo API for VPN/proxy check (fail-open)
 - **Package Manager:** pnpm (v10)
 
-## Mandatory Pre-Change Protocol: Specialized Skills
-> **CRITICAL DIRECTIVE:** Before proposing or implementing **ANY** changes (Frontend, UI/UX, Backend, Database, SEO, Content, or Performance), the AI **MUST ALWAYS review and evaluate against the 5 specialized engineering skills in `agents/skills/`**:
-> 
-> 1. `agents/skills/performance-engineer.md` — Core Web Vitals, SSR/ISR caching (`revalidate = 3600`, `unstable_cache`), Cloudinary asset optimization (`optimizeCloudinaryUrl`), database index performance, pgvector cosine search latency, bundle size containment.
-> 2. `agents/skills/seo-engineer.md` — Technical crawlability, Schema.org JSON-LD integrity (`Person`, `WebSite`, `Organization`, `ProfessionalService`, `CollectionPage`, `BreadcrumbList`, `SpeakableSpecification`), dynamic OpenGraph generation (`opengraph-image.tsx`), XML sitemap (`app/sitemap.ts`), robots.txt compliance.
-> 3. `agents/skills/Seo-keyword-research-implementation.md` — Search intent mapping (AI SDE, RAG, pgvector, Node.js, FDE), keyword-to-page mapping, topic cluster internal linking, preventing keyword cannibalization, content depth standards.
-> 4. `agents/skills/ui-ux-engineer.md` — Visual hierarchy, Playfair/Geist typography, dark/light theme consistency, interactive widget ergonomics (`Chatbot`, `PushSettings`, `TipTapEditor`), mobile responsiveness, WCAG accessibility.
-> 5. `agents/skills/frontend-engineer.md` — Composable Next.js App Router patterns, Server vs Client component boundaries (`LazyClientComponents.tsx` with `ssr: false`), zero CLS, form validation, error boundaries (`app/error.tsx`), 404 handling (`app/not-found.tsx`).
+## Mandatory Pre-Implementation Protocol: ALWAYS Load & Use Agents Skills
+
+> [!CAUTION]
+> ### STRICT ENFORCEMENT: ZERO IMPLEMENTATION WITHOUT READING SKILLS
+> Before proposing any changes, writing a single line of code, creating new files, or editing existing files, the AI **MUST ALWAYS load and read the applicable skill file(s) from `agents/skills/` using `view_file`**.
+>
+> **Mandatory Execution Pipeline:**
+> 1. **Identify Applicable Discipline(s):**
+>    - **UI/UX Direction & Visual Design:** [agents/skills/ui-ux-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer.md) (Layout, spacing, typography, theme contrast, interactive widget ergonomics, accessibility)
+>    - **Frontend & App Router Architecture:** [agents/skills/frontend-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer.md) (React 19 / Next.js 16 components, Server vs Client boundaries, zero CLS, form handling, error states)
+>    - **Technical SEO, Schema & AEO/GEO:** [agents/skills/seo-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer.md) (Schema.org JSON-LD integrity, dynamic OpenGraph cards, sitemaps, robots.txt, machine readability)
+>    - **Keyword Strategy & Content Layer:** [agents/skills/Seo-keyword-research-implementation.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/Seo-keyword-research-implementation.md) (Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, on-page optimization, anti-cannibalization)
+>    - **Performance & Optimization:** [agents/skills/performance-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer.md) (Core Web Vitals, SSR/ISR caching, Cloudinary transformations, pgvector search latency, bundle size)
+> 2. **Load the Skill File(s):** Call `view_file` on every relevant skill document to read its purpose, scope, non-negotiable rules, and workflow before formulating a solution.
+> 3. **Evaluate & Comply:** Cross-reference the proposed implementation against the skill's engineering principles, constraints, and checklists.
+> 4. **Implement with Justification:** Apply changes in strict accordance with the loaded skill's standards.
+>
+> **This protocol applies unconditionally to ALL tasks — including bug fixes, component styling, content updates, schema tweaks, and API refactoring.**
 
 ## Key Pages & AI Discovery Endpoints
 
@@ -51,16 +61,17 @@ Personal portfolio, technical publication platform, and interactive engineering 
 
 ## Core Architecture & Operational Rules
 
-1. **Never Commit Secrets:** All credentials, keys, and tokens live strictly in `.env`.
-2. **Server Components by Default:** Fetch data directly in server components (`page.tsx`) using Drizzle queries with ISR (`export const revalidate = 3600`).
-3. **Client Component Boundaries:** Group heavy, client-only interactive widgets (`Chatbot`, `PushSettings`, `CloudTransition`) into `components/LazyClientComponents.tsx` loaded with `ssr: false` to eliminate hydration mismatches.
-4. **Dual-Mode API Authentication:** Write endpoints callable by automation (`POST /api/blogs`, `POST /api/push/send`) use `isAuthorized()` from `lib/api-auth.ts`, supporting either cookie-based admin sessions or `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`.
-5. **Sanitized Rich Content:** Blog and project contents are stored as sanitized HTML (from TipTap or converted from Markdown via `rehype-sanitize`) and rendered on the client via `HtmlParser` or `ContentWithToc`.
-6. **Automatic Vector Indexing:** Creating, modifying, or deleting blogs/projects automatically triggers pgvector indexing or cleanup in `content_chunks`.
-7. **Cloudinary Asset Delivery:** Always wrap Cloudinary URLs with `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` to enforce automatic modern formats (`f_auto`) and quality compression (`q_auto`).
-8. **Breadcrumb Consistency:** Always use `components/layout/Breadcrumbs.tsx` to maintain unified UI navigation and synchronous `BreadcrumbList` schema markup.
-9. **Single Source of Truth for Metadata:** Import canonical URLs, social handles, and identity info from `lib/site-config.ts`.
-10. **Package Management:** Always use `pnpm` (`packageManager: pnpm@10`). Never use `npm` or `yarn`.
+1. **Always Load and Apply `agents/skills/` Before Any Implementation:** Absolute requirement. Never propose or implement changes without first reading and evaluating against the relevant specialized skill(s) via `view_file`.
+2. **Never Commit Secrets:** All credentials, keys, and tokens live strictly in `.env`.
+3. **Server Components by Default:** Fetch data directly in server components (`page.tsx`) using Drizzle queries with ISR (`export const revalidate = 3600`).
+4. **Client Component Boundaries:** Group heavy, client-only interactive widgets (`Chatbot`, `PushSettings`, `CloudTransition`) into `components/LazyClientComponents.tsx` loaded with `ssr: false` to eliminate hydration mismatches.
+5. **Dual-Mode API Authentication:** Write endpoints callable by automation (`POST /api/blogs`, `POST /api/push/send`) use `isAuthorized()` from `lib/api-auth.ts`, supporting either cookie-based admin sessions or `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`.
+6. **Sanitized Rich Content:** Blog and project contents are stored as sanitized HTML (from TipTap or converted from Markdown via `rehype-sanitize`) and rendered on the client via `HtmlParser` or `ContentWithToc`.
+7. **Automatic Vector Indexing:** Creating, modifying, or deleting blogs/projects automatically triggers pgvector indexing or cleanup in `content_chunks`.
+8. **Cloudinary Asset Delivery:** Always wrap Cloudinary URLs with `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` to enforce automatic modern formats (`f_auto`) and quality compression (`q_auto`).
+9. **Breadcrumb Consistency:** Always use `components/layout/Breadcrumbs.tsx` to maintain unified UI navigation and synchronous `BreadcrumbList` schema markup.
+10. **Single Source of Truth for Metadata:** Import canonical URLs, social handles, and identity info from `lib/site-config.ts`.
+11. **Package Management:** Always use `pnpm` (`packageManager: pnpm@10`). Never use `npm` or `yarn`.
 
 ## Identity & Professional Profile
 - **Name:** Samir Shaikh
