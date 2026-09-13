@@ -1,6 +1,6 @@
 # AI Rules & Engineering Directives — Samir Portfolio Dev
 
-> **Scope:** These rules apply to all AI models, CLIs, and autonomous coding assistants operating on `samir-portfolio-dev`. Adherence is mandatory on every step.
+> **Scope:** These rules apply to all AI models, CLIs, and autonomous coding assistants operating on `samir-portfolio-dev`. Adherence is mandatory on every step. Companion directives and references: [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) (Universal standards & skill routing) | [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md) (Project knowledge graph) | [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md) (Gemini directives) | [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc) (OpenCode config).
 
 ---
 

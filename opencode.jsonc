@@ -8,9 +8,9 @@
   // "model": "anthropic/claude-sonnet-4-6",
   // "small_model": "groq/llama-3.3-70b-versatile",
 
-  // Always inject project context so the mandatory pre-implementation
+  // Always inject project context and rules so the mandatory pre-implementation
   // protocol (load agents/skills before any code change) is in effect.
-  "instructions": ["context.md"],
+  "instructions": ["context.md", "AI_RULE.md"],
 
   // Register the 5 specialized engineering skills (ui-ux, frontend, seo,
   // keyword-research, performance) as native opencode skills. Each lives in

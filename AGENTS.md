@@ -1,6 +1,6 @@
 # AGENTS.md — Universal AI Agent Directives & Operational Standards
 
-> This document is the single, universal operating standard for all AI coding agents, CLIs, and assistant tools (including Antigravity, OpenCode, Claude Code, Cursor, Windsurf, Trae, Aider, and GitHub Copilot) working in this repository.
+> This document is the single, universal operating standard for all AI coding agents, CLIs, and assistant tools (including Antigravity, OpenCode, Claude Code, Cursor, Windsurf, Trae, Aider, and GitHub Copilot) working in this repository. Companion directives and rule configurations include [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md), [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md), [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md), and [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc).
 
 ---
 
@@ -158,7 +158,12 @@ samir-portfolio-dev/
 │   ├── llms.txt                # Machine-readable knowledge graph for AI engines
 │   ├── .well-known/security.txt# Security disclosure policy
 │   └── Logo.svg, Filled_Logo.png
-└── docs/                       # PRD, Design System, SEO strategies, Drizzle guides
+├── docs/                       # PRD, Design System, SEO strategies, Drizzle guides
+├── AGENTS.md                   # Universal AI agent directives & operational standards
+├── AI_RULE.md                  # Strict AI engineering rules & non-negotiable checklist
+├── context.md                  # Deep technical context & environment specifications
+├── gemini.md                   # Gemini system context, routing protocol & directives
+└── opencode.jsonc              # OpenCode assistant configuration & skills declaration
 ```
 
 ---

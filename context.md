@@ -145,6 +145,13 @@ public/
 ├── Logo.svg, Logo.png         # Primary brand marks
 ├── Filled_Logo.png            # Solid logo for OpenGraph and metadata icons
 └── sw.js                      # Serwist service worker bundle
+agents/
+└── skills/                    # 5 specialized engineering skills (UI/UX, frontend, seo, keywords, performance)
+AGENTS.md                      # Universal AI coding agent directives & standards
+AI_RULE.md                     # Strict AI rules, engineering guardrails & checklist
+context.md                     # Deep technical context & environment specifications
+gemini.md                      # Gemini context, routing protocol & directives
+opencode.jsonc                 # OpenCode assistant configuration & skills declaration
 ```
 
 ## Database Schema (12 tables)
@@ -246,14 +253,15 @@ public/
 | `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Redis credentials | Listed in `.env.example` for planned persistent rate limiting |
 
 ## Critical Rules & Gotchas
-1. **Always Load and Follow `agents/skills/` Before Any Implementation:** Mandatory pre-requisite. Before proposing or implementing any changes (frontend, UI/UX, SEO, performance, or backend), the AI MUST explicitly view and evaluate against the relevant skill(s) in `agents/skills/` via `view_file` (`performance-engineer/SKILL.md`, `seo-engineer/SKILL.md`, `seo-keyword-research-implementation/SKILL.md`, `ui-ux-engineer/SKILL.md`, `frontend-engineer/SKILL.md`).
-2. **Never commit secrets** — all credentials remain strictly in `.env`.
-3. **Server components for reads, client components for interactivity** — keep data fetching in server components with ISR (`revalidate = 3600`).
-4. **Use pnpm** — do not use npm or yarn (`packageManager: pnpm@10`).
-5. **`admin_users` table is unused** — credentials authentication compares `ADMIN_USERNAME`/`ADMIN_PASSWORD` env vars directly.
-6. **Dual-mode API authentication** — `isAuthorized()` in `lib/api-auth.ts` allows both user session cookies and `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`. Do not use this helper on user-only routes.
-7. **Chat rate limiting is currently in-memory** — rate limits reset across serverless cold starts. Redis integration via Upstash is prepared in `.env.example` as a future enhancement.
-8. **Cloudinary transformations** — use `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` when rendering Cloudinary assets to guarantee modern formats (`f_auto`) and quality compression (`q_auto`).
-9. **Breadcrumb consistency** — use `components/layout/Breadcrumbs.tsx` rather than manual breadcrumb links to ensure synchronized visual navigation and `BreadcrumbList` JSON-LD.
-10. **RAG indexing trigger** — creating, updating, or deleting blogs/projects automatically indexes or deletes content chunks in pgvector. No secondary seed call is needed during routine blog publishing.
-11. **Rich text HTML format** — blog and project contents are stored as sanitized HTML, rendered on the client via `HtmlParser.tsx` or `ContentWithToc.tsx`.
+1. **Strict AI Directives Compliance:** All AI models and tools must adhere strictly to [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) and [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md). Never bypass the pre-implementation skill loading protocol.
+2. **Always Load and Follow `agents/skills/` Before Any Implementation:** Mandatory pre-requisite. Before proposing or implementing any changes (frontend, UI/UX, SEO, performance, or backend), the AI MUST explicitly view and evaluate against the relevant skill(s) in `agents/skills/` via `view_file` (`performance-engineer/SKILL.md`, `seo-engineer/SKILL.md`, `seo-keyword-research-implementation/SKILL.md`, `ui-ux-engineer/SKILL.md`, `frontend-engineer/SKILL.md`).
+3. **Never commit secrets** — all credentials remain strictly in `.env`.
+4. **Server components for reads, client components for interactivity** — keep data fetching in server components with ISR (`revalidate = 3600`).
+5. **Use pnpm** — do not use npm or yarn (`packageManager: pnpm@10`).
+6. **`admin_users` table is unused** — credentials authentication compares `ADMIN_USERNAME`/`ADMIN_PASSWORD` env vars directly.
+7. **Dual-mode API authentication** — `isAuthorized()` in `lib/api-auth.ts` allows both user session cookies and `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`. Do not use this helper on user-only routes.
+8. **Chat rate limiting is currently in-memory** — rate limits reset across serverless cold starts. Redis integration via Upstash is prepared in `.env.example` as a future enhancement.
+9. **Cloudinary transformations** — use `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` when rendering Cloudinary assets to guarantee modern formats (`f_auto`) and quality compression (`q_auto`).
+10. **Breadcrumb consistency** — use `components/layout/Breadcrumbs.tsx` rather than manual breadcrumb links to ensure synchronized visual navigation and `BreadcrumbList` JSON-LD.
+11. **RAG indexing trigger** — creating, updating, or deleting blogs/projects automatically indexes or deletes content chunks in pgvector. No secondary seed call is needed during routine blog publishing.
+12. **Rich text HTML format** — blog and project contents are stored as sanitized HTML, rendered on the client via `HtmlParser.tsx` or `ContentWithToc.tsx`.

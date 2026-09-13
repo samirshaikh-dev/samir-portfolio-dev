@@ -58,20 +58,25 @@ Personal portfolio, technical publication platform, and interactive engineering 
 | `/robots.txt` | Crawler Instructions | Configured in `app/robots.ts` (disallows `/admin/` and `/api/`, links to sitemap) |
 | `public/llms.txt` | LLM Knowledge Graph | Grounding context for AI search engines, answer engines, and blog automation |
 | `public/.well-known/security.txt` | Security Disclosure | Security contact and vulnerability reporting policy |
+| [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) | Universal Agent Directives | Universal operating standard and skill routing matrix for all AI coding tools |
+| [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md) | Core AI Rules & Directives | Strict engineering guardrails, architecture patterns, and non-negotiable checklist |
+| [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md) | Comprehensive Context | Deep architectural knowledge graph, API definitions, and environment variables |
+| [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc) | OpenCode Configuration | Tool permissions, automated skill registration, and custom commands |
 
 ## Core Architecture & Operational Rules
 
-1. **Always Load and Apply `agents/skills/` Before Any Implementation:** Absolute requirement. Never propose or implement changes without first reading and evaluating against the relevant specialized skill(s) via `view_file`.
-2. **Never Commit Secrets:** All credentials, keys, and tokens live strictly in `.env`.
-3. **Server Components by Default:** Fetch data directly in server components (`page.tsx`) using Drizzle queries with ISR (`export const revalidate = 3600`).
-4. **Client Component Boundaries:** Group heavy, client-only interactive widgets (`Chatbot`, `PushSettings`, `CloudTransition`) into `components/LazyClientComponents.tsx` loaded with `ssr: false` to eliminate hydration mismatches.
-5. **Dual-Mode API Authentication:** Write endpoints callable by automation (`POST /api/blogs`, `POST /api/push/send`) use `isAuthorized()` from `lib/api-auth.ts`, supporting either cookie-based admin sessions or `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`.
-6. **Sanitized Rich Content:** Blog and project contents are stored as sanitized HTML (from TipTap or converted from Markdown via `rehype-sanitize`) and rendered on the client via `HtmlParser` or `ContentWithToc`.
-7. **Automatic Vector Indexing:** Creating, modifying, or deleting blogs/projects automatically triggers pgvector indexing or cleanup in `content_chunks`.
-8. **Cloudinary Asset Delivery:** Always wrap Cloudinary URLs with `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` to enforce automatic modern formats (`f_auto`) and quality compression (`q_auto`).
-9. **Breadcrumb Consistency:** Always use `components/layout/Breadcrumbs.tsx` to maintain unified UI navigation and synchronous `BreadcrumbList` schema markup.
-10. **Single Source of Truth for Metadata:** Import canonical URLs, social handles, and identity info from `lib/site-config.ts`.
-11. **Package Management:** Always use `pnpm` (`packageManager: pnpm@10`). Never use `npm` or `yarn`.
+1. **Strict AI Directives Compliance:** Always strictly comply with [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) and [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md). Never bypass the pre-implementation skill loading protocol.
+2. **Always Load and Apply `agents/skills/` Before Any Implementation:** Absolute requirement. Never propose or implement changes without first reading and evaluating against the relevant specialized skill(s) via `view_file`.
+3. **Never Commit Secrets:** All credentials, keys, and tokens live strictly in `.env`.
+4. **Server Components by Default:** Fetch data directly in server components (`page.tsx`) using Drizzle queries with ISR (`export const revalidate = 3600`).
+5. **Client Component Boundaries:** Group heavy, client-only interactive widgets (`Chatbot`, `PushSettings`, `CloudTransition`) into `components/LazyClientComponents.tsx` loaded with `ssr: false` to eliminate hydration mismatches.
+6. **Dual-Mode API Authentication:** Write endpoints callable by automation (`POST /api/blogs`, `POST /api/push/send`) use `isAuthorized()` from `lib/api-auth.ts`, supporting either cookie-based admin sessions or `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`.
+7. **Sanitized Rich Content:** Blog and project contents are stored as sanitized HTML (from TipTap or converted from Markdown via `rehype-sanitize`) and rendered on the client via `HtmlParser` or `ContentWithToc`.
+8. **Automatic Vector Indexing:** Creating, modifying, or deleting blogs/projects automatically triggers pgvector indexing or cleanup in `content_chunks`.
+9. **Cloudinary Asset Delivery:** Always wrap Cloudinary URLs with `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` to enforce automatic modern formats (`f_auto`) and quality compression (`q_auto`).
+10. **Breadcrumb Consistency:** Always use `components/layout/Breadcrumbs.tsx` to maintain unified UI navigation and synchronous `BreadcrumbList` schema markup.
+11. **Single Source of Truth for Metadata:** Import canonical URLs, social handles, and identity info from `lib/site-config.ts`.
+12. **Package Management:** Always use `pnpm` (`packageManager: pnpm@10`). Never use `npm` or `yarn`.
 
 ## Identity & Professional Profile
 - **Name:** Samir Shaikh
