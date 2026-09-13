@@ -246,7 +246,7 @@ public/
 | `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Redis credentials | Listed in `.env.example` for planned persistent rate limiting |
 
 ## Critical Rules & Gotchas
-1. **Always Load and Follow `agents/skills/` Before Any Implementation:** Mandatory pre-requisite. Before proposing or implementing any changes (frontend, UI/UX, SEO, performance, or backend), the AI MUST explicitly view and evaluate against the relevant skill(s) in `agents/skills/` via `view_file` (`performance-engineer.md`, `seo-engineer.md`, `Seo-keyword-research-implementation.md`, `ui-ux-engineer.md`, `frontend-engineer.md`).
+1. **Always Load and Follow `agents/skills/` Before Any Implementation:** Mandatory pre-requisite. Before proposing or implementing any changes (frontend, UI/UX, SEO, performance, or backend), the AI MUST explicitly view and evaluate against the relevant skill(s) in `agents/skills/` via `view_file` (`performance-engineer/SKILL.md`, `seo-engineer/SKILL.md`, `seo-keyword-research-implementation/SKILL.md`, `ui-ux-engineer/SKILL.md`, `frontend-engineer/SKILL.md`).
 2. **Never commit secrets** — all credentials remain strictly in `.env`.
 3. **Server components for reads, client components for interactivity** — keep data fetching in server components with ISR (`revalidate = 3600`).
 4. **Use pnpm** — do not use npm or yarn (`packageManager: pnpm@10`).

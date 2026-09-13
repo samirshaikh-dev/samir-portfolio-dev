@@ -26,11 +26,11 @@ Personal portfolio, technical publication platform, and interactive engineering 
 >
 > **Mandatory Execution Pipeline:**
 > 1. **Identify Applicable Discipline(s):**
->    - **UI/UX Direction & Visual Design:** [agents/skills/ui-ux-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer.md) (Layout, spacing, typography, theme contrast, interactive widget ergonomics, accessibility)
->    - **Frontend & App Router Architecture:** [agents/skills/frontend-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer.md) (React 19 / Next.js 16 components, Server vs Client boundaries, zero CLS, form handling, error states)
->    - **Technical SEO, Schema & AEO/GEO:** [agents/skills/seo-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer.md) (Schema.org JSON-LD integrity, dynamic OpenGraph cards, sitemaps, robots.txt, machine readability)
->    - **Keyword Strategy & Content Layer:** [agents/skills/Seo-keyword-research-implementation.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/Seo-keyword-research-implementation.md) (Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, on-page optimization, anti-cannibalization)
->    - **Performance & Optimization:** [agents/skills/performance-engineer.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer.md) (Core Web Vitals, SSR/ISR caching, Cloudinary transformations, pgvector search latency, bundle size)
+>    - **UI/UX Direction & Visual Design:** [agents/skills/ui-ux-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) (Layout, spacing, typography, theme contrast, interactive widget ergonomics, accessibility)
+>    - **Frontend & App Router Architecture:** [agents/skills/frontend-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer/SKILL.md) (React 19 / Next.js 16 components, Server vs Client boundaries, zero CLS, form handling, error states)
+>    - **Technical SEO, Schema & AEO/GEO:** [agents/skills/seo-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md) (Schema.org JSON-LD integrity, dynamic OpenGraph cards, sitemaps, robots.txt, machine readability)
+>    - **Keyword Strategy & Content Layer:** [agents/skills/seo-keyword-research-implementation/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md) (Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, on-page optimization, anti-cannibalization)
+>    - **Performance & Optimization:** [agents/skills/performance-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md) (Core Web Vitals, SSR/ISR caching, Cloudinary transformations, pgvector search latency, bundle size)
 > 2. **Load the Skill File(s):** Call `view_file` on every relevant skill document to read its purpose, scope, non-negotiable rules, and workflow before formulating a solution.
 > 3. **Evaluate & Comply:** Cross-reference the proposed implementation against the skill's engineering principles, constraints, and checklists.
 > 4. **Implement with Justification:** Apply changes in strict accordance with the loaded skill's standards.

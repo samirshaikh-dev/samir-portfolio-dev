@@ -1,0 +1,56 @@
+// Samir Portfolio — opencode project configuration.
+// JSONC: comments and trailing commas are allowed.
+// Full reference: https://opencode.ai/config.json
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // Pin models explicitly (uncomment to override the global default).
+  // "model": "anthropic/claude-sonnet-4-6",
+  // "small_model": "groq/llama-3.3-70b-versatile",
+
+  // Always inject project context so the mandatory pre-implementation
+  // protocol (load agents/skills before any code change) is in effect.
+  "instructions": ["context.md"],
+
+  // Register the 5 specialized engineering skills (ui-ux, frontend, seo,
+  // keyword-research, performance) as native opencode skills. Each lives in
+  // agents/skills/<name>/SKILL.md and is scanned recursively.
+  "skills": {
+    "paths": ["agents/skills"]
+  },
+
+  // Custom agents stay out of the way of tooling; define any here if needed.
+  // "agent": {},
+
+  // Convenience commands aligned with the repo's pnpm scripts.
+  "command": {
+    "lint": {
+      "description": "Run ESLint verification",
+      "template": "Run `pnpm run lint` and fix any errors or warnings this command reports."
+    },
+    "build": {
+      "description": "Run production build (webpack)",
+      "template": "Run `pnpm run build` and fix any errors this command reports."
+    },
+    "generate-blog": {
+      "description": "Run the automated blog generator",
+      "template": "Run `pnpm run generate-blog` and summarize what was generated."
+    }
+  },
+
+  // Fail-open, AI-friendly permission defaults: keep secrets safe, allow git.
+  "permission": {
+    "bash": {
+      "pnpm *": "allow",
+      "git status*": "allow",
+      "git log*": "allow",
+      "git diff*": "allow",
+      "ls*": "allow",
+      "dir*": "allow",
+      "*": "ask"
+    },
+    "external_directory": {
+      "*": "ask"
+    }
+  }
+}

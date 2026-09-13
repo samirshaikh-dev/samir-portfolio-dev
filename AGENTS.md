@@ -24,15 +24,15 @@
 
 | Task Area | Required Skill File | Core Focus |
 | :--- | :--- | :--- |
-| **UI & Visual Design** | [`agents/skills/ui-ux-engineer.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer.md) | Visual hierarchy, spacing, typography, theme contrast, interactive widgets, WCAG accessibility |
-| **Frontend & Components** | [`agents/skills/frontend-engineer.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer.md) | React 19 / Next.js 16 patterns, Server vs Client boundaries, zero CLS, form handling, error states |
-| **Technical SEO & AEO/GEO** | [`agents/skills/seo-engineer.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer.md) | Schema.org JSON-LD integrity, dynamic OpenGraph, XML sitemaps, robots.txt, AI citation readability |
-| **Keywords & Content** | [`agents/skills/Seo-keyword-research-implementation.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/Seo-keyword-research-implementation.md) | Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, anti-cannibalization, content depth |
-| **Performance & Latency** | [`agents/skills/performance-engineer.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer.md) | Core Web Vitals, SSR/ISR caching, Cloudinary optimization, pgvector search latency, bundle size |
+| **UI & Visual Design** | [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) | Visual hierarchy, spacing, typography, theme contrast, interactive widgets, WCAG accessibility |
+| **Frontend & Components** | [`agents/skills/frontend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer/SKILL.md) | React 19 / Next.js 16 patterns, Server vs Client boundaries, zero CLS, form handling, error states |
+| **Technical SEO & AEO/GEO** | [`agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md) | Schema.org JSON-LD integrity, dynamic OpenGraph, XML sitemaps, robots.txt, AI citation readability |
+| **Keywords & Content** | [`agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md) | Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, anti-cannibalization, content depth |
+| **Performance & Latency** | [`agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md) | Core Web Vitals, SSR/ISR caching, Cloudinary optimization, pgvector search latency, bundle size |
 
 ### Required Step-by-Step Workflow for AI Agents:
 1. **Identify:** Determine which of the 5 skills above govern the requested change.
-2. **Read:** Explicitly view/read the skill file (`agents/skills/<skill-name>.md`) before planning or editing.
+2. **Read:** Explicitly view/read the applicable skill file (`agents/skills/<skill-name>/SKILL.md`) before planning or editing.
 3. **Verify:** Check your proposed solution against the non-negotiable rules and engineering principles of that skill.
 4. **Implement:** Write code that strictly adheres to the skill guidelines, citing the relevant principle in your explanation.
 
