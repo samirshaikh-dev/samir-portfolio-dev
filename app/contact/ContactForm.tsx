@@ -8,6 +8,7 @@ export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -22,6 +23,10 @@ export default function ContactForm() {
       subject: String(formData.get("subject") || "").trim(),
       message: String(formData.get("message") || "").trim(),
     };
+
+    if (!data.name || !data.email || !data.subject || !data.message) {
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -38,6 +43,11 @@ export default function ContactForm() {
 ${data.message}`;
 
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(whatsappText)}`;
+    setWhatsappLink(whatsappUrl);
+
+    // Open WhatsApp IMMEDIATELY within the direct user gesture to prevent browser popup blockers.
+    // Modern browsers silently block window.open() if invoked after an asynchronous await (such as network fetch).
+    const whatsappTab = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     try {
       const res = await fetch("/api/contact", {
@@ -46,17 +56,32 @@ ${data.message}`;
         body: JSON.stringify(data),
       });
 
+      const resData = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        throw new Error("Failed to save message");
+        throw new Error(resData.error || "Failed to save message");
       }
 
-      setSuccessMessage("Inquiry saved! Opening WhatsApp to message Samir directly...");
+      if (resData.emailSent) {
+        setSuccessMessage(
+          "Inquiry saved! A confirmation email has been dispatched to your inbox. You can also continue the conversation on WhatsApp."
+        );
+      } else {
+        setSuccessMessage(
+          "Inquiry saved! You can also continue the conversation on WhatsApp."
+        );
+      }
+
+      formRef.current?.reset();
     } catch {
-      // Still open WhatsApp so visitor can reach out even if API encounters an issue
-      setSuccessMessage("Opening WhatsApp to message Samir directly...");
+      setSuccessMessage(
+        "Your message was prepared for WhatsApp! If the tab did not open automatically, click the button below to message Samir directly."
+      );
     } finally {
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-      formRef.current.reset();
+      // If popup was blocked by browser policy, ensure fallback link is ready
+      if (!whatsappTab || whatsappTab.closed) {
+        // Fallback button is visible in the success alert
+      }
       setLoading(false);
     }
   }
@@ -67,9 +92,22 @@ ${data.message}`;
         <div
           role="status"
           aria-live="polite"
-          className="rounded-lg bg-green-50 dark:bg-green-900/20 p-4 text-sm text-green-800 dark:text-green-400 border border-green-200 dark:border-green-800"
+          className="rounded-lg bg-green-50 dark:bg-green-900/20 p-4 text-sm text-green-800 dark:text-green-400 border border-green-200 dark:border-green-800 flex flex-col gap-3"
         >
-          {successMessage}
+          <p>{successMessage}</p>
+          {whatsappLink && (
+            <div>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-neutral-950 font-semibold px-4 py-2 text-xs transition-colors shadow-sm"
+              >
+                <FaWhatsapp className="text-base flex-shrink-0" aria-hidden="true" />
+                <span>Open in WhatsApp</span>
+              </a>
+            </div>
+          )}
         </div>
       )}
       {error && (
@@ -149,7 +187,7 @@ ${data.message}`;
         className="inline-flex items-center justify-center gap-2 rounded-lg bg-foreground text-background font-medium px-6 py-3 text-sm hover:opacity-90 transition-opacity disabled:opacity-50 w-full sm:w-auto self-start mt-2 cursor-pointer"
       >
         <FaWhatsapp className="text-lg flex-shrink-0" aria-hidden="true" />
-        <span>{loading ? "Opening WhatsApp..." : "Send via WhatsApp"}</span>
+        <span>{loading ? "Sending..." : "Send via WhatsApp"}</span>
       </button>
     </form>
   );

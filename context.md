@@ -151,6 +151,7 @@ AGENTS.md                      # Universal AI coding agent directives & standard
 AI_RULE.md                     # Strict AI rules, engineering guardrails & checklist
 context.md                     # Deep technical context & environment specifications
 gemini.md                      # Gemini context, routing protocol & directives
+portfolio-theme.md             # Color & theme reference (design tokens, light/dark palette, accents)
 opencode.jsonc                 # OpenCode assistant configuration & skills declaration
 ```
 
@@ -186,7 +187,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 
 ### CSS & Design System
 - **Tailwind CSS v4:** `@import "tailwindcss"` in `globals.css` with PostCSS configuration.
-- **Color Variables:** CSS custom properties define background, foreground, primary, border, hover, and footer colors across `.dark` and light themes.
+- **Color Variables:** CSS custom properties define background, foreground, primary, border, hover, and footer colors across `.dark` and light themes. See [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md) for the full token & palette reference.
 - **Typography:** `@tailwindcss/typography` used via `.prose` and `.prose-invert` for rendered rich text.
 - **Fonts:** Geist Sans (`--font-geist-sans`), Geist Mono (`--font-geist-mono`), and Playfair Display (`--font-playfair`) configured in `lib/fonts.ts`.
 

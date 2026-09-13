@@ -1,6 +1,6 @@
 # AGENTS.md — Universal AI Agent Directives & Operational Standards
 
-> This document is the single, universal operating standard for all AI coding agents, CLIs, and assistant tools (including Antigravity, OpenCode, Claude Code, Cursor, Windsurf, Trae, Aider, and GitHub Copilot) working in this repository. Companion directives and rule configurations include [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md), [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md), [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md), and [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc).
+> This document is the single, universal operating standard for all AI coding agents, CLIs, and assistant tools (including Antigravity, OpenCode, Claude Code, Cursor, Windsurf, Trae, Aider, and GitHub Copilot) working in this repository. Companion directives and rule configurations include [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md), [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md), [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md), [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md), and [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc).
 
 ---
 
@@ -92,7 +92,7 @@
 - **Syndication & Feeds:** Dynamic RSS 2.0 XML feed at `app/api/feed/route.ts` and dynamic sitemap at `app/sitemap.ts`.
 
 ### Assets & Styling
-- **Tailwind CSS v4:** Uses CSS variables for color theming (`--color-background`, `--color-foreground`, `--color-primary`, `--color-border-primary`, etc.) with dark mode via `.dark`.
+- **Tailwind CSS v4:** Uses CSS variables for color theming (`--color-background`, `--color-foreground`, `--color-primary`, `--color-border-primary`, etc.) with dark mode via `.dark`. Full token & palette documentation in [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md).
 - **Cloudinary Optimization:** Always wrap Cloudinary image URLs with `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` to attach `f_auto,q_auto`.
 - **Rich Content:** TipTap editor output is stored as HTML and rendered safely with Next.js image optimization via `components/HtmlParser.tsx` or `components/ContentWithToc.tsx`.
 
@@ -163,6 +163,7 @@ samir-portfolio-dev/
 ├── AI_RULE.md                  # Strict AI engineering rules & non-negotiable checklist
 ├── context.md                  # Deep technical context & environment specifications
 ├── gemini.md                   # Gemini system context, routing protocol & directives
+├── portfolio-theme.md          # Color & theme reference (design tokens, light/dark palette, accents)
 └── opencode.jsonc              # OpenCode assistant configuration & skills declaration
 ```
 

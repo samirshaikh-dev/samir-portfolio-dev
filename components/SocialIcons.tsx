@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-  FaGithub, FaGitlab, FaBitbucket, FaLinkedin, FaAngellist, FaCodepen, FaDribbble, FaBehance, FaFigma, FaMedium, FaNpm, FaDocker, FaKaggle, FaUnity, FaSteam, FaProductHunt, FaReddit, FaDiscord, FaYoutube, FaTwitch, FaPatreon, FaDev
+  FaGithub, FaGitlab, FaBitbucket, FaLinkedin, FaAngellist, FaCodepen, FaDribbble, FaBehance, FaFigma, FaMedium, FaNpm, FaDocker, FaKaggle, FaUnity, FaSteam, FaProductHunt, FaReddit, FaDiscord, FaYoutube, FaTwitch, FaPatreon, FaDev, FaWhatsapp, FaPhone
 } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 import {
-  SiSourceforge, SiLaunchpad, SiPolywork, SiPeerlist, SiBento, SiLeetcode, SiHackerrank, SiCodeforces, SiCodechef, SiCodewars, SiTopcoder, SiHackerearth, SiCodesandbox, SiStackblitz, SiJsfiddle, SiReplit, SiHashnode, SiSubstack, SiPypi, SiRust, SiRubygems, SiPackagist, SiApachemaven, SiNuget, SiHuggingface, SiHackthebox, SiTryhackme, SiIndiehackers, SiCrunchbase, SiStackoverflow, SiCalendly, SiUpwork, SiFiverr, SiBuymeacoffee, SiKofi
+  SiSourceforge, SiLaunchpad, SiPolywork, SiPeerlist, SiBento, SiLeetcode, SiHackerrank, SiCodeforces, SiCodechef, SiCodewars, SiTopcoder, SiHackerearth, SiCodesandbox, SiStackblitz, SiJsfiddle, SiReplit, SiHashnode, SiSubstack, SiPypi, SiRust, SiRubygems, SiPackagist, SiApachemaven, SiNuget, SiHuggingface, SiHackthebox, SiTryhackme, SiIndiehackers, SiCrunchbase, SiStackoverflow, SiCalendly, SiUpwork, SiFiverr, SiBuymeacoffee, SiKofi, SiGmail
 } from 'react-icons/si';
 
 export const SOCIAL_CATEGORIES = [
@@ -47,6 +47,10 @@ export const SOCIAL_CATEGORIES = [
   {
     category: "Scheduling, Freelance & Monetization",
     platforms: ["Calendly", "Upwork", "Fiverr", "GitHub Sponsors", "Patreon", "Buy Me a Coffee", "Ko-fi"]
+  },
+  {
+    category: "Direct Contact & Messaging",
+    platforms: ["WhatsApp", "Gmail", "Phone"]
   }
 ];
 
@@ -112,7 +116,10 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "GitHub Sponsors": FaGithub,
   "Patreon": FaPatreon,
   "Buy Me a Coffee": SiBuymeacoffee,
-  "Ko-fi": SiKofi
+  "Ko-fi": SiKofi,
+  "WhatsApp": FaWhatsapp,
+  "Gmail": SiGmail,
+  "Phone": FaPhone
 };
 
 export const SocialIcon = ({ name, className = "w-6 h-6" }: { name: string, className?: string }) => {

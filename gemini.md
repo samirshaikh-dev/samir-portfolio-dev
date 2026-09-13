@@ -8,7 +8,7 @@ Personal portfolio, technical publication platform, and interactive engineering 
 
 ## Tech Stack & Architecture
 - **Framework:** Next.js 16 (App Router, webpack build), React 19, TypeScript 5
-- **Styling:** Tailwind CSS v4 (`@tailwindcss/postcss`, `@tailwindcss/typography`), dark/light mode via `next-themes`
+- **Styling:** Tailwind CSS v4 (`@tailwindcss/postcss`, `@tailwindcss/typography`), dark/light mode via `next-themes` — see [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md) for the color/theme reference
 - **Database:** Neon (serverless PostgreSQL) + Drizzle ORM + pgvector (3072-dimensional vector store)
 - **Authentication:** NextAuth v5 (`5.0.0-beta.31`, GitHub OAuth + Credentials) + Dual-mode Bearer token auth (`BLOG_AUTOMATION_TOKEN`) via `lib/api-auth.ts`
 - **AI & RAG:** Vercel AI SDK (`ai` v6), Google Gemini (`gemini-embedding-2` for 3072d vectors), Groq (`llama-3.3-70b-versatile` for chat and blog generation)
@@ -61,6 +61,7 @@ Personal portfolio, technical publication platform, and interactive engineering 
 | [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) | Universal Agent Directives | Universal operating standard and skill routing matrix for all AI coding tools |
 | [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md) | Core AI Rules & Directives | Strict engineering guardrails, architecture patterns, and non-negotiable checklist |
 | [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md) | Comprehensive Context | Deep architectural knowledge graph, API definitions, and environment variables |
+| [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md) | Color & Theme Reference | Design tokens, light/dark color system, accent usage, typography, and theme reference map |
 | [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc) | OpenCode Configuration | Tool permissions, automated skill registration, and custom commands |
 
 ## Core Architecture & Operational Rules

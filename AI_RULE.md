@@ -1,6 +1,6 @@
 # AI Rules & Engineering Directives — Samir Portfolio Dev
 
-> **Scope:** These rules apply to all AI models, CLIs, and autonomous coding assistants operating on `samir-portfolio-dev`. Adherence is mandatory on every step. Companion directives and references: [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) (Universal standards & skill routing) | [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md) (Project knowledge graph) | [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md) (Gemini directives) | [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc) (OpenCode config).
+> **Scope:** These rules apply to all AI models, CLIs, and autonomous coding assistants operating on `samir-portfolio-dev`. Adherence is mandatory on every step. Companion directives and references: [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) (Universal standards & skill routing) | [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md) (Project knowledge graph) | [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md) (Gemini directives) | [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md) (Color & theme reference) | [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc) (OpenCode config).
 
 ---
 
@@ -69,7 +69,7 @@
 - **Security ([`lib/chat/security.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/chat/security.ts)):** In-memory rate limiting per IP and per FingerprintJS `x-visitor-id`. IPinfo VPN/proxy check in fail-open mode.
 
 ### Styling & Assets
-- **Tailwind CSS v4:** Uses CSS variables for color theming (`--color-background`, `--color-foreground`, `--color-primary`, `--color-border-primary`, etc.) with dark mode via `.dark`.
+- **Tailwind CSS v4:** Uses CSS variables for color theming (`--color-background`, `--color-foreground`, `--color-primary`, `--color-border-primary`, etc.) with dark mode via `.dark`. Full token & palette documentation in [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md).
 - **Cloudinary Optimization:** Always wrap Cloudinary image URLs with `optimizeCloudinaryUrl()` from [`lib/cloudinary.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/cloudinary.ts) to enforce `f_auto,q_auto`.
 - **Rich Content:** Stored as sanitized HTML, rendered safely with Next.js image optimization via [`components/HtmlParser.tsx`](file:///s:/portfolio/samir-portfolio-dev/components/HtmlParser.tsx) or [`components/ContentWithToc.tsx`](file:///s:/portfolio/samir-portfolio-dev/components/ContentWithToc.tsx).
 
