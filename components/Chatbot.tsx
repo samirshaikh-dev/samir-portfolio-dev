@@ -5,8 +5,93 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useRef, useEffect, useState } from 'react';
 import fpPromise from '@fingerprintjs/fingerprintjs';
-import { FiMessageSquare, FiSend, FiLoader, FiX } from 'react-icons/fi';
+import { FiMessageSquare, FiSend, FiLoader, FiX, FiAlertCircle } from 'react-icons/fi';
 import Image from 'next/image';
+import Link from 'next/link';
+
+interface FriendlyError {
+  title: string;
+  description: string;
+}
+
+function getFriendlyErrorMessage(err: Error | undefined): FriendlyError {
+  if (!err) {
+    return {
+      title: 'Something Went Wrong',
+      description: "I'm temporarily having trouble connecting to the service. Please reach out to Samir directly.",
+    };
+  }
+
+  let rawMessage = err.message || '';
+  try {
+    const parsed = JSON.parse(rawMessage);
+    if (parsed.error) rawMessage = parsed.error;
+  } catch {
+    // keep rawMessage
+  }
+
+  // Preserve friendly conversational notices from security checks (e.g., VPN, daily limits)
+  if (
+    rawMessage.startsWith('Whoa,') ||
+    rawMessage.startsWith('Hey there!') ||
+    rawMessage.startsWith('Missing visitor ID')
+  ) {
+    return {
+      title: rawMessage.startsWith('Whoa') ? 'Daily Limit Reached' : 'Notice',
+      description: rawMessage,
+    };
+  }
+
+  const lower = rawMessage.toLowerCase();
+
+  // API Key / Authentication / Provider configuration errors
+  if (
+    lower.includes('api key') ||
+    lower.includes('unauthorized') ||
+    lower.includes('forbidden') ||
+    lower.includes('401') ||
+    lower.includes('403') ||
+    lower.includes('loadapikeyerror')
+  ) {
+    return {
+      title: 'Assistant Service Offline',
+      description: "The AI assistant is temporarily undergoing maintenance or credential updates. In the meantime, feel free to explore Samir's projects or reach out directly!",
+    };
+  }
+
+  // Rate limits or quotas
+  if (
+    lower.includes('rate limit') ||
+    lower.includes('too many requests') ||
+    lower.includes('429') ||
+    lower.includes('quota')
+  ) {
+    return {
+      title: 'Rate Limit Reached',
+      description: "I'm receiving a lot of questions right now! Please check back later or reach out to Samir directly.",
+    };
+  }
+
+  // Network / connection drop
+  if (
+    lower.includes('failed to fetch') ||
+    lower.includes('network') ||
+    lower.includes('offline') ||
+    lower.includes('econnrefused') ||
+    lower.includes('timeout')
+  ) {
+    return {
+      title: 'Connection Issue',
+      description: 'Unable to reach the server. Please check your internet connection or reach out to Samir directly.',
+    };
+  }
+
+  // Generic fallback
+  return {
+    title: 'Temporary Hiccup',
+    description: "I ran into an unexpected issue while generating a response. Please reach out to Samir directly.",
+  };
+}
 
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +106,7 @@ export default function Chatbot() {
     loadFingerprint();
   }, []);
 
-  const { messages, sendMessage, status, error } = useChat();
+  const { messages, sendMessage, status, error, clearError } = useChat();
   const [input, setInput] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -45,10 +130,10 @@ export default function Chatbot() {
   const isLoading = status === 'submitted' || status === 'streaming';
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to bottom only when a new message arrives (not during streaming)
+  // Auto-scroll to bottom only when a new message arrives or error occurs
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages.length]);
+  }, [messages.length, error]);
 
   return (
     <>
@@ -107,7 +192,7 @@ export default function Chatbot() {
             <div className="h-full flex flex-col items-center justify-center text-center space-y-3 text-muted-foreground opacity-70">
               <FiMessageSquare className="w-10 h-10 mb-2" />
               <p className="text-sm px-4">
-                Hi! I'm an AI trained on Samir's portfolio. <br /> Ask me anything!
+                Hi! I&apos;m an AI trained on Samir&apos;s portfolio. <br /> Ask me anything!
               </p>
             </div>
           )}
@@ -155,19 +240,44 @@ export default function Chatbot() {
               </div>
             </div>
           )}
-          {error && (
-            <div className="flex justify-start">
-              <div className="max-w-[85%] rounded-2xl px-4 py-3 text-sm bg-red-500/10 border border-red-500/20 text-red-400 rounded-bl-sm">
-                {(() => {
-                  try {
-                    return JSON.parse(error.message).error || error.message;
-                  } catch {
-                    return error.message || 'An error occurred';
-                  }
-                })()}
+          {error && (() => {
+            const { title, description } = getFriendlyErrorMessage(error);
+            return (
+              <div className="flex justify-start">
+                <div className="max-w-[90%] rounded-2xl p-4 text-sm bg-red-500/10 border border-red-500/20 text-foreground rounded-bl-sm space-y-3 shadow-sm">
+                  <div className="flex items-start gap-2.5">
+                    <FiAlertCircle className="w-5 h-5 text-red-500 dark:text-red-400 shrink-0 mt-0.5" />
+                    <div className="space-y-1">
+                      <p className="font-semibold text-xs tracking-wide uppercase text-red-600 dark:text-red-400">
+                        {title}
+                      </p>
+                      <p className="text-xs text-muted-foreground leading-relaxed">
+                        {description}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                    <Link
+                      href="/contact"
+                      onClick={() => setIsOpen(false)}
+                      className="inline-flex items-center gap-1 text-xs font-medium px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-foreground transition-colors"
+                    >
+                      Contact Samir &rarr;
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => clearError()}
+                      className="text-xs text-muted-foreground hover:text-foreground ml-auto px-1.5 py-1 transition-colors cursor-pointer"
+                      title="Dismiss notice"
+                    >
+                      Dismiss
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-          )}
+            );
+          })()}
           <div ref={messagesEndRef} />
         </div>
 
