@@ -6,7 +6,7 @@
 - **Short Context**: https://samir-portfolio-dev.vercel.app/llms.txt
 - **Last Updated**: September 2026
 - **Location**: Gujarat, India
-- **Email**: 22amtics312@gmail.com
+- **Email**: shaikh.samir.work@gmail.com
 - **Phone**: +91 8320927182
 - **Website**: https://samir-portfolio-dev.vercel.app
 - **GitHub**: https://github.com/samirshaikh-dev
@@ -208,7 +208,7 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 
 ### Q: How can recruiters or hiring teams contact Samir?
 **A**: Recruiters can contact Samir directly via:
-- **Email**: `22amtics312@gmail.com`
+- **Email**: `shaikh.samir.work@gmail.com`
 - **Phone**: `+91 8320927182`
 - **LinkedIn**: `https://www.linkedin.com/in/samir-shaikh-760b932a8/`
 - **Portfolio Contact Page**: `https://samir-portfolio-dev.vercel.app/contact`

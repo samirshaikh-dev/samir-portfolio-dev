@@ -83,8 +83,8 @@ Personal portfolio, technical publication platform, and interactive engineering 
 - **Positioning:** AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer (FDE)
 - **Location:** Vapi / Surat, Gujarat, India (Open to Remote Worldwide)
 - **Education:** B.Tech in Information Technology, Uka Tarsadia University
-- **Experience:** Logicwind (Software Engineer Intern / Backend Developer)
-- **Contact Email:** `22amtics312@gmail.com` / `shaikh.samir.dev@gmail.com`
+- **Experience:** Xira Infotech (Full Stack Engineer Intern), LOGICWIND (Back End Developer Intern)
+- **Contact Email:** `shaikh.samir.work@gmail.com`
 - **Telephone:** `+91 8320927182`
 - **GitHub:** `https://github.com/samirshaikh-dev`
 - **LinkedIn:** `https://linkedin.com/in/samir-shaikh-760b932a8`

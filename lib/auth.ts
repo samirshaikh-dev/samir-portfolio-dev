@@ -47,6 +47,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async signIn({ account, profile }) {
       if (account?.provider === "github") {
         return (
+          profile?.email === "shaikh.samir.work@gmail.com" ||
           profile?.email === "22amtics312@gmail.com" ||
           profile?.email === "22amtics197@gmail.com"
         );
