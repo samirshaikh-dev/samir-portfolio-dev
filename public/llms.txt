@@ -1,121 +1,106 @@
-Name: Samir Shaikh
-Title: AI Backend Engineer | AI SDE | Agentic AI Engineer
-Location: Gujarat, India
-Last Updated: July 2026
+# Samir Shaikh
 
+> AI Backend Engineer, AI SDE, and Agentic AI Engineer specializing in production Retrieval-Augmented Generation (RAG) systems, autonomous LLM agent workflows, and scalable distributed architectures. Combining backend depth with customer context to build and deploy production AI systems, with an active focus on Forward Deployed Engineering (FDE).
+
+Last Updated: September 2026
+Location: Gujarat, India
 Website: https://samir-portfolio-dev.vercel.app
 GitHub: https://github.com/samirshaikh-dev
 LinkedIn: https://www.linkedin.com/in/samir-shaikh-760b932a8/
+Twitter: https://x.com/samirshaikh-dev
 Email: 22amtics312@gmail.com
-Resume: https://samir-portfolio-dev.vercel.app/resume
-Contact: https://samir-portfolio-dev.vercel.app/contact
-Blog: https://samir-portfolio-dev.vercel.app/blogs
+Phone: +91 8320927182
 
-## Summary
-AI Backend Engineer and AI SDE specializing in backend systems, distributed architectures, Retrieval-Augmented Generation (RAG) applications, and agentic AI workflows. I am also exploring Forward Deployed Engineer roles that combine backend depth, customer context, and end-to-end ownership.
+## Quick Links
 
-## About
+- [Resume](https://samir-portfolio-dev.vercel.app/resume): Current resume and professional qualifications
+- [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, and case studies
+- [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design
+- [About](https://samir-portfolio-dev.vercel.app/about): Background, timeline, and engineering principles
+- [Contact](https://samir-portfolio-dev.vercel.app/contact): Get in touch for roles, consulting, or technical advisory
+- [RSS Feed](https://samir-portfolio-dev.vercel.app/api/feed): Syndicate updates and engineering articles
 
-### Past
-I completed my B.Tech in Information Technology from Uka Tarsadia University in 2026 with a clear focus on backend engineering, where I found the challenge of designing reliable systems more interesting than building user interfaces. I then spent around 9 months as a Backend Developer Intern at Logicwind, building production applications with Node.js and TypeScript. I worked across monolithic and microservice architectures, developing REST APIs, integrating third-party services (Dittofeed, Reoon, OneSignal), optimizing performance, and contributing to systems used by real users. That experience taught me that production engineering is about more than writing code — it's about building services that are reliable, observable, and maintainable when things don't go as planned.
+## Summary & Positioning
 
-### Present
-Right now I'm building the AI layer — the backend infrastructure that makes AI products actually work in production, not just in demos. A full RAG pipeline with Gemini embeddings and pgvector (live on this portfolio — ~10k blog/project chunks indexed, ~300ms query time), a WhatsApp automation system in production handling 1k+ messages/week for a local business, and an AI ticket-triage pipeline running on Kafka and BullMQ with full OpenTelemetry observability. I'm continuously strengthening my backend engineering skills by building scalable systems with NestJS, PostgreSQL, Redis, Docker, and distributed architectures, while expanding into AI backend development through hands-on projects. The common thread: not experimenting with AI as a side interest — building the backend infrastructure that makes AI features ship, scale, and stay honest.
+Samir Shaikh is an AI Backend Engineer and AI SDE based in Gujarat, India, with production experience architecting scalable, event-driven backend systems, Retrieval-Augmented Generation (RAG) pipelines, and agentic AI workflows. Experienced in leading full lifecycle development from technical discovery to production deployment, Samir focuses on Forward Deployed Engineering (FDE) and AI Backend roles where engineering rigor solves ambiguous, customer-critical business challenges.
 
-### Future
-I'm headed toward Forward Deployed Engineering — the role that puts backend depth directly in front of customers, where the problem isn't fully defined when you walk in the room and ownership means end-to-end, not just the ticket in the queue. FDE is where the craft I've been building actually compounds: the ability to read a customer's real constraint faster than a spec document captures it, to prototype a working solution in the same conversation, and to own the gap between what the product does and what the customer needs it to do. Concretely: I'm targeting roles at companies where AI is the product, not a feature — where being the engineer closest to the customer is the high-leverage position, not the fallback. Applied AI Engineer, Forward Deployed AI Engineer, Solutions Engineer, Founding Engineer — the title varies, but the shape of the work is the same: bring the technical depth, translate the customer problem, ship the solution.
+## Background & Experience
 
-## Skills
+### Logicwind — Backend Developer Intern (Sep 2025 – May 2026)
+- Engineered backend features and spearheaded legacy package migrations across 3+ active microservice and Firebase-based codebases, substantially reducing technical debt.
+- Integrated third-party automation systems (Dittofeed marketing automation, Reoon email verification, OneSignal web push) into live products, serving thousands of active users.
+- Designed and maintained RESTful APIs and asynchronous workers across microservice, monolithic, and serverless architectures.
+- Collaborated cross-functionally in an Agile environment participating in sprint planning, code reviews, and latency profiling.
+- Profiled database queries and refactored integration bottlenecks, measurably reducing API response latencies.
+
+### Education
+- **Bachelor of Technology (B.Tech) in Information Technology** (2022 – 2026)
+  - Uka Tarsadia University (UTU), Gujarat, India
+  - Core focus: Distributed Systems, Database Management Systems, Data Structures & Algorithms, Network Security.
+
+## Core Technical Skills
 
 ### Expert
 - Node.js
 - TypeScript
 - Backend System Design
+- REST API Architecture
 
 ### Advanced
+- PostgreSQL & pgvector
 - Express.js
-- PostgreSQL
+- Docker & Containerization
 - MongoDB
-- Docker
-- REST APIs
-- System Design
+- Microservices Architecture
+- Git & CI/CD Workflows
 
-### Intermediate
+### Intermediate / Working Knowledge
 - NestJS
-- Kafka
+- Apache Kafka
 - BullMQ
-- Redis
+- Redis (Caching & Message Broker)
 - GraphQL
-- React
-- Next.js
+- Next.js & React
+- OpenTelemetry, Prometheus & Grafana
 
-## AI / LLM Stack
-- Retrieval-Augmented Generation (RAG)
-- Agentic AI & AI Agents
-- Multi-Agent Orchestration
-- Tool-Using AI Systems
-- Google Gemini API
-- Embeddings
-- pgvector (vector similarity search)
-- Vercel AI SDK
-- Prompt Engineering
-- Context grounding / hallucination control
+## AI, LLM & Agentic Stack
 
-## Backend Engineering
-- Microservices architecture
-- Event-driven systems
-- Authentication (JWT, OAuth, RBAC)
-- Rate limiting & security hardening
-- Background job processing
-- WebSockets / real-time systems
-- API design (REST & GraphQL)
+- **Retrieval-Augmented Generation (RAG)**: Production RAG pipelines, chunking strategies, hybrid search, context compression, hallucination mitigation.
+- **Vector Search & Embeddings**: PostgreSQL `pgvector` (HNSW & IVFFlat indexing, cosine distance similarity), Google Gemini `gemini-embedding-2` (3072 dimensions).
+- **Agentic AI & Orchestration**: Autonomous multi-step agents, function calling/tool execution, dynamic reflection, structured JSON schema outputs.
+- **Frameworks & SDKs**: Vercel AI SDK, Google Gemini API, Groq Cloud API, OpenAI API.
+- **Observability & Evaluation**: Context grounding metrics, token efficiency tracking, prompt engineering, structured error boundaries.
 
-## Infrastructure & Observability
-- Docker
-- CI/CD (GitHub Actions)
-- OpenTelemetry
-- Prometheus
-- Grafana
+## Featured Production Projects
 
-## Databases
-- PostgreSQL (including pgvector)
-- MongoDB
-- Redis
+### 1. Portfolio AI Assistant & RAG Pipeline
+- **Role & Stack**: Creator — Next.js 16, TypeScript, Neon PostgreSQL + pgvector, Gemini Embeddings, Groq AI Chat.
+- **Metrics & Benchmarks**: Indexes ~10,000 document chunks with strict cosine distance filtering (<= 0.5); achieves sub-300ms vector retrieval and grounding latency.
+- **Key Architecture**: Dynamic context grounding with live GitHub activity injection and in-memory rate limiting with FingerprintJS fraud detection.
+- **URL**: https://samir-portfolio-dev.vercel.app
 
-## Projects
+### 2. WhatsApp Business Campaign & Automation Platform
+- **Role & Stack**: Lead Backend Engineer — Node.js, Express, PostgreSQL, whatsapp-web.js, Redis.
+- **Metrics & Production Impact**: In live production for a regional business handling 1,000+ customer messages per week with zero message dropouts.
+- **Key Architecture**: Session persistence, automated scheduling queues, rate-limit throttling to prevent account flagging, and real-time delivery webhooks.
 
-### AI Portfolio RAG Chatbot (built 2025)
-- Production RAG system powering portfolio assistant
-- ~10k chunks indexed across blogs, projects, and about pages
-- Gemini embeddings + pgvector semantic search (~300ms query latency)
-- Designed to reduce hallucinations via grounded retrieval
-- Live at: https://samir-portfolio-dev.vercel.app
+### 3. AI Ticket Triage & Routing System
+- **Role & Stack**: Backend Architect — Node.js, Express, Apache Kafka, BullMQ, PostgreSQL, Docker, OpenTelemetry.
+- **Key Architecture**: Asynchronous microservices pipeline that categorizes incoming support tickets using LLMs and dispatches them via Kafka queues with BullMQ worker retry semantics.
+- **Observability**: End-to-end distributed tracing instrumented with OpenTelemetry, Prometheus metrics collection, and Grafana dashboarding.
 
-### AI Ticket Triage System (built 2025)
-- Microservices-based architecture
-- Kafka + BullMQ event processing
-- Observability with OpenTelemetry + Prometheus + Grafana
+### 4. Eventify Platform
+- **Role & Stack**: Full-Stack Backend Developer — GraphQL API, Node.js, PostgreSQL, React.
+- **Key Architecture**: Role-based access control (RBAC), transactional ticket booking with concurrency locks, and automated email confirmation notifications.
 
-### WhatsApp Campaign Platform (built 2025, in production for real SME)
-- Node.js + automation system for business messaging workflows
-- 1k+ messages/week throughput for an active local business
-- WhatsApp Web automation via whatsapp-web.js
+## Engineering Principles
 
-### Eventify Platform (built 2025)
-- Full-stack event management system
-- GraphQL API with PostgreSQL + React frontend
+1. **Production Reliability Over Demo Hype**: Building AI systems that remain deterministic, secure, observable, and rate-limited under real-world traffic.
+2. **Grounding & Zero Hallucination Tolerances**: Using strict distance thresholds, verifiable context injection, and citation anchors for AI outputs.
+3. **End-to-End Ownership**: Translating ambiguous business problems directly into robust backend code, tests, telemetry, and automated deployment pipelines.
+4. **Clean Domain Boundaries**: Decoupling ingestion, embedding generation, vector storage, retrieval re-ranking, and inference for maintainability.
 
-## Work Experience
+## Target Roles & Career Goals
 
-### Backend Developer Intern
-Logicwind — Sep 2025 to May 2026
-- Engineered new features and led legacy package migrations across 3+ active microservice and Firebase-based codebases, reducing technical debt and improving system maintainability.
-- Integrated third-party services (Dittofeed, Reoon, OneSignal) into existing backend systems, shipping marketing automation, email verification, and push notification capabilities in live products.
-- Built and maintained backend services across microservice, monolithic, and serverless architectures.
-- Collaborated cross-functionally in an Agile environment — sprint planning, code reviews, and debugging.
-- Optimized existing APIs and backend workflows by profiling bottlenecks and refactoring integration patterns, reducing response latency.
-
-## Career Goals
-Primarily targeting AI Backend Engineer, AI SDE, and Agentic AI Engineer roles. I am especially interested in roles that require customer-facing problem solving, comfort with ambiguity, and ownership from discovery to deployment. Heading toward Forward Deployed Engineering longer-term.
-
-Open to remote and India-based roles.
+- **Target Roles**: AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Solutions Engineer.
+- **Work Arrangements**: Open to Remote (Global: US, UK, Europe, APAC) and on-site / hybrid roles across India.

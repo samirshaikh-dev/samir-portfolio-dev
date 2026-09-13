@@ -8,11 +8,11 @@ import {
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer",
+    default: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer",
     template: "%s | Samir Shaikh",
   },
   description:
-    "Samir Shaikh is an AI Backend Engineer and AI SDE building RAG pipelines, LLM-powered chatbots, agentic AI systems, and scalable Node.js systems. Exploring Forward Deployed Engineer roles that combine backend depth with direct customer ownership.",
+    "Samir Shaikh is an AI Backend Engineer and AI SDE building production RAG pipelines, autonomous agentic AI workflows, and scalable distributed systems. Exploring Forward Deployed Engineer (FDE) roles combining backend depth with direct customer ownership.",
   keywords: [
     "Samir Shaikh",
     "Samir Shaikh Portfolio",
@@ -142,9 +142,9 @@ export const metadata: Metadata = {
   authors: [{ name: AUTHOR_NAME, url: APP_URL }],
   creator: AUTHOR_NAME,
   openGraph: {
-    title: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer",
+    title: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer",
     description:
-      "Samir Shaikh is an AI Backend Engineer and AI SDE building RAG pipelines, LLM-powered chatbots, agentic AI systems, and scalable Node.js systems. Exploring Forward Deployed Engineer roles with direct customer ownership.",
+      "Samir Shaikh is an AI Backend Engineer and AI SDE building production RAG pipelines, autonomous agentic AI workflows, and scalable distributed systems. Exploring Forward Deployed Engineer roles.",
     url: APP_URL,
     siteName: "Samir Shaikh Portfolio",
     images: [
@@ -152,7 +152,7 @@ export const metadata: Metadata = {
         url: "/Filled_Logo.png",
         width: 1200,
         height: 630,
-        alt: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer",
+        alt: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer",
       },
     ],
     type: "website",
@@ -160,9 +160,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer",
+    title: "Samir Shaikh - AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer",
     description:
-      "AI Backend Engineer and AI SDE building RAG pipelines, LLM-powered chatbots, agentic AI systems, and scalable Node.js systems.",
+      "AI Backend Engineer and AI SDE building production RAG pipelines, autonomous agentic AI workflows, and scalable distributed systems.",
     images: ["/Filled_Logo.png"],
     creator: TWITTER_HANDLE,
   },

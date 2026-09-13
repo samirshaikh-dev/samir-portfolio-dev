@@ -29,12 +29,16 @@ export const LONGTAIL_KEYWORDS = [
   "scalable Node.js backend development",
   "AI backend engineer open to remote work",
   "Forward Deployed Engineer for AI products",
+  "Forward Deployed Engineer for AI startups",
+  "hire Forward Deployed AI Engineer",
   "vector search and semantic search implementation",
   "production-grade AI chatbot development",
   "hire a backend developer for my startup",
   "Node.js developer for hire remote",
   "AI Node.js developer for hire remote",
   "build a semantic search engine with pgvector",
+  "production RAG pipeline with pgvector and Gemini",
+  "agentic AI orchestration and tool execution",
   "NestJS API development for SaaS",
   "reduce LLM hallucinations with RAG",
   "design a scalable microservices backend",
@@ -61,6 +65,8 @@ export const VOICE_QUERIES = [
   "who can help me ship an AI feature into my SaaS product",
   "how do I find a remote TypeScript backend developer",
   "who builds event-driven systems with Kafka and Redis",
+  "who can deploy an AI product directly to enterprise customers",
+  "how do I hire a Forward Deployed Engineer for an AI startup",
 ];
 
 /** Industries this personal brand serves. */
@@ -120,6 +126,11 @@ export const SERVICES = [
     description:
       "Containerize with Docker, ship CI/CD with GitHub Actions, and add OpenTelemetry, Prometheus, and Grafana observability.",
   },
+  {
+    name: "Forward Deployed AI Engineering",
+    description:
+      "Bridge customer requirements directly to production code — rapid prototyping, enterprise deployment, RAG integration, and end-to-end AI product ownership.",
+  },
 ] as const;
 
 /** Reusable Offer nodes built from SERVICES (shared by Person + Organization). */
@@ -143,7 +154,7 @@ export function getRootJsonLd() {
       image: `${APP_URL}/Filled_Logo.png`,
       email: AUTHOR_EMAIL,
       telephone: AUTHOR_PHONE,
-      jobTitle: "AI Backend Engineer | AI SDE | Agentic AI Engineer",
+      jobTitle: "AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer",
       description:
         "AI Backend Engineer and AI SDE with production experience architecting scalable, event-driven backend solutions, Retrieval-Augmented Generation (RAG) systems, and agentic AI workflows. Strong interest in customer-embedded, forward-deployed engineering work.",
       address: {
