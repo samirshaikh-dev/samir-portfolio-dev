@@ -26,14 +26,15 @@ export default async function Hero() {
       <div className="w-full max-w-6xl flex-1 flex flex-col">
         {/* Intro */}
         <div className="pt-6 md:pt-10 mb-8">
+          <p className="text-base text-text-muted mb-1">Hey, I&apos;m</p>
           <h1
             className="text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-3"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Hey, I&apos;m Samir Shaikh.
+            Samir Shaikh &mdash; AI-Enabled Full Stack Developer (Backend-First)
           </h1>
-          <p className="text-base md:text-lg text-text-muted max-w-2xl">
-            I&apos;m a backend developer who builds RAG pipelines, LLM-powered chatbots, and agentic AI systems. If you need a Node.js developer to integrate an LLM into your product, build a scalable backend for your startup, or ship AI features — let&apos;s talk.
+          <p className="hero-intro text-base md:text-lg text-text-muted max-w-2xl">
+            I&apos;m a backend-first full stack developer who ships production-ready web apps fast by pairing strong system design with AI coding agents &mdash; RAG pipelines, LLM features, and scalable Node.js/TypeScript backends included.
           </p>
         </div>
 
@@ -105,7 +106,8 @@ export default async function Hero() {
                 </div>
               </div>
 
-              {/* Stars */}
+              {/* Stars — only show when non-zero */}
+              {stats.totalStars > 0 && (
               <div className="col-span-1 md:col-span-1 row-span-1 bg-background p-6 md:p-8 rounded-3xl shadow-sm border border-border-primary hover:shadow-md transition-shadow flex items-center justify-between">
                 <div className="flex items-center gap-3 text-text-muted">
                   <FaStar className="text-xl" />
@@ -113,6 +115,7 @@ export default async function Hero() {
                 </div>
                 <div className="text-3xl md:text-4xl font-bold text-foreground">{stats.totalStars.toLocaleString()}</div>
               </div>
+              )}
 
               {/* Followers */}
               <div className="col-span-1 md:col-span-1 row-span-1 bg-background p-6 md:p-8 rounded-3xl shadow-sm border border-border-primary hover:shadow-md transition-shadow flex items-center justify-between">
@@ -123,7 +126,8 @@ export default async function Hero() {
                 <div className="text-3xl md:text-4xl font-bold text-foreground">{stats.followers.toLocaleString()}</div>
               </div>
 
-              {/* PRs */}
+              {/* PRs — only show when non-zero */}
+              {stats.totalPRs > 0 && (
               <div className="col-span-1 md:col-span-1 row-span-1 bg-background p-6 md:p-8 rounded-3xl shadow-sm border border-border-primary hover:shadow-md transition-shadow flex items-center justify-between">
                 <div className="flex items-center gap-3 text-text-muted">
                   <FaCodeBranch className="text-xl" />
@@ -131,6 +135,7 @@ export default async function Hero() {
                 </div>
                 <div className="text-3xl md:text-4xl font-bold text-foreground">{stats.totalPRs.toLocaleString()}</div>
               </div>
+              )}
 
               {/* Repositories */}
               <div className="col-span-1 md:col-span-1 row-span-1 bg-background p-6 md:p-8 rounded-3xl shadow-sm border border-border-primary hover:shadow-md transition-shadow flex flex-col justify-center">

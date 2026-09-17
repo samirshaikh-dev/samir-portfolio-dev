@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import { getSpeakableJsonLd } from "@/lib/seo/structured-data";
 import { db } from "@/lib/db";
 import { projects as projectsSchema, blogs as blogsSchema } from "@/lib/schema";
 import { eq, desc } from "drizzle-orm";
@@ -96,7 +97,7 @@ export default async function Home() {
           <div className="flex justify-between items-end mb-10">
             <div>
               <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Featured Projects</h2>
-              <p className="text-text-muted">Some of the things I've been working on recently.</p>
+              <p className="text-text-muted">Some of the things I&apos;ve been working on recently.</p>
             </div>
             <Link 
               href="/projects" 
@@ -128,6 +129,12 @@ export default async function Home() {
           </div>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(getSpeakableJsonLd(["h1", "h2", ".hero-intro"])),
+        }}
+      />
     </main>
   );
 }

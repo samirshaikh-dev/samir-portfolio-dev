@@ -119,7 +119,7 @@ export function renderReplyEmail({
             <tr>
               <td class="header">
                 <h1 class="brand-title">${AUTHOR_NAME}</h1>
-                <p class="brand-sub">AI Backend Engineer &bull; Forward Deployed Engineer</p>
+                <p class="brand-sub">AI-Enabled Full Stack Developer &bull; Backend-First</p>
               </td>
             </tr>
             <tr>
@@ -131,7 +131,7 @@ export function renderReplyEmail({
                 <div class="signoff">
                   Warm regards,<br />
                   <strong style="color: #ffffff;">${AUTHOR_NAME}</strong><br />
-                  <span style="font-size: 12px; color: #71717a;">AI Backend Engineer &bull; FDE</span><br />
+                  <span style="font-size: 12px; color: #71717a;">AI-Enabled Full Stack Developer (Backend-First)</span><br />
                   <span style="font-size: 12px; color: #71717a;">${AUTHOR_EMAIL} | ${AUTHOR_PHONE}</span>
                 </div>
               </td>
@@ -140,7 +140,7 @@ export function renderReplyEmail({
               <td class="footer">
                 <p style="margin: 0 0 8px;">
                   <a href="${APP_URL}">Portfolio</a> &bull;
-                  <a href="https://github.com/ShaikhSamir786">GitHub</a> &bull;
+                  <a href="https://github.com/samirshaikh-dev">GitHub</a> &bull;
                   <a href="https://linkedin.com">LinkedIn</a> &bull;
                   <a href="https://wa.me/${AUTHOR_PHONE.replace(/[^0-9]/g, "")}">WhatsApp</a>
                 </p>

@@ -12,7 +12,7 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Engineering Services | Samir Shaikh — Backend, AI & Web Development",
+  title: "Engineering Services | Samir Shaikh — AI-Enabled Full Stack Development (Backend-First)",
   description:
     "Reliable AI systems, knowledge retrieval pipelines, production backend APIs, modern web applications, and technical SEO built for startups, founders, and product teams.",
   keywords: [
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/services`,
   },
   openGraph: {
-    title: "Engineering Services | Samir Shaikh — Backend, AI & Web Development",
+    title: "Engineering Services | Samir Shaikh — AI-Enabled Full Stack Development (Backend-First)",
     description:
       "Reliable AI systems, knowledge retrieval pipelines, production backend APIs, modern web applications, and technical SEO built for startups, founders, and product teams.",
     url: `${APP_URL}/services`,
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Engineering Services | Samir Shaikh — Backend, AI & Web Development",
+    title: "Engineering Services | Samir Shaikh — AI-Enabled Full Stack Development (Backend-First)",
     description:
       "Reliable AI systems, knowledge retrieval pipelines, production backend APIs, modern web applications, and technical SEO built for startups, founders, and product teams.",
   },
@@ -96,7 +96,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         title: "AI Agents & Tool Orchestration",
         tagline: "Develop AI workflows that use tools, APIs, structured outputs, and guardrails to automate multi-step tasks.",
         description:
-          "Move beyond single-turn chatbots into automated multi-step workflows. We build agents that query internal APIs, validate inputs with structured schemas, and perform deterministic tasks reliably.",
+          "Move beyond single-turn chatbots into automated multi-step workflows. We build agents that query internal APIs, validate inputs with structured schemas, apply guardrails and structured outputs for deterministic reliability, and perform complex tasks safely.",
         deliverables: [
           "Tool-calling architectures and custom API integrations",
           "Structured JSON schema validation using Zod for deterministic output",
@@ -136,7 +136,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         title: "LLM Integration & AI User Experiences",
         tagline: "Integrate LLMs into applications with streaming responses, conversation workflows, usage controls, structured responses, and reliable API handling.",
         description:
-          "Incorporate modern language models into existing user interfaces with smooth streaming text, usage controls, and reliable error recovery.",
+          "Incorporate modern language models into existing user interfaces with smooth streaming text, usage controls, cost observability, and reliable error recovery.",
         deliverables: [
           "Low-latency streaming responses via Vercel AI SDK",
           "Context window management and prompt assembly workflows",
@@ -262,6 +262,33 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         relatedLink: {
           label: "Read SEO & technical guides →",
           href: "/blogs",
+        },
+      },
+    ],
+  },
+  {
+    id: "ai-accelerated-engineering",
+    title: "AI-Accelerated Engineering",
+    subtitle: "Agent-assisted development workflow that ships production-ready code fast — without cutting corners on quality, security, or testing.",
+    services: [
+      {
+        id: "ai-assisted-workflow",
+        badge: "10 // AI-ACCELERATED DELIVERY",
+        title: "AI-Accelerated Engineering",
+        tagline: "Ship faster with Cursor, Claude Code, and GitHub Copilot — while keeping critical logic, security, and testing firmly in hand.",
+        description:
+          "AI coding agents accelerate delivery of boilerplate, repetitive patterns, and scaffolding so engineering time goes to what matters most: architecture decisions, business logic, security review, and test coverage. The result is a production-safe codebase that moves at startup speed — without the AI slop.",
+        deliverables: [
+          "Agent-assisted code generation for boilerplate, tests, and repetitive patterns",
+          "Manual ownership of all critical logic, auth flows, and security-sensitive code",
+          "Test coverage written and validated by a human engineer, not AI-generated blindly",
+          "CI gate integration to catch regressions introduced by generated code",
+          "Code review process that distinguishes AI-assisted sections from hand-crafted logic",
+        ],
+        techStack: ["Cursor", "Claude Code", "GitHub Copilot", "TypeScript", "CI/CD"],
+        relatedLink: {
+          label: "Explore projects built this way →",
+          href: "/projects",
         },
       },
     ],

@@ -164,9 +164,9 @@ export function getRootJsonLd() {
       image: `${APP_URL}/Filled_Logo.png`,
       email: AUTHOR_EMAIL,
       telephone: AUTHOR_PHONE,
-      jobTitle: "AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer",
+      jobTitle: "AI-Enabled Full Stack Developer",
       description:
-        "AI Backend Engineer and AI SDE with production experience architecting scalable, event-driven backend solutions, Retrieval-Augmented Generation (RAG) systems, and agentic AI workflows. Strong interest in customer-embedded, forward-deployed engineering work.",
+        "AI-enabled full stack developer (backend-first) building production Node.js/TypeScript applications, RAG pipelines, LLM-powered features, and scalable backend systems with an agent-assisted engineering workflow.",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Vapi / Surat",
@@ -181,6 +181,16 @@ export function getRootJsonLd() {
         educationalCredentialAwarded: "Bachelor of Technology in Information Technology",
       },
       hasOccupation: [
+        {
+          "@type": "Occupation",
+          name: "AI-Enabled Full Stack Developer",
+          occupationLocation: {
+            "@type": "Country",
+            name: "IN",
+          },
+          skills: "Node.js, TypeScript, Next.js, React, PostgreSQL, pgvector, RAG Systems, LLM Integration, AI Agents, Cursor, GitHub Copilot, Claude Code, Microservices, Docker, CI/CD",
+          validFrom: "2026",
+        },
         {
           "@type": "Occupation",
           name: "Full Stack Engineer",
@@ -299,7 +309,7 @@ export function getRootJsonLd() {
       name: SITE_NAME,
       url: APP_URL,
       description:
-        "Portfolio of Samir Shaikh, AI Backend Engineer and AI SDE specializing in RAG pipelines, LLM-powered chatbots, agentic AI systems, and event-driven microservices.",
+        "Portfolio of Samir Shaikh, AI-enabled full stack developer (backend-first) specializing in Node.js/TypeScript applications, RAG pipelines, LLM-powered features, and scalable backend systems built with an agent-assisted workflow.",
       author: {
         "@type": "Person",
         name: AUTHOR_NAME,
@@ -322,7 +332,7 @@ export function getRootJsonLd() {
       email: AUTHOR_EMAIL,
       telephone: AUTHOR_PHONE,
       description:
-        "Personal brand of Samir Shaikh — AI Backend Engineer and AI SDE offering backend engineering, RAG systems, LLM integration, and agentic AI development services.",
+        "Personal brand of Samir Shaikh — AI-enabled full stack developer (backend-first) offering Node.js/TypeScript development, RAG systems, LLM integration, and production backend engineering services.",
       founder: {
         "@type": "Person",
         name: AUTHOR_NAME,
@@ -334,7 +344,7 @@ export function getRootJsonLd() {
         addressRegion: "Gujarat",
         addressCountry: "IN",
       },
-      slogan: "Backend depth meets AI product ownership.",
+      slogan: "Full stack fluency. Backend depth. AI-accelerated delivery.",
       knowsAbout: INDUSTRIES_SERVED,
       areaServed: AREA_SERVED,
       keywords: LONGTAIL_KEYWORDS.join(", "),

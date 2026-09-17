@@ -13,19 +13,16 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "About | Samir Shaikh",
-  description: "Learn more about Samir Shaikh — an AI Backend Engineer, AI SDE, and Agentic AI Engineer from Gujarat, India, with experience building RAG pipelines, LLM-powered chatbots, agentic AI systems, scalable microservices, and event-driven systems. Interned at Logicwind. B.Tech in IT from Uka Tarsadia University.",
+  description: "Learn more about Samir Shaikh — an AI-enabled full stack developer (backend-first) from Gujarat, India, building production Node.js/TypeScript applications, RAG pipelines, and LLM-powered features with an agent-assisted workflow. B.Tech in IT from Uka Tarsadia University.",
   keywords: [
     "About Samir Shaikh",
     "Samir Shaikh biography",
-    "AI Backend Engineer",
-    "Agentic AI Engineer",
-    "AI SDE",
+    "AI-Enabled Full Stack Developer",
+    "Full Stack Developer India",
     "Node.js Backend Developer",
-    "AI Node.js Backend Developer",
     "RAG pipeline developer",
     "LLM integration engineer",
     "microservices developer",
-    "AI microservices developer",
     "event-driven systems",
     "B.Tech Information Technology",
     "Uka Tarsadia University",
@@ -37,14 +34,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "About | Samir Shaikh",
-    description: "Learn more about Samir Shaikh — an AI Backend Engineer, AI SDE, and Agentic AI Engineer from Gujarat, India, with experience building RAG pipelines, agentic AI systems, LLM-powered chatbots, and event-driven systems.",
+    description: "Learn more about Samir Shaikh — an AI-enabled full stack developer (backend-first) from Gujarat, India, building production Node.js/TypeScript apps, RAG pipelines, and LLM-powered features with an agent-assisted workflow.",
     url: `${APP_URL}/about`,
     type: "profile",
   },
   twitter: {
     card: "summary_large_image",
     title: "About | Samir Shaikh",
-    description: "AI Backend Engineer and Agentic AI Engineer from Gujarat, India. Experienced in RAG pipelines, LLM chatbots, agentic AI, Node.js, NestJS, PostgreSQL, and microservices.",
+    description: "AI-enabled full stack developer (backend-first) from Gujarat, India. Experienced in Node.js, TypeScript, PostgreSQL, RAG pipelines, LLM integration, and microservices.",
   },
 };
 
@@ -152,7 +149,7 @@ export default async function AboutPage() {
           ]}
         />
       </div>
-      <PageHeader title="About" subtitle="AI Backend Engineer and Agentic AI Engineer from Gujarat, India." />
+      <PageHeader title="About" subtitle="AI-Enabled Full Stack Developer from Gujarat, India — backend-first, shipping with AI." />
       <div className="max-w-3xl mx-auto w-full">
         {hasAnySection ? (
           <>
@@ -163,7 +160,7 @@ export default async function AboutPage() {
 
             {/* Voice-search optimized intro (hidden but crawlable for AEO) */}
             <p className="sr-only">
-              Samir Shaikh is a backend developer based in Gujarat, India with experience in Node.js, TypeScript, PostgreSQL, and AI systems. He has built RAG chatbots, microservices with Kafka and BullMQ, and production APIs. He is available for freelance backend engineering and remote AI backend engineer roles. If you are looking for a remote TypeScript backend developer, or someone who builds event-driven systems with Kafka and Redis, Samir Shaikh is the right engineer to contact.
+              Samir Shaikh is an AI-enabled full stack developer (backend-first) from Gujarat, India. He builds production Node.js/TypeScript applications, RAG pipelines, and LLM-powered features using an agent-assisted workflow with Cursor, GitHub Copilot, and Claude Code — owning critical logic, security, and testing by hand. Available for remote full-stack backend and AI engineering roles.
             </p>
 
             {/* Git-log timeline */}

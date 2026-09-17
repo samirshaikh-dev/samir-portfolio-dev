@@ -9,43 +9,42 @@ import { APP_URL } from "@/lib/site-config";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Resume | Samir Shaikh",
-  description: "View and download Samir Shaikh's resume. AI Backend Engineer, AI SDE, and Agentic AI Engineer with experience in RAG systems, LLM integration, agentic AI workflows, Express.js, NestJS, GraphQL, PostgreSQL, Redis, BullMQ, Docker, Apache Kafka, and CI/CD pipelines. Open to remote roles.",
+  title: "Resume | Samir Shaikh — AI-Enabled Full Stack Developer",
+  description:
+    "View and download Samir Shaikh's resume. AI-enabled full stack developer (backend-first) with production experience in Node.js, TypeScript, Next.js, PostgreSQL, RAG systems, and LLM integration. Open to remote roles.",
   keywords: [
     "Samir Shaikh resume",
     "Samir Shaikh CV",
     "download resume",
+    "AI-Enabled Full Stack Developer resume",
+    "full stack developer resume",
     "backend developer resume",
-    "AI backend developer resume",
     "Node.js developer CV",
-    "AI Node.js developer CV",
     "AI engineer resume",
     "hire backend developer",
-    "hire AI backend developer",
     "backend developer open to work",
     "remote backend developer",
-    "remote AI backend developer",
-    "Express.js NestJS developer",
-    "AI Express.js NestJS developer",
-    "GraphQL PostgreSQL developer",
-    "Docker Kafka Redis engineer",
+    "Node.js TypeScript developer",
+    "PostgreSQL developer",
+    "RAG LLM engineer",
   ],
   alternates: {
     canonical: `${APP_URL}/resume`,
   },
   openGraph: {
-    title: "Resume | Samir Shaikh",
-    description: "View and download Samir Shaikh's resume. AI Backend Engineer and Agentic AI Engineer experienced in RAG, LLM integration, Node.js, NestJS, PostgreSQL, and microservices.",
+    title: "Resume | Samir Shaikh — AI-Enabled Full Stack Developer",
+    description:
+      "View and download Samir Shaikh's resume. AI-enabled full stack developer (backend-first) experienced in Node.js, TypeScript, Next.js, PostgreSQL, RAG systems, and LLM integration.",
     url: `${APP_URL}/resume`,
     type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Resume | Samir Shaikh",
-    description: "Download Samir Shaikh's resume. AI Backend Engineer, AI SDE, and Agentic AI Engineer with RAG, LLM, Node.js, NestJS, and microservices experience.",
+    title: "Resume | Samir Shaikh — AI-Enabled Full Stack Developer",
+    description:
+      "Download Samir Shaikh's resume. AI-enabled full stack developer (backend-first) with Node.js, TypeScript, PostgreSQL, RAG, and LLM integration experience.",
   },
 };
-
 
 async function getResumeUrl(): Promise<string> {
   try {

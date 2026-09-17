@@ -240,7 +240,7 @@ export function renderConfirmationEmail({
               <td class="footer">
                 <p style="margin: 0 0 10px;">
                   <a href="${APP_URL}">Portfolio</a> &bull;
-                  <a href="https://github.com/ShaikhSamir786">GitHub</a> &bull;
+                  <a href="https://github.com/samirshaikh-dev">GitHub</a> &bull;
                   <a href="https://linkedin.com">LinkedIn</a> &bull;
                   <a href="https://wa.me/${AUTHOR_PHONE.replace(/[^0-9]/g, "")}">WhatsApp</a>
                 </p>
