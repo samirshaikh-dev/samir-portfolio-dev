@@ -10,6 +10,7 @@ import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
 import { ScrollDepthTracker } from "@/components/analytics/AnalyticsEvents";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import ConditionalFooter from "@/components/layout/ConditionalFooter";
 import LazyClientComponents from "@/components/LazyClientComponents";
 
 export { metadata, viewport };
@@ -73,9 +74,11 @@ export default function RootLayout({
           >
             {children}
           </div>
-          <Suspense fallback={<FooterSkeleton />}>
-            <Footer />
-          </Suspense>
+          <ConditionalFooter>
+            <Suspense fallback={<FooterSkeleton />}>
+              <Footer />
+            </Suspense>
+          </ConditionalFooter>
           <LazyClientComponents />
           <GoogleAnalytics />
           <ScrollDepthTracker />
