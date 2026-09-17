@@ -4,11 +4,13 @@ import {
   AUTHOR_EMAIL,
   AUTHOR_PHONE,
   SITE_NAME,
+  LINKEDIN_URL,
+  GITHUB_URL,
 } from "@/lib/site-config";
 
-const SAME_AS = [
-  "https://linkedin.com/in/samir-shaikh-760b932a8",
-  "https://github.com/samirshaikh-dev",
+export const SAME_AS = [
+  LINKEDIN_URL,
+  GITHUB_URL,
 ];
 
 /**

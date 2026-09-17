@@ -14,6 +14,7 @@ import Breadcrumbs from "@/components/layout/Breadcrumbs";
 export const revalidate = 3600;
 
 import { APP_URL } from "@/lib/site-config";
+import { SAME_AS } from "@/lib/seo/structured-data";
 
 interface Comment {
   name: string;
@@ -308,10 +309,7 @@ export default async function BlogPostPage({ params }: Props) {
                   "@type": "Person",
                   name: "Samir Shaikh",
                   url: APP_URL,
-                  sameAs: [
-                    "https://linkedin.com/in/samir-shaikh-760b932a8",
-                    "https://github.com/samirshaikh-dev",
-                  ],
+                  sameAs: SAME_AS,
                 }
               ]
             })

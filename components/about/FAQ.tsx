@@ -33,7 +33,7 @@ export default function FAQ() {
     {
       question: "How can I contact Samir?",
       answer:
-        "You can reach Samir via email at shaikh.samir.work@gmail.com, through the contact form on this website, or on LinkedIn at linkedin.com/in/samir-shaikh-760b932a8. He typically responds within 24-48 hours.",
+        "You can reach Samir via email at shaikh.samir.work@gmail.com, through the contact form on this website, or on LinkedIn at linkedin.com/in/samirshaikh-dev. He typically responds within 24-48 hours.",
     },
     {
       question: "What kind of production projects have you worked on?",

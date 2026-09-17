@@ -1,4 +1,4 @@
-import { AUTHOR_NAME, AUTHOR_EMAIL, AUTHOR_PHONE, APP_URL } from "@/lib/site-config";
+import { AUTHOR_NAME, AUTHOR_EMAIL, AUTHOR_PHONE, APP_URL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site-config";
 
 export interface ReplyEmailProps {
   name: string;
@@ -140,8 +140,8 @@ export function renderReplyEmail({
               <td class="footer">
                 <p style="margin: 0 0 8px;">
                   <a href="${APP_URL}">Portfolio</a> &bull;
-                  <a href="https://github.com/samirshaikh-dev">GitHub</a> &bull;
-                  <a href="https://linkedin.com">LinkedIn</a> &bull;
+                  <a href="${GITHUB_URL}">GitHub</a> &bull;
+                  <a href="${LINKEDIN_URL}">LinkedIn</a> &bull;
                   <a href="https://wa.me/${AUTHOR_PHONE.replace(/[^0-9]/g, "")}">WhatsApp</a>
                 </p>
                 <p style="margin: 0;">

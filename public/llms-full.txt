@@ -10,7 +10,7 @@
 - **Phone**: +91 8320927182
 - **Website**: https://samir-portfolio-dev.vercel.app
 - **GitHub**: https://github.com/samirshaikh-dev
-- **LinkedIn**: https://www.linkedin.com/in/samir-shaikh-760b932a8/
+- **LinkedIn**: https://www.linkedin.com/in/samirshaikh-dev/
 - **Twitter / X**: https://x.com/samirshaikh-dev
 - **Resume**: https://samir-portfolio-dev.vercel.app/resume
 - **Blog Archive**: https://samir-portfolio-dev.vercel.app/blogs
@@ -210,5 +210,5 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 **A**: Recruiters can contact Samir directly via:
 - **Email**: `shaikh.samir.work@gmail.com`
 - **Phone**: `+91 8320927182`
-- **LinkedIn**: `https://www.linkedin.com/in/samir-shaikh-760b932a8/`
+- **LinkedIn**: `https://www.linkedin.com/in/samirshaikh-dev/`
 - **Portfolio Contact Page**: `https://samir-portfolio-dev.vercel.app/contact`

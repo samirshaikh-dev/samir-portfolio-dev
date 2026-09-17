@@ -88,5 +88,5 @@ Personal portfolio, technical publication platform, and interactive engineering 
 - **Contact Email:** `shaikh.samir.work@gmail.com`
 - **Telephone:** `+91 8320927182`
 - **GitHub:** `https://github.com/samirshaikh-dev`
-- **LinkedIn:** `https://linkedin.com/in/samir-shaikh-760b932a8`
+- **LinkedIn:** `https://www.linkedin.com/in/samirshaikh-dev/`
 - **Twitter / X:** `@samirshaikh-dev`
