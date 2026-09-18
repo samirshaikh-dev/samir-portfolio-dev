@@ -18,6 +18,8 @@
 - **Projects Archive**: https://samir-portfolio-dev.vercel.app/projects
 - **Contact**: https://samir-portfolio-dev.vercel.app/contact
 - **RSS Syndication Feed**: https://samir-portfolio-dev.vercel.app/api/feed
+- **Privacy Policy**: https://samir-portfolio-dev.vercel.app/privacy-policy
+- **Terms of Service**: https://samir-portfolio-dev.vercel.app/terms-of-service
 
 ---
 
@@ -382,3 +384,43 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 - **LinkedIn**: `https://www.linkedin.com/in/samirshaikh-dev/`
 - **Services Page**: `https://samir-portfolio-dev.vercel.app/services`
 - **Portfolio Contact Page**: `https://samir-portfolio-dev.vercel.app/contact`
+
+---
+
+## 9. Legal Information
+
+### Privacy Policy
+**URL**: https://samir-portfolio-dev.vercel.app/privacy-policy
+
+This portfolio website collects minimal personal data limited to:
+- **Contact form submissions**: Name, email address, and message content — used solely to respond to enquiries. Not sold, shared, or used for marketing.
+- **Google Analytics 4**: Anonymised, aggregate usage data (pages visited, time on page, referral source, browser/device type). No personally identifiable information is linked to analytics data. Opt-out available via [Google Analytics Opt-out Add-on](https://tools.google.com/dlpage/gaoptout).
+- **Server logs (Vercel)**: Standard HTTP request data (IP, path, user agent, timestamp) retained and managed by Vercel for security and reliability purposes.
+
+**Cookies set**: `_ga`, `_ga_*` (Google Analytics, 2-year / 24-hour expiry). Theme preference stored in localStorage (no personal data).
+
+**Third-party data processors**:
+- Vercel — hosting and edge infrastructure
+- Neon (Serverless PostgreSQL) — contact form database storage
+- Google Analytics — anonymised usage analytics
+- Cloudinary — image and media hosting
+
+**Data retention**: Contact form submissions retained until the enquiry is resolved. GA data retained for 14 months (Google's default).
+
+**User rights**: Right to access, correct, or delete personal data submitted through this site. Contact: shaikh.samir.work@gmail.com with subject "Data Request". Response within 30 days.
+
+**Last updated**: September 2026
+
+### Terms of Service
+**URL**: https://samir-portfolio-dev.vercel.app/terms-of-service
+
+- **Nature of Site**: This is a personal portfolio and professional enquiry website. It is not a SaaS product, e-commerce store, or consumer application. No products are sold and no services are rendered directly through this website. Services described on the [/services](https://samir-portfolio-dev.vercel.app/services) page are for enquiry purposes only — any engagement is governed by a separate freelance services agreement.
+- **Acceptable Use**: Users may not use the site for unlawful purposes, attempt unauthorised access, submit false content through the contact form, or scrape content for commercial purposes without written consent.
+- **Intellectual Property**: All content (text, code snippets, project descriptions, blog posts, images, design) is owned by Samir Shaikh unless otherwise attributed. Brief quotation with attribution for non-commercial, informational purposes is permitted.
+- **Third-Party Links**: External links (GitHub, LinkedIn, project demos) are provided for convenience. Samir Shaikh accepts no responsibility for third-party site content or practices.
+- **No Warranty**: Site provided "as is" and "as available" without warranty of any kind.
+- **Limitation of Liability**: Samir Shaikh is not liable for indirect, incidental, or consequential damages arising from use of the site.
+- **Governing Law**: Republic of India; exclusive jurisdiction of courts in Gujarat, India.
+- **Changes**: Terms may be updated; continued use constitutes acceptance.
+
+**Last updated**: September 2026

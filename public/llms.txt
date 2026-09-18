@@ -21,6 +21,8 @@ Phone: +91 8320927182
 - [About](https://samir-portfolio-dev.vercel.app/about): Background, timeline, and engineering principles
 - [Contact](https://samir-portfolio-dev.vercel.app/contact): Get in touch for roles, consulting, or technical advisory
 - [RSS Feed](https://samir-portfolio-dev.vercel.app/api/feed): Syndicate updates and engineering articles
+- [Privacy Policy](https://samir-portfolio-dev.vercel.app/privacy-policy): Data collection, usage, cookies, and your rights
+- [Terms of Service](https://samir-portfolio-dev.vercel.app/terms-of-service): Terms governing use of this portfolio website
 
 ## Summary & Positioning
 
@@ -146,3 +148,15 @@ URL: https://samir-portfolio-dev.vercel.app/services
 
 - **Target Roles & Engagements**: Freelance AI Engineer, Contract Backend Developer, AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Solutions Engineer.
 - **Work Arrangements**: Open to Freelance Sprints (1-4 weeks), Contract Partnerships/Retainers, Remote Full-Time (Global: US, UK, Europe, APAC), and on-site / hybrid roles across India.
+
+## Legal
+
+- **Privacy Policy**: https://samir-portfolio-dev.vercel.app/privacy-policy
+  - Data collected: contact form submissions (name, email, message), Google Analytics (anonymised), Vercel server logs.
+  - No personal data is sold or shared with third parties beyond listed processors (Vercel, Neon, Google Analytics, Cloudinary).
+  - Data deletion requests: shaikh.samir.work@gmail.com
+- **Terms of Service**: https://samir-portfolio-dev.vercel.app/terms-of-service
+  - This is a personal portfolio and professional enquiry website — not a SaaS product or consumer application.
+  - Services described are for enquiry purposes; any engagement is governed by a separate freelance agreement.
+  - Governing law: Republic of India (Gujarat courts).
+  - Intellectual property: all portfolio content owned by Samir Shaikh unless otherwise attributed.

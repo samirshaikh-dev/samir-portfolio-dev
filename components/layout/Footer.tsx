@@ -178,9 +178,17 @@ export default async function Footer() {
           <p>
             © {new Date().getFullYear()} All rights reserved.
           </p>
-          <div className="mt-4 sm:mt-0">
+          <div className="mt-4 sm:mt-0 flex items-center gap-4">
             <Link href="/sitemap" className="hover:text-foreground transition-colors">
               Sitemap
+            </Link>
+            <span aria-hidden="true" className="opacity-30">·</span>
+            <Link href="/privacy-policy" className="hover:text-foreground transition-colors">
+              Privacy Policy
+            </Link>
+            <span aria-hidden="true" className="opacity-30">·</span>
+            <Link href="/terms-of-service" className="hover:text-foreground transition-colors">
+              Terms
             </Link>
           </div>
         </div>
