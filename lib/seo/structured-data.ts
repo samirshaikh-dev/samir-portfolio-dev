@@ -19,6 +19,9 @@ export const SAME_AS = [
  * (Generative Engine Optimization) entity relationships.
  */
 export const LONGTAIL_KEYWORDS = [
+  "hire AI-enabled full stack developer",
+  "AI-enabled full stack developer backend-first",
+  "full stack developer using AI coding agents",
   "hire Node.js backend developer",
   "hire AI Node.js backend developer",
   "freelance backend engineer for startups",
