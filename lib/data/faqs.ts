@@ -16,140 +16,140 @@ export interface FAQItem {
 }
 
 export const FAQS: FAQItem[] = [
-  // 1. Pricing & Payment (Client-Focused)
+  // 1. Pricing & Payment (Commercial Intent & Risk Mitigation)
   {
     id: "project-cost-pricing",
     category: "Pricing & Payment",
     question: "How much does a freelance project or custom website typically cost?",
     answer:
-      "Pricing is transparent and based on scope complexity rather than arbitrary guesswork. Focused sprints, technical SEO audits, or targeted feature builds typically range from $300 to $800 (₹25,000 to ₹65,000). Complete full-stack web applications, custom SaaS MVPs, and production AI/RAG systems typically range from $900 to $2,500+ (₹75,000 to ₹2,00,000+). You receive a detailed line-item proposal with a guaranteed fixed quote before any work starts.",
-    tags: ["Pricing", "Cost", "Website Cost", "Fixed Quote", "No Hidden Fees"],
+      "A typical freelance project with Samir Shaikh ranges from $300 to $800 (₹25,000 to ₹65,000) for targeted feature sprints and technical SEO audits, and $900 to $2,500+ (₹75,000 to ₹2,00,000+) for complete full-stack web applications or production AI/RAG systems. Every engagement begins with a scope breakdown and a guaranteed fixed-price proposal with no surprise billings.",
+    tags: ["Freelance Pricing", "Website Cost", "Fixed Quote", "Next.js Development Cost", "AI Project Cost"],
   },
   {
     id: "fixed-budget-vs-hourly",
     category: "Pricing & Payment",
     question: "Do you work with a fixed project budget or hourly rates?",
     answer:
-      "I primarily work on milestone-based fixed budgets because it protects you from unexpected costs — you know the exact delivery schedule and total investment upfront. For open-ended consulting, ongoing feature roadmaps, or technical advisory, I also offer dedicated weekly retainer sprints ($500 - $900/week) with clear velocity commitments.",
-    tags: ["Fixed Budget", "Weekly Retainer", "Milestones", "Hourly vs Fixed"],
+      "I work primarily on milestone-based fixed budgets to give clients guaranteed cost certainty and protected timelines. For ongoing product development, continuous engineering roadmaps, or technical advisory, I also provide dedicated weekly retainer sprints ($500 to $900/week) with agreed-upon delivery velocity and daily progress visibility.",
+    tags: ["Fixed Budget", "Weekly Retainer", "Milestone Billing", "Contract Pricing", "Hourly vs Fixed"],
   },
   {
     id: "payment-terms-milestones",
     category: "Pricing & Payment",
-    question: "What are your payment terms and milestones?",
+    question: "What are your payment terms and milestone schedule?",
     answer:
-      "Payments are split across transparent milestone stages to keep your investment safe. A typical structure is: 30% upfront deposit to kick off architecture and design, 35% upon reviewing working milestone demos on a private staging server, and the remaining 35% only after final testing, deployment, and verified code handover.",
-    tags: ["Payment Terms", "Milestones", "Safe Payment", "Staging Review"],
+      "Payment terms follow a safe 30/35/35 milestone structure tied directly to verified deliverables: 30% upfront deposit to initiate technical architecture and design, 35% upon reviewing working milestone demos on a staging server, and the final 35% only after production deployment, testing sign-off, and repository transfer.",
+    tags: ["Payment Terms", "Milestone Payments", "Safe Escrow", "Staging Verification"],
   },
   {
     id: "satisfaction-guarantee-revisions",
     category: "Pricing & Payment",
-    question: "What if I don't like the design or the deliverable isn't what I expected?",
+    question: "What if the deliverable does not match requirements or needs revision?",
     answer:
-      "Every project includes structured revision rounds at each milestone stage. We align on visual references, wireframes, and technical specifications before writing code so there are no surprises. If any deliverable diverges from the agreed-upon specification, I revise it at no additional cost until it meets your requirements before proceeding to the next stage.",
-    tags: ["Revisions", "Satisfaction Guarantee", "Design Review", "Quality Assurance"],
+      "Every project includes structured revision rounds at each milestone stage to ensure 100% alignment with your expectations. Because we establish concrete technical specifications and UI wireframes before writing production code, scope divergence is caught early. Any deliverable that does not match the agreed specification is revised at zero additional cost.",
+    tags: ["Satisfaction Guarantee", "Revision Policy", "Quality Assurance", "Design Review"],
   },
 
-  // 2. Process & Timeline (Client-Focused)
+  // 2. Process & Timeline (Speed, Agility & Communication)
   {
     id: "urgent-timeline-1-week",
     category: "Process & Timeline",
-    question: "I need a website or MVP in 1-2 weeks — is that possible?",
+    question: "I need a production-ready website or MVP in 1-2 weeks — is that possible?",
     answer:
-      "Yes. For time-sensitive launches, I offer accelerated rapid prototyping sprints. By scoping out non-essential complexity and focusing strictly on core high-impact features, I can deploy a production-ready Next.js web application, landing page, or functional AI prototype within 7 to 14 business days.",
-    tags: ["Fast Delivery", "1 Week Website", "MVP Sprint", "Rapid Prototyping"],
+      "Yes, production-ready web applications and MVPs can be delivered in 7 to 14 business days using focused rapid-prototyping sprints. By scoping out non-critical features and concentrating on core business workflows, I leverage an AI-accelerated engineering workflow (Next.js 16, TypeScript, Tailwind CSS) to ship functional, tested products at startup velocity.",
+    tags: ["Fast MVP Delivery", "1 Week Website", "Rapid Prototyping", "Next.js MVP", "Startup Velocity"],
   },
   {
     id: "development-workflow-steps",
     category: "Process & Timeline",
     question: "What is your step-by-step freelance development process?",
     answer:
-      "My workflow is low-friction and structured for velocity: (1) Technical Discovery — Unpack requirements, constraints, and business goals, (2) Architectural Spec & Roadmap — Provide a clear blueprint, milestone schedule, and fixed quote, (3) Sprint Development — Clean code, regular Git commits, and live staging previews, and (4) Production Launch & Handover — Automated CI/CD deployment, environment configuration, and full repository ownership transfer.",
-    tags: ["Development Process", "Workflow", "Agile Sprints", "Milestones"],
+      "My development process operates in four structured stages: (1) Discovery & Architecture — Clarifying business objectives, constraints, and data schemas, (2) Milestone Blueprint — Delivering a fixed quote, tech spec, and delivery roadmap, (3) Sprint Execution — Writing clean code with continuous Git commits and live staging previews, and (4) Launch & Handover — Automated CI/CD deployment, documentation, and 100% repository ownership transfer.",
+    tags: ["Development Process", "Agile Sprints", "Milestone Delivery", "Software Lifecycle"],
   },
   {
     id: "project-delay-handling",
     category: "Process & Timeline",
-    question: "What happens if a project runs into roadblocks or gets delayed?",
+    question: "How do you prevent project delays and handle unexpected technical blockers?",
     answer:
-      "I practice radical transparency with zero radio silence. If unforeseen third-party API limitations or scope changes arise, I flag them immediately with proposed technical alternatives and revised impact assessments. Timelines are protected by aggressive milestone tracking and realistic buffer days built into every initial estimate.",
-    tags: ["Project Delays", "Risk Management", "Transparency", "Timeline Protection"],
+      "I eliminate project delays through proactive milestone buffers and daily async communication with zero radio silence. If third-party API dependencies or ambiguous constraints surface, I flag them immediately alongside actionable technical alternatives so the launch schedule remains protected.",
+    tags: ["Project Management", "Timeline Protection", "Async Communication", "Risk Management"],
   },
   {
     id: "post-launch-support-maintenance",
     category: "Process & Timeline",
     question: "Do you provide ongoing support, bug fixing, and maintenance after delivery?",
     answer:
-      "Yes. Every project includes a complimentary 30-day post-launch warranty where any bugs, edge-case glitches, or deployment adjustments are fixed immediately at no charge. For long-term peace of mind, I offer flexible monthly maintenance retainers covering security updates, performance monitoring, database backups, and ongoing feature additions.",
-    tags: ["Post-Launch Support", "Warranty", "Maintenance Retainer", "Bug Fixes"],
+      "Yes, every project includes a complimentary 30-day post-launch warranty covering immediate bug fixes, edge-case tuning, and deployment adjustments. For ongoing feature development and infrastructure health, I offer monthly maintenance retainers covering security updates, database optimization, and performance monitoring.",
+    tags: ["Post-Launch Support", "Maintenance Retainer", "Warranty", "Bug Fixes", "SLA Support"],
   },
 
-  // 3. Trust & Guarantees (Security & Peace of Mind)
+  // 3. Trust & Guarantees (Legal, IP & Data Protection)
   {
     id: "nda-and-ip-agreement",
     category: "Trust & Guarantees",
     question: "Do you sign Non-Disclosure Agreements (NDAs) and intellectual property contracts?",
     answer:
-      "Yes, 100%. Before you share proprietary documents, business secrets, or technical specs, I execute a standard mutual NDA to guarantee absolute confidentiality. All contracts explicitly transfer full intellectual property and commercial copyright to you immediately upon final milestone settlement.",
-    tags: ["NDA", "Confidentiality", "IP Protection", "Legal Agreement"],
+      "Yes, I sign standard mutual NDAs before reviewing any proprietary business data, project specs, or codebases. All contracts explicitly stipulate that 100% of intellectual property, commercial copyrights, and patentable logic transfer exclusively to you upon milestone settlement.",
+    tags: ["NDA", "Confidentiality", "IP Assignment", "Legal Protection", "Client Security"],
   },
   {
     id: "code-ownership-no-lockin",
     category: "Trust & Guarantees",
     question: "Who owns the source code and infrastructure after the project ends?",
     answer:
-      "You retain 100% exclusive ownership of all code, database schemas, assets, and deployment configurations. All work is committed directly to your private GitHub or GitLab repository, and deployed to your own hosting accounts (Vercel, AWS, Neon, etc.). There are zero vendor lock-ins, zero proprietary licenses, and zero ongoing platform markups.",
-    tags: ["100% Code Ownership", "Zero Vendor Lock-In", "Private GitHub", "Open Source"],
+      "You retain 100% exclusive ownership of all source code, database schemas, and deployment configurations with zero vendor lock-in. Work is committed directly to your private GitHub or GitLab organization and hosted on your accounts (Vercel, AWS, Neon, Cloudinary), ensuring complete autonomy.",
+    tags: ["100% Code Ownership", "Zero Vendor Lock-In", "Private GitHub", "Open Architecture"],
   },
   {
     id: "data-security-privacy",
     category: "Trust & Guarantees",
     question: "How do you ensure data security and privacy for sensitive company data?",
     answer:
-      "Security is engineered at every layer: environment secrets remain encrypted in `.env` vaults, database connections use strict TLS with least-privilege credentials, and API routes enforce timing-safe token authentication. For AI applications, private company documents are indexed into isolated vector databases with zero model training on your data.",
-    tags: ["Data Security", "Privacy", "API Security", "Vector Isolation"],
+      "Data security is implemented via end-to-end encryption, strict TLS database connections, least-privilege API credentials, and environment secrets management in `.env` vaults. For AI applications, company documents are stored in isolated vector databases with zero third-party model training on your private data.",
+    tags: ["Data Privacy", "Security Engineering", "Private AI", "TLS Encryption", "Vector Isolation"],
   },
 
-  // 4. AI & RAG Systems (Deep Technical Architecture)
+  // 4. AI & RAG Systems (Deep Technical Architecture & AI-Enabled Workflow)
   {
     id: "rag-architecture",
     category: "AI & RAG Systems",
     question: "How is your production RAG pipeline designed and what prevents hallucination?",
     answer:
-      "My production RAG architecture connects Google Gemini 3072-dimensional embeddings (`gemini-embedding-2`) to Neon serverless PostgreSQL with pgvector. We enforce a strict cosine distance threshold (<= 0.5) to discard irrelevant context before LLM synthesis. Prompts are deterministically grounded using structured context blocks, verified citations, and refusal guardrails when source context is insufficient. In addition, real-time developer activity is retrieved dynamically from GitHub events to ground current engineering status.",
-    tags: ["RAG", "pgvector", "Gemini", "Embeddings", "Hallucination Defense"],
+      "My production RAG architecture pairs Google Gemini 3072-dimensional embeddings (`gemini-embedding-2`) with Neon Serverless PostgreSQL and pgvector for sub-300ms vector retrieval. Hallucinations are prevented through strict cosine distance filtering (<= 0.5), deterministic system prompts that enforce verified citations, refusal guardrails when context is insufficient, and real-time activity grounding.",
+    tags: ["RAG Pipeline", "pgvector", "Gemini Embeddings", "Hallucination Defense", "Vector Search"],
+  },
+  {
+    id: "ai-coding-agents-workflow-quality",
+    category: "AI & RAG Systems",
+    question: "How do you use AI coding assistants without compromising code quality or security?",
+    answer:
+      "I use AI coding agents (Cursor, Claude Code, GitHub Copilot) strictly for repetitive boilerplate, test fixtures, and initial scaffolding — never for unverified production logic. Every line of code passes through strict manual architecture review, unit testing, and automated CI gates, ensuring zero 'AI slop', zero security vulnerabilities, and clean, maintainable software.",
+    tags: ["AI-Enabled Developer", "Code Quality", "CI/CD Gates", "Cursor", "Claude Code", "Code Security"],
   },
   {
     id: "agentic-ai-workflows",
     category: "AI & RAG Systems",
     question: "What experience do you have with Agentic AI, tool calling, and MCP?",
     answer:
-      "I design agentic AI workflows using the Vercel AI SDK and Model Context Protocol (MCP) standards. This includes multi-step reasoning, autonomous tool execution with structured schema validation, human-in-the-loop gates, and deterministic state transitions. My systems incorporate fallback strategies, retry budgets, and strict output parsing to ensure reliable autonomous execution in production environments.",
-    tags: ["Agentic AI", "Tool Calling", "MCP", "Vercel AI SDK", "Autonomous Agents"],
-  },
-  {
-    id: "ai-coding-agents-workflow",
-    category: "AI & RAG Systems",
-    question: "What does an 'AI-Enabled Full Stack Developer' mean in your day-to-day workflow?",
-    answer:
-      "Operating as an AI-enabled developer means pairing deep backend engineering fundamentals with advanced AI coding assistants (Cursor, Claude Code, GitHub Copilot) to accelerate delivery 2-3x without compromising code quality. Repetitive boilerplate, initial scaffolding, and repetitive test fixtures are delegated to AI agents, while architecture, database design, API security, edge cases, and critical business logic are strictly authored, reviewed, and validated through CI gates personally.",
-    tags: ["AI-Enabled", "Full Stack", "Productivity", "Code Quality", "CI/CD"],
+      "I architect agentic AI workflows using the Vercel AI SDK and Model Context Protocol (MCP) standards. These systems execute multi-step reasoning, autonomous database queries, and external API tool calls validated through Zod schemas, structured outputs, and human-in-the-loop approval gates.",
+    tags: ["Agentic AI", "Tool Calling", "MCP", "Vercel AI SDK", "Autonomous Agents", "Zod Validation"],
   },
   {
     id: "custom-knowledge-base-chatbots",
     category: "AI & RAG Systems",
-    question: "Can you build custom knowledge base AI chatbots for existing SaaS platforms or websites?",
+    question: "Can you build a custom knowledge base AI chatbot for an existing SaaS or website?",
     answer:
-      "Yes. I build custom, embeddable AI chatbots connected directly to company knowledge bases (PDFs, Markdown, Notion docs, SQL databases, or customer support archives). The pipeline includes automated document ingestion, token-aware chunking, vector indexing, streaming responses, and responsive drawer UI widgets with session rate limiting and VPN/abuse protection.",
-    tags: ["Chatbots", "Custom Knowledge Base", "SaaS", "Vector Search", "Streaming UI"],
+      "Yes, I build production-grade AI chatbots connected directly to company knowledge bases (PDFs, Markdown, Notion docs, or PostgreSQL databases). The solution features automated document chunking, vector indexing, streaming responses, rate limiting, and seamless embeddable drawer UI widgets tailored to your brand.",
+    tags: ["Custom AI Chatbot", "Knowledge Base AI", "SaaS AI Integration", "Streaming UI", "RAG Chatbot"],
   },
   {
     id: "custom-ai-vs-saas-tools",
     category: "AI & RAG Systems",
-    question: "Why hire a custom AI developer instead of using off-the-shelf chatbot software?",
+    question: "Why hire a custom AI engineer instead of using off-the-shelf chatbot software?",
     answer:
-      "SaaS chatbot tools charge recurring monthly per-message fees, lock your data onto third-party servers, and offer limited customization. A custom AI application built on Next.js and pgvector gives you 100% data ownership, zero per-seat software fees, custom domain integrations, and the freedom to connect to your proprietary database and CRM workflows.",
-    tags: ["Custom AI vs SaaS", "Cost Savings", "Data Sovereignty", "Custom Integration"],
+      "Building a custom AI application gives you 100% proprietary data ownership, zero recurring monthly per-message or per-seat markups, and complete flexibility to connect directly into your internal databases and APIs. Off-the-shelf tools lock your data onto third-party servers and charge steep subscription fees.",
+    tags: ["Custom AI vs SaaS", "Cost Reduction", "Data Sovereignty", "API Integration"],
   },
 
   // 5. Backend & Architecture (Distributed Systems & Performance)
@@ -158,99 +158,99 @@ export const FAQS: FAQItem[] = [
     category: "Backend & Architecture",
     question: "What is your primary backend and distributed systems technology stack?",
     answer:
-      "My primary backend stack is Node.js, TypeScript, Next.js App Router, Express, and NestJS, coupled with PostgreSQL and Drizzle ORM. For distributed and high-throughput systems, I architect event-driven microservices using Redis, Apache Kafka, BullMQ for background job queues, and Docker for containerized deployment. System observability is managed with OpenTelemetry, Prometheus, and Grafana.",
-    tags: ["Node.js", "TypeScript", "PostgreSQL", "Kafka", "BullMQ", "Redis", "Docker"],
+      "My primary backend stack consists of Node.js, TypeScript, Next.js App Router, Express, NestJS, and PostgreSQL with Drizzle ORM. For distributed event-driven systems, I build resilient message queues using Apache Kafka, BullMQ, and Redis, containerized with Docker and monitored via OpenTelemetry.",
+    tags: ["Backend Tech Stack", "Node.js", "TypeScript", "PostgreSQL", "Kafka", "BullMQ", "Redis", "Docker"],
   },
   {
     id: "fix-bugs-existing-codebase",
     category: "Backend & Architecture",
     question: "Can you fix bugs, improve performance, or add features to my existing project?",
     answer:
-      "Yes. I frequently take over existing codebases to resolve critical bugs, eliminate technical debt, profile and fix database query latency, and optimize sub-second Google Core Web Vitals. I conduct a quick codebase audit first, ensuring zero disruption to your live production users while modernizing the code.",
-    tags: ["Bug Fixing", "Existing Codebase", "Performance Tuning", "Core Web Vitals", "Refactoring"],
+      "Yes, I regularly audit and optimize existing codebases to fix critical bugs, resolve technical debt, eliminate database query bottlenecks, and achieve sub-second Google Core Web Vitals. Work is conducted with comprehensive regression testing to ensure zero downtime for live users.",
+    tags: ["Bug Fixing", "Existing Codebase", "Code Audit", "Performance Optimization", "Core Web Vitals"],
   },
   {
     id: "frontend-and-backend-together",
     category: "Backend & Architecture",
     question: "Can you handle both frontend and backend development end-to-end?",
     answer:
-      "Yes. You work with a single engineer who connects the entire stack: Next.js, React 19, TypeScript, and Tailwind CSS on the frontend, seamlessly wired to Node.js, PostgreSQL (with Drizzle ORM/pgvector), Redis, and event pipelines on the backend. This eliminates coordination friction between separate designers and backend developers, cutting delivery time in half.",
-    tags: ["Full Stack", "Next.js", "Node.js", "PostgreSQL", "TypeScript"],
+      "Yes, I provide single-engineer full-stack delivery: Next.js (React 19) and Tailwind CSS on the frontend, cleanly connected to Node.js, PostgreSQL, Redis, and event pipelines on the backend. This eliminates coordination overhead between multiple contractors and dramatically speeds up feature delivery.",
+    tags: ["Full Stack Development", "Next.js", "React 19", "Backend First", "TypeScript Full Stack"],
   },
   {
     id: "rate-limiting-security",
     category: "Backend & Architecture",
     question: "How do you implement API security, rate limiting, and bot defense?",
     answer:
-      "Security is layered: (1) Dual-mode timing-safe API authorization supporting user session validation (`auth()`) and Bearer secret tokens (`timingSafeEqual`), (2) Dual-tier rate limiting tracking requests by IP and client device fingerprints (`@fingerprintjs/fingerprintjs`), (3) VPN/Proxy privacy inspection via IPinfo API, and (4) Strict schema input validation and parameterized SQL queries to prevent injection attacks.",
-    tags: ["API Security", "Rate Limiting", "FingerprintJS", "Bearer Tokens", "Drizzle"],
+      "API security is implemented through layered defenses: dual-mode timing-safe Bearer token and session authentication (`timingSafeEqual`), in-memory and device-fingerprinted rate limiting (`@fingerprintjs/fingerprintjs`), VPN/proxy detection via IPinfo, and parameterized SQL queries to prevent injection.",
+    tags: ["API Security", "Rate Limiting", "FingerprintJS", "Bot Defense", "Timing-Safe Auth"],
   },
   {
     id: "database-performance-vector",
     category: "Backend & Architecture",
-    question: "How do you optimize database performance and pgvector query latency?",
+    question: "How do you optimize PostgreSQL and pgvector query latency?",
     answer:
-      "I optimize PostgreSQL performance using targeted indexing (HNSW and IVFFlat for vector embeddings, compound indexes for relational queries), connection pooling with Neon serverless adapters, query profiling, and Next.js `unstable_cache` with tag-based revalidation for repetitive reads. Vector distance queries maintain sub-300ms latency even under high concurrency.",
-    tags: ["PostgreSQL", "pgvector", "HNSW Index", "Connection Pooling", "Cache Invalidation"],
+      "I optimize database performance using targeted indexing (HNSW and IVFFlat for vector embeddings, compound indexes for relational queries), Neon serverless connection pooling, query profiling, and Next.js `unstable_cache` with tag-based revalidation to maintain sub-300ms response times under load.",
+    tags: ["PostgreSQL Optimization", "pgvector Latency", "HNSW Index", "Connection Pooling", "Caching"],
   },
   {
     id: "microservices-vs-monolith",
     category: "Backend & Architecture",
     question: "What is your approach to architectural decisions between monoliths and microservices?",
     answer:
-      "I advocate for pragmatic architecture: start with a clean, modular monolith or Next.js full-stack system when domain boundaries are still evolving to avoid premature distributed systems overhead. When specific domain boundaries demand independent scaling, disparate database technologies, or isolated deployment cadences, I decompose modules into event-driven microservices communicating asynchronously via Kafka or BullMQ.",
-    tags: ["Architecture", "Modular Monolith", "Microservices", "Event-Driven", "System Design"],
+      "I take a pragmatic architectural approach: start with a clean modular monolith or Next.js full-stack system when domain boundaries are evolving, and decompose into event-driven microservices (Kafka/BullMQ) only when specific services require independent scaling, separate deployment cadences, or dedicated database stores.",
+    tags: ["System Architecture", "Modular Monolith", "Microservices", "Event-Driven Architecture"],
   },
 
-  // 6. Forward Deployed & Roles (Career, Hiring & Enterprise)
+  // 6. Forward Deployed & Roles (Career, Hiring & Enterprise Alignment)
   {
     id: "fde-role-interest",
     category: "Forward Deployed & Roles",
     question: "What is a Forward Deployed Engineer (FDE) and why are you targeting this role?",
     answer:
-      "A Forward Deployed Engineer (FDE) operates directly at the intersection of deep technical engineering and customer impact. Unlike back-office developers isolated from end-users, an FDE embeds with enterprise clients or stakeholders, unpacks ambiguous business requirements, rapidly prototypes custom AI and software solutions in days, and takes direct accountability for hardening and shipping those solutions into production.",
+      "A Forward Deployed Engineer (FDE) bridges deep technical engineering with direct customer ownership by embedding with enterprise stakeholders, unpacking ambiguous requirements, rapidly prototyping custom AI solutions, and taking direct accountability for deploying and hardening those systems in production.",
     tags: ["Forward Deployed Engineer", "FDE", "Technical Discovery", "Client Ownership", "Prototyping"],
   },
   {
     id: "fulltime-employment-availability",
     category: "Forward Deployed & Roles",
-    question: "Are you actively looking for full-time engineering roles?",
+    question: "Are you actively open to full-time engineering roles and remote teams?",
     answer:
-      "Yes. I am actively pursuing full-time opportunities as an AI Backend Engineer, AI SDE, Agentic AI Engineer, or Forward Deployed Engineer (FDE). I am open to remote-first engineering teams globally as well as hybrid or on-site roles in India.",
-    tags: ["Hiring", "Full-Time", "AI SDE", "AI Backend Engineer", "Remote"],
+      "Yes, I am actively open to full-time roles as an AI Backend Engineer, AI SDE, Agentic AI Engineer, or Forward Deployed Engineer (FDE). I work effectively with global remote engineering teams across multiple time zones as well as hybrid or on-site opportunities in India.",
+    tags: ["Hiring", "Full-Time Roles", "AI SDE", "AI Backend Engineer", "Remote Work India"],
   },
   {
     id: "fde-customer-ambiguity",
     category: "Forward Deployed & Roles",
     question: "How do you navigate ambiguous client requirements during technical discovery?",
     answer:
-      "I lead technical discovery by converting high-level business objectives into concrete technical specifications, data schemas, and edge-case definitions. I build interactive functional prototypes early to validate user assumptions, iterate rapidly based on real user feedback, and establish transparent milestone cadences before investing in large-scale system builds.",
-    tags: ["Technical Discovery", "Requirement Scoping", "Agile", "Customer Success"],
+      "I navigate ambiguous requirements by building early functional prototypes that validate user assumptions in days rather than weeks. By breaking high-level objectives into concrete technical specifications and maintaining continuous feedback loops, client needs are validated before scaling production architecture.",
+    tags: ["Technical Discovery", "Customer Discovery", "Requirements Scoping", "Agile Validation"],
   },
 
-  // 7. Background & Contact (Bio, SLAs, Communication)
+  // 7. Background & Contact (Bio, Credentials & Getting Started)
   {
     id: "who-is-samir-shaikh",
     category: "Background & Contact",
-    question: "Who is Samir Shaikh and what is his professional background?",
+    question: "Who is Samir Shaikh and what is his engineering background?",
     answer:
-      "Samir Shaikh is an AI-enabled full-stack engineer with a backend-first foundation based in Gujarat, India. He holds a B.Tech in Information Technology from Uka Tarsadia University (2026). His production experience includes engineering at Xira Infotech (delivering a dynamic job portal with Next.js, PostgreSQL, and RBAC) and LOGICWIND (re-engineering microservices and customer engagement pipelines).",
-    tags: ["About", "Education", "Experience", "Xira Infotech", "Logicwind"],
+      "Samir Shaikh is an AI-enabled full stack developer (backend-first) based in Gujarat, India, with a B.Tech in Information Technology from Uka Tarsadia University (2026). His production experience includes engineering at Xira Infotech (job portal with RBAC and PostgreSQL) and LOGICWIND (microservice optimization and customer engagement pipelines).",
+    tags: ["About Samir Shaikh", "Engineering Bio", "Xira Infotech", "Logicwind", "B.Tech IT"],
   },
   {
     id: "communication-channels-timezone",
     category: "Background & Contact",
-    question: "How do we stay in sync during the project and what time zones do you support?",
+    question: "How do we stay in sync during a project and what time zones do you support?",
     answer:
-      "I communicate asynchronously through Slack, Discord, or WhatsApp for daily progress updates, supplemented by weekly video calls (Google Meet/Zoom) and recorded Loom video walkthroughs for milestone demos. Based in Gujarat, India, I regularly overlap business hours with clients across the US, UK, Europe, Middle East, and Asia-Pacific.",
-    tags: ["Communication", "Slack", "Discord", "Global Time Zones", "Loom Updates"],
+      "I communicate asynchronously via Slack, Discord, or WhatsApp for daily progress updates, supplemented by weekly video syncs (Google Meet/Zoom) and Loom video walkthroughs for milestone demos. Based in Gujarat, India, my working hours regularly overlap with clients in the US, UK, Europe, and Asia-Pacific.",
+    tags: ["Client Communication", "Slack", "Discord", "Global Time Zones", "Loom Updates"],
   },
   {
     id: "contact-response-sla",
     category: "Background & Contact",
-    question: "How can I get in touch with Samir and what is the typical response SLA?",
+    question: "How can I get started or discuss a project with Samir?",
     answer:
-      "You can contact Samir directly via email at shaikh.samir.work@gmail.com, message him on LinkedIn (linkedin.com/in/samirshaikh-dev), or submit an inquiry through the on-site contact form (/contact). He responds to engineering and hiring inquiries within 24 to 48 hours to schedule a free 30-minute discovery call.",
-    tags: ["Contact", "Email", "LinkedIn", "Response SLA", "Discovery Call"],
+      "You can get started immediately by submitting an inquiry on the Contact page (/contact) or emailing shaikh.samir.work@gmail.com with your project overview and timeline. I respond to all business and hiring inquiries within 24 to 48 hours to schedule a free 30-minute discovery consultation.",
+    tags: ["Contact Samir", "Free Discovery Call", "Hire Samir Shaikh", "Project Consultation"],
   },
 ];
