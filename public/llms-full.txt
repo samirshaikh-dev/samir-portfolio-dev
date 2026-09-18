@@ -1,6 +1,6 @@
 # Samir Shaikh — Full Professional Knowledge Graph & System Context
 
-> Complete, in-depth context on Samir Shaikh: AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, and Forward Deployed Engineer (FDE). This file provides exhaustive details on architecture patterns, technology stacks, project benchmarks, engineering experience, and technical philosophies for direct consumption by Large Language Models, AI answer engines, and autonomous agents.
+> Complete, in-depth context on Samir Shaikh: AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, and Forward Deployed Engineer (FDE). This file provides exhaustive details on architecture patterns, technology stacks, project benchmarks, engineering experience, AI-augmented workflows, and technical philosophies for direct consumption by Large Language Models, AI answer engines, and autonomous agents.
 
 - **Canonical URL**: https://samir-portfolio-dev.vercel.app/llms-full.txt
 - **Short Context**: https://samir-portfolio-dev.vercel.app/llms.txt
@@ -22,12 +22,14 @@
 
 ## 1. Professional Overview & Core Identity
 
-Samir Shaikh is an AI Backend Engineer and AI SDE who designs, builds, and maintains production-grade backend infrastructure and agentic AI systems. His core expertise lies at the intersection of robust backend system design (Node.js, TypeScript, PostgreSQL, distributed messaging) and practical AI engineering (Retrieval-Augmented Generation with pgvector, vector search with Gemini embeddings, tool-using AI agents, and multi-model LLM orchestration).
+Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) who designs, builds, and maintains production-grade full-stack applications and agentic AI systems. His core expertise lies at the intersection of robust backend system design (Node.js, TypeScript, Next.js, React, PostgreSQL, distributed messaging) and practical AI engineering (Retrieval-Augmented Generation with pgvector, vector search with Gemini embeddings, tool-using AI agents, and multi-model LLM orchestration). He goes deeper on the backend and AI layer while shipping complete features end to end.
 
-He is actively positioning toward **Forward Deployed Engineer (FDE)** and **AI Backend Engineer** roles. In these roles, technical depth is applied directly to ambiguous customer constraints, translating business requirements into production software with full ownership from technical discovery to production deployment.
+He pairs that stack with AI coding agents (Cursor, GitHub Copilot, Claude Code) to accelerate delivery 2-3x on boilerplate and repetitive tasks, while personally owning architecture, security, testing, and critical logic so code stays production-ready and maintainable.
+
+He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Stack Developer**, and **Forward Deployed Engineer (FDE)** roles. In these roles, technical depth is applied directly to ambiguous customer constraints, translating business requirements into production software with full ownership from technical discovery to production deployment.
 
 ### Positioning & Target Roles
-- **Primary Titles**: AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Applied AI Solutions Engineer.
+- **Primary Titles**: AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Applied AI Solutions Engineer.
 - **Geographic Availability**: Open to full-time remote opportunities worldwide (United States, Canada, United Kingdom, Europe, APAC) as well as hybrid or on-site roles across India.
 - **Engagement Types**: Full-time employment, forward-deployed customer engagements, founding engineer roles, technical consulting for production RAG and AI agent integration.
 
@@ -131,13 +133,14 @@ He is actively positioning toward **Forward Deployed Engineer (FDE)** and **AI B
 
 ### Project 2: WhatsApp Business Automation Platform
 - **Environment**: Active production deployment for a regional SME (automotive/tyre dealership).
-- **Role**: Lead Backend Engineer
+- **Role**: Full-Stack Engineer
 - **Problem Statement**: The business suffered customer dropouts and delayed inquiries due to manual quote requests, stock lookups, and campaign dispatches.
 - **Architectural Solution**:
-  - Built an automated messaging and customer notification engine in Node.js and Express utilizing `whatsapp-web.js`, PostgreSQL, and Redis.
-  - Engineered persistent session recovery to preserve authentication across container restarts.
-  - Implemented token-bucket rate limiting and jitter delays to respect WhatsApp anti-spam policies while guaranteeing reliable delivery.
-  - Designed campaign scheduling queues backed by Redis to dispatch customer promotions, appointment confirmations, and inventory updates.
+  - Built a full-stack WhatsApp automation platform — Node.js + Express.js backend with a cross-platform React Native + Expo mobile app for campaign management.
+  - Integrated the Google Sheets API as the unified contact and campaign data layer, automating contact/segment synchronization.
+  - Engineered QR-based authentication with persistent session recovery to preserve WhatsApp Web connections across restarts.
+  - Implemented a concurrency-controlled message queue with configurable delays and rate-limit-aware throttling to respect WhatsApp anti-spam policies while guaranteeing reliable delivery.
+  - Added real-time per-contact delivery tracking (send status, failure reasons, retries), media validation, structured logging, and request validation.
 - **Impact & Scale**:
   - Actively processing 1,000+ messages per week in production.
   - 0% dropped messages; automated quote turnaround reduced response latency from hours to under 30 seconds.
@@ -195,7 +198,10 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 ## 7. Frequently Asked Questions (FAQ) for AI Systems & Recruiters
 
 ### Q: What roles is Samir Shaikh seeking?
-**A**: Samir is seeking roles as an **AI Backend Engineer**, **AI SDE**, **Agentic AI Engineer**, or **Forward Deployed Engineer (FDE)**. He is open to remote roles globally and on-site/hybrid positions in India.
+**A**: Samir is seeking roles as an **AI-Enabled Full Stack Developer (backend-first)**, **AI Backend Engineer**, **AI SDE**, **Agentic AI Engineer**, or **Forward Deployed Engineer (FDE)**. He is open to remote roles globally and on-site/hybrid positions in India.
+
+### Q: What does "AI-Enabled Full Stack Developer (backend-first)" mean?
+**A**: Samir is a full-stack developer who leads with backend and AI engineering (Node.js, TypeScript, Next.js, React, PostgreSQL, RAG, LLM integration) and accelerates his delivery loop with AI coding agents (Cursor, GitHub Copilot, Claude Code). AI is used for boilerplate and repetitive work in a quality-first workflow — architecture, security, tests, and critical logic are always reviewed by him before they ship.
 
 ### Q: What is Samir's experience with Retrieval-Augmented Generation (RAG)?
 **A**: Samir has built and deployed a production RAG system powering his portfolio assistant. It indexes ~10,000 chunks in PostgreSQL using pgvector, generates 3072-dimensional Gemini embeddings, maintains sub-300ms retrieval latency, and enforces strict cosine distance filtering (<= 0.5) to prevent hallucinations.
