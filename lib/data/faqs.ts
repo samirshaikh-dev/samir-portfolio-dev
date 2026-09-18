@@ -66,6 +66,23 @@ export const FAQS: FAQItem[] = [
     tags: ["Next.js vs WordPress", "Custom Web Development", "PageSpeed Score", "Core Web Vitals", "Zero Plugin Fees"],
   },
 
+  {
+    id: "non-technical-founder-friendly",
+    category: "Pricing & Payment",
+    question: "I'm a non-technical founder — can you translate my business idea into a working product without me understanding the code?",
+    answer:
+      "Absolutely. A significant portion of my clients are non-technical founders and business owners. I translate business objectives into clear technical specifications using plain-language milestone documents, visual wireframes, and Loom video walkthroughs at every stage. You review working demos on a staging URL — no code review required, ever.",
+    tags: ["Non-Technical Founder", "Business Idea to Product", "No-Code Communication", "Startup MVP", "Plain Language Specs"],
+  },
+  {
+    id: "freelancer-vs-agency",
+    category: "Pricing & Payment",
+    question: "Why hire a freelance engineer instead of a software agency?",
+    answer:
+      "Hiring a freelance engineer gives you direct access to the senior engineer writing your code — not a project manager who relays specs to a junior team offshore. This means faster decisions, lower overhead cost (typically 40–60% less than agencies), zero account management layers, and a single accountable professional who understands your full technical stack from day one.",
+    tags: ["Freelancer vs Agency", "Direct Engineering Access", "Cost Comparison", "Senior Developer", "No Middleman"],
+  },
+
   // 2. Process & Timeline (Speed, Agility & Communication)
   {
     id: "urgent-timeline-1-week",
@@ -98,6 +115,14 @@ export const FAQS: FAQItem[] = [
     answer:
       "Yes, every project includes a complimentary 30-day post-launch warranty covering immediate bug fixes, edge-case tuning, and deployment adjustments. For ongoing feature development and infrastructure health, I offer monthly maintenance retainers covering security updates, database optimization, and performance monitoring.",
     tags: ["Post-Launch Support", "Maintenance Retainer", "Warranty", "Bug Fixes", "SLA Support"],
+  },
+  {
+    id: "collaborate-with-inhouse-team",
+    category: "Process & Timeline",
+    question: "Can you work alongside our existing in-house engineering team or current tech stack?",
+    answer:
+      "Yes, I integrate smoothly into existing teams and codebases. Whether contributing as an embedded specialist on a specific feature, reviewing architecture decisions, or owning an independent microservice, I follow your team's Git workflow, PR review process, and coding standards with zero friction. I've collaborated with cross-functional teams using Jira, Linear, Notion, and Slack.",
+    tags: ["Team Collaboration", "Embedded Engineer", "Existing Codebase", "PR Reviews", "Jira Linear Slack"],
   },
 
   // 3. Trust & Guarantees (Legal, IP & Data Protection)
@@ -132,6 +157,15 @@ export const FAQS: FAQItem[] = [
     answer:
       "Every project strictly adheres to TypeScript strict mode, modular architecture, and automated ESLint / Prettier rules. You receive comprehensive README documentation, environment variable guides, and clear commit history so any future internal engineer or agency can onboard and ship features in under 30 minutes.",
     tags: ["Clean Code", "Maintainability", "Developer Handoff", "TypeScript Strict", "Documentation"],
+  },
+
+  {
+    id: "project-continuity-availability",
+    category: "Trust & Guarantees",
+    question: "What happens to my project if you become unavailable mid-engagement?",
+    answer:
+      "Project continuity is protected through three layers: continuous Git commits with descriptive messages, living technical documentation updated at every milestone, and a fully documented handover package (README, architecture diagrams, env variable guide, deployment runbook). Any competent engineer can onboard in under a day, ensuring your project is never held hostage to a single point of failure.",
+    tags: ["Project Continuity", "Risk Mitigation", "Handover Documentation", "Git History", "Single Point of Failure"],
   },
 
   // 4. AI & RAG Systems (Deep Technical Architecture & AI-Enabled Workflow)
@@ -182,6 +216,15 @@ export const FAQS: FAQItem[] = [
     answer:
       "I implement multi-layered cost safeguards: in-memory and IP-based rate limiting, strict token budgets, compact prompt compression, and vector query caching. By pairing cost-effective models (Groq LLaMA 3.3, Google Gemini) with local pgvector retrieval, LLMs only process concise, verified context chunks rather than entire document dumps.",
     tags: ["AI Token Costs", "API Billing Safeguards", "Rate Limiting", "Groq LLaMA", "Cost Optimization"],
+  },
+
+  {
+    id: "ai-model-selection-guidance",
+    category: "AI & RAG Systems",
+    question: "How do you choose the right AI model (GPT-4, Gemini, Claude, LLaMA) for a specific use case?",
+    answer:
+      "Model selection is driven by four factors: task complexity (reasoning depth vs. pattern matching), latency requirements (streaming chat vs. batch processing), cost per token at production scale, and data privacy constraints (cloud-hosted vs. locally-hosted open-source models). For most production RAG and chatbot applications, I recommend a hybrid: Gemini embeddings for retrieval with Groq-hosted LLaMA 3.3 for fast streaming inference — delivering sub-second responses at a fraction of GPT-4 costs.",
+    tags: ["AI Model Selection", "GPT-4 vs Gemini", "LLaMA 3.3", "Groq", "Model Comparison", "LLM Cost Optimization"],
   },
 
   // 5. Backend & Architecture (Distributed Systems & Performance)
