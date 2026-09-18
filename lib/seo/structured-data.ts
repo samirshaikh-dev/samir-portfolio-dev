@@ -21,14 +21,21 @@ export const SAME_AS = [
 export const LONGTAIL_KEYWORDS = [
   "freelance AI developer",
   "freelance AI engineer",
+  "freelance website developer",
   "freelance backend developer",
   "freelance full stack developer",
   "hire freelance AI developer",
-  "hire freelance backend developer",
-  "freelance backend engineer for startups",
-  "freelance AI backend engineer for startups",
-  "contract software engineer for MVP",
-  "contract backend developer Node.js TypeScript",
+  "hire website developer for business",
+  "custom website development services",
+  "Next.js website developer",
+  "business website developer for hire",
+  "landing page developer for SaaS",
+  "SEO optimization services",
+  "freelance SEO specialist",
+  "technical SEO audit and optimization",
+  "website speed optimization services",
+  "Core Web Vitals speed optimization",
+  "website redesign services",
   "AI chatbot for website",
   "AI chatbot for SaaS",
   "custom knowledge base AI",
@@ -44,14 +51,12 @@ export const LONGTAIL_KEYWORDS = [
   "AI development services",
   "custom AI development",
   "Forward Deployed Engineer for AI products",
-  "Forward Deployed Engineer for AI startups",
   "hire Forward Deployed AI Engineer",
   "hire AI-enabled full stack developer",
   "AI-enabled full stack developer backend-first",
   "vector search and semantic search implementation",
   "hire a backend developer for my startup",
   "Node.js developer for hire remote",
-  "AI Node.js developer for hire remote",
   "freelance RAG pipeline developer",
   "build a semantic search engine with pgvector",
   "production RAG pipeline with pgvector and Gemini",
@@ -76,6 +81,9 @@ export const LONGTAIL_KEYWORDS = [
  * prospective clients and recruiters actually ask out loud.
  */
 export const VOICE_QUERIES = [
+  "who can build a custom website for my business",
+  "who can improve my website Google SEO ranking",
+  "who can fix my website speed and Core Web Vitals",
   "who can build an AI chatbot for my website",
   "who can build an AI chatbot for my SaaS",
   "how do I stop my AI chatbot from hallucinating",
@@ -86,7 +94,6 @@ export const VOICE_QUERIES = [
   "how do I hire a backend engineer for an AI project",
   "who can build a RAG system that stops my chatbot from hallucinating",
   "which engineer can turn my monolith into microservices",
-  "who can help me ship an AI feature into my SaaS product",
   "how do I find a remote TypeScript backend developer",
   "who builds event-driven systems with Kafka and Redis",
   "how do I hire a Forward Deployed Engineer for an AI startup",
@@ -155,14 +162,24 @@ export const SERVICES = [
       "Containerize applications and establish CI/CD, logging, monitoring, metrics, tracing, and production reliability practices.",
   },
   {
-    name: "Full-Stack Web & Application Development",
+    name: "Custom Website Development & Landing Pages",
     description:
-      "Build fast, responsive, and modern web applications with Next.js, React, TypeScript, and solid backend systems.",
+      "Build fast, modern, and mobile-responsive business websites and high-converting landing pages with Next.js, React, and Tailwind CSS.",
   },
   {
-    name: "Technical SEO, AEO & Web Performance",
+    name: "SEO Services & Search Engine Optimization",
     description:
-      "Optimize web applications for Google search rankings, AI answer engines (AEO/GEO), and fast Core Web Vitals.",
+      "Comprehensive SEO services including technical SEO audits, on-page optimization, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO).",
+  },
+  {
+    name: "Website Redesign & Speed Optimization",
+    description:
+      "Modernize slow-loading, outdated websites to score 90+ on Google PageSpeed Insights and ace Core Web Vitals (LCP, CLS, INP).",
+  },
+  {
+    name: "Full-Stack Web Application Development",
+    description:
+      "Build custom web applications, customer portals, and SaaS dashboards with Next.js, React, Node.js, and secure databases.",
   },
   {
     name: "AI-Accelerated Engineering",

@@ -12,13 +12,19 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Freelance AI Developer & Backend Engineer for Hire | Samir Shaikh",
+  title: "Freelance AI Developer, Website Developer & SEO Services | Samir Shaikh",
   description:
-    "Hire Samir Shaikh — freelance AI developer & backend engineer. Production-grade AI chatbots for websites and SaaS, custom knowledge bases, RAG systems, scalable APIs, and Forward Deployed Engineering for startups and product teams.",
+    "Hire Samir Shaikh — freelance AI developer, website developer & SEO specialist. Custom business websites, SEO optimization services, website speed optimization, production AI chatbots, and backend architectures for businesses, startups, and product teams.",
   keywords: [
     ...LONGTAIL_KEYWORDS.slice(0, 15),
     "freelance AI developer",
     "freelance AI engineer",
+    "freelance website developer",
+    "website developer for business",
+    "custom website development",
+    "SEO optimization services",
+    "freelance SEO specialist",
+    "website speed optimization",
     "AI chatbot for website",
     "AI chatbot for SaaS",
     "custom knowledge base AI",
@@ -28,10 +34,9 @@ export const metadata: Metadata = {
     "stop chatbot from hallucinating",
     "Forward Deployed Engineer",
     "hire freelance AI developer",
-    "hire RAG developer",
+    "hire website developer",
     "AI workflow automation for startups",
     "AI agent development services",
-    "custom AI development",
     "backend API development services",
     "full-stack web development services",
     "technical SEO engineer",
@@ -40,17 +45,17 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/services`,
   },
   openGraph: {
-    title: "Freelance AI Developer & Backend Engineer for Hire | Samir Shaikh",
+    title: "Freelance AI Developer, Website Developer & SEO Services | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI developer & backend engineer. Production-grade AI chatbots for websites and SaaS, custom knowledge bases, RAG systems, scalable APIs, and Forward Deployed Engineering.",
+      "Hire Samir Shaikh — freelance AI developer, website developer & SEO specialist. Custom business websites, SEO optimization services, website speed optimization, production AI chatbots, and backend architectures.",
     url: `${APP_URL}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelance AI Developer & Backend Engineer for Hire | Samir Shaikh",
+    title: "Freelance AI Developer, Website Developer & SEO Services | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI developer & backend engineer. Production-grade AI chatbots for websites and SaaS, custom knowledge bases, RAG systems, scalable APIs, and Forward Deployed Engineering.",
+      "Hire Samir Shaikh — freelance AI developer, website developer & SEO specialist. Custom business websites, SEO optimization services, website speed optimization, production AI chatbots, and backend architectures.",
   },
 };
 
@@ -233,46 +238,86 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "web-growth",
     title: "Web Development & Search Growth",
-    subtitle: "Modern, performant web applications paired with technical SEO and answer-engine discoverability.",
+    subtitle: "High-converting business websites, custom web apps, and search engine optimization (SEO) that turn visitors into paying customers.",
     services: [
       {
-        id: "full-stack-web",
-        badge: "08 // MODERN WEB APPS",
-        title: "Full-Stack Web & Application Development",
-        tagline: "Build fast, responsive, and modern web applications with Next.js, React, and solid backend systems.",
+        id: "custom-websites",
+        badge: "08 // WEBSITE DEVELOPMENT",
+        title: "Custom Website Development & Landing Pages",
+        tagline: "Build fast, modern, and mobile-responsive business websites and high-converting landing pages with Next.js, React, and Tailwind CSS.",
         description:
-          "Turn your ideas into polished, customer-facing web applications. We build responsive frontends connected to secure APIs, role-based dashboards, and scalable database schemas.",
+          "Need a new website or a high-converting landing page for your business? We design and develop custom, lightning-fast websites using Next.js, React, and Tailwind CSS. No bloated WordPress themes, no slow page builders — just clean, secure, and easily maintainable websites tailored to your brand.",
         deliverables: [
-          "Modern web applications and marketing platforms built with Next.js App Router",
-          "End-to-end integration between frontend UI, backend APIs, and databases",
-          "Role-based admin dashboards, CMS workflows, and user portal systems",
-          "Fast rendering with React Server Components, SSR, and ISR caching",
-          "Clean, maintainable Tailwind CSS styling and accessible UI components",
+          "Custom business websites, corporate pages, and modern portfolio platforms",
+          "High-converting SaaS and marketing landing pages built for lead generation",
+          "100% mobile-responsive design that looks stunning on phones, tablets, and desktops",
+          "CMS integration (Sanity, Strapi, or custom admin panel) for easy non-technical content updates",
+          "Contact form setup, email notification alerts, and Google Analytics tracking",
         ],
-        techStack: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "PostgreSQL"],
+        techStack: ["Next.js 16", "React 19", "Tailwind CSS", "TypeScript", "Vercel"],
         relatedLink: {
-          label: "Explore web projects →",
+          label: "Explore website projects →",
           href: "/projects",
         },
       },
       {
-        id: "technical-seo",
-        badge: "09 // SEARCH & AEO",
-        title: "Technical SEO, AEO & Web Performance",
-        tagline: "Optimize web applications for Google search rankings, AI answer engines (AEO/GEO), and fast Core Web Vitals.",
+        id: "seo-services",
+        badge: "09 // SEO SERVICES",
+        title: "SEO Services & Search Engine Optimization",
+        tagline: "Rank higher on Google, get cited by AI answer engines (AEO/GEO), and drive organic traffic that converts.",
         description:
-          "Make your web applications visible to search engines and AI assistants alike. We implement Schema.org structured data, optimize Core Web Vitals, and build clean technical foundations.",
+          "Struggling to get found on Google? We provide end-to-end SEO services covering technical SEO audits, keyword optimization, metadata architecture, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO) so your website is discovered by both traditional searchers and AI tools like ChatGPT and Perplexity.",
         deliverables: [
-          "Schema.org JSON-LD implementation (Organization, Service, FAQ, Articles)",
-          "Generative Engine Optimization (GEO/AEO) for citations in Perplexity and ChatGPT",
-          "Core Web Vitals profiling (improving LCP, CLS, INP) and bundle size audits",
-          "Dynamic XML sitemaps, robots.txt, and automated OpenGraph social preview cards",
-          "Canonical URL hygiene, crawlability audits, and semantic HTML structure",
+          "Complete website SEO audit identifying crawl errors, indexation issues, and content gaps",
+          "On-page SEO optimization: meta titles, descriptions, semantic headings, and keyword mapping",
+          "Schema.org JSON-LD structured data implementation for Google rich snippets",
+          "Generative Engine Optimization (GEO/AEO) for citations in Perplexity and ChatGPT search",
+          "XML sitemaps, robots.txt hygiene, canonical URL setup, and Google Search Console indexing",
         ],
-        techStack: ["Schema.org JSON-LD", "Next.js Metadata", "Google Search Console", "OpenGraph", "Web Vitals"],
+        techStack: ["Schema.org JSON-LD", "Google Search Console", "Next.js Metadata", "AEO/GEO", "Web Vitals"],
         relatedLink: {
-          label: "Read SEO & technical guides →",
+          label: "Read SEO guides & reports →",
           href: "/blogs",
+        },
+      },
+      {
+        id: "website-speed-optimization",
+        badge: "10 // SPEED & PERFORMANCE",
+        title: "Website Redesign & Speed Optimization",
+        tagline: "Transform outdated, slow-loading websites into fast, high-ranking, and modern digital experiences.",
+        description:
+          "Slow websites lose 40%+ of visitors before the page even loads. We redesign clunky websites and optimize existing codebases to score 90+ on Google PageSpeed Insights, ace Core Web Vitals (LCP, CLS, INP), and deliver silky-smooth user experiences that keep customers engaged.",
+        deliverables: [
+          "Complete website redesign with modern UI/UX, typography, and dark/light themes",
+          "Google PageSpeed and Core Web Vitals optimization (improving LCP, CLS, and INP)",
+          "Image compression, asset lazy-loading, and Cloudinary CDN optimization",
+          "Code splitting, JavaScript bundle reduction, and browser caching strategy",
+          "Accessibility (WCAG) compliance and cross-browser responsiveness testing",
+        ],
+        techStack: ["Core Web Vitals", "Lighthouse", "Cloudinary CDN", "Tailwind CSS", "PageSpeed"],
+        relatedLink: {
+          label: "Review performance benchmarks →",
+          href: "/projects",
+        },
+      },
+      {
+        id: "full-stack-web",
+        badge: "11 // CUSTOM WEB APPLICATIONS",
+        title: "Full-Stack Web Application Development",
+        tagline: "Custom web apps, customer portals, and admin dashboards built with Next.js, React, and robust backend APIs.",
+        description:
+          "When an off-the-shelf website isn't enough, we build custom web applications. From customer portals and booking systems to role-based SaaS dashboards, we deliver scalable full-stack applications with secure authentication and database architectures.",
+        deliverables: [
+          "Custom web applications, customer portals, and internal business tools",
+          "Role-based access control (RBAC), user authentication, and profile management",
+          "Payment gateway integrations (Stripe, Razorpay) and subscription billing",
+          "RESTful and GraphQL API connections with PostgreSQL or MongoDB databases",
+          "Automated deployment pipelines, testing, and production monitoring",
+        ],
+        techStack: ["Next.js 16", "React 19", "Node.js", "PostgreSQL", "Drizzle ORM"],
+        relatedLink: {
+          label: "Explore web projects →",
+          href: "/projects",
         },
       },
     ],
@@ -284,7 +329,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
     services: [
       {
         id: "ai-assisted-workflow",
-        badge: "10 // AI-ACCELERATED DELIVERY",
+        badge: "12 // AI-ACCELERATED DELIVERY",
         title: "AI-Accelerated Engineering",
         tagline: "Ship faster with Cursor, Claude Code, and GitHub Copilot — while keeping critical logic, security, and testing firmly in hand.",
         description:
@@ -416,6 +461,21 @@ const SERVICES_FAQS = [
       "For targeted prototypes or specific feature integrations, initial working versions are typically delivered in 1 to 2 weeks. Full-scale web applications, backend architectures, and production integrations typically range from 3 to 6 weeks depending on project complexity.",
   },
   {
+    question: "Can you build a custom website for my business or brand?",
+    answer:
+      "Yes. We design and develop custom, responsive websites tailored specifically for businesses, founders, consultants, and brands. Whether you need a multi-page corporate website, a high-converting SaaS landing page, or a personal portfolio, we deliver blazing-fast Next.js websites with clean styling, contact forms, lead capture, and easy CMS content updates.",
+  },
+  {
+    question: "What do your SEO services include and how do they help my website rank?",
+    answer:
+      "Our SEO services focus on technical accuracy and measurable search visibility: (1) In-depth technical SEO audits to resolve crawl errors, redirect loops, and indexation issues, (2) Keyword mapping and on-page optimization for titles, meta descriptions, and semantic headings, (3) Schema.org structured data (Organization, FAQPage, Service) for Google rich snippets, (4) Google Core Web Vitals profiling for speed, and (5) Generative Engine Optimization (GEO/AEO) so AI answer engines like ChatGPT and Perplexity find and cite your content.",
+  },
+  {
+    question: "Why should I hire a custom website developer instead of using WordPress or Wix?",
+    answer:
+      "Generic website builders and WordPress templates often come with bloated code, slow loading times, security vulnerabilities from outdated plugins, and rigid design limitations. A custom Next.js website gives you near-instant load speeds (95+ on Google PageSpeed), superior Google search rankings, zero ongoing plugin subscription fees, complete design uniqueness, and the ability to seamlessly add custom AI or backend features whenever your business grows.",
+  },
+  {
     question: "Can you work with our existing tech stack and codebase?",
     answer:
       "Yes. Whether you are using Next.js, React, Node.js, Express, NestJS, or PostgreSQL, we integrate cleanly into your existing codebase, repository, and database without requiring disruptive rewrites.",
@@ -494,7 +554,7 @@ export default function ServicesPage() {
                 Ship production-grade software that drives real business results.
               </h2>
               <p className="service-desc text-text-muted text-base leading-relaxed">
-                I help startups, founders, and engineering teams design, build, and ship production-grade AI features — custom knowledge bases, AI chatbots for websites and SaaS, AI agents, and workflow automation — alongside high-performance Node.js/TypeScript backend systems, Next.js web applications, and search-optimized technical foundations. Available as a freelance AI developer, contract engineer, or Forward Deployed Engineer.
+                I help startups, business owners, and engineering teams build and ship custom business websites, comprehensive SEO services, and production-grade AI features — custom knowledge bases, AI chatbots for websites and SaaS, AI agents, and workflow automation — alongside high-performance Node.js/TypeScript backend systems and web speed optimization. Available as a freelance developer, SEO consultant, or Forward Deployed Engineer.
               </p>
             </div>
             <div className="flex-shrink-0 flex flex-col sm:flex-row gap-3">

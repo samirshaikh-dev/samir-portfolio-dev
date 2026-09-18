@@ -264,34 +264,56 @@ High-throughput APIs, asynchronous job queues, and rock-solid system design buil
    - **Tech Stack**: Docker, GitHub Actions, OpenTelemetry, Prometheus, Vercel
 
 ### Category 3: Web Development & Search Growth
-Modern, performant web applications paired with technical SEO and answer-engine discoverability.
+High-converting business websites, custom web apps, and search engine optimization (SEO) that turn visitors into paying customers.
 
-8. **Full-Stack Web & Application Development (08 // MODERN WEB APPS)**
-   - **Tagline**: Build fast, responsive, and modern web applications with Next.js, React, and solid backend systems.
-   - **Description**: Turn ideas into polished, customer-facing web applications. Responsive frontends connected to secure APIs, role-based dashboards, and scalable database schemas.
+8. **Custom Website Development & Landing Pages (08 // WEBSITE DEVELOPMENT)**
+   - **Tagline**: Build fast, modern, and mobile-responsive business websites and high-converting landing pages with Next.js, React, and Tailwind CSS.
+   - **Description**: Design and develop custom, lightning-fast business websites and landing pages. Clean, secure, easily maintainable websites tailored to your brand without bloated WordPress themes or slow builders.
    - **Deliverables**:
-     - Modern web applications and marketing platforms built with Next.js App Router
-     - End-to-end integration between frontend UI, backend APIs, and databases
-     - Role-based admin dashboards, CMS workflows, and user portal systems
-     - Fast rendering with React Server Components, SSR, and ISR caching
-     - Clean, maintainable Tailwind CSS styling and accessible UI components
-   - **Tech Stack**: Next.js 16, React 19, TypeScript, Tailwind CSS, PostgreSQL
+     - Custom business websites, corporate pages, and modern portfolio platforms
+     - High-converting SaaS and marketing landing pages built for lead generation
+     - 100% mobile-responsive design optimized across all screen sizes
+     - CMS integration (Sanity, Strapi, or custom admin panel) for easy non-technical content updates
+     - Contact form setup, email alert notifications, and Google Analytics tracking
+   - **Tech Stack**: Next.js 16, React 19, Tailwind CSS, TypeScript, Vercel
 
-9. **Technical SEO, AEO & Web Performance (09 // SEARCH & AEO)**
-   - **Tagline**: Optimize web applications for Google search rankings, AI answer engines (AEO/GEO), and fast Core Web Vitals.
-   - **Description**: Make web applications visible to search engines and AI assistants alike. Implements Schema.org structured data, optimizes Core Web Vitals, and builds clean technical foundations.
+9. **SEO Services & Search Engine Optimization (09 // SEO SERVICES)**
+   - **Tagline**: Rank higher on Google, get cited by AI answer engines (AEO/GEO), and drive organic traffic that converts.
+   - **Description**: Comprehensive SEO services covering technical SEO audits, keyword optimization, metadata architecture, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO) for traditional and AI search engines.
    - **Deliverables**:
-     - Schema.org JSON-LD implementation (Organization, Service, FAQ, Articles)
-     - Generative Engine Optimization (GEO/AEO) for citations in Perplexity, Claude, and ChatGPT
-     - Core Web Vitals profiling (improving LCP, CLS, INP) and bundle size audits
-     - Dynamic XML sitemaps, robots.txt, and automated OpenGraph social preview cards
-     - Canonical URL hygiene, crawlability audits, and semantic HTML structure
-   - **Tech Stack**: Schema.org JSON-LD, Next.js Metadata, Google Search Console, OpenGraph, Web Vitals
+     - Complete website SEO audit identifying crawl errors, indexation issues, and content gaps
+     - On-page SEO optimization: meta titles, descriptions, semantic headings, and keyword mapping
+     - Schema.org JSON-LD structured data implementation for Google rich snippets
+     - Generative Engine Optimization (GEO/AEO) for citations in Perplexity and ChatGPT search
+     - XML sitemaps, robots.txt hygiene, canonical URL setup, and Google Search Console indexing
+   - **Tech Stack**: Schema.org JSON-LD, Google Search Console, Next.js Metadata, AEO/GEO, Web Vitals
+
+10. **Website Redesign & Speed Optimization (10 // SPEED & PERFORMANCE)**
+    - **Tagline**: Transform outdated, slow-loading websites into fast, high-ranking, and modern digital experiences.
+    - **Description**: Redesign clunky websites and optimize existing codebases to score 90+ on Google PageSpeed Insights, ace Core Web Vitals (LCP, CLS, INP), and deliver silky-smooth user experiences that keep customers engaged.
+    - **Deliverables**:
+      - Complete website redesign with modern UI/UX, typography, and dark/light themes
+      - Google PageSpeed and Core Web Vitals optimization (improving LCP, CLS, and INP)
+      - Image compression, asset lazy-loading, and Cloudinary CDN optimization
+      - Code splitting, JavaScript bundle reduction, and browser caching strategy
+      - Accessibility (WCAG) compliance and cross-browser responsiveness testing
+    - **Tech Stack**: Core Web Vitals, Lighthouse, Cloudinary CDN, Tailwind CSS, PageSpeed
+
+11. **Full-Stack Web Application Development (11 // CUSTOM WEB APPLICATIONS)**
+    - **Tagline**: Custom web apps, customer portals, and admin dashboards built with Next.js, React, and robust backend APIs.
+    - **Description**: Build scalable custom web applications, member portals, and role-based SaaS dashboards with secure authentication, database architectures, and responsive UI components.
+    - **Deliverables**:
+      - Custom web applications, customer portals, and internal business tools
+      - Role-based access control (RBAC), user authentication, and profile management
+      - Payment gateway integrations (Stripe, Razorpay) and subscription billing
+      - RESTful and GraphQL API connections with PostgreSQL or MongoDB databases
+      - Automated deployment pipelines, testing, and production monitoring
+    - **Tech Stack**: Next.js 16, React 19, Node.js, PostgreSQL, Drizzle ORM
 
 ### Category 4: AI-Accelerated Engineering
 Agent-assisted development workflow that ships production-ready code fast — without cutting corners on quality, security, or testing.
 
-10. **AI-Accelerated Engineering (10 // AI-ACCELERATED DELIVERY)**
+12. **AI-Accelerated Engineering (12 // AI-ACCELERATED DELIVERY)**
     - **Tagline**: Ship faster with Cursor, Claude Code, and GitHub Copilot — while keeping critical logic, security, and testing firmly in hand.
     - **Description**: AI coding agents accelerate delivery of boilerplate, repetitive patterns, and scaffolding so engineering time goes to what matters most: architecture decisions, business logic, security review, and test coverage.
     - **Deliverables**:
@@ -342,11 +364,20 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 ## 8. Frequently Asked Questions (FAQ) for AI Systems, Clients & Recruiters
 
 ### Q: What engineering services does Samir Shaikh offer?
-**A**: Samir provides 10 core services across 4 categories:
+**A**: Samir provides 12 core services across 4 categories:
 1. **AI & Intelligent Systems**: Custom Knowledge Bases & RAG Systems (pgvector, Gemini), AI Agents & Workflow Automation (Zod, tool-calling), AI Product Development & Prototyping, and LLM Integration (streaming, rate-limiting).
 2. **Backend & Distributed Architecture**: Production Backend APIs & System Design (Node.js, NestJS, REST/GraphQL), Event-Driven Systems (BullMQ, Kafka), and Cloud/DevOps (Docker, GitHub Actions, OpenTelemetry).
-3. **Web Development & Search Growth**: Full-Stack Web Development (Next.js 16, React 19, TypeScript), and Technical SEO, AEO & Web Performance (Schema.org JSON-LD, GEO).
+3. **Web Development & Search Growth**: Custom Website Development & Landing Pages (Next.js 16, React 19, Tailwind CSS), SEO Services & Search Engine Optimization (Schema.org JSON-LD, GEO/AEO), Website Redesign & Speed Optimization (Core Web Vitals 90+), and Full-Stack Web Application Development (RBAC, Stripe).
 4. **AI-Accelerated Engineering**: Agent-assisted delivery with Cursor, Claude Code, and Copilot backed by strict human architecture, security, and test reviews.
+
+### Q: Can Samir build a custom website for my business or brand?
+**A**: Yes. Samir designs and develops custom, responsive websites tailored for businesses, founders, consultants, and brands. Whether you need a corporate business website, a high-converting SaaS landing page, or a personal portfolio, he delivers blazing-fast Next.js websites with clean styling, contact forms, lead capture, and easy CMS updates.
+
+### Q: What do Samir's SEO services include and how do they help a website rank?
+**A**: Samir's SEO services focus on technical accuracy and measurable organic search visibility: (1) Full technical SEO audit resolving crawl errors, broken links, and indexation issues, (2) Keyword mapping and on-page optimization for titles, meta descriptions, and semantic headings, (3) Schema.org structured data (Organization, FAQPage, Service) for Google rich snippets, (4) Google Core Web Vitals profiling for sub-second speeds, and (5) Generative Engine Optimization (GEO/AEO) so AI answer engines like ChatGPT and Perplexity discover and cite your content.
+
+### Q: Why hire a custom website developer instead of using WordPress or Wix?
+**A**: Generic builders like Wix or WordPress templates frequently suffer from bloated code, slow loading times, security vulnerabilities from outdated plugins, and rigid design limitations. A custom Next.js website gives you near-instant load speeds (95+ on Google PageSpeed), superior Google search rankings, zero ongoing plugin license fees, complete design uniqueness, and the ability to seamlessly integrate custom AI or backend features whenever your business expands.
 
 ### Q: How does Samir work with startups as a freelance engineer or contractor?
 **A**: Samir operates with a low-friction, high-transparency workflow tailored for startup velocity:

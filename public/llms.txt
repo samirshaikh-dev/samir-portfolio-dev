@@ -125,8 +125,10 @@ URL: https://samir-portfolio-dev.vercel.app/services
 - **Cloud, DevOps & Observability**: Production containerization with Docker, CI/CD with GitHub Actions, and distributed telemetry with OpenTelemetry and Grafana.
 
 ### 3. Web Development & Search Growth
-- **Full-Stack Web & Application Development**: Modern, high-performance web applications built with Next.js App Router, React 19, TypeScript, and Tailwind CSS.
-- **Technical SEO, AEO & Web Performance**: Schema.org JSON-LD structured data, Generative Engine Optimization (GEO/AEO) for AI citation, and Core Web Vitals optimization.
+- **Custom Website Development & Landing Pages**: Modern, mobile-responsive business websites and high-converting marketing landing pages built with Next.js App Router, React 19, TypeScript, and Tailwind CSS.
+- **SEO Services & Search Engine Optimization**: Technical SEO audits, on-page keyword optimization, Schema.org JSON-LD structured data, and Generative Engine Optimization (GEO/AEO) for Google and AI answer engine rankings.
+- **Website Redesign & Speed Optimization**: Performance tuning and redesigns to score 90+ on Google PageSpeed Insights, improve Core Web Vitals (LCP, CLS, INP), and reduce bounce rates.
+- **Full-Stack Web Application Development**: Custom web applications, client portals, and role-based SaaS dashboards with PostgreSQL and secure authentication.
 
 ### 4. AI-Accelerated Engineering
 - **AI-Accelerated Delivery**: Rapid prototyping and delivery using Cursor, Claude Code, and GitHub Copilot while personally owning architecture, security, testing, and critical logic.
