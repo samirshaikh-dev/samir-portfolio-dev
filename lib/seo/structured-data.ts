@@ -21,11 +21,15 @@ export const SAME_AS = [
 export const LONGTAIL_KEYWORDS = [
   "hire AI-enabled full stack developer",
   "AI-enabled full stack developer backend-first",
-  "full stack developer using AI coding agents",
-  "hire Node.js backend developer",
-  "hire AI Node.js backend developer",
+  "freelance AI engineer",
+  "freelance backend developer",
+  "freelance full stack developer",
+  "hire freelance AI engineer",
+  "hire freelance backend developer",
   "freelance backend engineer for startups",
   "freelance AI backend engineer for startups",
+  "contract software engineer for MVP",
+  "contract backend developer Node.js TypeScript",
   "build a RAG chatbot for my website",
   "integrate an LLM into my SaaS product",
   "AI agent development services",
@@ -41,6 +45,7 @@ export const LONGTAIL_KEYWORDS = [
   "hire a backend developer for my startup",
   "Node.js developer for hire remote",
   "AI Node.js developer for hire remote",
+  "freelance RAG pipeline developer",
   "build a semantic search engine with pgvector",
   "production RAG pipeline with pgvector and Gemini",
   "agentic AI orchestration and tool execution",
@@ -51,6 +56,7 @@ export const LONGTAIL_KEYWORDS = [
   "add AI chat to my existing product",
   "backend developer experienced with Docker and CI/CD",
   "TypeScript backend engineer for AI startups",
+  "Next.js full stack developer for hire",
   "migrate a monolith to microservices",
   "optimize slow PostgreSQL queries and APIs",
 ];
@@ -145,6 +151,11 @@ export const SERVICES = [
     name: "Technical SEO, AEO & Web Performance",
     description:
       "Optimize web applications for Google search rankings, AI answer engines (AEO/GEO), and fast Core Web Vitals.",
+  },
+  {
+    name: "AI-Accelerated Engineering",
+    description:
+      "Ship production features fast with Cursor, Claude Code, and Copilot while personally owning architecture, security, testing, and critical logic.",
   },
 ] as const;
 
@@ -406,11 +417,11 @@ export function getServiceJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: `${AUTHOR_NAME} — Backend & AI Engineering`,
+    name: `${AUTHOR_NAME} — Freelance AI & Backend Engineering Services`,
     url: `${APP_URL}/services`,
     image: `${APP_URL}/Filled_Logo.png`,
     description:
-      "Backend and AI engineering services: production APIs, RAG systems, LLM integration, AI agents, microservices, and DevOps for startups and SaaS products.",
+      "Freelance AI and backend engineering services: production RAG systems, AI agents, LLM integration, high-throughput APIs, Next.js web applications, and technical SEO for startups and product teams.",
     provider: {
       "@type": "Person",
       name: AUTHOR_NAME,
@@ -421,7 +432,7 @@ export function getServiceJsonLd() {
     keywords: LONGTAIL_KEYWORDS.join(", "),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Backend & AI Engineering Services",
+      name: "Freelance AI & Backend Engineering Services",
       itemListElement: SERVICE_OFFERS,
     },
   };

@@ -16,7 +16,7 @@ Phone: +91 8320927182
 - [Full Documentation](https://samir-portfolio-dev.vercel.app/llms-full.txt): Comprehensive knowledge graph, case studies, benchmarks, and architecture details
 - [Resume](https://samir-portfolio-dev.vercel.app/resume): Current resume and professional qualifications
 - [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, and case studies
-- [Services](https://samir-portfolio-dev.vercel.app/services): Engineering services (AI & RAG systems, backend architecture, full-stack web development, technical SEO)
+- [Services](https://samir-portfolio-dev.vercel.app/services): Freelance & engineering services (RAG systems, AI agents, production backend APIs, Next.js web apps, technical SEO)
 - [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design
 - [About](https://samir-portfolio-dev.vercel.app/about): Background, timeline, and engineering principles
 - [Contact](https://samir-portfolio-dev.vercel.app/contact): Get in touch for roles, consulting, or technical advisory
@@ -24,7 +24,7 @@ Phone: +91 8320927182
 
 ## Summary & Positioning
 
-Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) based in Gujarat, India. He designs and ships full-stack features across Node.js, TypeScript, Next.js, React, and PostgreSQL, while going deeper on the AI layer with production experience in Retrieval-Augmented Generation (RAG) pipelines, LLM integration, vector databases (pgvector), semantic search, and agentic AI workflows. He pairs that stack with AI coding agents (Cursor, GitHub Copilot, Claude Code) for repetitive work while personally owning architecture, security, testing, and critical logic — rapid prototyping plus production-ready, maintainable code. Samir targets AI Backend Engineer, AI-Enabled Full Stack Developer, and Forward Deployed Engineer roles where engineering rigor solves ambiguous, customer-critical business challenges.
+Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) based in Gujarat, India, available for freelance sprints, contract engineering, and full-time remote roles. He designs and ships full-stack features across Node.js, TypeScript, Next.js, React, and PostgreSQL, while going deeper on the AI layer with production experience in Retrieval-Augmented Generation (RAG) pipelines, LLM integration, vector databases (pgvector), semantic search, and agentic AI workflows. He pairs that stack with AI coding agents (Cursor, GitHub Copilot, Claude Code) for repetitive work while personally owning architecture, security, testing, and critical logic — rapid prototyping plus production-ready, maintainable code. Samir targets Freelance AI Engineer, Contract Backend Developer, AI Backend Engineer, AI-Enabled Full Stack Developer, and Forward Deployed Engineer opportunities where engineering rigor solves ambiguous, customer-critical business challenges.
 
 ## AI-Enabled Workflow
 
@@ -117,5 +117,5 @@ Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) based in Guja
 
 ## Target Roles & Career Goals
 
-- **Target Roles**: AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Solutions Engineer.
-- **Work Arrangements**: Open to Remote (Global: US, UK, Europe, APAC) and on-site / hybrid roles across India.
+- **Target Roles & Engagements**: Freelance AI Engineer, Contract Backend Developer, AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Solutions Engineer.
+- **Work Arrangements**: Open to Freelance Sprints (1-4 weeks), Contract Partnerships/Retainers, Remote Full-Time (Global: US, UK, Europe, APAC), and on-site / hybrid roles across India.

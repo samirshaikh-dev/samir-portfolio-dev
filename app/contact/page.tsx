@@ -8,12 +8,13 @@ import { getContactPageJsonLd } from "@/lib/seo/structured-data";
 export const metadata: Metadata = {
   title: "Contact | Samir Shaikh",
   description:
-    "Get in touch with Samir Shaikh — an AI Backend Engineer and Forward Deployed Engineer open to remote opportunities, contract projects, and collaborations. Reach out via email or the contact form.",
+    "Get in touch with Samir Shaikh — freelance AI engineer, backend developer, and Forward Deployed Engineer open to remote roles, contract projects, and freelance collaborations. Reach out via email or the contact form.",
   keywords: [
     "contact Samir Shaikh",
+    "hire freelance AI engineer",
+    "hire freelance backend developer",
+    "hire full stack developer",
     "hire Node.js developer",
-    "hire AI Node.js developer",
-    "hire backend developer",
     "hire AI backend developer",
     "freelance backend developer",
     "freelance AI backend developer",
@@ -66,7 +67,7 @@ export default function ContactPage() {
         subtitle="Have a question or want to work together? Leave a message below."
       />
       <p className="sr-only">
-        Looking to hire an AI backend engineer or forward deployed engineer for an AI project? Need someone to ship an AI feature into your SaaS product? Samir Shaikh is an AI Backend Engineer and Full Stack Engineer available for remote roles, contract projects, and advisory.
+        Looking to hire a freelance AI engineer, contract backend developer, or forward deployed engineer for an AI project? Need someone to build a RAG pipeline or ship full stack web features into your SaaS product? Samir Shaikh is an AI Backend Engineer and Full Stack Engineer available for freelance sprints, contract collaboration, and remote roles.
       </p>
       <div className="max-w-2xl mx-auto w-full">
         <ContactForm />

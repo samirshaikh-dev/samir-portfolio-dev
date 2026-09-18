@@ -12,34 +12,38 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Engineering Services | Samir Shaikh — AI-Enabled Full Stack Development (Backend-First)",
+  title: "Freelance AI & Backend Engineering Services | Samir Shaikh — Full Stack AI Developer",
   description:
-    "Reliable AI systems, knowledge retrieval pipelines, production backend APIs, modern web applications, and technical SEO built for startups, founders, and product teams.",
+    "Hire Samir Shaikh — freelance AI engineer and backend developer. Specializing in production RAG systems, AI agents, scalable APIs, Next.js web applications, and technical SEO for startups and product teams.",
   keywords: [
     ...LONGTAIL_KEYWORDS.slice(0, 15),
-    "RAG systems services",
-    "AI agent development",
-    "backend API development",
+    "freelance AI engineer",
+    "freelance backend developer",
+    "freelance full stack developer",
+    "contract software engineer",
+    "hire freelance AI developer",
+    "hire RAG developer",
+    "AI agent development services",
+    "backend API development services",
     "full-stack web development services",
     "technical SEO engineer",
     "event-driven microservices",
-    "freelance web developer",
   ],
   alternates: {
     canonical: `${APP_URL}/services`,
   },
   openGraph: {
-    title: "Engineering Services | Samir Shaikh — AI-Enabled Full Stack Development (Backend-First)",
+    title: "Freelance AI & Backend Engineering Services | Samir Shaikh — Full Stack AI Developer",
     description:
-      "Reliable AI systems, knowledge retrieval pipelines, production backend APIs, modern web applications, and technical SEO built for startups, founders, and product teams.",
+      "Hire Samir Shaikh — freelance AI engineer and backend developer. Specializing in production RAG systems, AI agents, scalable APIs, Next.js web applications, and technical SEO for startups and product teams.",
     url: `${APP_URL}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Engineering Services | Samir Shaikh — AI-Enabled Full Stack Development (Backend-First)",
+    title: "Freelance AI & Backend Engineering Services | Samir Shaikh — Full Stack AI Developer",
     description:
-      "Reliable AI systems, knowledge retrieval pipelines, production backend APIs, modern web applications, and technical SEO built for startups, founders, and product teams.",
+      "Hire Samir Shaikh — freelance AI engineer and backend developer. Specializing in production RAG systems, AI agents, scalable APIs, Next.js web applications, and technical SEO for startups and product teams.",
   },
 };
 
@@ -78,7 +82,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         description:
           "Help users query your proprietary documents and knowledge bases accurately. We implement vector search with embedding models and relevance filtering so responses stay grounded in your real-world data.",
         deliverables: [
-          "Vector database indexing and embedding pipeline setup",
+          "Vector database indexing (pgvector) and hybrid search embedding pipeline setup",
           "Document parsing, semantic chunking, and metadata tagging",
           "Relevance filtering and context assembly to minimize hallucination risks",
           "Integration into chat interfaces, Q&A search, and internal tools",
@@ -326,39 +330,49 @@ const ENGAGEMENT_MODELS = [
   {
     title: "Startup MVP & Feature Sprints",
     badge: "High Velocity",
-    subtitle: "For early-stage startups and founders looking to build an MVP, AI feature, or web app quickly.",
+    subtitle: "For early-stage startups and founders looking for a freelance AI engineer or full-stack developer to ship quickly.",
     highlights: [
-      "Fixed-scope sprints (1 to 4 weeks)",
+      "Fixed-scope freelance sprints (1 to 4 weeks)",
       "Targeted RAG, AI workflow, web app, or API integration",
-      "Direct technical communication with founders/CTOs",
-      "Production-ready deployment & clean code",
+      "Direct technical collaboration with founders & CTOs",
+      "Production-ready deployment, tests & clean code",
     ],
   },
   {
     title: "Contract & Dedicated Collaboration",
     badge: "Flexible Scope",
-    subtitle: "For growing teams needing dedicated backend, full-stack, and AI engineering support.",
+    subtitle: "For growing engineering teams needing dedicated freelance backend, full-stack, or AI engineering support.",
     highlights: [
-      "Flexible contract or monthly retainer partnership",
-      "Seamless integration into your existing codebase",
+      "Flexible freelance contract or monthly retainer partnership",
+      "Seamless integration into your existing codebase & team",
       "Backend architecture, query tuning, and API design",
-      "Collaborative code reviews and documentation",
+      "Collaborative code reviews, testing & documentation",
     ],
   },
   {
     title: "Full-Time Remote Engineering",
     badge: "Long Term",
-    subtitle: "For engineering teams seeking high-impact backend & AI engineering talent.",
+    subtitle: "For engineering teams seeking high-impact remote backend, full stack, or forward deployed AI engineering talent.",
     highlights: [
       "AI Backend Engineer / Full Stack Developer roles",
       "Fluent in async communication across global timezones",
       "Strong foundation in Node.js, TypeScript, PostgreSQL, & Next.js",
-      "Immediate availability for remote work",
+      "Immediate availability for remote engineering",
     ],
   },
 ];
 
 const SERVICES_FAQS = [
+  {
+    question: "How do you work with startups as a freelance engineer or contractor?",
+    answer:
+      "I operate with a low-friction, high-transparency workflow tailored for startup velocity: (1) Sprint-based feature delivery with clearly defined milestone scopes, (2) Direct async communication via Slack/Discord and weekly syncs, (3) Clean Git workflows with PRs, automated CI checks, and comprehensive documentation, and (4) Immediate code handover directly into your private GitHub or GitLab repositories.",
+  },
+  {
+    question: "What is your availability for freelance or contract engineering projects?",
+    answer:
+      "I am actively available for new freelance sprints, contract collaborations, and technical advisory. Depending on current project commitments, I can typically onboard and begin shipping production code within 3 to 7 business days following an initial discovery call.",
+  },
   {
     question: "How do you improve AI accuracy and minimize hallucinations?",
     answer:
@@ -438,7 +452,7 @@ export default function ServicesPage() {
       {/* Header */}
       <div className="max-w-6xl mx-auto w-full">
         <PageHeader
-          title="Engineering Services"
+          title="Freelance & Engineering Services"
           subtitle="Reliable AI integrations, production backend architectures, modern web apps, and technical SEO tailored for startups, founders, and product teams."
         />
 
@@ -447,13 +461,13 @@ export default function ServicesPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-wider text-green-600 dark:text-green-400 font-semibold bg-green-500/10 border border-green-500/30 px-2.5 py-1 rounded-full inline-block mb-3">
-                ● Available for Projects, Contracts & Full-Time Roles
+                ● Available for Freelance Projects, Contracts & Full-Time Remote Roles
               </span>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-3">
                 Ship reliable software that drives real business results.
               </h2>
               <p className="service-desc text-text-muted text-base leading-relaxed">
-                I help startups and engineering teams design, build, and deploy production-ready AI features, high-performance backend systems, modern Next.js web applications, and search-optimized technical foundations.
+                I help startups, founders, and engineering teams design, build, and deploy production-ready AI features, high-performance backend systems, modern Next.js web applications, and search-optimized technical foundations — available as a freelance engineer, contract specialist, or dedicated remote developer.
               </p>
             </div>
             <div className="flex-shrink-0 flex flex-col sm:flex-row gap-3">
