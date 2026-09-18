@@ -59,6 +59,14 @@ export const LONGTAIL_KEYWORDS = [
   "Next.js full stack developer for hire",
   "migrate a monolith to microservices",
   "optimize slow PostgreSQL queries and APIs",
+  "build an AI chatbot for my website",
+  "add AI chatbot to my SaaS product",
+  "custom knowledge base search with AI",
+  "production-grade RAG pipeline developer",
+  "AI workflow automation for startups",
+  "stop LLM hallucinations in my product",
+  "hire Node.js AI developer remote",
+  "TypeScript backend developer for hire remote",
 ];
 
 /**

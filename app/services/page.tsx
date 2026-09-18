@@ -12,9 +12,9 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Freelance AI & Backend Engineering Services | Samir Shaikh — Full Stack AI Developer",
+  title: "Freelance AI Engineer & Backend Developer for Hire | Samir Shaikh",
   description:
-    "Hire Samir Shaikh — freelance AI engineer and backend developer. Specializing in production RAG systems, AI agents, scalable APIs, Next.js web applications, and technical SEO for startups and product teams.",
+    "Hire Samir Shaikh — freelance AI engineer & Node.js/TypeScript backend developer. Production RAG systems, AI agents, custom knowledge bases, scalable APIs, and Next.js apps for startups and product teams.",
   keywords: [
     ...LONGTAIL_KEYWORDS.slice(0, 15),
     "freelance AI engineer",
@@ -23,6 +23,13 @@ export const metadata: Metadata = {
     "contract software engineer",
     "hire freelance AI developer",
     "hire RAG developer",
+    "Node.js AI developer for hire",
+    "TypeScript backend developer for hire",
+    "AI chatbot development for SaaS",
+    "custom knowledge base AI",
+    "production-grade AI systems",
+    "AI workflow automation",
+    "forward deployed engineer",
     "AI agent development services",
     "backend API development services",
     "full-stack web development services",
@@ -33,17 +40,17 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/services`,
   },
   openGraph: {
-    title: "Freelance AI & Backend Engineering Services | Samir Shaikh — Full Stack AI Developer",
+    title: "Freelance AI Engineer & Backend Developer for Hire | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI engineer and backend developer. Specializing in production RAG systems, AI agents, scalable APIs, Next.js web applications, and technical SEO for startups and product teams.",
+      "Hire Samir Shaikh — freelance AI engineer & Node.js/TypeScript backend developer. Production RAG systems, AI agents, custom knowledge bases, scalable APIs, and Next.js apps for startups and product teams.",
     url: `${APP_URL}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelance AI & Backend Engineering Services | Samir Shaikh — Full Stack AI Developer",
+    title: "Freelance AI Engineer & Backend Developer for Hire | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI engineer and backend developer. Specializing in production RAG systems, AI agents, scalable APIs, Next.js web applications, and technical SEO for startups and product teams.",
+      "Hire Samir Shaikh — freelance AI engineer & Node.js/TypeScript backend developer. Production RAG systems, AI agents, custom knowledge bases, scalable APIs, and Next.js apps for startups and product teams.",
   },
 };
 
@@ -80,7 +87,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         title: "RAG Systems & Knowledge Retrieval",
         tagline: "Build grounded AI systems with vector search, embeddings, document retrieval, and relevance-focused responses.",
         description:
-          "Help users query your proprietary documents and knowledge bases accurately. We implement vector search with embedding models and relevance filtering so responses stay grounded in your real-world data.",
+          "Help users query your proprietary documents and knowledge bases accurately. We build custom knowledge base search and RAG pipelines with vector embeddings and relevance filtering — so AI responses stay grounded in your real data and stop hallucinating.",
         deliverables: [
           "Vector database indexing (pgvector) and hybrid search embedding pipeline setup",
           "Document parsing, semantic chunking, and metadata tagging",
@@ -100,7 +107,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         title: "AI Agents & Tool Orchestration",
         tagline: "Develop AI workflows that use tools, APIs, structured outputs, and guardrails to automate multi-step tasks.",
         description:
-          "Move beyond single-turn chatbots into automated multi-step workflows. We build agents that query internal APIs, validate inputs with structured schemas, apply guardrails and structured outputs for deterministic reliability, and perform complex tasks safely.",
+          "Move beyond single-turn chatbots into AI workflow automation. We build agents that query internal APIs, validate inputs with structured schemas, apply guardrails and structured outputs for deterministic reliability, and perform complex multi-step tasks safely.",
         deliverables: [
           "Tool-calling architectures and custom API integrations",
           "Structured JSON schema validation using Zod for deterministic output",
@@ -352,9 +359,9 @@ const ENGAGEMENT_MODELS = [
   {
     title: "Full-Time Remote Engineering",
     badge: "Long Term",
-    subtitle: "For engineering teams seeking high-impact remote backend, full stack, or forward deployed AI engineering talent.",
+    subtitle: "For engineering teams seeking high-impact remote backend, full stack, or Forward Deployed AI Engineering talent.",
     highlights: [
-      "AI Backend Engineer / Full Stack Developer roles",
+      "AI Backend Engineer / AI SDE / Forward Deployed Engineer roles",
       "Fluent in async communication across global timezones",
       "Strong foundation in Node.js, TypeScript, PostgreSQL, & Next.js",
       "Immediate availability for remote engineering",
@@ -399,9 +406,14 @@ const SERVICES_FAQS = [
       "You retain 100% ownership of all code, architecture specifications, configurations, and documentation created during the engagement. Everything is committed directly to your private repositories.",
   },
   {
+    question: "Can you build an AI chatbot for my website or SaaS product?",
+    answer:
+      "Yes. A typical engagement involves building a RAG pipeline that grounds the chatbot's responses in your own documentation, product data, or knowledge base — so it answers accurately without hallucinating. The result integrates as an API into your existing web application or product interface. Most AI chatbot integrations are delivered within 2 to 4 weeks.",
+  },
+  {
     question: "How do we get started?",
     answer:
-      "Send a message via the Contact page or email shaikh.samir.work@gmail.com with a brief summary of your project goals. We will review your requirements and schedule a short discovery call to discuss next steps.",
+      "The fastest path: email shaikh.samir.work@gmail.com or use the Contact page with a brief summary of what you need — what you're building, your stack, and your timeline. I reply within 24 hours to schedule a short discovery call, after which I provide a clear scope and timeline proposal, typically within 48 hours.",
   },
 ];
 
@@ -453,7 +465,7 @@ export default function ServicesPage() {
       <div className="max-w-6xl mx-auto w-full">
         <PageHeader
           title="Freelance & Engineering Services"
-          subtitle="Reliable AI integrations, production backend architectures, modern web apps, and technical SEO tailored for startups, founders, and product teams."
+          subtitle="Production-grade AI integrations, backend architectures, and modern web apps — built for startups, founders, and product teams ready to ship."
         />
 
         {/* Hero Value Banner */}
@@ -467,7 +479,7 @@ export default function ServicesPage() {
                 Ship reliable software that drives real business results.
               </h2>
               <p className="service-desc text-text-muted text-base leading-relaxed">
-                I help startups, founders, and engineering teams design, build, and deploy production-ready AI features, high-performance backend systems, modern Next.js web applications, and search-optimized technical foundations — available as a freelance engineer, contract specialist, or dedicated remote developer.
+                I help startups, founders, and engineering teams design, build, and ship production-grade AI features — custom knowledge bases, RAG pipelines, AI agents, and AI workflow automation — alongside high-performance Node.js/TypeScript backend systems, Next.js web applications, and search-optimized technical foundations. Available as a freelance engineer, contract specialist, or dedicated remote developer.
               </p>
             </div>
             <div className="flex-shrink-0 flex flex-col sm:flex-row gap-3">

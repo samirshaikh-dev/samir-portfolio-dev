@@ -92,7 +92,7 @@ export default function PrivacyPolicyPage() {
               &ldquo;my&rdquo;) collects, uses, and protects personal
               information on this portfolio website located at{" "}
               <a href={APP_URL} target="_blank" rel="noopener noreferrer">
-                {APP_URL}
+                {APP_URL}   
               </a>{" "}
               (the &ldquo;Site&rdquo;).
             </p>
