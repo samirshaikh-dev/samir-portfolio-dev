@@ -19,29 +19,36 @@ export const SAME_AS = [
  * (Generative Engine Optimization) entity relationships.
  */
 export const LONGTAIL_KEYWORDS = [
-  "hire AI-enabled full stack developer",
-  "AI-enabled full stack developer backend-first",
+  "freelance AI developer",
   "freelance AI engineer",
   "freelance backend developer",
   "freelance full stack developer",
-  "hire freelance AI engineer",
+  "hire freelance AI developer",
   "hire freelance backend developer",
   "freelance backend engineer for startups",
   "freelance AI backend engineer for startups",
   "contract software engineer for MVP",
   "contract backend developer Node.js TypeScript",
-  "build a RAG chatbot for my website",
-  "integrate an LLM into my SaaS product",
+  "AI chatbot for website",
+  "AI chatbot for SaaS",
+  "custom knowledge base AI",
+  "custom knowledge base",
+  "stop chatbot from hallucinating",
+  "improve AI chatbot accuracy",
+  "production-grade AI chatbot",
+  "production-grade AI application",
+  "production-grade RAG pipeline",
+  "RAG chatbot development",
+  "AI workflow automation for startups",
   "AI agent development services",
-  "custom REST and GraphQL API development",
-  "event-driven microservices architecture consultant",
-  "scalable Node.js backend development",
-  "AI backend engineer open to remote work",
+  "AI development services",
+  "custom AI development",
   "Forward Deployed Engineer for AI products",
   "Forward Deployed Engineer for AI startups",
   "hire Forward Deployed AI Engineer",
+  "hire AI-enabled full stack developer",
+  "AI-enabled full stack developer backend-first",
   "vector search and semantic search implementation",
-  "production-grade AI chatbot development",
   "hire a backend developer for my startup",
   "Node.js developer for hire remote",
   "AI Node.js developer for hire remote",
@@ -51,21 +58,16 @@ export const LONGTAIL_KEYWORDS = [
   "agentic AI orchestration and tool execution",
   "NestJS API development for SaaS",
   "reduce LLM hallucinations with RAG",
-  "design a scalable microservices backend",
+  "custom REST and GraphQL API development",
+  "event-driven microservices architecture consultant",
+  "scalable Node.js backend development",
+  "AI backend engineer open to remote work",
   "Kafka and BullMQ event pipeline developer",
   "add AI chat to my existing product",
   "backend developer experienced with Docker and CI/CD",
   "TypeScript backend engineer for AI startups",
   "Next.js full stack developer for hire",
-  "migrate a monolith to microservices",
   "optimize slow PostgreSQL queries and APIs",
-  "build an AI chatbot for my website",
-  "add AI chatbot to my SaaS product",
-  "custom knowledge base search with AI",
-  "production-grade RAG pipeline developer",
-  "AI workflow automation for startups",
-  "stop LLM hallucinations in my product",
-  "hire Node.js AI developer remote",
   "TypeScript backend developer for hire remote",
 ];
 
@@ -74,8 +76,11 @@ export const LONGTAIL_KEYWORDS = [
  * prospective clients and recruiters actually ask out loud.
  */
 export const VOICE_QUERIES = [
-  "who can build an AI chatbot for my business",
-  "how do I add semantic search to my application",
+  "who can build an AI chatbot for my website",
+  "who can build an AI chatbot for my SaaS",
+  "how do I stop my AI chatbot from hallucinating",
+  "who builds custom knowledge bases with AI",
+  "how do I hire a freelance AI developer",
   "which developer can integrate an LLM into my product",
   "who builds scalable Node.js backends for startups",
   "how do I hire a backend engineer for an AI project",
@@ -84,7 +89,6 @@ export const VOICE_QUERIES = [
   "who can help me ship an AI feature into my SaaS product",
   "how do I find a remote TypeScript backend developer",
   "who builds event-driven systems with Kafka and Redis",
-  "who can deploy an AI product directly to enterprise customers",
   "how do I hire a Forward Deployed Engineer for an AI startup",
 ];
 
@@ -116,24 +120,24 @@ export const AREA_SERVED = [
 /** Concrete, problem-oriented services offered. */
 export const SERVICES = [
   {
-    name: "RAG Systems & Knowledge Retrieval",
+    name: "Custom Knowledge Bases & RAG Systems",
     description:
-      "Build grounded AI systems with vector search, embeddings, document retrieval, and relevance-focused responses.",
+      "Build production-grade AI chatbots for websites and SaaS grounded in custom knowledge bases with pgvector, semantic search, and hallucination mitigation.",
   },
   {
-    name: "AI Agents & Tool Orchestration",
+    name: "AI Agents & Workflow Automation",
     description:
-      "Develop AI workflows that use tools, APIs, structured outputs, and guardrails to automate multi-step tasks.",
+      "Develop production-grade AI agent workflows that use tools, APIs, structured schemas, and guardrails to automate multi-step business tasks.",
   },
   {
     name: "AI Product Development & Integration",
     description:
-      "Turn AI use cases into working product features, from proof of concept to integration with existing applications and workflows.",
+      "Turn AI use cases into production-ready product features, from discovery and rapid prototypes to seamless database and UI integration.",
   },
   {
     name: "LLM Integration & AI User Experiences",
     description:
-      "Integrate LLMs into applications with streaming responses, conversation workflows, usage controls, structured responses, and reliable API handling.",
+      "Integrate LLMs into applications with low-latency streaming responses, conversational workflows, usage controls, and reliable error recovery.",
   },
   {
     name: "Production Backend APIs & System Design",
@@ -153,7 +157,7 @@ export const SERVICES = [
   {
     name: "Full-Stack Web & Application Development",
     description:
-      "Build fast, responsive, and modern web applications with Next.js, React, and solid backend systems.",
+      "Build fast, responsive, and modern web applications with Next.js, React, TypeScript, and solid backend systems.",
   },
   {
     name: "Technical SEO, AEO & Web Performance",

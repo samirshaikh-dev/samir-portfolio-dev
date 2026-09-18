@@ -181,28 +181,28 @@ Canonical Services URL: https://samir-portfolio-dev.vercel.app/services
 Samir provides 10 core engineering services organized across 4 strategic categories, designed specifically for early-stage startups, product teams, and engineering leaders who require immediate senior-level execution.
 
 ### Category 1: AI & Intelligent Systems
-Turn machine learning models into reliable, grounded, and tool-using product capabilities.
+Turn machine learning models into reliable, production-grade AI chatbots, custom knowledge bases, and automated workflows.
 
-1. **RAG Systems & Knowledge Retrieval (01 // KNOWLEDGE RETRIEVAL)**
-   - **Tagline**: Build grounded AI systems with vector search, embeddings, document retrieval, and relevance-focused responses.
-   - **Description**: Query proprietary documents and knowledge bases accurately. Implements vector search with embedding models and relevance filtering so responses stay grounded in real data.
+1. **Custom Knowledge Bases & RAG Systems (01 // CUSTOM KNOWLEDGE BASES)**
+   - **Tagline**: Build a production-grade AI chatbot for your website or SaaS grounded in your company's custom knowledge base.
+   - **Description**: Stop AI hallucinations and vague responses. We build custom knowledge bases and production-grade RAG pipelines with PostgreSQL pgvector and semantic search — so your AI chatbot answers accurately from your real product data, documentation, and company policies with zero guesswork.
    - **Deliverables**:
-     - Vector database indexing (pgvector) and hybrid search (vector + keyword) embedding pipeline setup
-     - Document parsing, semantic chunking, and metadata tagging
-     - Relevance filtering and context assembly to minimize hallucination risks (cosine distance <= 0.5)
-     - Integration into chat interfaces, Q&A search, and internal tools
-     - Performance evaluation against real-world test queries and user inputs
+     - Custom knowledge base indexing and document chunking (PDFs, Markdown, and database records)
+     - Vector database pipeline setup with PostgreSQL pgvector and 3072d semantic embeddings
+     - Hallucination mitigation with strict cosine distance filtering (<= 0.5) and context verification
+     - Turnkey AI chatbot integration for website widgets, SaaS applications, and internal portals
+     - Retrieval accuracy evaluation, latency profiling (<300ms), and automated response guardrails
    - **Tech Stack**: PostgreSQL, pgvector, Gemini Embeddings, Drizzle ORM, TypeScript
 
-2. **AI Agents & Tool Orchestration (02 // AGENT WORKFLOWS)**
-   - **Tagline**: Develop AI workflows that use tools, APIs, structured outputs, and guardrails to automate multi-step tasks.
-   - **Description**: Move beyond single-turn chatbots into automated multi-step workflows. Builds agents that query internal APIs, validate inputs with structured schemas, apply guardrails, and execute tasks deterministically.
+2. **AI Agents & Workflow Automation (02 // AGENT WORKFLOWS)**
+   - **Tagline**: Develop production-grade AI agents that use tools, APIs, and structured outputs to automate multi-step business tasks.
+   - **Description**: Move beyond single-turn conversational chatbots into reliable AI workflow automation. We build deterministic agents that query internal APIs, validate inputs with structured schemas, apply guardrails, and execute multi-step workflows safely.
    - **Deliverables**:
-     - Tool-calling architectures and custom API integrations
-     - Structured JSON schema validation using Zod for deterministic output
-     - Input guardrails and fallback logic for unhandled user queries
-     - Multi-turn state management and conversational memory
-     - Testing and validation for workflow consistency
+     - Tool-calling architectures and custom API integrations for automated actions
+     - Structured JSON schema validation using Zod for deterministic, parseable output
+     - Input guardrails and graceful fallbacks for unhandled or malicious queries
+     - Multi-turn state management, conversational memory, and task persistence
+     - Testing and CI validation for consistent agentic execution
    - **Tech Stack**: Vercel AI SDK, Groq, Google Gemini, Node.js, Zod
 
 3. **AI Product Development & Integration (03 // PRODUCT DEVELOPMENT)**
@@ -309,11 +309,9 @@ Agent-assisted development workflow that ships production-ready code fast — wi
 - **04 Integration & Handover**: Deploy to production, integrate with existing stack, and provide complete documentation, tests, and code walkthroughs.
 
 ### Engagement Models for Clients & Founders
-- **Startup MVP & Feature Sprints (High Velocity)**: Fixed-scope freelance sprints (1 to 4 weeks) for early-stage founders building an MVP or adding targeted AI features.
-- **Contract & Dedicated Collaboration (Flexible Scope)**: Flexible freelance contract or monthly retainer for growing teams needing dedicated backend and AI engineering support.
-- **Full-Time Remote Engineering (Long Term)**: High-impact remote roles across global time zones (US, UK, Europe, APAC) with async fluency and deep full-stack proficiency.
-
----
+- **Startup MVP & Feature Sprints (High Velocity)**: Fixed-scope freelance sprints (1 to 4 weeks) for early-stage founders looking for a freelance AI developer or full-stack engineer to build an MVP, custom knowledge base, or production-grade AI chatbot.
+- **Contract & Dedicated Collaboration (Flexible Scope)**: Flexible freelance contract or monthly retainer for growing teams needing dedicated backend, full-stack, or AI development services.
+- **Forward Deployed Engineering & Remote Roles (Embedded / Long Term)**: Embedded Forward Deployed Engineer (FDE) or remote AI Backend Engineer translating customer constraints into deployed software across global time zones (US, UK, Europe, APAC).
 
 ---
 
@@ -345,7 +343,7 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 
 ### Q: What engineering services does Samir Shaikh offer?
 **A**: Samir provides 10 core services across 4 categories:
-1. **AI & Intelligent Systems**: RAG Systems & Knowledge Retrieval (pgvector, Gemini), AI Agents & Tool Orchestration (Zod, tool-calling), AI Product Development & Prototyping, and LLM Integration (streaming, rate-limiting).
+1. **AI & Intelligent Systems**: Custom Knowledge Bases & RAG Systems (pgvector, Gemini), AI Agents & Workflow Automation (Zod, tool-calling), AI Product Development & Prototyping, and LLM Integration (streaming, rate-limiting).
 2. **Backend & Distributed Architecture**: Production Backend APIs & System Design (Node.js, NestJS, REST/GraphQL), Event-Driven Systems (BullMQ, Kafka), and Cloud/DevOps (Docker, GitHub Actions, OpenTelemetry).
 3. **Web Development & Search Growth**: Full-Stack Web Development (Next.js 16, React 19, TypeScript), and Technical SEO, AEO & Web Performance (Schema.org JSON-LD, GEO).
 4. **AI-Accelerated Engineering**: Agent-assisted delivery with Cursor, Claude Code, and Copilot backed by strict human architecture, security, and test reviews.
@@ -359,6 +357,21 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 
 ### Q: What is Samir's availability for freelance or contract engineering projects?
 **A**: Samir is actively available for new freelance sprints, contract collaborations, and technical advisory. Depending on current project commitments, he can typically onboard and begin shipping production code within 3 to 7 business days following an initial technical discovery call.
+
+### Q: How do you stop an AI chatbot from hallucinating?
+**A**: To stop an AI chatbot from hallucinating, Samir implements a production-grade RAG pipeline: (1) Semantic chunking and vector indexing of verified documentation and company data using PostgreSQL pgvector, (2) Strict cosine distance thresholds (<= 0.5) so irrelevant context is filtered out, (3) Grounded prompt templates that instruct the model to cite verified data and decline ungrounded questions, and (4) Graceful fallback handling with transparent handoffs when information is missing.
+
+### Q: Can Samir build an AI chatbot for my website or SaaS using our custom knowledge base?
+**A**: Yes. Samir builds production-grade AI chatbots tailored for websites and SaaS platforms connected directly to proprietary knowledge bases (PDFs, Markdown, FAQs, Notion, or SQL databases). The chatbot retrieves verified company data in real time, answers customer inquiries accurately without hallucinating, and integrates cleanly as an embeddable widget or backend API. Typical delivery is 1 to 3 weeks.
+
+### Q: What makes an AI chatbot or RAG system "production-grade"?
+**A**: A production-grade AI system differs fundamentally from a quick proof-of-concept wrapper: (1) Deterministic grounding with strict relevance thresholds and hallucination defenses, (2) Sub-300ms vector retrieval and low-latency streaming responses, (3) Robust rate limiting, token usage tracking, and cost safeguards, (4) In-memory session security and abuse prevention, and (5) Comprehensive test coverage, CI/CD deployment pipelines, and structured error boundaries.
+
+### Q: What is a Forward Deployed Engineer and when should a team hire one?
+**A**: A Forward Deployed Engineer (FDE) bridges the gap between deep software engineering and direct customer immersion. Unlike traditional developers isolated behind tickets, an FDE embeds directly with stakeholders or enterprise clients, conducts technical discovery on ambiguous requirements, rapidly builds and validates prototypes, and hardens the solution for production deployment. Hire an FDE when deploying high-stakes AI features or integrating custom software into client workflows.
+
+### Q: Why hire a freelance AI developer instead of using an off-the-shelf chatbot tool?
+**A**: Off-the-shelf chatbot builders often store company data on shared third-party servers, charge recurring monthly per-seat or per-message markups, offer limited customization, and struggle with complex company workflows. Hiring a freelance AI developer gives you 100% code and data ownership, zero recurring software platform fees, tailored retrieval algorithms optimized for your specific data schema, and seamless integration into your existing authentication and backend systems.
 
 ### Q: What roles is Samir Shaikh seeking?
 **A**: Samir is open to:

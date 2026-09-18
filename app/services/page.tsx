@@ -12,45 +12,45 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Freelance AI Engineer & Backend Developer for Hire | Samir Shaikh",
+  title: "Freelance AI Developer & Backend Engineer for Hire | Samir Shaikh",
   description:
-    "Hire Samir Shaikh — freelance AI engineer & Node.js/TypeScript backend developer. Production RAG systems, AI agents, custom knowledge bases, scalable APIs, and Next.js apps for startups and product teams.",
+    "Hire Samir Shaikh — freelance AI developer & backend engineer. Production-grade AI chatbots for websites and SaaS, custom knowledge bases, RAG systems, scalable APIs, and Forward Deployed Engineering for startups and product teams.",
   keywords: [
     ...LONGTAIL_KEYWORDS.slice(0, 15),
+    "freelance AI developer",
     "freelance AI engineer",
-    "freelance backend developer",
-    "freelance full stack developer",
-    "contract software engineer",
+    "AI chatbot for website",
+    "AI chatbot for SaaS",
+    "custom knowledge base AI",
+    "custom knowledge base",
+    "production-grade AI chatbot",
+    "production-grade AI systems",
+    "stop chatbot from hallucinating",
+    "Forward Deployed Engineer",
     "hire freelance AI developer",
     "hire RAG developer",
-    "Node.js AI developer for hire",
-    "TypeScript backend developer for hire",
-    "AI chatbot development for SaaS",
-    "custom knowledge base AI",
-    "production-grade AI systems",
-    "AI workflow automation",
-    "forward deployed engineer",
+    "AI workflow automation for startups",
     "AI agent development services",
+    "custom AI development",
     "backend API development services",
     "full-stack web development services",
     "technical SEO engineer",
-    "event-driven microservices",
   ],
   alternates: {
     canonical: `${APP_URL}/services`,
   },
   openGraph: {
-    title: "Freelance AI Engineer & Backend Developer for Hire | Samir Shaikh",
+    title: "Freelance AI Developer & Backend Engineer for Hire | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI engineer & Node.js/TypeScript backend developer. Production RAG systems, AI agents, custom knowledge bases, scalable APIs, and Next.js apps for startups and product teams.",
+      "Hire Samir Shaikh — freelance AI developer & backend engineer. Production-grade AI chatbots for websites and SaaS, custom knowledge bases, RAG systems, scalable APIs, and Forward Deployed Engineering.",
     url: `${APP_URL}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelance AI Engineer & Backend Developer for Hire | Samir Shaikh",
+    title: "Freelance AI Developer & Backend Engineer for Hire | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI engineer & Node.js/TypeScript backend developer. Production RAG systems, AI agents, custom knowledge bases, scalable APIs, and Next.js apps for startups and product teams.",
+      "Hire Samir Shaikh — freelance AI developer & backend engineer. Production-grade AI chatbots for websites and SaaS, custom knowledge bases, RAG systems, scalable APIs, and Forward Deployed Engineering.",
   },
 };
 
@@ -79,21 +79,21 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
   {
     id: "ai-intelligent-systems",
     title: "AI & Intelligent Systems",
-    subtitle: "Turn machine learning models into reliable, grounded, and tool-using product capabilities.",
+    subtitle: "Turn machine learning models into reliable, production-grade AI chatbots, custom knowledge bases, and automated workflows.",
     services: [
       {
         id: "rag-systems",
-        badge: "01 // KNOWLEDGE RETRIEVAL",
-        title: "RAG Systems & Knowledge Retrieval",
-        tagline: "Build grounded AI systems with vector search, embeddings, document retrieval, and relevance-focused responses.",
+        badge: "01 // CUSTOM KNOWLEDGE BASES",
+        title: "Custom Knowledge Bases & RAG Systems",
+        tagline: "Build a production-grade AI chatbot for your website or SaaS grounded in your company's custom knowledge base.",
         description:
-          "Help users query your proprietary documents and knowledge bases accurately. We build custom knowledge base search and RAG pipelines with vector embeddings and relevance filtering — so AI responses stay grounded in your real data and stop hallucinating.",
+          "Generic AI chatbots hallucinate and give vague answers that frustrate users. We build custom knowledge bases and production-grade RAG pipelines with PostgreSQL pgvector and semantic search — so your AI chatbot answers accurately from your real product data, documentation, and company policies with zero guesswork.",
         deliverables: [
-          "Vector database indexing (pgvector) and hybrid search embedding pipeline setup",
-          "Document parsing, semantic chunking, and metadata tagging",
-          "Relevance filtering and context assembly to minimize hallucination risks",
-          "Integration into chat interfaces, Q&A search, and internal tools",
-          "Performance evaluation against real-world test queries and user inputs",
+          "Custom knowledge base indexing and document chunking (PDFs, Markdown, and database records)",
+          "Vector database pipeline setup with PostgreSQL pgvector and 3072d semantic embeddings",
+          "Hallucination mitigation with strict cosine distance filtering and context verification",
+          "Turnkey AI chatbot integration for website widgets, SaaS applications, and internal portals",
+          "Retrieval accuracy evaluation, latency profiling (<300ms), and automated response guardrails",
         ],
         techStack: ["PostgreSQL", "pgvector", "Gemini Embeddings", "Drizzle ORM", "TypeScript"],
         relatedLink: {
@@ -104,16 +104,16 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
       {
         id: "ai-agents",
         badge: "02 // AGENT WORKFLOWS",
-        title: "AI Agents & Tool Orchestration",
-        tagline: "Develop AI workflows that use tools, APIs, structured outputs, and guardrails to automate multi-step tasks.",
+        title: "AI Agents & Workflow Automation",
+        tagline: "Develop production-grade AI agents that use tools, APIs, and structured outputs to automate multi-step business tasks.",
         description:
-          "Move beyond single-turn chatbots into AI workflow automation. We build agents that query internal APIs, validate inputs with structured schemas, apply guardrails and structured outputs for deterministic reliability, and perform complex multi-step tasks safely.",
+          "Move beyond single-turn conversational chatbots into reliable AI workflow automation. We build deterministic agents that query internal APIs, validate inputs with structured schemas, apply guardrails, and execute multi-step workflows safely.",
         deliverables: [
-          "Tool-calling architectures and custom API integrations",
-          "Structured JSON schema validation using Zod for deterministic output",
-          "Input guardrails and fallback logic for unhandled user queries",
-          "Multi-turn state management and conversational memory",
-          "Testing and validation for workflow consistency",
+          "Tool-calling architectures and custom API integrations for automated actions",
+          "Structured JSON schema validation using Zod for deterministic, parseable output",
+          "Input guardrails and graceful fallbacks for unhandled or malicious queries",
+          "Multi-turn state management, conversational memory, and task persistence",
+          "Testing and CI validation for consistent agentic execution",
         ],
         techStack: ["Vercel AI SDK", "Groq", "Google Gemini", "Node.js", "Zod"],
         relatedLink: {
@@ -125,15 +125,15 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         id: "ai-product-dev",
         badge: "03 // PRODUCT DEVELOPMENT",
         title: "AI Product Development & Integration",
-        tagline: "Turn AI use cases into working product features, from proof of concept to integration with existing applications and workflows.",
+        tagline: "Transform AI concepts into production-ready product features, from discovery and rapid prototypes to database and UI integration.",
         description:
-          "Transform an initial AI concept into a working, production-ready feature. We handle end-to-end integration with your existing stack, database, and user interface.",
+          "Transform an initial AI concept into a working, customer-ready product feature. We handle end-to-end integration across your existing tech stack, database, authentication, and user interface.",
         deliverables: [
-          "Technical feasibility assessment and architecture planning",
-          "Functional MVP and interactive prototype development",
-          "Clean API endpoints connecting AI models to your frontend",
+          "Technical feasibility assessment and architectural scope definition",
+          "Functional MVP and interactive prototype development in rapid sprint cycles",
+          "Clean, typed API endpoints connecting AI models to your frontend application",
           "Integration with user authentication, databases, and permission models",
-          "Clear documentation and code handover walkthroughs",
+          "Production deployment, monitoring setup, and comprehensive code handover",
         ],
         techStack: ["Next.js", "Node.js", "PostgreSQL", "REST/GraphQL", "Tailwind CSS"],
         relatedLink: {
@@ -145,15 +145,15 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         id: "llm-integration",
         badge: "04 // LLM INTEGRATION",
         title: "LLM Integration & AI User Experiences",
-        tagline: "Integrate LLMs into applications with streaming responses, conversation workflows, usage controls, structured responses, and reliable API handling.",
+        tagline: "Integrate modern LLMs into applications with low-latency streaming responses, usage controls, and reliable error recovery.",
         description:
-          "Incorporate modern language models into existing user interfaces with smooth streaming text, usage controls, cost observability, and reliable error recovery.",
+          "Incorporate state-of-the-art language models into your existing website or SaaS UI with smooth streaming text, usage controls, token observability, and provider failover strategies.",
         deliverables: [
-          "Low-latency streaming responses via Vercel AI SDK",
+          "Low-latency streaming responses via Vercel AI SDK with zero UI blocking",
           "Context window management and prompt assembly workflows",
           "Rate limiting, token usage tracking, and cost control safeguards",
-          "Secure API key handling and provider failover strategies",
-          "Conversational state persistence across user sessions",
+          "Secure API key handling and multi-provider failover strategies",
+          "Conversational state persistence across user sessions and devices",
         ],
         techStack: ["Vercel AI SDK", "Next.js App Router", "Groq", "Gemini 2.0", "TypeScript"],
         relatedLink: {
@@ -337,34 +337,34 @@ const ENGAGEMENT_MODELS = [
   {
     title: "Startup MVP & Feature Sprints",
     badge: "High Velocity",
-    subtitle: "For early-stage startups and founders looking for a freelance AI engineer or full-stack developer to ship quickly.",
+    subtitle: "For early-stage startups and founders looking for a freelance AI developer or full-stack engineer to ship quickly.",
     highlights: [
       "Fixed-scope freelance sprints (1 to 4 weeks)",
-      "Targeted RAG, AI workflow, web app, or API integration",
+      "Production-grade AI chatbot, custom knowledge base, web app, or API",
       "Direct technical collaboration with founders & CTOs",
-      "Production-ready deployment, tests & clean code",
+      "Production-ready deployment, tests & clean code handover",
     ],
   },
   {
     title: "Contract & Dedicated Collaboration",
     badge: "Flexible Scope",
-    subtitle: "For growing engineering teams needing dedicated freelance backend, full-stack, or AI engineering support.",
+    subtitle: "For growing product teams needing dedicated freelance backend, full-stack, or AI development services.",
     highlights: [
       "Flexible freelance contract or monthly retainer partnership",
-      "Seamless integration into your existing codebase & team",
+      "Seamless integration into your existing codebase & team rituals",
       "Backend architecture, query tuning, and API design",
-      "Collaborative code reviews, testing & documentation",
+      "Collaborative code reviews, testing & thorough documentation",
     ],
   },
   {
-    title: "Full-Time Remote Engineering",
-    badge: "Long Term",
-    subtitle: "For engineering teams seeking high-impact remote backend, full stack, or Forward Deployed AI Engineering talent.",
+    title: "Forward Deployed Engineering & Remote Roles",
+    badge: "Embedded / Long Term",
+    subtitle: "For teams seeking an embedded Forward Deployed Engineer (FDE) or high-impact remote AI backend engineer.",
     highlights: [
-      "AI Backend Engineer / AI SDE / Forward Deployed Engineer roles",
-      "Fluent in async communication across global timezones",
-      "Strong foundation in Node.js, TypeScript, PostgreSQL, & Next.js",
-      "Immediate availability for remote engineering",
+      "Forward Deployed Engineer (FDE) / AI Backend Engineer / AI SDE",
+      "Direct customer immersion, rapid prototyping & enterprise deployment",
+      "Fluent in async communication across US, UK, and European timezones",
+      "Immediate availability for contract sprints or full-time remote roles",
     ],
   },
 ];
@@ -373,7 +373,7 @@ const SERVICES_FAQS = [
   {
     question: "How do you work with startups as a freelance engineer or contractor?",
     answer:
-      "I operate with a low-friction, high-transparency workflow tailored for startup velocity: (1) Sprint-based feature delivery with clearly defined milestone scopes, (2) Direct async communication via Slack/Discord and weekly syncs, (3) Clean Git workflows with PRs, automated CI checks, and comprehensive documentation, and (4) Immediate code handover directly into your private GitHub or GitLab repositories.",
+      "I operate with a low-friction, high-transparency workflow tailored for startup velocity: (1) Sprint-based feature delivery with clearly defined milestone scopes (1 to 4 weeks), (2) Direct async communication via Slack/Discord and weekly syncs, (3) Clean Git workflows with PRs, automated CI checks, and comprehensive documentation, and (4) Immediate code handover directly into your private GitHub or GitLab repositories.",
   },
   {
     question: "What is your availability for freelance or contract engineering projects?",
@@ -381,9 +381,29 @@ const SERVICES_FAQS = [
       "I am actively available for new freelance sprints, contract collaborations, and technical advisory. Depending on current project commitments, I can typically onboard and begin shipping production code within 3 to 7 business days following an initial discovery call.",
   },
   {
-    question: "How do you improve AI accuracy and minimize hallucinations?",
+    question: "How do you stop an AI chatbot from hallucinating?",
     answer:
-      "While no LLM can guarantee zero hallucinations, we significantly improve response quality through: (1) relevant vector search and document parsing, (2) strict relevance thresholds so unrelated documents are excluded, (3) grounded prompt templates that instruct the model to stick strictly to verified context, and (4) graceful fallbacks when the required information is not found in your data.",
+      "To stop an AI chatbot from hallucinating, we implement a production-grade RAG pipeline: (1) Semantic chunking and vector indexing of your verified documentation and company data using PostgreSQL pgvector, (2) Strict cosine distance thresholds (<= 0.5) so irrelevant context is filtered out, (3) Grounded prompt templates that instruct the model to cite verified data and decline ungrounded questions, and (4) Graceful fallback handling with transparent handoffs when information is missing.",
+  },
+  {
+    question: "Can you build an AI chatbot for my website or SaaS using our custom knowledge base?",
+    answer:
+      "Yes. We build production-grade AI chatbots tailored for websites and SaaS platforms connected directly to your proprietary knowledge base (PDFs, Markdown, FAQs, Notion pages, or SQL databases). The chatbot retrieves verified company data in real time, answers customer inquiries accurately without hallucinating, and integrates cleanly as an embeddable widget or backend API. Typical delivery ranges from 1 to 3 weeks.",
+  },
+  {
+    question: "What makes an AI chatbot or RAG system 'production-grade'?",
+    answer:
+      "A production-grade AI system differs fundamentally from a quick proof-of-concept wrapper: (1) Deterministic grounding with strict relevance thresholds and hallucination defenses, (2) Sub-300ms vector retrieval and low-latency streaming responses, (3) Robust rate limiting, token usage tracking, and cost safeguards, (4) In-memory session security and abuse prevention, and (5) Comprehensive test coverage, CI/CD deployment pipelines, and structured error boundaries.",
+  },
+  {
+    question: "What is a Forward Deployed Engineer and when should my team hire one?",
+    answer:
+      "A Forward Deployed Engineer (FDE) bridges the gap between deep software engineering and direct customer immersion. Unlike traditional developers isolated behind tickets, an FDE embeds directly with stakeholders or enterprise clients, conducts technical discovery on ambiguous requirements, rapidly builds and validates prototypes, and hardens the solution for production deployment. Hire an FDE when deploying high-stakes AI features or integrating custom software into client workflows.",
+  },
+  {
+    question: "Why hire a freelance AI developer instead of using an off-the-shelf chatbot tool?",
+    answer:
+      "Off-the-shelf chatbot builders often store your data on shared third-party servers, charge recurring monthly per-seat or per-message markups, offer limited customization, and struggle with complex company workflows. Hiring a freelance AI developer gives you 100% code and data ownership, zero recurring software platform fees, tailored retrieval algorithms optimized for your specific data schema, and seamless integration into your existing authentication and backend systems.",
   },
   {
     question: "Can you build both the backend and frontend for our web application?",
@@ -404,11 +424,6 @@ const SERVICES_FAQS = [
     question: "Who owns the code and intellectual property?",
     answer:
       "You retain 100% ownership of all code, architecture specifications, configurations, and documentation created during the engagement. Everything is committed directly to your private repositories.",
-  },
-  {
-    question: "Can you build an AI chatbot for my website or SaaS product?",
-    answer:
-      "Yes. A typical engagement involves building a RAG pipeline that grounds the chatbot's responses in your own documentation, product data, or knowledge base — so it answers accurately without hallucinating. The result integrates as an API into your existing web application or product interface. Most AI chatbot integrations are delivered within 2 to 4 weeks.",
   },
   {
     question: "How do we get started?",
@@ -464,8 +479,8 @@ export default function ServicesPage() {
       {/* Header */}
       <div className="max-w-6xl mx-auto w-full">
         <PageHeader
-          title="Freelance & Engineering Services"
-          subtitle="Production-grade AI integrations, backend architectures, and modern web apps — built for startups, founders, and product teams ready to ship."
+          title="Freelance AI & Engineering Services"
+          subtitle="Production-grade AI chatbots, custom knowledge bases, backend architectures, and modern web apps — built for startups, founders, and product teams ready to ship."
         />
 
         {/* Hero Value Banner */}
@@ -473,13 +488,13 @@ export default function ServicesPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-wider text-green-600 dark:text-green-400 font-semibold bg-green-500/10 border border-green-500/30 px-2.5 py-1 rounded-full inline-block mb-3">
-                ● Available for Freelance Projects, Contracts & Full-Time Remote Roles
+                ● Available for Freelance Projects, Contracts & Forward Deployed Roles
               </span>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-3">
-                Ship reliable software that drives real business results.
+                Ship production-grade software that drives real business results.
               </h2>
               <p className="service-desc text-text-muted text-base leading-relaxed">
-                I help startups, founders, and engineering teams design, build, and ship production-grade AI features — custom knowledge bases, RAG pipelines, AI agents, and AI workflow automation — alongside high-performance Node.js/TypeScript backend systems, Next.js web applications, and search-optimized technical foundations. Available as a freelance engineer, contract specialist, or dedicated remote developer.
+                I help startups, founders, and engineering teams design, build, and ship production-grade AI features — custom knowledge bases, AI chatbots for websites and SaaS, AI agents, and workflow automation — alongside high-performance Node.js/TypeScript backend systems, Next.js web applications, and search-optimized technical foundations. Available as a freelance AI developer, contract engineer, or Forward Deployed Engineer.
               </p>
             </div>
             <div className="flex-shrink-0 flex flex-col sm:flex-row gap-3">
@@ -701,7 +716,7 @@ export default function ServicesPage() {
             Have a project or opportunity in mind?
           </h2>
           <p className="text-text-muted text-sm max-w-xl mx-auto mb-8 leading-relaxed">
-            Whether you need an AI knowledge pipeline, full-stack web application, scalable backend APIs, or technical SEO optimization, let&apos;s talk through your goals.
+            Whether you need a production-grade AI chatbot for your website or SaaS, a custom knowledge base, scalable backend APIs, or full-stack web engineering, let&apos;s talk through your goals.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

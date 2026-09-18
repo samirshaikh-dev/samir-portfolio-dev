@@ -16,7 +16,7 @@ Phone: +91 8320927182
 - [Full Documentation](https://samir-portfolio-dev.vercel.app/llms-full.txt): Comprehensive knowledge graph, case studies, benchmarks, and architecture details
 - [Resume](https://samir-portfolio-dev.vercel.app/resume): Current resume and professional qualifications
 - [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, and case studies
-- [Services](https://samir-portfolio-dev.vercel.app/services): Freelance & engineering services (RAG systems, AI agents, production backend APIs, Next.js web apps, technical SEO)
+- [Services](https://samir-portfolio-dev.vercel.app/services): Freelance AI developer & engineering services (production-grade AI chatbots for websites/SaaS, custom knowledge bases, RAG systems, backend APIs, Next.js web apps, technical SEO)
 - [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design
 - [About](https://samir-portfolio-dev.vercel.app/about): Background, timeline, and engineering principles
 - [Contact](https://samir-portfolio-dev.vercel.app/contact): Get in touch for roles, consulting, or technical advisory
@@ -26,7 +26,7 @@ Phone: +91 8320927182
 
 ## Summary & Positioning
 
-Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) based in Gujarat, India, available for freelance sprints, contract engineering, and full-time remote roles. He designs and ships full-stack features across Node.js, TypeScript, Next.js, React, and PostgreSQL, while going deeper on the AI layer with production experience in Retrieval-Augmented Generation (RAG) pipelines, LLM integration, vector databases (pgvector), semantic search, and agentic AI workflows. He pairs that stack with AI coding agents (Cursor, GitHub Copilot, Claude Code) for repetitive work while personally owning architecture, security, testing, and critical logic — rapid prototyping plus production-ready, maintainable code. Samir targets Freelance AI Engineer, Contract Backend Developer, AI Backend Engineer, AI-Enabled Full Stack Developer, and Forward Deployed Engineer opportunities where engineering rigor solves ambiguous, customer-critical business challenges.
+Samir Shaikh is a Freelance AI Developer & Backend Engineer based in Gujarat, India, available for freelance sprints, contract engineering, and full-time remote roles. He designs and ships production-grade AI features — including custom knowledge bases, AI chatbots for websites and SaaS, RAG systems, and AI workflow automation — alongside robust Node.js, TypeScript, Next.js, React, and PostgreSQL backends. He pairs deep systems knowledge with AI coding agents (Cursor, GitHub Copilot, Claude Code) for rapid prototyping while personally owning architecture, security, testing, and critical logic. Samir specializes in Freelance AI Engineer, Contract Backend Developer, AI Backend Engineer, and Forward Deployed Engineer (FDE) engagements where technical depth solves customer-critical business challenges.
 
 ## AI-Enabled Workflow
 
@@ -114,10 +114,10 @@ Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) based in Guja
 URL: https://samir-portfolio-dev.vercel.app/services
 
 ### 1. AI & Intelligent Systems
-- **RAG Systems & Knowledge Retrieval**: Grounded AI systems with PostgreSQL pgvector, Gemini embeddings, chunking, and relevance filtering to minimize hallucinations.
-- **AI Agents & Tool Orchestration**: Multi-step agent workflows using Vercel AI SDK, tool-calling APIs, structured Zod schemas, and deterministic execution boundaries.
-- **AI Product Development & Integration**: Transforming AI concepts into working production features, from initial POC to database and UI integration.
-- **LLM Integration & AI User Experiences**: Low-latency streaming responses, prompt management, rate limiting, and token usage controls.
+- **Custom Knowledge Bases & RAG Systems**: Build production-grade AI chatbots for websites and SaaS grounded in custom company knowledge bases with PostgreSQL pgvector, Gemini embeddings, and strict relevance filtering to stop hallucinations.
+- **AI Agents & Workflow Automation**: Multi-step agent workflows and business task automation using Vercel AI SDK, tool-calling APIs, structured Zod schemas, and deterministic execution boundaries.
+- **AI Product Development & Integration**: Transforming AI concepts into production-ready product features, from discovery and rapid prototypes to database and UI integration.
+- **LLM Integration & AI User Experiences**: Low-latency streaming responses, prompt management, rate limiting, and token usage controls with provider failover.
 
 ### 2. Backend & Distributed Architecture
 - **Production Backend APIs & System Design**: Modular REST and GraphQL APIs with Node.js, Express, NestJS, PostgreSQL, Redis caching, and RBAC authentication.
@@ -132,9 +132,9 @@ URL: https://samir-portfolio-dev.vercel.app/services
 - **AI-Accelerated Delivery**: Rapid prototyping and delivery using Cursor, Claude Code, and GitHub Copilot while personally owning architecture, security, testing, and critical logic.
 
 ### Engagement Models for Startups & Clients
-- **Startup MVP & Feature Sprints**: 1 to 4-week fixed-scope sprints for early-stage founders building an MVP or integrating an AI feature.
+- **Startup MVP & Feature Sprints**: 1 to 4-week fixed-scope sprints for early-stage founders building an MVP, custom knowledge base, or production-grade AI chatbot.
 - **Contract & Dedicated Collaboration**: Flexible freelance contract or monthly retainer for growing engineering teams needing backend and AI support.
-- **Full-Time Remote Engineering**: High-impact remote roles across global time zones (US, UK, Europe, APAC).
+- **Forward Deployed Engineering & Remote Roles**: Customer-embedded Forward Deployed Engineer (FDE) or remote AI Backend Engineer translating ambiguous requirements into deployed production systems across global time zones (US, UK, Europe, APAC).
 
 ## Engineering Principles
 
