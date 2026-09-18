@@ -27,7 +27,7 @@ Phone: +91 8320927182
 
 ## Summary & Positioning
 
-Samir Shaikh is a Freelance AI Developer & Backend Engineer based in Gujarat, India, available for freelance sprints, contract engineering, and full-time remote roles. He designs and ships production-grade AI features — including custom knowledge bases, AI chatbots for websites and SaaS, RAG systems, and AI workflow automation — alongside robust Node.js, TypeScript, Next.js, React, and PostgreSQL backends. He pairs deep systems knowledge with AI coding agents (Cursor, GitHub Copilot, Claude Code) for rapid prototyping while personally owning architecture, security, testing, and critical logic. Samir specializes in Freelance AI Engineer, Contract Backend Developer, AI Backend Engineer, and Forward Deployed Engineer (FDE) engagements where technical depth solves customer-critical business challenges.
+Samir Shaikh is a Freelance AI Developer & Full Stack Engineer based in Gujarat, India, available for freelance sprints, contract engineering, and remote roles. He helps startups, founders, and product teams build reliable AI agents, custom RAG knowledge bases, and scalable full-stack web applications. He pairs deep systems knowledge (Node.js, TypeScript, Next.js, React, PostgreSQL pgvector) with AI coding agents (Cursor, GitHub Copilot, Claude Code) for rapid delivery while personally owning architecture, security, testing, and critical logic. Samir specializes in Freelance AI Engineer, Contract Backend Developer, AI Backend Engineer, and Forward Deployed Engineer (FDE) engagements where technical depth solves customer-critical business challenges.
 
 ## AI-Enabled Workflow
 
@@ -115,29 +115,36 @@ Samir Shaikh is a Freelance AI Developer & Backend Engineer based in Gujarat, In
 URL: https://samir-portfolio-dev.vercel.app/services
 
 ### 1. AI & Intelligent Systems
-- **Custom Knowledge Bases & RAG Systems**: Build production-grade AI chatbots for websites and SaaS grounded in custom company knowledge bases with PostgreSQL pgvector, Gemini embeddings, and strict relevance filtering to stop hallucinations.
-- **AI Agents & Workflow Automation**: Multi-step agent workflows and business task automation using Vercel AI SDK, tool-calling APIs, structured Zod schemas, and deterministic execution boundaries.
-- **AI Product Development & Integration**: Transforming AI concepts into production-ready product features, from discovery and rapid prototypes to database and UI integration.
-- **LLM Integration & AI User Experiences**: Low-latency streaming responses, prompt management, rate limiting, and token usage controls with provider failover.
+- **Custom Knowledge Bases & RAG Systems** (Starting from $900 / ₹75,000): Build production-grade AI chatbots for websites and SaaS grounded in custom company knowledge bases with PostgreSQL pgvector, Gemini embeddings, and strict relevance filtering to stop hallucinations.
+- **AI Agents & Workflow Automation** (Starting from $800 / ₹65,000): Multi-step agent workflows and business task automation using Vercel AI SDK, tool-calling APIs, structured Zod schemas, and deterministic execution boundaries.
+- **AI Product Development & Integration** (Starting from $1,200 / ₹1,00,000): Transforming AI concepts into production-ready product features, from discovery and rapid prototypes to database and UI integration.
+- **LLM Integration & AI User Experiences** (Starting from $500 / ₹40,000): Low-latency streaming responses, prompt management, rate limiting, and token usage controls with provider failover.
 
 ### 2. Backend & Distributed Architecture
-- **Production Backend APIs & System Design**: Modular REST and GraphQL APIs with Node.js, Express, NestJS, PostgreSQL, Redis caching, and RBAC authentication.
-- **Event-Driven Systems & Background Processing**: Scalable asynchronous workflows using queues (BullMQ), message brokers (Apache Kafka, Redis), and worker pipelines.
-- **Cloud, DevOps & Observability**: Production containerization with Docker, CI/CD with GitHub Actions, and distributed telemetry with OpenTelemetry and Grafana.
+- **Production Backend APIs & System Design** (Starting from $600 / ₹50,000): Modular REST and GraphQL APIs with Node.js, Express, NestJS, PostgreSQL, Redis caching, and RBAC authentication.
+- **Event-Driven Systems & Background Processing** (Starting from $500 / ₹40,000): Scalable asynchronous workflows using queues (BullMQ), message brokers (Apache Kafka, Redis), and worker pipelines.
+- **Cloud, DevOps & Observability** (Starting from $400 / ₹35,000): Production containerization with Docker, CI/CD with GitHub Actions, and distributed telemetry with OpenTelemetry and Grafana.
 
 ### 3. Web Development & Search Growth
-- **Custom Website Development & Landing Pages**: Modern, mobile-responsive business websites and high-converting marketing landing pages built with Next.js App Router, React 19, TypeScript, and Tailwind CSS.
-- **SEO Services & Search Engine Optimization**: Technical SEO audits, on-page keyword optimization, Schema.org JSON-LD structured data, and Generative Engine Optimization (GEO/AEO) for Google and AI answer engine rankings.
-- **Website Redesign & Speed Optimization**: Performance tuning and redesigns to score 90+ on Google PageSpeed Insights, improve Core Web Vitals (LCP, CLS, INP), and reduce bounce rates.
-- **Full-Stack Web Application Development**: Custom web applications, client portals, and role-based SaaS dashboards with PostgreSQL and secure authentication.
+- **Custom Website Development & Landing Pages** (Starting from $300 / ₹25,000): Modern, mobile-responsive business websites and high-converting marketing landing pages built with Next.js App Router, React 19, TypeScript, and Tailwind CSS.
+- **SEO Services & Search Engine Optimization** (Starting from $200 / ₹15,000): Technical SEO audits, on-page keyword optimization, Schema.org JSON-LD structured data, and Generative Engine Optimization (GEO/AEO) for Google and AI answer engine rankings.
+- **Website Redesign & Speed Optimization** (Starting from $250 / ₹20,000): Performance tuning and redesigns to score 90+ on Google PageSpeed Insights, improve Core Web Vitals (LCP, CLS, INP), and reduce bounce rates.
+- **Full-Stack Web Application Development** (Starting from $1,200 / ₹1,00,000): Custom web applications, client portals, and role-based SaaS dashboards with PostgreSQL and secure authentication.
 
 ### 4. AI-Accelerated Engineering
-- **AI-Accelerated Delivery**: Rapid prototyping and delivery using Cursor, Claude Code, and GitHub Copilot while personally owning architecture, security, testing, and critical logic.
+- **AI-Accelerated Delivery** (Included with all engagements): Rapid prototyping and delivery using Cursor, Claude Code, and GitHub Copilot while personally owning architecture, security, testing, and critical logic.
 
 ### Engagement Models for Startups & Clients
 - **Startup MVP & Feature Sprints**: 1 to 4-week fixed-scope sprints for early-stage founders building an MVP, custom knowledge base, or production-grade AI chatbot.
 - **Contract & Dedicated Collaboration**: Flexible freelance contract or monthly retainer for growing engineering teams needing backend and AI support.
 - **Forward Deployed Engineering & Remote Roles**: Customer-embedded Forward Deployed Engineer (FDE) or remote AI Backend Engineer translating ambiguous requirements into deployed production systems across global time zones (US, UK, Europe, APAC).
+
+## How I Work (Client Engagement Process)
+
+1. **Phase 1: Discovery (Day 1–2)**: Free 30-min discovery call to understand business goals, technical constraints, architecture scope, and budget alignment. No commitment required.
+2. **Phase 2: Blueprint & Proposal (Day 2–3)**: Fixed-price milestone proposal with clear delivery dates, architecture spec, and signed NDA prior to code access.
+3. **Phase 3: Sprint Execution (Weeks 1–N)**: Rapid development sprints with daily Git commits, async Slack/WhatsApp updates, staging preview URLs, and zero AI shortcuts on security or critical logic.
+4. **Phase 4: Launch & Handover (Final Day)**: Complete deployment to client infrastructure, 100% repository transfer to client org, comprehensive documentation, and a 30-day post-launch warranty included.
 
 ## Engineering Principles
 

@@ -74,6 +74,16 @@ export const LONGTAIL_KEYWORDS = [
   "Next.js full stack developer for hire",
   "optimize slow PostgreSQL queries and APIs",
   "TypeScript backend developer for hire remote",
+  "custom AI chatbot pricing",
+  "hire freelance AI developer cost",
+  "RAG pipeline development cost",
+  "how much does an AI chatbot cost",
+  "fixed price AI development sprint",
+  "website development pricing for small business",
+  "freelance AI developer portfolio",
+  "hire freelance Next.js developer",
+  "hire freelance backend engineer",
+  "AI chatbot development company",
 ];
 
 /**
@@ -97,6 +107,10 @@ export const VOICE_QUERIES = [
   "how do I find a remote TypeScript backend developer",
   "who builds event-driven systems with Kafka and Redis",
   "how do I hire a Forward Deployed Engineer for an AI startup",
+  "how much does it cost to build a custom AI chatbot",
+  "how much does a freelance AI developer charge",
+  "who can build an MVP for my startup in 2 weeks",
+  "how much does it cost to build a custom business website",
 ];
 
 /** Industries this personal brand serves. */
@@ -130,74 +144,127 @@ export const SERVICES = [
     name: "Custom Knowledge Bases & RAG Systems",
     description:
       "Build production-grade AI chatbots for websites and SaaS grounded in custom knowledge bases with pgvector, semantic search, and hallucination mitigation.",
+    price: "900",
+    priceCurrency: "USD",
+    priceLabel: "From $900 / ₹75,000",
   },
   {
     name: "AI Agents & Workflow Automation",
     description:
       "Develop production-grade AI agent workflows that use tools, APIs, structured schemas, and guardrails to automate multi-step business tasks.",
+    price: "800",
+    priceCurrency: "USD",
+    priceLabel: "From $800 / ₹65,000",
   },
   {
     name: "AI Product Development & Integration",
     description:
       "Turn AI use cases into production-ready product features, from discovery and rapid prototypes to seamless database and UI integration.",
+    price: "1200",
+    priceCurrency: "USD",
+    priceLabel: "From $1,200 / ₹1,00,000",
   },
   {
     name: "LLM Integration & AI User Experiences",
     description:
       "Integrate LLMs into applications with low-latency streaming responses, conversational workflows, usage controls, and reliable error recovery.",
+    price: "500",
+    priceCurrency: "USD",
+    priceLabel: "From $500 / ₹40,000",
   },
   {
     name: "Production Backend APIs & System Design",
     description:
       "Design and build reliable backend systems, REST/GraphQL APIs, authentication, database architecture, caching, and performance improvements.",
+    price: "600",
+    priceCurrency: "USD",
+    priceLabel: "From $600 / ₹50,000",
   },
   {
     name: "Event-Driven Systems & Background Processing",
     description:
       "Build scalable asynchronous workflows using queues, event-driven architecture, scheduled jobs, and distributed processing.",
+    price: "500",
+    priceCurrency: "USD",
+    priceLabel: "From $500 / ₹40,000",
   },
   {
     name: "Cloud, DevOps & Observability",
     description:
       "Containerize applications and establish CI/CD, logging, monitoring, metrics, tracing, and production reliability practices.",
+    price: "400",
+    priceCurrency: "USD",
+    priceLabel: "From $400 / ₹35,000",
   },
   {
     name: "Custom Website Development & Landing Pages",
     description:
       "Build fast, modern, and mobile-responsive business websites and high-converting landing pages with Next.js, React, and Tailwind CSS.",
+    price: "300",
+    priceCurrency: "USD",
+    priceLabel: "From $300 / ₹25,000",
   },
   {
     name: "SEO Services & Search Engine Optimization",
     description:
       "Comprehensive SEO services including technical SEO audits, on-page optimization, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO).",
+    price: "200",
+    priceCurrency: "USD",
+    priceLabel: "From $200 / ₹15,000",
   },
   {
     name: "Website Redesign & Speed Optimization",
     description:
       "Modernize slow-loading, outdated websites to score 90+ on Google PageSpeed Insights and ace Core Web Vitals (LCP, CLS, INP).",
+    price: "250",
+    priceCurrency: "USD",
+    priceLabel: "From $250 / ₹20,000",
   },
   {
     name: "Full-Stack Web Application Development",
     description:
       "Build custom web applications, customer portals, and SaaS dashboards with Next.js, React, Node.js, and secure databases.",
+    price: "1200",
+    priceCurrency: "USD",
+    priceLabel: "From $1,200 / ₹1,00,000",
   },
   {
     name: "AI-Accelerated Engineering",
     description:
       "Ship production features fast with Cursor, Claude Code, and Copilot while personally owning architecture, security, testing, and critical logic.",
+    price: "0",
+    priceCurrency: "USD",
+    priceLabel: "Included with all engagements",
   },
 ] as const;
 
 /** Reusable Offer nodes built from SERVICES (shared by Person + Organization). */
 const SERVICE_OFFERS = SERVICES.map((service) => ({
   "@type": "Offer",
+  ...(service.price !== "0" && {
+    price: service.price,
+    priceCurrency: service.priceCurrency,
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: service.price,
+      priceCurrency: service.priceCurrency,
+      unitText: service.priceLabel,
+    },
+  }),
+  url: `${APP_URL}/services`,
   itemOffered: {
     "@type": "Service",
     name: service.name,
     serviceType: service.name,
     description: service.description,
+    provider: {
+      "@type": "Person",
+      name: AUTHOR_NAME,
+      url: APP_URL,
+    },
   },
 }));
+
 
 export function getRootJsonLd() {
   return [
@@ -209,9 +276,9 @@ export function getRootJsonLd() {
       image: `${APP_URL}/Filled_Logo.png`,
       email: AUTHOR_EMAIL,
       telephone: AUTHOR_PHONE,
-      jobTitle: "AI-Enabled Full Stack Developer",
+      jobTitle: "Freelance AI Developer & Full Stack Engineer",
       description:
-        "AI-enabled full stack developer (backend-first) building production Node.js/TypeScript applications, RAG pipelines, LLM-powered features, and scalable backend systems with an agent-assisted engineering workflow.",
+        "Helping startups, founders, and product teams build reliable AI agents, custom RAG knowledge bases, and scalable full-stack web applications. Freelance AI developer and backend engineer available for sprints, contracts, and remote roles.",
       address: {
         "@type": "PostalAddress",
         addressLocality: "Vapi / Surat",
@@ -226,6 +293,16 @@ export function getRootJsonLd() {
         educationalCredentialAwarded: "Bachelor of Technology in Information Technology",
       },
       hasOccupation: [
+        {
+          "@type": "Occupation",
+          name: "Freelance AI Developer",
+          occupationLocation: {
+            "@type": "Country",
+            name: "IN",
+          },
+          skills: "Node.js, TypeScript, Next.js, React, PostgreSQL, pgvector, RAG Systems, AI Chatbots, LLM Integration, AI Agents, SEO",
+          validFrom: "2026",
+        },
         {
           "@type": "Occupation",
           name: "AI-Enabled Full Stack Developer",
@@ -354,7 +431,7 @@ export function getRootJsonLd() {
       name: SITE_NAME,
       url: APP_URL,
       description:
-        "Portfolio of Samir Shaikh, AI-enabled full stack developer (backend-first) specializing in Node.js/TypeScript applications, RAG pipelines, LLM-powered features, and scalable backend systems built with an agent-assisted workflow.",
+        "Portfolio of Samir Shaikh — Freelance AI Developer & Full Stack Engineer helping startups and businesses build reliable AI agents, custom RAG chatbots, high-converting websites, and production backends.",
       author: {
         "@type": "Person",
         name: AUTHOR_NAME,
@@ -377,7 +454,7 @@ export function getRootJsonLd() {
       email: AUTHOR_EMAIL,
       telephone: AUTHOR_PHONE,
       description:
-        "Personal brand of Samir Shaikh — AI-enabled full stack developer (backend-first) offering Node.js/TypeScript development, RAG systems, LLM integration, and production backend engineering services.",
+        "Freelance AI development and backend engineering services by Samir Shaikh — helping startups, founders, and product teams build production RAG systems, AI agents, Next.js applications, and scalable backends.",
       founder: {
         "@type": "Person",
         name: AUTHOR_NAME,
@@ -389,13 +466,13 @@ export function getRootJsonLd() {
         addressRegion: "Gujarat",
         addressCountry: "IN",
       },
-      slogan: "Full stack fluency. Backend depth. AI-accelerated delivery.",
+      slogan: "Helping startups build reliable AI systems, high-converting websites, and production backends.",
       knowsAbout: INDUSTRIES_SERVED,
       areaServed: AREA_SERVED,
       keywords: LONGTAIL_KEYWORDS.join(", "),
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Backend & AI Engineering Services",
+        name: "Freelance AI & Web Engineering Services",
         itemListElement: SERVICE_OFFERS,
       },
       sameAs: SAME_AS,
@@ -446,11 +523,11 @@ export function getServiceJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    name: `${AUTHOR_NAME} — Freelance AI & Backend Engineering Services`,
+    name: `${AUTHOR_NAME} — Freelance AI Developer & Full Stack Engineering Services`,
     url: `${APP_URL}/services`,
     image: `${APP_URL}/Filled_Logo.png`,
     description:
-      "Freelance AI and backend engineering services: production RAG systems, AI agents, LLM integration, high-throughput APIs, Next.js web applications, and technical SEO for startups and product teams.",
+      "Freelance AI and full-stack engineering services: custom knowledge bases, RAG chatbots, AI workflow automation, Next.js web applications, high-throughput APIs, and technical SEO with transparent sprint pricing for startups and businesses.",
     provider: {
       "@type": "Person",
       name: AUTHOR_NAME,
@@ -461,7 +538,7 @@ export function getServiceJsonLd() {
     keywords: LONGTAIL_KEYWORDS.join(", "),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Freelance AI & Backend Engineering Services",
+      name: "Freelance AI & Web Engineering Services",
       itemListElement: SERVICE_OFFERS,
     },
   };

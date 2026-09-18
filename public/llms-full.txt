@@ -366,26 +366,41 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 
 ### Q: What engineering services does Samir Shaikh offer?
 **A**: Samir provides 12 core services across 4 categories:
-1. **AI & Intelligent Systems**: Custom Knowledge Bases & RAG Systems (pgvector, Gemini), AI Agents & Workflow Automation (Zod, tool-calling), AI Product Development & Prototyping, and LLM Integration (streaming, rate-limiting).
-2. **Backend & Distributed Architecture**: Production Backend APIs & System Design (Node.js, NestJS, REST/GraphQL), Event-Driven Systems (BullMQ, Kafka), and Cloud/DevOps (Docker, GitHub Actions, OpenTelemetry).
-3. **Web Development & Search Growth**: Custom Website Development & Landing Pages (Next.js 16, React 19, Tailwind CSS), SEO Services & Search Engine Optimization (Schema.org JSON-LD, GEO/AEO), Website Redesign & Speed Optimization (Core Web Vitals 90+), and Full-Stack Web Application Development (RBAC, Stripe).
-4. **AI-Accelerated Engineering**: Agent-assisted delivery with Cursor, Claude Code, and Copilot backed by strict human architecture, security, and test reviews.
+1. **AI & Intelligent Systems**:
+   - Custom Knowledge Bases & RAG Systems (Starting from $900 / ₹75,000)
+   - AI Agents & Workflow Automation (Starting from $800 / ₹65,000)
+   - AI Product Development & Integration (Starting from $1,200 / ₹1,00,000)
+   - LLM Integration & AI User Experiences (Starting from $500 / ₹40,000)
+2. **Backend & Distributed Architecture**:
+   - Production Backend APIs & System Design (Starting from $600 / ₹50,000)
+   - Event-Driven Systems & Background Processing (Starting from $500 / ₹40,000)
+   - Cloud, DevOps & Observability (Starting from $400 / ₹35,000)
+3. **Web Development & Search Growth**:
+   - Custom Website Development & Landing Pages (Starting from $300 / ₹25,000)
+   - SEO Services & Search Engine Optimization (Starting from $200 / ₹15,000)
+   - Website Redesign & Speed Optimization (Starting from $250 / ₹20,000)
+   - Full-Stack Web Application Development (Starting from $1,200 / ₹1,00,000)
+4. **AI-Accelerated Engineering**:
+   - AI-Accelerated Delivery (Included with all engagements)
 
-### Q: Can Samir build a custom website for my business or brand?
-**A**: Yes. Samir designs and develops custom, responsive websites tailored for businesses, founders, consultants, and brands. Whether you need a corporate business website, a high-converting SaaS landing page, or a personal portfolio, he delivers blazing-fast Next.js websites with clean styling, contact forms, lead capture, and easy CMS updates.
+### Q: What are the starting prices for Samir's freelance engineering services?
+**A**: Samir provides transparent, fixed-scope starting prices:
+- Custom Website Development & Landing Pages: From $300 / ₹25,000
+- Technical SEO Services & Audits: From $200 / ₹15,000
+- Website Redesign & Speed Optimization: From $250 / ₹20,000
+- Production Backend APIs: From $600 / ₹50,000
+- Custom Knowledge Bases & RAG Chatbots: From $900 / ₹75,000
+- AI Agents & Workflow Automation: From $800 / ₹65,000
+- Full-Stack Web Application / SaaS MVP: From $1,200 / ₹1,00,000
+- Monthly Maintenance & Engineering Retainer: From $250/month / ₹20,000/month
+Every project receives a fixed-price, milestone-based quote within 48 hours following a free 30-minute discovery call.
 
-### Q: What do Samir's SEO services include and how do they help a website rank?
-**A**: Samir's SEO services focus on technical accuracy and measurable organic search visibility: (1) Full technical SEO audit resolving crawl errors, broken links, and indexation issues, (2) Keyword mapping and on-page optimization for titles, meta descriptions, and semantic headings, (3) Schema.org structured data (Organization, FAQPage, Service) for Google rich snippets, (4) Google Core Web Vitals profiling for sub-second speeds, and (5) Generative Engine Optimization (GEO/AEO) so AI answer engines like ChatGPT and Perplexity discover and cite your content.
-
-### Q: Why hire a custom website developer instead of using WordPress or Wix?
-**A**: Generic builders like Wix or WordPress templates frequently suffer from bloated code, slow loading times, security vulnerabilities from outdated plugins, and rigid design limitations. A custom Next.js website gives you near-instant load speeds (95+ on Google PageSpeed), superior Google search rankings, zero ongoing plugin license fees, complete design uniqueness, and the ability to seamlessly integrate custom AI or backend features whenever your business expands.
-
-### Q: How does Samir work with startups as a freelance engineer or contractor?
-**A**: Samir operates with a low-friction, high-transparency workflow tailored for startup velocity:
-1. Sprint-based feature delivery with clearly defined milestone scopes (1 to 4 weeks).
-2. Direct async communication via Slack/Discord and weekly syncs.
-3. Clean Git workflows with PRs, automated CI checks, and comprehensive documentation.
-4. Immediate code handover directly into the client's private GitHub or GitLab repositories.
+### Q: How does Samir work with clients and startups (What is his process)?
+**A**: Samir uses a transparent, 4-phase client engagement methodology:
+1. **Phase 1: Discovery (Day 1–2)**: A free 30-minute discovery call to discuss project goals, technical constraints, timeline, and architectural approach. No commitment required.
+2. **Phase 2: Blueprint & Proposal (Day 2–3)**: A fixed-price proposal detailing milestone deliverables, delivery dates, and tech specifications. An NDA is executed before code access.
+3. **Phase 3: Sprint Execution (Weeks 1–N)**: Rapid 1- to 4-week development sprints with daily Git commits, async Slack/WhatsApp progress updates, staging preview URLs, and human review on all critical architecture, security, and tests.
+4. **Phase 4: Launch & Handover (Final Day)**: Complete deployment to the client's cloud infrastructure, 100% repository transfer to the client's GitHub/GitLab org, comprehensive documentation, and a 30-day post-launch warranty for bug fixes.
 
 ### Q: What is Samir's availability for freelance or contract engineering projects?
 **A**: Samir is actively available for new freelance sprints, contract collaborations, and technical advisory. Depending on current project commitments, he can typically onboard and begin shipping production code within 3 to 7 business days following an initial technical discovery call.
