@@ -60,8 +60,8 @@ export default async function Hero() {
           >
             Samir Shaikh &mdash; AI-Enabled Full Stack Developer (Backend-First)
           </h1>
-          <p className="hero-intro text-base md:text-lg text-text-muted max-w-2xl">
-            I&apos;m a backend-first full stack developer who ships production-ready web apps fast by pairing strong system design with AI coding agents &mdash; RAG pipelines, LLM features, and scalable Node.js/TypeScript backends included.
+          <p className="hero-intro text-base md:text-lg text-text-muted max-w-2xl leading-relaxed">
+            Helping startups, founders, and engineering teams build reliable AI agents, RAG knowledge bases, and scalable full-stack web applications &mdash; delivered with clean system architecture and zero fluff.
           </p>
 
           {/* Hero CTA buttons */}

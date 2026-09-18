@@ -66,6 +66,7 @@ interface ServiceOffering {
   title: string;
   tagline: string;
   description: string;
+  startingPrice?: string;
   deliverables: string[];
   techStack: string[];
   relatedLink?: {
@@ -94,6 +95,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Build a production-grade AI chatbot for your website or SaaS grounded in your company's custom knowledge base.",
         description:
           "Generic AI chatbots hallucinate and give vague answers that frustrate users. We build custom knowledge bases and production-grade RAG pipelines with PostgreSQL pgvector and semantic search — so your AI chatbot answers accurately from your real product data, documentation, and company policies with zero guesswork.",
+        startingPrice: "From $900 / ₹75,000",
         deliverables: [
           "Custom knowledge base indexing and document chunking (PDFs, Markdown, and database records)",
           "Vector database pipeline setup with PostgreSQL pgvector and 3072d semantic embeddings",
@@ -114,6 +116,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Develop production-grade AI agents that use tools, APIs, and structured outputs to automate multi-step business tasks.",
         description:
           "Move beyond single-turn conversational chatbots into reliable AI workflow automation. We build deterministic agents that query internal APIs, validate inputs with structured schemas, apply guardrails, and execute multi-step workflows safely.",
+        startingPrice: "From $800 / ₹65,000",
         deliverables: [
           "Tool-calling architectures and custom API integrations for automated actions",
           "Structured JSON schema validation using Zod for deterministic, parseable output",
@@ -134,6 +137,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Transform AI concepts into production-ready product features, from discovery and rapid prototypes to database and UI integration.",
         description:
           "Transform an initial AI concept into a working, customer-ready product feature. We handle end-to-end integration across your existing tech stack, database, authentication, and user interface.",
+        startingPrice: "From $1,200 / ₹1,00,000",
         deliverables: [
           "Technical feasibility assessment and architectural scope definition",
           "Functional MVP and interactive prototype development in rapid sprint cycles",
@@ -154,6 +158,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Integrate modern LLMs into applications with low-latency streaming responses, usage controls, and reliable error recovery.",
         description:
           "Incorporate state-of-the-art language models into your existing website or SaaS UI with smooth streaming text, usage controls, token observability, and provider failover strategies.",
+        startingPrice: "From $500 / ₹40,000",
         deliverables: [
           "Low-latency streaming responses via Vercel AI SDK with zero UI blocking",
           "Context window management and prompt assembly workflows",
@@ -181,6 +186,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Design and build reliable backend systems, REST/GraphQL APIs, authentication, database architecture, caching, and performance improvements.",
         description:
           "Deliver dependable server-side systems that handle business logic cleanly, with strict TypeScript types, optimized database queries, and secure access controls.",
+        startingPrice: "From $600 / ₹50,000",
         deliverables: [
           "Modular RESTful and GraphQL API design and implementation",
           "Relational and document database schema design (PostgreSQL, MongoDB)",
@@ -201,6 +207,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Build scalable asynchronous workflows using queues, event-driven architecture, scheduled jobs, and distributed processing.",
         description:
           "Keep your critical user journeys fast and responsive by offloading heavy, non-blocking tasks to reliable queue-based worker pipelines.",
+        startingPrice: "From $500 / ₹40,000",
         deliverables: [
           "Asynchronous background job processing with BullMQ and Redis",
           "Event-driven message architecture and decoupled worker services",
@@ -221,6 +228,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Containerize applications and establish CI/CD, logging, monitoring, metrics, tracing, and production reliability practices.",
         description:
           "Ensure your backend applications run reliably across development, staging, and production environments with automated deployment and clear visibility.",
+        startingPrice: "From $400 / ₹35,000",
         deliverables: [
           "Production containerization with Docker and Docker Compose",
           "Automated CI/CD pipelines with GitHub Actions (linting, testing, builds)",
@@ -248,6 +256,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Build fast, modern, and mobile-responsive business websites and high-converting landing pages with Next.js, React, and Tailwind CSS.",
         description:
           "Need a new website or a high-converting landing page for your business? We design and develop custom, lightning-fast websites using Next.js, React, and Tailwind CSS. No bloated WordPress themes, no slow page builders — just clean, secure, and easily maintainable websites tailored to your brand.",
+        startingPrice: "From $300 / ₹25,000",
         deliverables: [
           "Custom business websites, corporate pages, and modern portfolio platforms",
           "High-converting SaaS and marketing landing pages built for lead generation",
@@ -268,6 +277,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Rank higher on Google, get cited by AI answer engines (AEO/GEO), and drive organic traffic that converts.",
         description:
           "Struggling to get found on Google? We provide end-to-end SEO services covering technical SEO audits, keyword optimization, metadata architecture, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO) so your website is discovered by both traditional searchers and AI tools like ChatGPT and Perplexity.",
+        startingPrice: "From $200 / ₹15,000",
         deliverables: [
           "Complete website SEO audit identifying crawl errors, indexation issues, and content gaps",
           "On-page SEO optimization: meta titles, descriptions, semantic headings, and keyword mapping",
@@ -288,6 +298,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Transform outdated, slow-loading websites into fast, high-ranking, and modern digital experiences.",
         description:
           "Slow websites lose 40%+ of visitors before the page even loads. We redesign clunky websites and optimize existing codebases to score 90+ on Google PageSpeed Insights, ace Core Web Vitals (LCP, CLS, INP), and deliver silky-smooth user experiences that keep customers engaged.",
+        startingPrice: "From $250 / ₹20,000",
         deliverables: [
           "Complete website redesign with modern UI/UX, typography, and dark/light themes",
           "Google PageSpeed and Core Web Vitals optimization (improving LCP, CLS, and INP)",
@@ -308,6 +319,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Custom web apps, customer portals, and admin dashboards built with Next.js, React, and robust backend APIs.",
         description:
           "When an off-the-shelf website isn't enough, we build custom web applications. From customer portals and booking systems to role-based SaaS dashboards, we deliver scalable full-stack applications with secure authentication and database architectures.",
+        startingPrice: "From $1,200 / ₹1,00,000",
         deliverables: [
           "Custom web applications, customer portals, and internal business tools",
           "Role-based access control (RBAC), user authentication, and profile management",
@@ -335,6 +347,7 @@ const SERVICE_CATEGORIES: ServiceCategory[] = [
         tagline: "Ship faster with Cursor, Claude Code, and GitHub Copilot — while keeping critical logic, security, and testing firmly in hand.",
         description:
           "AI coding agents accelerate delivery of boilerplate, repetitive patterns, and scaffolding so engineering time goes to what matters most: architecture decisions, business logic, security review, and test coverage. The result is a production-safe codebase that moves at startup speed — without the AI slop.",
+        startingPrice: "Built into all engagements",
         deliverables: [
           "Agent-assisted code generation for boilerplate, tests, and repetitive patterns",
           "Manual ownership of all critical logic, auth flows, and security-sensitive code",
@@ -383,6 +396,7 @@ const ENGAGEMENT_MODELS = [
   {
     title: "Startup MVP & Feature Sprints",
     badge: "High Velocity",
+    startingPrice: "From $800 / sprint",
     subtitle: "For early-stage startups and founders looking for a freelance AI developer or full-stack engineer to ship quickly.",
     highlights: [
       "Fixed-scope freelance sprints (1 to 4 weeks)",
@@ -394,6 +408,7 @@ const ENGAGEMENT_MODELS = [
   {
     title: "Contract & Dedicated Collaboration",
     badge: "Flexible Scope",
+    startingPrice: "From $2,000 / mo",
     subtitle: "For growing product teams needing dedicated freelance backend, full-stack, or AI development services.",
     highlights: [
       "Flexible freelance contract or monthly retainer partnership",
@@ -405,6 +420,7 @@ const ENGAGEMENT_MODELS = [
   {
     title: "Forward Deployed Engineering & Remote Roles",
     badge: "Embedded / Long Term",
+    startingPrice: "Custom Contract / Full-time",
     subtitle: "For teams seeking an embedded Forward Deployed Engineer (FDE) or high-impact remote AI backend engineer.",
     highlights: [
       "Forward Deployed Engineer (FDE) / AI Backend Engineer / AI SDE",
@@ -575,6 +591,31 @@ export default function ServicesPage() {
           </div>
         </div>
 
+        {/* Pricing & Delivery Guarantee Bar */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16 p-4 rounded-xl border border-border-primary bg-card-bg/60 text-left">
+          <div className="flex items-center gap-3 px-3">
+            <span className="text-emerald-500 font-bold text-base">✓</span>
+            <div>
+              <p className="text-xs font-semibold text-foreground">Transparent Starting Rates</p>
+              <p className="text-[11px] text-text-muted">Clear budget guidance with zero surprise scope bloat</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 px-3 border-t sm:border-t-0 sm:border-l border-border-primary/60 pt-3 sm:pt-0">
+            <span className="text-emerald-500 font-bold text-base">✓</span>
+            <div>
+              <p className="text-xs font-semibold text-foreground">Fixed-Price Quotes in 48h</p>
+              <p className="text-[11px] text-text-muted">Detailed milestone scope after a free discovery call</p>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 px-3 border-t sm:border-t-0 sm:border-l border-border-primary/60 pt-3 sm:pt-0">
+            <span className="text-emerald-500 font-bold text-base">✓</span>
+            <div>
+              <p className="text-xs font-semibold text-foreground">100% Code & IP Ownership</p>
+              <p className="text-[11px] text-text-muted">Committed directly to your private repositories</p>
+            </div>
+          </div>
+        </div>
+
         {/* Categories Section */}
         <div className="mb-20 space-y-20">
           {SERVICE_CATEGORIES.map((category, catIdx) => (
@@ -605,6 +646,11 @@ export default function ServicesPage() {
                         <span className="font-mono text-[11px] font-semibold text-text-muted tracking-wider">
                           {service.badge}
                         </span>
+                        {service.startingPrice && (
+                          <span className="font-mono text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                            {service.startingPrice}
+                          </span>
+                        )}
                       </div>
 
                       <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
@@ -645,14 +691,22 @@ export default function ServicesPage() {
                         ))}
                       </div>
 
-                      {service.relatedLink && (
+                      <div className="flex items-center justify-between gap-2 pt-1">
+                        {service.relatedLink && (
+                          <Link
+                            href={service.relatedLink.href}
+                            className="text-xs font-mono font-medium text-foreground hover:underline inline-flex items-center gap-1"
+                          >
+                            {service.relatedLink.label}
+                          </Link>
+                        )}
                         <Link
-                          href={service.relatedLink.href}
-                          className="text-xs font-mono font-medium text-foreground hover:underline inline-flex items-center gap-1"
+                          href={`/contact?service=${encodeURIComponent(service.id)}`}
+                          className="text-xs font-medium text-primary hover:underline inline-flex items-center gap-1 ml-auto"
                         >
-                          {service.relatedLink.label}
+                          Request quote &rarr;
                         </Link>
-                      )}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -715,9 +769,16 @@ export default function ServicesPage() {
                 className="rounded-xl border border-border-primary bg-card-bg p-6 flex flex-col justify-between"
               >
                 <div>
-                  <span className="font-mono text-[11px] px-2 py-0.5 rounded border border-border-primary text-text-muted inline-block mb-3">
-                    {model.badge}
-                  </span>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="font-mono text-[11px] px-2 py-0.5 rounded border border-border-primary text-text-muted inline-block">
+                      {model.badge}
+                    </span>
+                    {model.startingPrice && (
+                      <span className="font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                        {model.startingPrice}
+                      </span>
+                    )}
+                  </div>
                   <h3 className="text-lg font-bold text-foreground mb-1">
                     {model.title}
                   </h3>
