@@ -34,11 +34,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const staticRoutes = ['', '/about', '/projects', '/blogs', '/services', '/contact', '/resume', '/sitemap'].map((route) => ({
+  const staticRoutes = ['', '/about', '/projects', '/blogs', '/services', '/contact', '/resume', '/sitemap', '/faq'].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: (route === '' ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
-    priority: route === '' ? 1 : route === '/sitemap' ? 0.7 : 0.9,
+    priority: route === '' ? 1 : route === '/sitemap' ? 0.7 : route === '/faq' ? 0.8 : 0.9,
   }));
 
   const legalRoutes = ['/privacy-policy', '/terms-of-service'].map((route) => ({

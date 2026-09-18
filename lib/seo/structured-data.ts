@@ -504,3 +504,25 @@ export function getSpeakableJsonLd(
     },
   };
 }
+
+/**
+ * FAQPage JSON-LD schema for FAQ and Q&A content pages.
+ * Matches Schema.org standard for Google rich snippets and AEO answer extraction.
+ */
+export function getFaqPageJsonLd(
+  faqs: { question: string; answer: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
+

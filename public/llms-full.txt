@@ -14,6 +14,7 @@
 - **Twitter / X**: https://x.com/samirshaikh-dev
 - **Resume**: https://samir-portfolio-dev.vercel.app/resume
 - **Services Catalog**: https://samir-portfolio-dev.vercel.app/services
+- **FAQ Knowledge Base**: https://samir-portfolio-dev.vercel.app/faq
 - **Blog Archive**: https://samir-portfolio-dev.vercel.app/blogs
 - **Projects Archive**: https://samir-portfolio-dev.vercel.app/projects
 - **Contact**: https://samir-portfolio-dev.vercel.app/contact

@@ -9,6 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: '*',
         allow: [
           '/',
+          '/faq',
           '/api/feed',
           '/llms.txt',
           '/llms-full.txt',
@@ -40,6 +41,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
         allow: [
           '/',
+          '/faq',
           '/llms.txt',
           '/llms-full.txt',
           '/api/feed',
