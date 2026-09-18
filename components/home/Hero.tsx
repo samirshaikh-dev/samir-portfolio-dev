@@ -1,4 +1,6 @@
 import { getGithubStats } from "@/lib/github";
+import { AVAILABILITY_STATUS, AVAILABILITY_LABEL } from "@/lib/site-config";
+import Link from "next/link";
 import { FaGithub, FaStar, FaCodeBranch, FaUsers, FaFileCode } from "react-icons/fa6";
 import { FiGitCommit } from "react-icons/fi";
 
@@ -26,6 +28,31 @@ export default async function Hero() {
       <div className="w-full max-w-6xl flex-1 flex flex-col">
         {/* Intro */}
         <div className="pt-6 md:pt-10 mb-8">
+          {/* Availability badge */}
+          <div className="mb-4">
+            <span
+              className={`inline-flex items-center gap-2 text-xs font-medium px-3 py-1.5 rounded-full border transition-colors ${
+                AVAILABILITY_STATUS === "available"
+                  ? "bg-green-50 dark:bg-green-950/40 border-green-200 dark:border-green-800 text-green-700 dark:text-green-400"
+                  : AVAILABILITY_STATUS === "limited"
+                  ? "bg-yellow-50 dark:bg-yellow-950/40 border-yellow-200 dark:border-yellow-800 text-yellow-700 dark:text-yellow-400"
+                  : "bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-800 text-red-700 dark:text-red-400"
+              }`}
+            >
+              <span
+                aria-hidden="true"
+                className={`w-1.5 h-1.5 rounded-full animate-pulse ${
+                  AVAILABILITY_STATUS === "available"
+                    ? "bg-green-500"
+                    : AVAILABILITY_STATUS === "limited"
+                    ? "bg-yellow-500"
+                    : "bg-red-500"
+                }`}
+              />
+              {AVAILABILITY_LABEL}
+            </span>
+          </div>
+
           <p className="text-base text-text-muted mb-1">Hey, I&apos;m</p>
           <h1
             className="text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-3"
@@ -36,6 +63,28 @@ export default async function Hero() {
           <p className="hero-intro text-base md:text-lg text-text-muted max-w-2xl">
             I&apos;m a backend-first full stack developer who ships production-ready web apps fast by pairing strong system design with AI coding agents &mdash; RAG pipelines, LLM features, and scalable Node.js/TypeScript backends included.
           </p>
+
+          {/* Hero CTA buttons */}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground text-sm font-medium px-5 py-2.5 hover:opacity-90 transition-opacity"
+            >
+              View Services
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-background text-foreground text-sm font-medium px-5 py-2.5 hover:bg-hover-bg transition-colors"
+            >
+              Book a Free Call
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </Link>
+          </div>
         </div>
 
         {/* GitHub Bento Grid */}
