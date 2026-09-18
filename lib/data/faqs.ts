@@ -49,6 +49,22 @@ export const FAQS: FAQItem[] = [
       "Every project includes structured revision rounds at each milestone stage to ensure 100% alignment with your expectations. Because we establish concrete technical specifications and UI wireframes before writing production code, scope divergence is caught early. Any deliverable that does not match the agreed specification is revised at zero additional cost.",
     tags: ["Satisfaction Guarantee", "Revision Policy", "Quality Assurance", "Design Review"],
   },
+  {
+    id: "monthly-hosting-infrastructure-cost",
+    category: "Pricing & Payment",
+    question: "How much will monthly hosting and database infrastructure cost after launch?",
+    answer:
+      "For most startups and small businesses, monthly infrastructure costs range from $0 to $20/month. Applications are architected on generous modern serverless tiers (Vercel, Neon Serverless PostgreSQL, Cloudinary), ensuring zero payment for idle compute and scaling costs strictly as user traffic and business revenue grow.",
+    tags: ["Hosting Costs", "Infrastructure Cost", "Serverless Architecture", "Neon PostgreSQL", "Vercel"],
+  },
+  {
+    id: "custom-nextjs-vs-wordpress-wix",
+    category: "Pricing & Payment",
+    question: "Why should I invest in a custom Next.js website instead of WordPress or Wix?",
+    answer:
+      "A custom Next.js web application delivers sub-second load times (95+ Google PageSpeed score), zero recurring plugin subscription vulnerabilities, and superior search engine visibility. Most importantly, it gives you complete data ownership and the flexibility to seamlessly connect custom AI features, databases, and client portals without platform lock-in.",
+    tags: ["Next.js vs WordPress", "Custom Web Development", "PageSpeed Score", "Core Web Vitals", "Zero Plugin Fees"],
+  },
 
   // 2. Process & Timeline (Speed, Agility & Communication)
   {
@@ -109,6 +125,14 @@ export const FAQS: FAQItem[] = [
       "Data security is implemented via end-to-end encryption, strict TLS database connections, least-privilege API credentials, and environment secrets management in `.env` vaults. For AI applications, company documents are stored in isolated vector databases with zero third-party model training on your private data.",
     tags: ["Data Privacy", "Security Engineering", "Private AI", "TLS Encryption", "Vector Isolation"],
   },
+  {
+    id: "clean-codebase-developer-handoff",
+    category: "Trust & Guarantees",
+    question: "How do you ensure the codebase is clean and easy for other developers to take over?",
+    answer:
+      "Every project strictly adheres to TypeScript strict mode, modular architecture, and automated ESLint / Prettier rules. You receive comprehensive README documentation, environment variable guides, and clear commit history so any future internal engineer or agency can onboard and ship features in under 30 minutes.",
+    tags: ["Clean Code", "Maintainability", "Developer Handoff", "TypeScript Strict", "Documentation"],
+  },
 
   // 4. AI & RAG Systems (Deep Technical Architecture & AI-Enabled Workflow)
   {
@@ -150,6 +174,14 @@ export const FAQS: FAQItem[] = [
     answer:
       "Building a custom AI application gives you 100% proprietary data ownership, zero recurring monthly per-message or per-seat markups, and complete flexibility to connect directly into your internal databases and APIs. Off-the-shelf tools lock your data onto third-party servers and charge steep subscription fees.",
     tags: ["Custom AI vs SaaS", "Cost Reduction", "Data Sovereignty", "API Integration"],
+  },
+  {
+    id: "runaway-ai-token-costs",
+    category: "AI & RAG Systems",
+    question: "How do you protect against runaway LLM API bills and high token costs?",
+    answer:
+      "I implement multi-layered cost safeguards: in-memory and IP-based rate limiting, strict token budgets, compact prompt compression, and vector query caching. By pairing cost-effective models (Groq LLaMA 3.3, Google Gemini) with local pgvector retrieval, LLMs only process concise, verified context chunks rather than entire document dumps.",
+    tags: ["AI Token Costs", "API Billing Safeguards", "Rate Limiting", "Groq LLaMA", "Cost Optimization"],
   },
 
   // 5. Backend & Architecture (Distributed Systems & Performance)
@@ -200,6 +232,14 @@ export const FAQS: FAQItem[] = [
     answer:
       "I take a pragmatic architectural approach: start with a clean modular monolith or Next.js full-stack system when domain boundaries are evolving, and decompose into event-driven microservices (Kafka/BullMQ) only when specific services require independent scaling, separate deployment cadences, or dedicated database stores.",
     tags: ["System Architecture", "Modular Monolith", "Microservices", "Event-Driven Architecture"],
+  },
+  {
+    id: "seo-aeo-geo-ranking-visibility",
+    category: "Backend & Architecture",
+    question: "Will my new website rank on Google and get cited by AI answer engines like ChatGPT and Perplexity?",
+    answer:
+      "Yes, every application is engineered with technical SEO and Generative Engine Optimization (GEO/AEO) from day one: semantic HTML5 hierarchy, Schema.org JSON-LD structured data, dynamic OpenGraph social cards, XML sitemaps, and sub-second Core Web Vitals to maximize search rankings and AI citations.",
+    tags: ["Technical SEO", "AEO", "GEO", "Schema.org JSON-LD", "Google Rankings", "Perplexity Citation"],
   },
 
   // 6. Forward Deployed & Roles (Career, Hiring & Enterprise Alignment)

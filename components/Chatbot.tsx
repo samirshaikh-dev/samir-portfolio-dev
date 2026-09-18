@@ -96,6 +96,9 @@ function getFriendlyErrorMessage(err: Error | undefined): FriendlyError {
 export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [visitorId, setVisitorId] = useState<string>('');
+  const [input, setInput] = useState('');
+  const { messages, sendMessage, status, error, clearError } = useChat();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const loadFingerprint = async () => {
@@ -104,11 +107,17 @@ export default function Chatbot() {
       setVisitorId(result.visitorId);
     };
     loadFingerprint();
-  }, []);
 
-  const { messages, sendMessage, status, error, clearError } = useChat();
-  const [input, setInput] = useState('');
-  const inputRef = useRef<HTMLInputElement>(null);
+    const handleOpenChat = (e: Event) => {
+      const customEvent = e as CustomEvent<{ query?: string }>;
+      setIsOpen(true);
+      if (customEvent.detail?.query) {
+        setInput(customEvent.detail.query);
+      }
+    };
+    window.addEventListener('open-ai-chat', handleOpenChat);
+    return () => window.removeEventListener('open-ai-chat', handleOpenChat);
+  }, []);
 
   useEffect(() => {
     if (isOpen && inputRef.current) {

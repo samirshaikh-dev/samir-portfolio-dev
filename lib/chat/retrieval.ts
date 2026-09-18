@@ -4,8 +4,44 @@ import { db } from '@/lib/db';
 import { contentChunks, blogs, projects } from '@/lib/schema';
 import { cosineDistance, inArray } from 'drizzle-orm';
 import { getRecentGithubEvents } from '@/lib/github';
+import { FAQS } from '@/lib/data/faqs';
 
 const MAX_DISTANCE = 0.5;
+
+function getMatchingFaqs(queryText: string): string {
+  const query = queryText.toLowerCase().trim();
+  if (!query) return '';
+  const words = query.split(/\s+/).filter((w) => w.length > 2);
+  if (words.length === 0) return '';
+
+  const matched = FAQS.map((faq) => {
+    let score = 0;
+    const qLower = faq.question.toLowerCase();
+    const aLower = faq.answer.toLowerCase();
+    const tagsLower = faq.tags?.map((t) => t.toLowerCase()) || [];
+
+    if (qLower.includes(query)) score += 10;
+
+    for (const word of words) {
+      if (qLower.includes(word)) score += 3;
+      if (tagsLower.some((t) => t.includes(word))) score += 2;
+      if (aLower.includes(word)) score += 1;
+    }
+    return { faq, score };
+  })
+    .filter((item) => item.score >= 3)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2);
+
+  if (matched.length === 0) return '';
+
+  return matched
+    .map(
+      (m, i) =>
+        `--- Context FAQ ${i + 1} (FAQ Knowledge Base) ---\nExact Title: FAQ - ${m.faq.question}\nURL: /faq#${m.faq.id}\nQuestion: ${m.faq.question}\nAnswer: ${m.faq.answer}`
+    )
+    .join('\n\n');
+}
 
 const GITHUB_INTENT_RE =
   /\b(github|commit[s]?|repo(?:s|sitory|sitories)?|pull\s*request|pr\b|issue[s]?|push(?:ed)?|open\s*source|contribut(?:e|ion|ed|ing)|star(?:red)?|fork(?:ed)?|activity|recent|latest|working\s*on|coding|develop(?:ing|ed)?)\b/i;
@@ -37,6 +73,9 @@ async function getGithubEventsCached(): Promise<string | null> {
 
 export async function getRelevantContext(messages: string[]): Promise<string> {
   try {
+    const latestMessage = messages[messages.length - 1] || '';
+    const matchedFaqs = getMatchingFaqs(latestMessage);
+
     // Embed last 2-3 messages joined for better follow-up understanding
     const embedWindow = messages.slice(-3).join(' ');
 
@@ -57,7 +96,6 @@ export async function getRelevantContext(messages: string[]): Promise<string> {
       .limit(4);
 
     const filteredChunks = relevantChunks.filter((c) => (c.distance as number) <= MAX_DISTANCE);
-    if (filteredChunks.length === 0) return '';
 
     // Fetch metadata for blogs and projects
     const blogIds = filteredChunks
@@ -114,12 +152,16 @@ export async function getRelevantContext(messages: string[]): Promise<string> {
       .join('\n\n');
 
     // Only fetch GitHub activity if the message is plausibly about it
-    const latestMessage = messages[messages.length - 1] || '';
     if (isGithubRelevant(latestMessage)) {
       const githubEvents = await getGithubEventsCached();
       if (githubEvents) {
         contextText += `\n\n--- Context ${filteredChunks.length + 1} (github_activity) ---\n${githubEvents}`;
       }
+    }
+
+    // Append in-memory matched FAQs if relevant
+    if (matchedFaqs) {
+      contextText = contextText ? `${contextText}\n\n${matchedFaqs}` : matchedFaqs;
     }
 
     return contextText;

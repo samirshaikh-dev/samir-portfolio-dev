@@ -1,8 +1,16 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
-import { LuSearch, LuX, LuSparkles, LuCircleHelp, LuArrowRight, LuMail } from "react-icons/lu";
+import {
+  LuSearch,
+  LuX,
+  LuSparkles,
+  LuCircleHelp,
+  LuArrowRight,
+  LuMail,
+  LuMessageSquare,
+} from "react-icons/lu";
 import type { FAQItem, FAQCategory } from "@/lib/data/faqs";
 import FAQAccordionItem from "./FAQAccordionItem";
 
@@ -14,6 +22,24 @@ export default function FAQClient({ faqs }: FAQClientProps) {
   const [activeCategory, setActiveCategory] = useState<string>("All");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [openIds, setOpenIds] = useState<Set<string>>(new Set([faqs[0]?.id].filter(Boolean)));
+
+  // Listen for hash deep-linking on initial load
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+
+    const targetFaq = faqs.find((f) => f.id === hash);
+    if (targetFaq) {
+      const timer = setTimeout(() => {
+        setActiveCategory("All");
+        setOpenIds(new Set([hash]));
+        const el = document.getElementById(hash);
+        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, [faqs]);
 
   // Derive unique categories and calculate counts
   const categories = useMemo(() => {
@@ -54,6 +80,9 @@ export default function FAQClient({ faqs }: FAQClientProps) {
         next.delete(id);
       } else {
         next.add(id);
+        if (typeof window !== "undefined") {
+          window.history.replaceState(null, "", `#${id}`);
+        }
       }
       return next;
     });
@@ -76,36 +105,64 @@ export default function FAQClient({ faqs }: FAQClientProps) {
     setSearchQuery("");
   };
 
+  const askAiAssistant = (queryToAsk?: string) => {
+    const text = queryToAsk !== undefined ? queryToAsk : searchQuery;
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("open-ai-chat", { detail: { query: text } })
+      );
+    }
+  };
+
+  const handleTagClick = (tag: string) => {
+    setActiveCategory("All");
+    setSearchQuery(tag);
+  };
+
   return (
     <section className="w-full max-w-4xl mx-auto pb-16">
-      {/* Search Input Bar */}
-      <div className="relative mb-6">
-        <label htmlFor="faq-search" className="sr-only">
-          Search frequently asked questions
-        </label>
-        <div className="relative flex items-center">
-          <LuSearch
-            className="absolute left-4 w-5 h-5 text-text-muted pointer-events-none"
-            aria-hidden="true"
-          />
-          <input
-            id="faq-search"
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search questions, keywords, or topics (e.g. Freelance, RAG, Pricing, Next.js)..."
-            className="w-full pl-12 pr-10 py-3.5 bg-background border border-border-primary rounded-xl text-foreground placeholder:text-text-muted text-sm md:text-base focus:outline-hidden focus:ring-2 focus:ring-foreground/20 focus:border-border-primary transition-all"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              onClick={clearSearch}
-              aria-label="Clear search input"
-              className="absolute right-3.5 p-1 rounded-md text-text-muted hover:text-foreground hover:bg-hover-bg transition-colors cursor-pointer"
-            >
-              <LuX className="w-4 h-4" />
-            </button>
-          )}
+      {/* Search Bar & AI Bridge Trigger */}
+      <div className="flex flex-col gap-2 mb-6">
+        <div className="flex items-center justify-between text-xs text-text-muted px-1">
+          <span>Search or filter by category below</span>
+          <button
+            type="button"
+            onClick={() => askAiAssistant()}
+            className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
+          >
+            <LuSparkles className="w-3.5 h-3.5 text-foreground" />
+            <span>Need something specific? <u>Ask AI Assistant</u></span>
+          </button>
+        </div>
+
+        <div className="relative">
+          <label htmlFor="faq-search" className="sr-only">
+            Search frequently asked questions
+          </label>
+          <div className="relative flex items-center">
+            <LuSearch
+              className="absolute left-4 w-5 h-5 text-text-muted pointer-events-none"
+              aria-hidden="true"
+            />
+            <input
+              id="faq-search"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search questions, keywords, or topics (e.g. Pricing, RAG, Fixed Budget, Next.js)..."
+              className="w-full pl-12 pr-10 py-3.5 bg-background border border-border-primary rounded-xl text-foreground placeholder:text-text-muted text-sm md:text-base focus:outline-hidden focus:ring-2 focus:ring-foreground/20 focus:border-border-primary transition-all"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={clearSearch}
+                aria-label="Clear search input"
+                className="absolute right-3.5 p-1 rounded-md text-text-muted hover:text-foreground hover:bg-hover-bg transition-colors cursor-pointer"
+              >
+                <LuX className="w-4 h-4" />
+              </button>
+            )}
+          </div>
         </div>
       </div>
 
@@ -184,12 +241,13 @@ export default function FAQClient({ faqs }: FAQClientProps) {
               faq={faq}
               isOpen={openIds.has(faq.id)}
               onToggle={() => toggleAccordion(faq.id)}
+              onTagClick={handleTagClick}
             />
           ))}
         </div>
       ) : (
-        /* Empty State */
-        <div className="border border-border-primary rounded-xl p-10 text-center bg-background/50 flex flex-col items-center justify-center my-6">
+        /* Empty State with AI Assistant Bridge */
+        <div className="border border-border-primary rounded-xl p-8 sm:p-10 text-center bg-background/50 flex flex-col items-center justify-center my-6">
           <div className="w-12 h-12 rounded-full bg-hover-bg flex items-center justify-center text-text-muted mb-4">
             <LuCircleHelp className="w-6 h-6" />
           </div>
@@ -197,16 +255,25 @@ export default function FAQClient({ faqs }: FAQClientProps) {
             No matching questions found
           </h3>
           <p className="text-sm text-text-muted max-w-md mx-auto mb-6">
-            We couldn&apos;t find any FAQs matching your search criteria. Try a different keyword or view all categories.
+            We couldn&apos;t find an FAQ matching &ldquo;{searchQuery}&rdquo;. You can ask Samir&apos;s AI Assistant directly or reset your filters.
           </p>
-          <button
-            type="button"
-            onClick={resetFilters}
-            className="px-4 py-2 rounded-lg bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer flex items-center gap-2"
-          >
-            <LuSparkles className="w-4 h-4" />
-            Reset all filters
-          </button>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <button
+              type="button"
+              onClick={() => askAiAssistant(searchQuery)}
+              className="px-4 py-2.5 rounded-lg bg-foreground text-background text-sm font-medium hover:opacity-90 transition-opacity cursor-pointer flex items-center gap-2 shadow-xs"
+            >
+              <LuMessageSquare className="w-4 h-4" />
+              <span>Ask AI Assistant about this</span>
+            </button>
+            <button
+              type="button"
+              onClick={resetFilters}
+              className="px-4 py-2.5 rounded-lg border border-border-primary bg-background text-foreground text-sm font-medium hover:bg-hover-bg transition-colors cursor-pointer"
+            >
+              Reset all filters
+            </button>
+          </div>
         </div>
       )}
 
