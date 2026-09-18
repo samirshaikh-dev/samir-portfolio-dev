@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
+import HowIWork from "@/components/HowIWork";
 import { APP_URL, AUTHOR_EMAIL } from "@/lib/site-config";
 import {
   getServiceJsonLd,
@@ -743,6 +744,11 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* How I Work */}
+        <div className="mb-20">
+          <HowIWork variant="full" />
         </div>
 
         {/* Services FAQ */}

@@ -1,4 +1,5 @@
 import Hero from "@/components/home/Hero";
+import HowIWork from "@/components/HowIWork";
 import { getSpeakableJsonLd } from "@/lib/seo/structured-data";
 import { db } from "@/lib/db";
 import { projects as projectsSchema, blogs as blogsSchema } from "@/lib/schema";
@@ -21,7 +22,7 @@ async function getLatestProjects() {
       github_link: projectsSchema.githubLink,
       demo_link: projectsSchema.demoLink,
     }).from(projectsSchema).where(eq(projectsSchema.isPublished, true)).orderBy(desc(projectsSchema.publishedAt)).limit(3);
-    return result as any[];
+    return result;
   } catch {
     return [];
   }
@@ -38,7 +39,11 @@ async function getLatestBlogs() {
       published_at: blogsSchema.publishedAt,
       stars: blogsSchema.stars,
     }).from(blogsSchema).where(eq(blogsSchema.isPublished, true)).orderBy(desc(blogsSchema.publishedAt)).limit(3);
-    return result as any[];
+    return result.map((b) => ({
+      ...b,
+      published_at: b.published_at ? b.published_at.toISOString() : "",
+      stars: b.stars ?? 0,
+    }));
   } catch {
     return [];
   }
@@ -53,7 +58,9 @@ export default async function Home() {
   return (
     <main className="flex flex-col flex-1">
       <Hero />
-      
+
+      <HowIWork variant="compact" />
+
       <section className="px-6 md:px-10 py-16">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-end mb-10">
