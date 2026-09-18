@@ -107,6 +107,33 @@ Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) based in Guja
 - **Role & Stack**: Full-Stack Developer — GraphQL API (Apollo Server), Express.js, Node.js, PostgreSQL, React, Vite.
 - **Key Architecture**: Role-based access control (RBAC), JWT + bcrypt authentication, transactional ticket booking with concurrency locks, rate limiting, and automated email confirmation notifications.
 
+## Engineering & Freelance Services Offered
+
+URL: https://samir-portfolio-dev.vercel.app/services
+
+### 1. AI & Intelligent Systems
+- **RAG Systems & Knowledge Retrieval**: Grounded AI systems with PostgreSQL pgvector, Gemini embeddings, chunking, and relevance filtering to minimize hallucinations.
+- **AI Agents & Tool Orchestration**: Multi-step agent workflows using Vercel AI SDK, tool-calling APIs, structured Zod schemas, and deterministic execution boundaries.
+- **AI Product Development & Integration**: Transforming AI concepts into working production features, from initial POC to database and UI integration.
+- **LLM Integration & AI User Experiences**: Low-latency streaming responses, prompt management, rate limiting, and token usage controls.
+
+### 2. Backend & Distributed Architecture
+- **Production Backend APIs & System Design**: Modular REST and GraphQL APIs with Node.js, Express, NestJS, PostgreSQL, Redis caching, and RBAC authentication.
+- **Event-Driven Systems & Background Processing**: Scalable asynchronous workflows using queues (BullMQ), message brokers (Apache Kafka, Redis), and worker pipelines.
+- **Cloud, DevOps & Observability**: Production containerization with Docker, CI/CD with GitHub Actions, and distributed telemetry with OpenTelemetry and Grafana.
+
+### 3. Web Development & Search Growth
+- **Full-Stack Web & Application Development**: Modern, high-performance web applications built with Next.js App Router, React 19, TypeScript, and Tailwind CSS.
+- **Technical SEO, AEO & Web Performance**: Schema.org JSON-LD structured data, Generative Engine Optimization (GEO/AEO) for AI citation, and Core Web Vitals optimization.
+
+### 4. AI-Accelerated Engineering
+- **AI-Accelerated Delivery**: Rapid prototyping and delivery using Cursor, Claude Code, and GitHub Copilot while personally owning architecture, security, testing, and critical logic.
+
+### Engagement Models for Startups & Clients
+- **Startup MVP & Feature Sprints**: 1 to 4-week fixed-scope sprints for early-stage founders building an MVP or integrating an AI feature.
+- **Contract & Dedicated Collaboration**: Flexible freelance contract or monthly retainer for growing engineering teams needing backend and AI support.
+- **Full-Time Remote Engineering**: High-impact remote roles across global time zones (US, UK, Europe, APAC).
+
 ## Engineering Principles
 
 1. **Production Reliability Over Demo Hype**: Building AI systems that remain deterministic, secure, observable, and rate-limited under real-world traffic.

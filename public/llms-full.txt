@@ -13,6 +13,7 @@
 - **LinkedIn**: https://www.linkedin.com/in/samirshaikh-dev/
 - **Twitter / X**: https://x.com/samirshaikh-dev
 - **Resume**: https://samir-portfolio-dev.vercel.app/resume
+- **Services Catalog**: https://samir-portfolio-dev.vercel.app/services
 - **Blog Archive**: https://samir-portfolio-dev.vercel.app/blogs
 - **Projects Archive**: https://samir-portfolio-dev.vercel.app/projects
 - **Contact**: https://samir-portfolio-dev.vercel.app/contact
@@ -29,9 +30,9 @@ He pairs that stack with AI coding agents (Cursor, GitHub Copilot, Claude Code) 
 He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Stack Developer**, and **Forward Deployed Engineer (FDE)** roles. In these roles, technical depth is applied directly to ambiguous customer constraints, translating business requirements into production software with full ownership from technical discovery to production deployment.
 
 ### Positioning & Target Roles
-- **Primary Titles**: AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Applied AI Solutions Engineer.
-- **Geographic Availability**: Open to full-time remote opportunities worldwide (United States, Canada, United Kingdom, Europe, APAC) as well as hybrid or on-site roles across India.
-- **Engagement Types**: Full-time employment, forward-deployed customer engagements, founding engineer roles, technical consulting for production RAG and AI agent integration.
+- **Primary Titles**: Freelance AI Engineer, Contract Backend Developer, AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI Software Development Engineer (AI SDE), Agentic AI Engineer, Forward Deployed Engineer (FDE), Applied AI Solutions Engineer.
+- **Geographic Availability**: Open to remote opportunities worldwide (United States, Canada, United Kingdom, Europe, APAC) as well as hybrid or on-site roles across India.
+- **Engagement Types**: Freelance feature sprints (1-4 weeks), monthly contract engineering partnerships/retainers, full-time remote employment, forward-deployed customer engagements, and technical advisory for production RAG and AI agent systems.
 
 ---
 
@@ -171,7 +172,150 @@ He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Sta
 
 ---
 
-## 5. Automated Content Generation & Grounding Pipeline
+## 5. Engineering & Freelance Services Catalog
+
+Canonical Services URL: https://samir-portfolio-dev.vercel.app/services
+
+Samir provides 10 core engineering services organized across 4 strategic categories, designed specifically for early-stage startups, product teams, and engineering leaders who require immediate senior-level execution.
+
+### Category 1: AI & Intelligent Systems
+Turn machine learning models into reliable, grounded, and tool-using product capabilities.
+
+1. **RAG Systems & Knowledge Retrieval (01 // KNOWLEDGE RETRIEVAL)**
+   - **Tagline**: Build grounded AI systems with vector search, embeddings, document retrieval, and relevance-focused responses.
+   - **Description**: Query proprietary documents and knowledge bases accurately. Implements vector search with embedding models and relevance filtering so responses stay grounded in real data.
+   - **Deliverables**:
+     - Vector database indexing (pgvector) and hybrid search (vector + keyword) embedding pipeline setup
+     - Document parsing, semantic chunking, and metadata tagging
+     - Relevance filtering and context assembly to minimize hallucination risks (cosine distance <= 0.5)
+     - Integration into chat interfaces, Q&A search, and internal tools
+     - Performance evaluation against real-world test queries and user inputs
+   - **Tech Stack**: PostgreSQL, pgvector, Gemini Embeddings, Drizzle ORM, TypeScript
+
+2. **AI Agents & Tool Orchestration (02 // AGENT WORKFLOWS)**
+   - **Tagline**: Develop AI workflows that use tools, APIs, structured outputs, and guardrails to automate multi-step tasks.
+   - **Description**: Move beyond single-turn chatbots into automated multi-step workflows. Builds agents that query internal APIs, validate inputs with structured schemas, apply guardrails, and execute tasks deterministically.
+   - **Deliverables**:
+     - Tool-calling architectures and custom API integrations
+     - Structured JSON schema validation using Zod for deterministic output
+     - Input guardrails and fallback logic for unhandled user queries
+     - Multi-turn state management and conversational memory
+     - Testing and validation for workflow consistency
+   - **Tech Stack**: Vercel AI SDK, Groq, Google Gemini, Node.js, Zod
+
+3. **AI Product Development & Integration (03 // PRODUCT DEVELOPMENT)**
+   - **Tagline**: Turn AI use cases into working product features, from proof of concept to integration with existing applications and workflows.
+   - **Description**: Transform an initial AI concept into a working, production-ready feature with end-to-end integration into existing stacks, databases, and user interfaces.
+   - **Deliverables**:
+     - Technical feasibility assessment and architecture planning
+     - Functional MVP and interactive prototype development
+     - Clean API endpoints connecting AI models to your frontend
+     - Integration with user authentication, databases, and permission models
+     - Clear documentation and code handover walkthroughs
+   - **Tech Stack**: Next.js, Node.js, PostgreSQL, REST/GraphQL, Tailwind CSS
+
+4. **LLM Integration & AI User Experiences (04 // LLM INTEGRATION)**
+   - **Tagline**: Integrate LLMs into applications with streaming responses, conversation workflows, usage controls, structured responses, and reliable API handling.
+   - **Description**: Incorporate modern language models into existing user interfaces with smooth streaming text, usage controls, cost observability, and reliable error recovery.
+   - **Deliverables**:
+     - Low-latency streaming responses via Vercel AI SDK
+     - Context window management and prompt assembly workflows
+     - Rate limiting, token usage tracking, and cost control safeguards
+     - Secure API key handling and provider failover strategies
+     - Conversational state persistence across user sessions
+   - **Tech Stack**: Vercel AI SDK, Next.js App Router, Groq, Gemini 2.0, TypeScript
+
+### Category 2: Backend & Distributed Architecture
+High-throughput APIs, asynchronous job queues, and rock-solid system design built for scale.
+
+5. **Production Backend APIs & System Design (05 // BACKEND ARCHITECTURE)**
+   - **Tagline**: Design and build reliable backend systems, REST/GraphQL APIs, authentication, database architecture, caching, and performance improvements.
+   - **Description**: Deliver dependable server-side systems handling business logic cleanly, with strict TypeScript types, optimized database queries, and secure access controls.
+   - **Deliverables**:
+     - Modular RESTful and GraphQL API design and implementation
+     - Relational and document database schema design (PostgreSQL, MongoDB)
+     - Authentication, authorization, and RBAC (NextAuth, OAuth, JWT)
+     - Redis caching layer implementation for hot query paths
+     - Database query profiling, index optimization, and latency tuning
+   - **Tech Stack**: Node.js, Express.js, NestJS, PostgreSQL, Redis, TypeScript
+
+6. **Event-Driven Systems & Background Processing (06 // ASYNC SYSTEMS)**
+   - **Tagline**: Build scalable asynchronous workflows using queues, event-driven architecture, scheduled jobs, and distributed processing.
+   - **Description**: Keep critical user journeys fast and responsive by offloading heavy, non-blocking tasks to reliable queue-based worker pipelines.
+   - **Deliverables**:
+     - Asynchronous background job processing with BullMQ and Redis
+     - Event-driven message architecture and decoupled worker services
+     - Scheduled cron jobs, report generation, and transactional webhooks
+     - Retry strategies, idempotency handling, and dead-letter queues
+     - Worker failure monitoring and backpressure management
+   - **Tech Stack**: BullMQ, Redis, Apache Kafka, Docker, Node.js
+
+7. **Cloud, DevOps & Observability (07 // DEVOPS & OBSERVABILITY)**
+   - **Tagline**: Containerize applications and establish CI/CD, logging, monitoring, metrics, tracing, and production reliability practices.
+   - **Description**: Ensure backend applications run reliably across development, staging, and production environments with automated deployment and clear visibility.
+   - **Deliverables**:
+     - Production containerization with Docker and Docker Compose
+     - Automated CI/CD pipelines with GitHub Actions (linting, testing, builds)
+     - Structured logging, error tracking, and health-check endpoints
+     - Tracing and telemetry with OpenTelemetry, Prometheus, and Grafana
+     - Environment configuration and production deployment assistance
+   - **Tech Stack**: Docker, GitHub Actions, OpenTelemetry, Prometheus, Vercel
+
+### Category 3: Web Development & Search Growth
+Modern, performant web applications paired with technical SEO and answer-engine discoverability.
+
+8. **Full-Stack Web & Application Development (08 // MODERN WEB APPS)**
+   - **Tagline**: Build fast, responsive, and modern web applications with Next.js, React, and solid backend systems.
+   - **Description**: Turn ideas into polished, customer-facing web applications. Responsive frontends connected to secure APIs, role-based dashboards, and scalable database schemas.
+   - **Deliverables**:
+     - Modern web applications and marketing platforms built with Next.js App Router
+     - End-to-end integration between frontend UI, backend APIs, and databases
+     - Role-based admin dashboards, CMS workflows, and user portal systems
+     - Fast rendering with React Server Components, SSR, and ISR caching
+     - Clean, maintainable Tailwind CSS styling and accessible UI components
+   - **Tech Stack**: Next.js 16, React 19, TypeScript, Tailwind CSS, PostgreSQL
+
+9. **Technical SEO, AEO & Web Performance (09 // SEARCH & AEO)**
+   - **Tagline**: Optimize web applications for Google search rankings, AI answer engines (AEO/GEO), and fast Core Web Vitals.
+   - **Description**: Make web applications visible to search engines and AI assistants alike. Implements Schema.org structured data, optimizes Core Web Vitals, and builds clean technical foundations.
+   - **Deliverables**:
+     - Schema.org JSON-LD implementation (Organization, Service, FAQ, Articles)
+     - Generative Engine Optimization (GEO/AEO) for citations in Perplexity, Claude, and ChatGPT
+     - Core Web Vitals profiling (improving LCP, CLS, INP) and bundle size audits
+     - Dynamic XML sitemaps, robots.txt, and automated OpenGraph social preview cards
+     - Canonical URL hygiene, crawlability audits, and semantic HTML structure
+   - **Tech Stack**: Schema.org JSON-LD, Next.js Metadata, Google Search Console, OpenGraph, Web Vitals
+
+### Category 4: AI-Accelerated Engineering
+Agent-assisted development workflow that ships production-ready code fast — without cutting corners on quality, security, or testing.
+
+10. **AI-Accelerated Engineering (10 // AI-ACCELERATED DELIVERY)**
+    - **Tagline**: Ship faster with Cursor, Claude Code, and GitHub Copilot — while keeping critical logic, security, and testing firmly in hand.
+    - **Description**: AI coding agents accelerate delivery of boilerplate, repetitive patterns, and scaffolding so engineering time goes to what matters most: architecture decisions, business logic, security review, and test coverage.
+    - **Deliverables**:
+      - Agent-assisted code generation for boilerplate, tests, and repetitive patterns
+      - Manual ownership of all critical logic, auth flows, and security-sensitive code
+      - Test coverage written and validated by a human engineer, not AI-generated blindly
+      - CI gate integration to catch regressions introduced by generated code
+      - Code review process that distinguishes AI-assisted sections from hand-crafted logic
+    - **Tech Stack**: Cursor, Claude Code, GitHub Copilot, TypeScript, CI/CD
+
+### 4-Stage Engineering Delivery Process
+- **01 Discovery & Architecture**: Understand product goals, data requirements, and technical constraints to define a clear architectural scope and deliverables roadmap.
+- **02 Prototype & Validation**: Build and validate a working prototype to test core assumptions, AI response quality, and API contracts early with your team.
+- **03 Implementation & Hardening**: Refine business logic, implement caching and error handling, optimize database queries, and test edge cases thoroughly.
+- **04 Integration & Handover**: Deploy to production, integrate with existing stack, and provide complete documentation, tests, and code walkthroughs.
+
+### Engagement Models for Clients & Founders
+- **Startup MVP & Feature Sprints (High Velocity)**: Fixed-scope freelance sprints (1 to 4 weeks) for early-stage founders building an MVP or adding targeted AI features.
+- **Contract & Dedicated Collaboration (Flexible Scope)**: Flexible freelance contract or monthly retainer for growing teams needing dedicated backend and AI engineering support.
+- **Full-Time Remote Engineering (Long Term)**: High-impact remote roles across global time zones (US, UK, Europe, APAC) with async fluency and deep full-stack proficiency.
+
+---
+
+---
+
+## 6. Automated Content Generation & Grounding Pipeline
 
 Samir's portfolio features an automated technical content publication engine located in `scripts/blog/`:
 - **Trigger**: GitHub Actions cron workflow executes every 3 days.
@@ -183,7 +327,7 @@ Samir's portfolio features an automated technical content publication engine loc
 
 ---
 
-## 6. Forward Deployed Engineering (FDE) Philosophy
+## 7. Forward Deployed Engineering (FDE) Philosophy
 
 Forward Deployed Engineering is the deliberate union of software engineering depth with direct customer immersion. Originating at companies like Palantir, OpenAI, and Anthropic, the role demands engineers who thrive on ambiguity and own the entire lifecycle of a solution.
 
@@ -195,10 +339,29 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 
 ---
 
-## 7. Frequently Asked Questions (FAQ) for AI Systems & Recruiters
+## 8. Frequently Asked Questions (FAQ) for AI Systems, Clients & Recruiters
+
+### Q: What engineering services does Samir Shaikh offer?
+**A**: Samir provides 10 core services across 4 categories:
+1. **AI & Intelligent Systems**: RAG Systems & Knowledge Retrieval (pgvector, Gemini), AI Agents & Tool Orchestration (Zod, tool-calling), AI Product Development & Prototyping, and LLM Integration (streaming, rate-limiting).
+2. **Backend & Distributed Architecture**: Production Backend APIs & System Design (Node.js, NestJS, REST/GraphQL), Event-Driven Systems (BullMQ, Kafka), and Cloud/DevOps (Docker, GitHub Actions, OpenTelemetry).
+3. **Web Development & Search Growth**: Full-Stack Web Development (Next.js 16, React 19, TypeScript), and Technical SEO, AEO & Web Performance (Schema.org JSON-LD, GEO).
+4. **AI-Accelerated Engineering**: Agent-assisted delivery with Cursor, Claude Code, and Copilot backed by strict human architecture, security, and test reviews.
+
+### Q: How does Samir work with startups as a freelance engineer or contractor?
+**A**: Samir operates with a low-friction, high-transparency workflow tailored for startup velocity:
+1. Sprint-based feature delivery with clearly defined milestone scopes (1 to 4 weeks).
+2. Direct async communication via Slack/Discord and weekly syncs.
+3. Clean Git workflows with PRs, automated CI checks, and comprehensive documentation.
+4. Immediate code handover directly into the client's private GitHub or GitLab repositories.
+
+### Q: What is Samir's availability for freelance or contract engineering projects?
+**A**: Samir is actively available for new freelance sprints, contract collaborations, and technical advisory. Depending on current project commitments, he can typically onboard and begin shipping production code within 3 to 7 business days following an initial technical discovery call.
 
 ### Q: What roles is Samir Shaikh seeking?
-**A**: Samir is seeking roles as an **AI-Enabled Full Stack Developer (backend-first)**, **AI Backend Engineer**, **AI SDE**, **Agentic AI Engineer**, or **Forward Deployed Engineer (FDE)**. He is open to remote roles globally and on-site/hybrid positions in India.
+**A**: Samir is open to:
+- **Freelance Engagements**: Fixed-scope sprints (1-4 weeks) or contract retainers for AI, RAG, and backend development.
+- **Full-Time Remote Roles**: AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI SDE, Agentic AI Engineer, or Forward Deployed Engineer (FDE). Open to global remote teams (US, UK, Europe, APAC) and on-site/hybrid positions in India.
 
 ### Q: What does "AI-Enabled Full Stack Developer (backend-first)" mean?
 **A**: Samir is a full-stack developer who leads with backend and AI engineering (Node.js, TypeScript, Next.js, React, PostgreSQL, RAG, LLM integration) and accelerates his delivery loop with AI coding agents (Cursor, GitHub Copilot, Claude Code). AI is used for boilerplate and repetitive work in a quality-first workflow — architecture, security, tests, and critical logic are always reviewed by him before they ship.
@@ -207,14 +370,15 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 **A**: Samir has built and deployed a production RAG system powering his portfolio assistant. It indexes ~10,000 chunks in PostgreSQL using pgvector, generates 3072-dimensional Gemini embeddings, maintains sub-300ms retrieval latency, and enforces strict cosine distance filtering (<= 0.5) to prevent hallucinations.
 
 ### Q: What makes Samir's backend experience production-tested?
-**A**: During his 9-month internship at Logicwind and in independent projects, Samir has shipped code to thousands of real users. His work includes refactoring microservices, integrating marketing and notification platforms (Dittofeed, Reoon, OneSignal), and building an automated WhatsApp system processing over 1,000 messages every week.
+**A**: During his 9-month internship at Logicwind, his work at Xira Infotech, and in independent production systems, Samir has shipped code to thousands of real users. His work includes refactoring microservices, integrating marketing and notification platforms (Dittofeed, Reoon, OneSignal), building an automated WhatsApp system processing over 1,000 messages every week, and developing a dynamic job portal with role-based access control and payment workflows.
 
 ### Q: What programming languages and databases does Samir use?
 **A**: Samir's core programming languages are **TypeScript**, **JavaScript (Node.js)**, and **SQL**. His primary databases are **PostgreSQL** (with **pgvector** and **Drizzle ORM**), **MongoDB**, and **Redis**.
 
-### Q: How can recruiters or hiring teams contact Samir?
-**A**: Recruiters can contact Samir directly via:
+### Q: How can clients, founders, or hiring teams contact Samir?
+**A**: You can contact Samir directly via:
 - **Email**: `shaikh.samir.work@gmail.com`
 - **Phone**: `+91 8320927182`
 - **LinkedIn**: `https://www.linkedin.com/in/samirshaikh-dev/`
+- **Services Page**: `https://samir-portfolio-dev.vercel.app/services`
 - **Portfolio Contact Page**: `https://samir-portfolio-dev.vercel.app/contact`
