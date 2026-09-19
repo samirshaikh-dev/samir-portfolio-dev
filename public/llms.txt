@@ -112,32 +112,88 @@ Samir Shaikh is a Freelance AI Developer & Full Stack Engineer based in Gujarat,
 
 ## Engineering & Freelance Services Offered
 
-URL: https://samir-portfolio-dev.vercel.app/services
+Catalog URL: https://samir-portfolio-dev.vercel.app/services
 
 ### 1. AI & Intelligent Systems
-- **Custom Knowledge Bases & RAG Systems** (Starting from $900 / ₹75,000): Build production-grade AI chatbots for websites and SaaS grounded in custom company knowledge bases with PostgreSQL pgvector, Gemini embeddings, and strict relevance filtering to stop hallucinations.
-- **AI Agents & Workflow Automation** (Starting from $800 / ₹65,000): Multi-step agent workflows and business task automation using Vercel AI SDK, tool-calling APIs, structured Zod schemas, and deterministic execution boundaries.
-- **AI Product Development & Integration** (Starting from $1,200 / ₹1,00,000): Transforming AI concepts into production-ready product features, from discovery and rapid prototypes to database and UI integration.
-- **LLM Integration & AI User Experiences** (Starting from $500 / ₹40,000): Low-latency streaming responses, prompt management, rate limiting, and token usage controls with provider failover.
+- **Custom Knowledge Bases & RAG Systems** (From $900 / ₹75,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#knowledge-bases)
+  - *Tagline*: Production-grade AI chatbots and custom RAG knowledge bases for websites and SaaS grounded in verified documentation.
+  - *Target Audience*: SaaS startups, enterprise support teams, and digital businesses needing accurate AI chat.
+  - *Deliverables*: Semantic document chunking (PDFs, Markdown, Notion), PostgreSQL pgvector pipeline with 3072d Gemini embeddings, cosine distance filtering (<=0.5), embeddable website widget, and sub-300ms retrieval latency profiling.
+  - *Tech Stack*: PostgreSQL, pgvector, Gemini Embeddings, Drizzle ORM, TypeScript, Vercel AI SDK.
+
+- **AI Agents & Workflow Automation** (From $800 / ₹65,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#agent-workflows)
+  - *Tagline*: Deterministic AI agents with tool calling, structured JSON outputs, and guardrails to automate business workflows.
+  - *Target Audience*: Founders, CTOs, and product operations teams looking to automate repetitive engineering workflows.
+  - *Deliverables*: Tool-calling API architectures, Zod schema validation for predictable outputs, defensive prompt boundaries, multi-turn state persistence, and automated CI test suites.
+  - *Tech Stack*: Vercel AI SDK, Groq, Google Gemini, Node.js, Zod, TypeScript.
+
+- **AI Product Development & Integration** (From $1,200 / ₹1,00,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#product-development)
+  - *Tagline*: End-to-end AI feature engineering from technical discovery and rapid MVP to database and UI deployment.
+  - *Target Audience*: Early-stage startups and product teams launching new AI capabilities under tight deadlines.
+  - *Deliverables*: Technical discovery and architecture roadmap, 1 to 4-week rapid MVP delivery, typed REST/GraphQL endpoints, NextAuth RBAC integration, and production CI/CD handover.
+  - *Tech Stack*: Next.js 16, React 19, Node.js, PostgreSQL, REST/GraphQL, Tailwind CSS.
+
+- **LLM Integration & AI User Experiences** (From $500 / ₹40,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#llm-integration)
+  - *Tagline*: Low-latency streaming responses, token usage controls, and multi-provider failover strategies.
+  - *Target Audience*: Web applications and SaaS platforms adding conversational AI or generative features.
+  - *Deliverables*: Non-blocking streaming text UI, context window optimization, Upstash Redis rate limiting, secure API key isolation, and real-time token cost observability.
+  - *Tech Stack*: Vercel AI SDK, Groq, Google Gemini 2.0, Next.js App Router, TypeScript, Redis.
 
 ### 2. Backend & Distributed Architecture
-- **Production Backend APIs & System Design** (Starting from $600 / ₹50,000): Modular REST and GraphQL APIs with Node.js, Express, NestJS, PostgreSQL, Redis caching, and RBAC authentication.
-- **Event-Driven Systems & Background Processing** (Starting from $500 / ₹40,000): Scalable asynchronous workflows using queues (BullMQ), message brokers (Apache Kafka, Redis), and worker pipelines.
-- **Cloud, DevOps & Observability** (Starting from $400 / ₹35,000): Production containerization with Docker, CI/CD with GitHub Actions, and distributed telemetry with OpenTelemetry and Grafana.
+- **Production Backend APIs & System Design** (From $600 / ₹50,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#backend-architecture)
+  - *Tagline*: High-throughput REST & GraphQL APIs, clean schema design, caching layers, and database optimization.
+  - *Target Audience*: Growing SaaS companies requiring high-throughput, maintainable backend architectures.
+  - *Deliverables*: Type-safe API routes, Drizzle/Prisma relational migrations, OAuth/JWT authentication with RBAC, Redis caching layer for hot paths, and query profiling.
+  - *Tech Stack*: Node.js, Express.js, NestJS, PostgreSQL, Redis, Drizzle ORM, TypeScript.
+
+- **Event-Driven Systems & Background Processing** (From $500 / ₹40,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#async-systems)
+  - *Tagline*: Asynchronous job queues, scheduled tasks, transactional webhooks, and fault-tolerant message workers.
+  - *Target Audience*: Applications handling intensive background tasks, email bursts, exports, and webhooks.
+  - *Deliverables*: BullMQ + Redis background queue setup, decoupled Pub/Sub architecture, scheduled cron jobs, dead-letter queues (DLQ), and backpressure management.
+  - *Tech Stack*: BullMQ, Redis, Apache Kafka, Docker, Node.js, TypeScript.
+
+- **Cloud, DevOps & Observability** (From $400 / ₹35,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#devops-observability)
+  - *Tagline*: Production Docker containerization, automated CI/CD pipelines, and comprehensive telemetry.
+  - *Target Audience*: Engineering teams looking to automate releases and ensure 99.9% uptime.
+  - *Deliverables*: Multi-stage Docker containers, GitHub Actions automated CI/CD, structured JSON logging with Sentry error tracking, OpenTelemetry/Prometheus tracing, and zero-downtime deployment.
+  - *Tech Stack*: Docker, GitHub Actions, OpenTelemetry, Prometheus, Vercel, Linux.
 
 ### 3. Web Development & Search Growth
-- **Custom Website Development & Landing Pages** (Starting from $300 / ₹25,000): Modern, mobile-responsive business websites and high-converting marketing landing pages built with Next.js App Router, React 19, TypeScript, and Tailwind CSS.
-- **SEO Services & Search Engine Optimization** (Starting from $200 / ₹15,000): Technical SEO audits, on-page keyword optimization, Schema.org JSON-LD structured data, and Generative Engine Optimization (GEO/AEO) for Google and AI answer engine rankings.
-- **Website Redesign & Speed Optimization** (Starting from $250 / ₹20,000): Performance tuning and redesigns to score 90+ on Google PageSpeed Insights, improve Core Web Vitals (LCP, CLS, INP), and reduce bounce rates.
-- **Full-Stack Web Application Development** (Starting from $1,200 / ₹1,00,000): Custom web applications, client portals, and role-based SaaS dashboards with PostgreSQL and secure authentication.
+- **Custom Website Development & Landing Pages** (From $300 / ₹25,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#website-development)
+  - *Tagline*: High-converting, mobile-responsive business websites and landing pages built with Next.js and Tailwind CSS.
+  - *Target Audience*: Business owners, startups, consultants, and founders wanting a premium web presence.
+  - *Deliverables*: Custom business websites and SaaS landing pages, 100% mobile-first responsiveness, headless CMS / admin panel integration, interactive contact forms with Nodemailer alerts, and Google Analytics 4.
+  - *Tech Stack*: Next.js 16, React 19, Tailwind CSS v4, TypeScript, Vercel.
+
+- **SEO Services & Search Engine Optimization** (From $200 / ₹15,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#seo-services)
+  - *Tagline*: Technical SEO audits, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO) for Google and AI citations.
+  - *Target Audience*: Founders and businesses struggling to rank on Google or get noticed by AI answer engines.
+  - *Deliverables*: Full technical crawl & indexation audit, on-page keyword mapping (H1-H3 hierarchy), Schema.org JSON-LD structured data (Organization, ProfessionalService, Service, FAQPage), and llms.txt AEO/GEO configuration.
+  - *Tech Stack*: Schema.org JSON-LD, Google Search Console, Next.js Metadata API, AEO/GEO, Web Vitals.
+
+- **Website Redesign & Speed Optimization** (From $250 / ₹20,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#speed-performance)
+  - *Tagline*: Modernize sluggish websites to score 90+ on Google PageSpeed Insights and ace Core Web Vitals (LCP, CLS, INP).
+  - *Target Audience*: Businesses with slow-loading websites losing customers and search rank due to poor performance.
+  - *Deliverables*: Modern UI/UX redesign with dark/light themes, Core Web Vitals remediation (LCP < 2.5s, CLS < 0.1, INP < 200ms), automated Cloudinary CDN WebP/AVIF delivery, and bundle code-splitting.
+  - *Tech Stack*: Google PageSpeed, Core Web Vitals, Lighthouse, Cloudinary CDN, Tailwind CSS.
+
+- **Full-Stack Web Application Development** (From $1,200 / ₹1,00,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#custom-web-applications)
+  - *Tagline*: Custom web apps, customer portals, and SaaS dashboards with role-based auth and scalable databases.
+  - *Target Audience*: Companies needing bespoke business software, customer portals, or subscription SaaS platforms.
+  - *Deliverables*: Custom SaaS platforms and client portals, NextAuth session management with RBAC, Stripe/Razorpay subscription billing, direct PostgreSQL + Drizzle ORM integration, and automated test pipelines.
+  - *Tech Stack*: Next.js 16, React 19, Node.js, PostgreSQL, Drizzle ORM, Tailwind CSS.
 
 ### 4. AI-Accelerated Engineering
-- **AI-Accelerated Delivery** (Included with all engagements): Rapid prototyping and delivery using Cursor, Claude Code, and GitHub Copilot while personally owning architecture, security, testing, and critical logic.
+- **AI-Accelerated Delivery** (Built into all engagements) · [Anchor](https://samir-portfolio-dev.vercel.app/services#ai-accelerated-delivery)
+  - *Tagline*: Agent-assisted development workflows shipping production-grade code with human-verified security and tests.
+  - *Target Audience*: Startups and engineering leaders wanting 2x-3x shipping speed without technical debt.
+  - *Deliverables*: Accelerated scaffolding via Cursor, Claude Code, and Copilot; strict human ownership of auth, security boundaries, and financial logic; automated CI verification; and complete Git handover.
+  - *Tech Stack*: Cursor, Claude Code, GitHub Copilot, TypeScript, Next.js, CI/CD.
 
 ### Engagement Models for Startups & Clients
-- **Startup MVP & Feature Sprints**: 1 to 4-week fixed-scope sprints for early-stage founders building an MVP, custom knowledge base, or production-grade AI chatbot.
-- **Contract & Dedicated Collaboration**: Flexible freelance contract or monthly retainer for growing engineering teams needing backend and AI support.
-- **Forward Deployed Engineering & Remote Roles**: Customer-embedded Forward Deployed Engineer (FDE) or remote AI Backend Engineer translating ambiguous requirements into deployed production systems across global time zones (US, UK, Europe, APAC).
+- **Startup MVP & Feature Sprints** (From $800 / sprint): 1 to 4-week fixed-scope sprints with guaranteed delivery dates for early-stage founders building an MVP, custom knowledge base, web app, or production AI chatbot.
+- **Contract & Dedicated Collaboration** (From $2,000 / mo): Monthly retainer or flexible contract partnership for growing teams needing ongoing backend, full-stack, or AI engineering velocity.
+- **Forward Deployed Engineering (FDE) & Remote Roles** (Custom Contract / Full-time): Customer-embedded Forward Deployed Engineer (FDE) or remote AI Backend Engineer translating ambiguous requirements into deployed production systems across global time zones (US, UK, Europe, APAC).
 
 ## How I Work (Client Engagement Process)
 
@@ -145,6 +201,7 @@ URL: https://samir-portfolio-dev.vercel.app/services
 2. **Phase 2: Blueprint & Proposal (Day 2–3)**: Fixed-price milestone proposal with clear delivery dates, architecture spec, and signed NDA prior to code access.
 3. **Phase 3: Sprint Execution (Weeks 1–N)**: Rapid development sprints with daily Git commits, async Slack/WhatsApp updates, staging preview URLs, and zero AI shortcuts on security or critical logic.
 4. **Phase 4: Launch & Handover (Final Day)**: Complete deployment to client infrastructure, 100% repository transfer to client org, comprehensive documentation, and a 30-day post-launch warranty included.
+
 
 ## Engineering Principles
 
