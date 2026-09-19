@@ -3,18 +3,22 @@
  * Automated blog generation & publishing orchestrator.
  *
  * Pipeline: topic selection (grounded in llms.txt + existing posts) ->
- * Groq content generation -> Markdown->HTML (sanitized) -> POST /api/blogs
- * -> POST /api/push/send (only if actually published).
+ * AI content generation (provider/model via AI_CHAT_PROVIDER/AI_CHAT_MODEL,
+ * defaults to Groq llama-3.3-70b-versatile) -> Markdown->HTML (sanitized) ->
+ * POST /api/blogs -> POST /api/push/send (only if actually published).
  *
  * RAG re-indexing is NOT triggered separately here: POST /api/blogs already
  * fire-and-forgets indexDocumentForRag() server-side (see app/api/blogs/route.ts).
  *
  * Required env vars (set as GitHub Actions secrets):
- *   GROQ_API_KEY            - Groq API key (same one the chatbot uses)
+ *   GROQ_API_KEY            - Groq API key (required when AI_CHAT_PROVIDER=groq)
  *   SITE_URL                - e.g. https://samir-portfolio-dev.vercel.app
  *   BLOG_AUTOMATION_TOKEN   - shared secret, must match the Vercel env var of the same name
  *
  * Optional:
+ *   AI_CHAT_PROVIDER        - "groq" (default) or "google" (shared with the chatbot)
+ *   AI_CHAT_MODEL           - model ID to use (default: llama-3.3-70b-versatile)
+ *   GOOGLE_GENERATIVE_AI_API_KEY - required when AI_CHAT_PROVIDER=google
  *   AUTO_PUBLISH            - "true" (default) or "false". If "false", posts are
  *                              always saved as drafts (is_published: false) for
  *                              manual review in /admin/blogs before going live.

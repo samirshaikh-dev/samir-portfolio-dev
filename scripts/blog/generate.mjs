@@ -1,7 +1,8 @@
 import { readFile } from "node:fs/promises";
 import { createGroq } from "@ai-sdk/groq";
+import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText } from "ai";
-import { GROQ_API_KEY } from "./config.mjs";
+import { GOOGLE_API_KEY, GROQ_API_KEY, AI_PROVIDER, AI_MODEL } from "./config.mjs";
 import { TOPIC_PILLARS } from "./topics.mjs";
 import { slugify } from "./utils.mjs";
 
@@ -39,7 +40,8 @@ export async function generatePostWithRetry(params, maxRetries = 2) {
 }
 
 /**
- * Generates a blog post using Groq's llama-3.3-70b-versatile model.
+ * Generates a blog post using the provider/model configured via AI_CHAT_PROVIDER
+ * and AI_CHAT_MODEL (defaults to Groq's llama-3.3-70b-versatile).
  * Uses grounded context from llms.txt to prevent hallucinations.
  * Includes anti-patterns list to avoid generic/corporate writing.
  * @param {Object} params - Generation parameters
@@ -49,7 +51,9 @@ export async function generatePostWithRetry(params, maxRetries = 2) {
  * @returns {Promise<Object>} Parsed post with title, slug, excerpt, markdown
  */
 export async function generatePost({ groundingContext, existingTitles, existingSlugs = [] }) {
-  const groq = createGroq({ apiKey: GROQ_API_KEY });
+  const model = AI_PROVIDER === "google"
+    ? createGoogleGenerativeAI({ apiKey: GOOGLE_API_KEY })(AI_MODEL)
+    : createGroq({ apiKey: GROQ_API_KEY })(AI_MODEL);
 
   const systemPrompt = `You are ghostwriting a technical blog post for Samir Shaikh's personal engineering blog.
 
@@ -113,7 +117,7 @@ Full markdown body here...
   let finishReason;
   try {
     const result = await generateText({
-      model: groq("llama-3.3-70b-versatile"),
+      model,
       prompt: systemPrompt,
       temperature: 0.5,
       maxTokens: 3000,
@@ -121,7 +125,7 @@ Full markdown body here...
     text = result.text;
     finishReason = result.finishReason;
   } catch (err) {
-    throw new Error(`Groq generation request failed: ${err.message}`);
+    throw new Error(`AI generation request failed (${AI_PROVIDER}/${AI_MODEL}): ${err.message}`);
   }
 
   if (finishReason === "length") {

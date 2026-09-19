@@ -1,5 +1,5 @@
 import { streamText, convertToModelMessages } from 'ai';
-import { groq } from '@ai-sdk/groq';
+import { getChatModel } from '@/lib/ai-config';
 import { runSecurityChecks } from '@/lib/chat/security';
 import { getRelevantContext } from '@/lib/chat/retrieval';
 import { getSystemPrompt } from '@/lib/chat/prompt';
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     const systemPrompt = getSystemPrompt(contextText);
 
     const result = streamText({
-      model: groq('llama-3.3-70b-versatile'),
+      model: getChatModel(),
       system: systemPrompt,
       messages: await convertToModelMessages(messages),
     });

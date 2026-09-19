@@ -15,6 +15,14 @@ on:
         options:
           - "true"
           - "false"
+      blog_ai_provider:
+        description: "AI provider for blog generation (groq or google)"
+        required: false
+        default: "groq"
+        type: choice
+        options:
+          - "groq"
+          - "google"
 
 jobs:
   generate-post:
@@ -30,11 +38,13 @@ jobs:
           node-version: "22"
 
       - name: Install dependencies needed by the script
-        run: npm install --no-save @ai-sdk/groq ai unified remark-parse remark-gfm remark-rehype rehype-sanitize rehype-stringify
+        run: npm install --no-save @ai-sdk/groq @ai-sdk/google ai unified remark-parse remark-gfm remark-rehype rehype-sanitize rehype-stringify
 
       - name: Generate and publish blog post
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GOOGLE_GENERATIVE_AI_API_KEY: ${{ secrets.GOOGLE_GENERATIVE_AI_API_KEY }}
+          AI_CHAT_PROVIDER: ${{ inputs.blog_ai_provider || 'groq' }}
           NEXTAUTH_URL: ${{ secrets.NEXTAUTH_URL }}
           BLOG_AUTOMATION_TOKEN: ${{ secrets.BLOG_AUTOMATION_TOKEN }}
           ENABLE_BLOG_AUTOMATION: "true"

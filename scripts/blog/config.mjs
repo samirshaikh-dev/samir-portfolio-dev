@@ -7,7 +7,10 @@ if (!rawSiteUrl) {
 }
 
 export const SITE_URL = rawSiteUrl.replace(/\/$/, "");
-export const GROQ_API_KEY = requireEnv("GROQ_API_KEY");
+export const AI_PROVIDER = (process.env.AI_CHAT_PROVIDER ?? "groq").toLowerCase();
+export const AI_MODEL = process.env.AI_CHAT_MODEL ?? "llama-3.3-70b-versatile";
+export const GROQ_API_KEY = AI_PROVIDER === "google" ? "" : requireEnv("GROQ_API_KEY");
+export const GOOGLE_API_KEY = AI_PROVIDER === "google" ? requireEnv("GOOGLE_GENERATIVE_AI_API_KEY") : "";
 export const AUTOMATION_TOKEN = requireEnv("BLOG_AUTOMATION_TOKEN");
 export const AUTO_PUBLISH = (process.env.AUTO_PUBLISH ?? "true").toLowerCase() !== "false";
 export const ENABLE_BLOG_AUTOMATION = process.env.ENABLE_BLOG_AUTOMATION === "true";

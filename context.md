@@ -262,8 +262,10 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 | `GITHUB_CLIENT_ID` | GitHub OAuth client ID | NextAuth GitHub provider |
 | `GITHUB_CLIENT_SECRET`| GitHub OAuth client secret | NextAuth GitHub provider |
 | `CLOUDINARY_URL` | Cloudinary connection string | Format: `cloudinary://key:secret@cloud_name` |
-| `GROQ_API_KEY` | Groq API key | AI Chatbot & automated blog generation |
-| `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini API key | 3072d embeddings for RAG (`gemini-embedding-2`) |
+| `GROQ_API_KEY` | Groq API key | AI Chatbot & automated blog generation (required when `AI_CHAT_PROVIDER` is `groq`) |
+| `GOOGLE_GENERATIVE_AI_API_KEY` | Gemini API key | 3072d embeddings for RAG (`gemini-embedding-2`) + chat/blog generation when provider is `google` |
+| `AI_CHAT_PROVIDER` | Chat & blog pipeline provider | `groq` (default) or `google`, read in `lib/ai-config.ts` and `scripts/blog/config.mjs` |
+| `AI_CHAT_MODEL` | Chat & blog pipeline model ID | Defaults to `llama-3.3-70b-versatile` |
 | `GITHUB_TOKEN` | GitHub Personal Access Token | GraphQL user stats & REST public events |
 | `SMTP_HOST` | Nodemailer SMTP server host | Contact reply and confirmation emails (e.g. `smtp.gmail.com`) |
 | `SMTP_PORT` | Nodemailer SMTP port | E.g. 465 or 587 |
