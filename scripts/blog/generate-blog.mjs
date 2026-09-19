@@ -4,7 +4,9 @@
  *
  * Pipeline: topic selection (grounded in llms.txt + existing posts) ->
  * AI content generation (provider/model via AI_CHAT_PROVIDER/AI_CHAT_MODEL,
- * defaults to Groq llama-3.3-70b-versatile) -> Markdown->HTML (sanitized) ->
+ * defaults to Groq llama-3.3-70b-versatile; SEO/AEO guidance loaded at runtime
+ * from agents/skills/seo-engineer, seo-keyword-research-implementation, and
+ * personal-seo-profile-optimizer) -> Markdown->HTML (sanitized) ->
  * POST /api/blogs -> POST /api/push/send (only if actually published).
  *
  * RAG re-indexing is NOT triggered separately here: POST /api/blogs already
@@ -26,7 +28,7 @@
  *                              of AUTO_PUBLISH (default: 350)
  */
 
-import { ENABLE_BLOG_AUTOMATION, AUTO_PUBLISH, SITE_URL } from "./config.mjs";
+import { ENABLE_BLOG_AUTOMATION, AUTO_PUBLISH, SITE_URL, AI_PROVIDER, AI_MODEL } from "./config.mjs";
 import { fetchExistingTitles, publishBlog, notifySubscribers } from "./api/index.mjs";
 import { loadGroundingContext, generatePostWithRetry } from "./generate.mjs";
 import { markdownToSafeHtml } from "./convert.mjs";
@@ -55,17 +57,17 @@ async function main() {
       console.log("Loading grounding context from public/llms.txt...");
       const groundingContext = await loadGroundingContext();
 
-      console.log("Generating post with Groq (llama-3.3-70b-versatile)...");
+      console.log(`Generating post with ${AI_PROVIDER} (${AI_MODEL})...`);
       const post = await generatePostWithRetry({ groundingContext, existingTitles, existingSlugs });
 
       console.log("Running quality checks...");
       const validation = validatePost(post);
-      console.log(`Quality score: ${validation.score}/7 | Checks:`, validation.checks);
+      console.log(`Quality score: ${validation.score}/9 | Keyword: ${post.keyword || "(none matched)"} | Checks:`, validation.checks);
 
       const shouldPublish = AUTO_PUBLISH && validation.passes;
 
       if (!validation.passes) {
-        console.warn(`Quality gate failed (score ${validation.score}/7) — saving as draft.`);
+        console.warn(`Quality gate failed (score ${validation.score}/9) — saving as draft.`);
       }
 
       console.log(`Converting markdown to sanitized HTML for: "${post.title}"`);
@@ -93,6 +95,7 @@ async function main() {
         attempt,
         title: post.title,
         slug: post.slug,
+        keyword: post.keyword,
         wordCount: validation.wordCount,
         qualityScore: validation.score,
         published: shouldPublish,

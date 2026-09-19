@@ -136,10 +136,11 @@ scripts/
     ├── api/                   # API clients (fetch-existing-titles, publish-blog, notify-subscribers)
     ├── config.mjs             # Environment checks and constants
     ├── convert.mjs            # Markdown → sanitized HTML (unified, remark, rehype, rehype-sanitize)
-    ├── generate.mjs           # Groq content generator grounded in public/llms.txt with retry logic
+    ├── generate.mjs           # AI content generator grounded in public/llms.txt + SEO skills, with retry logic
     ├── generate-blog.mjs      # Main entry point / orchestrator script (pnpm run generate-blog)
+    ├── skills.mjs             # Loads the 3 SEO skill files at runtime for prompt grounding (fail-open)
     ├── topics.mjs             # Rotating topic pillars with SEO metadata, target keywords, and outlines
-    └── validate.mjs           # 7-point quality gate (word count, code snippets, keyword presence, etc.)
+    └── validate.mjs           # 9-point quality gate (word count, code snippets, keyword in title, direct answer)
 docs/                          # Documentation
 ├── design.md                  # Design system & aesthetic guidelines
 ├── prd.md                     # Product Requirements Document
@@ -245,8 +246,9 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 - **Workflow:** `.github/workflows/auto-blog.yml` runs every 3 days (plus manual trigger) executing `scripts/blog/generate-blog.mjs`.
 - **Modular Pipeline:**
   - `topics.mjs`: Topic pillars with target keywords, search intent, cluster relationships, and outlines.
-  - `generate.mjs`: Groq `llama-3.3-70b-versatile` generates post grounded in `public/llms.txt` and existing titles.
-  - `validate.mjs`: Quality check enforcing word counts (`MIN_WORD_COUNT`, default 350), code blocks, and outlines.
+  - `generate.mjs`: Provider/model (`AI_CHAT_PROVIDER`/`AI_CHAT_MODEL`) generates post grounded in the technical core of `public/llms.txt` (client-process/pricing/legal sections stripped), existing titles, and SEO/AEO guidance — distilled `SEO_DIRECTIVES` by default, full skill files when `BLOG_FULL_SKILL_REFS=true`. Includes a pre-flight token guard (`BLOG_PROMPT_BUDGET`, default 6000) that falls back full refs → distilled and fails fast before the API call if still over budget.
+  - `validate.mjs`: 9-point quality gate enforcing word counts (`MIN_WORD_COUNT`, default 350), code blocks, headings, matched-keyword presence in title, and direct-answer openings (`score >= 6` passes).
+  - `skills.mjs`: Exports the compact `SEO_DIRECTIVES` block (default prompt guidance) plus `getSeoGuidance()`/`loadSeoSkillGuidance()`, which load the three SEO skill files at runtime, strip YAML frontmatter, and return combined reference text when `BLOG_FULL_SKILL_REFS=true` (fail-open).
   - `convert.mjs`: Sanitizes markdown to HTML with `rehype-sanitize`.
   - `publish-blog.mjs` & `notify-subscribers.mjs`: Posts to `/api/blogs` and triggers Web Push to subscribers if published.
 
@@ -283,6 +285,8 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 | `SITE_URL` | Site root URL override | Used by scripts; falls back to `NEXTAUTH_URL` |
 | `AUTO_PUBLISH` | Blog pipeline publish mode | Defaults to `'true'`; set `'false'` to save drafts |
 | `MIN_WORD_COUNT` | Minimum word count quality gate | Defaults to 350 |
+| `BLOG_FULL_SKILL_REFS` | Load full SEO skill files at runtime | Set `'true'` to enable; default `false` uses distilled `SEO_DIRECTIVES` |
+| `BLOG_PROMPT_BUDGET` | Max assembled prompt size for generation | Defaults to 6000 (estimated tokens); fails fast when exceeded |
 | `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Redis credentials | Listed in `.env.example` for planned persistent rate limiting |
 
 ## Critical Rules & Gotchas

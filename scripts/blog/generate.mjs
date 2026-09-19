@@ -5,17 +5,51 @@ import { generateText } from "ai";
 import { GOOGLE_API_KEY, GROQ_API_KEY, AI_PROVIDER, AI_MODEL } from "./config.mjs";
 import { TOPIC_PILLARS } from "./topics.mjs";
 import { slugify } from "./utils.mjs";
+import { SEO_DIRECTIVES, getSeoGuidance } from "./skills.mjs";
+
+// Sections of public/llms.txt that are irrelevant to writing technical blog
+// posts (client process / pricing / legal boilerplate). Dropping them keeps
+// the prompt small enough for low-token-budget providers/tiers.
+const GROUNDING_SKIP_SECTIONS = new Set([
+  "## Quick Links",
+  "## Engineering & Freelance Services Offered",
+  "## How I Work (Client Engagement Process)",
+  "## Legal",
+]);
+
+const DEFAULT_PROMPT_BUDGET = 6000;
 
 /**
- * Loads the grounding context from public/llms.txt.
+ * Estimates token count from character length (rough, conservative).
+ * @param {string} text
+ * @returns {number}
+ */
+function estimateTokens(text) {
+  return text ? Math.ceil(text.length / 4) : 0;
+}
+
+/**
+ * Loads the technical grounding context from public/llms.txt.
  * This file contains verified facts about Samir's skills, projects, and experience.
  * The AI model uses this to generate accurate, non-hallucinated content.
+ * Non-technical sections (Quick Links, services/pricing, engagement process, legal)
+ * are stripped to conserve prompt budget.
  * Runs in GitHub Actions where the repo is already cloned.
  * @returns {Promise<string>} The grounding context text, empty string if file not found
  */
 export async function loadGroundingContext() {
   try {
-    return await readFile(new URL("../../public/llms.txt", import.meta.url), "utf-8");
+    const raw = await readFile(new URL("../../public/llms.txt", import.meta.url), "utf-8");
+    const lines = raw.split("\n");
+    const kept = [];
+    let inSkippedSection = false;
+    for (const line of lines) {
+      if (/^## /.test(line)) {
+        inSkippedSection = GROUNDING_SKIP_SECTIONS.has(line.trim());
+      }
+      if (!inSkippedSection) kept.push(line);
+    }
+    return kept.join("\n").trim();
   } catch {
     console.warn("public/llms.txt not found, generating without grounding context.");
     return "";
@@ -55,7 +89,14 @@ export async function generatePost({ groundingContext, existingTitles, existingS
     ? createGoogleGenerativeAI({ apiKey: GOOGLE_API_KEY })(AI_MODEL)
     : createGroq({ apiKey: GROQ_API_KEY })(AI_MODEL);
 
-  const systemPrompt = `You are ghostwriting a technical blog post for Samir Shaikh's personal engineering blog.
+  const { text: seoSkillGuidance, mode: guidanceMode } = await getSeoGuidance();
+
+  const titlesDump = existingTitles.length ? existingTitles.map((t) => `- ${t}`).join("\n") : "(none yet)";
+  const pillarDump = TOPIC_PILLARS.map((p, i) =>
+    `[${i}] ${p.title} — main keyword: ${p.seo.mainKeyword} — outline: ${p.outline.join(" → ")}`
+  ).join("\n\n");
+
+  const buildPrompt = (skillText) => `You are ghostwriting a technical blog post for Samir Shaikh's personal engineering blog.
 
 GROUNDING FACTS (only true, verifiable information about Samir — do not invent experience, employers, metrics, or claims beyond what's here or reasonably explained as general technical knowledge):
 <CONTEXT>
@@ -63,19 +104,20 @@ ${groundingContext}
 </CONTEXT>
 
 ALREADY-PUBLISHED TITLES (write about something meaningfully different from all of these):
-${existingTitles.length ? existingTitles.map((t) => `- ${t}`).join("\n") : "(none yet)"}
+${titlesDump}
 
 CANDIDATE TOPIC PILLARS — pick the one least covered by the titles above, narrow it to one concrete angle, and follow its SEO brief:
-${TOPIC_PILLARS.map((p, i) => `[${i}] ${p.title}
-    main keyword: ${p.seo.mainKeyword}
-    long-tail: ${p.seo.longTailKeywords.join(", ")}
-    audience: ${p.seo.audience}
-    outline: ${p.outline.join(" → ")}`).join("\n\n")}
+${pillarDump}
+
+SEO / AEO / PERSONAL-AUTHORITY SKILL REFERENCES — these are the site's own SEO engineering skills. Apply them to this post as mandatory requirements:
+<SEO_SKILL_REFERENCES>
+${skillText}
+</SEO_SKILL_REFERENCES>
 
 SEO WRITING RULES:
 1. Use the main keyword naturally in the first paragraph, the H1 title, and at least one H2 heading.
 2. Sprinkle 2–3 long-tail keywords across H2/H3 headings and body prose — never stuff them.
-3. Structure: H1 title → intro (keyword in first sentence) → H2 sections matching the outline → conclusion with internal links.
+3. Structure: H1 title → intro (keyword in first sentence, direct answer to the post's main question) → H2 sections matching the outline → conclusion with internal links.
 4. Each H2 should be a clear, scannable heading (problem, architecture, implementation, pitfalls, conclusion pattern).
 5. Include at least one code block per major H2 section — tested, runnable code ranks higher than prose alone.
 6. End with a conclusion that links to 1–2 related pillar articles (use the relatedTo indices above).
@@ -113,12 +155,31 @@ OUTPUT FORMAT: Respond with ONLY the following structure (no markdown fences, no
 Full markdown body here...
 </markdown>`;
 
+  let prompt = buildPrompt(seoSkillGuidance);
+  const budget = Number(process.env.BLOG_PROMPT_BUDGET ?? DEFAULT_PROMPT_BUDGET) || DEFAULT_PROMPT_BUDGET;
+
+  if (estimateTokens(prompt) > budget && guidanceMode === "full-skill-refs") {
+    console.warn(
+      `[generate.mjs] Prompt ~${estimateTokens(prompt)} tokens exceeds BLOG_PROMPT_BUDGET (${budget}); falling back to distilled skill directives.`
+    );
+    prompt = buildPrompt(SEO_DIRECTIVES);
+  }
+
+  if (estimateTokens(prompt) > budget) {
+    throw new Error(
+      `Prompt is ~${estimateTokens(prompt)} tokens which exceeds BLOG_PROMPT_BUDGET (${budget}). ` +
+      `Reduce prompt size (e.g. shorten grounding context) or raise BLOG_PROMPT_BUDGET for this provider/tier.`
+    );
+  }
+
+  console.log(`[generate.mjs] Prompt ready: ~${estimateTokens(prompt)} tokens (${guidanceMode} skill guidance, budget ${budget}).`);
+
   let text;
   let finishReason;
   try {
     const result = await generateText({
       model,
-      prompt: systemPrompt,
+      prompt,
       temperature: 0.5,
       maxTokens: 3000,
     });
@@ -196,5 +257,64 @@ Full markdown body here...
     console.warn(`[generatePost] Slug collision resolved: appended -${suffix}`);
   }
 
+  // Attach the best-matching pillar keyword so the validator can enforce
+  // keyword presence in title/body (anti-cannibalization, per the SEO skills).
+  parsed.keyword = findMatchedKeyword({
+    title: parsed.title,
+    excerpt: parsed.excerpt,
+    markdown: parsed.markdown,
+    metaTitle: parsed.metaTitle,
+  });
+
   return parsed;
+}
+
+/**
+ * Scores every pillar's main + long-tail keywords by occurrence across the
+ * generated post and returns the single best-matching main keyword.
+ * Case-, space-, and punctuation-insensitive matching.
+ * @param {Object} post - { title, excerpt, markdown, metaTitle }
+ * @returns {string} The matched main keyword (or "" if none found)
+ */
+export function findMatchedKeyword(post) {
+  const haystack = normalizeText(
+    [post.title, post.metaTitle, post.excerpt, post.markdown].filter(Boolean).join(" ")
+  );
+  let best = null;
+  let bestScore = 0;
+
+  for (const pillar of TOPIC_PILLARS) {
+    const score = scoreKeyword(haystack, pillar.seo.mainKeyword) +
+      pillar.seo.longTailKeywords.reduce((acc, k) => acc + scoreKeyword(haystack, k), 0);
+    if (score > bestScore) {
+      bestScore = score;
+      best = pillar.seo.mainKeyword;
+    }
+  }
+
+  return bestScore > 0 ? best : "";
+}
+
+/**
+ * Normalizes text for keyword matching: lowercase, collapse whitespace,
+ * strip punctuation.
+ * @param {string} text
+ * @returns {string}
+ */
+function normalizeText(text) {
+  return text.toLowerCase().replace(/[\u2018\u2019'"]/g, "'").replace(/[.,/#!$%^&*;:{}=\-_`~()\[\]]/g, " ").replace(/\s+/g, " ").trim();
+}
+
+/**
+ * Counts non-overlapping occurrences of a keyword phrase in normalized text.
+ * @param {string} haystack - normalized text
+ * @param {string} keyword - raw keyword phrase
+ * @returns {number} occurrence count
+ */
+function scoreKeyword(haystack, keyword) {
+  const needle = normalizeText(keyword);
+  if (!needle) return 0;
+  const escaped = needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const matches = haystack.match(new RegExp(escaped, "g"));
+  return matches ? matches.length : 0;
 }
