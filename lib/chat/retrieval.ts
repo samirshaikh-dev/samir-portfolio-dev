@@ -31,6 +31,7 @@ function getMatchingServices(queryText: string): string {
     const descLower = service.description.toLowerCase();
     const techLower = service.techStack.map((t) => t.toLowerCase());
     const delivLower = service.deliverables.map((d) => d.toLowerCase());
+    const tagsLower = service.tags?.map((t) => t.toLowerCase()) || [];
 
     if (titleLower.includes(query)) score += 10;
     if (taglineLower.includes(query)) score += 6;
@@ -38,6 +39,7 @@ function getMatchingServices(queryText: string): string {
     for (const word of words) {
       if (titleLower.includes(word)) score += 4;
       if (taglineLower.includes(word)) score += 3;
+      if (tagsLower.some((t) => t.includes(word))) score += 3;
       if (techLower.some((t) => t.includes(word))) score += 2;
       if (delivLower.some((d) => d.includes(word))) score += 2;
       if (descLower.includes(word)) score += 1;
@@ -73,10 +75,12 @@ function getMatchingServices(queryText: string): string {
     let score = 0;
     const qLower = faq.question.toLowerCase();
     const aLower = faq.answer.toLowerCase();
+    const tagsLower = faq.tags?.map((t) => t.toLowerCase()) || [];
 
     if (qLower.includes(query)) score += 10;
     for (const word of words) {
       if (qLower.includes(word)) score += 3;
+      if (tagsLower.some((t) => t.includes(word))) score += 2;
       if (aLower.includes(word)) score += 1;
     }
     return { faq, score };

@@ -7,6 +7,7 @@ import {
   LINKEDIN_URL,
   GITHUB_URL,
 } from "@/lib/site-config";
+import { SERVICE_CATEGORIES } from "@/lib/data/services";
 
 export const SAME_AS = [
   LINKEDIN_URL,
@@ -15,12 +16,13 @@ export const SAME_AS = [
 
 /**
  * Long-tail, intent-rich search phrases the brand should be associated with.
- * Surfaced as `keywords` on the WebSite/Organization nodes to strengthen GEO
- * (Generative Engine Optimization) entity relationships.
+ * Surfaced as `keywords` on the WebSite/Organization/ProfessionalService nodes to strengthen GEO
+ * (Generative Engine Optimization) entity relationships and AI answer engine citations.
  */
 export const LONGTAIL_KEYWORDS = [
   "freelance AI developer",
   "freelance AI engineer",
+  "freelance AI developer fixed price",
   "freelance website developer",
   "freelance backend developer",
   "freelance full stack developer",
@@ -39,7 +41,7 @@ export const LONGTAIL_KEYWORDS = [
   "AI chatbot for website",
   "AI chatbot for SaaS",
   "custom knowledge base AI",
-  "custom knowledge base",
+  "custom knowledge base with pgvector",
   "stop chatbot from hallucinating",
   "improve AI chatbot accuracy",
   "production-grade AI chatbot",
@@ -48,10 +50,12 @@ export const LONGTAIL_KEYWORDS = [
   "RAG chatbot development",
   "AI workflow automation for startups",
   "AI agent development services",
+  "AI agent development with tool calling",
   "AI development services",
   "custom AI development",
   "Forward Deployed Engineer for AI products",
   "hire Forward Deployed AI Engineer",
+  "Forward Deployed Engineer FDE contract",
   "hire AI-enabled full stack developer",
   "AI-enabled full stack developer backend-first",
   "vector search and semantic search implementation",
@@ -61,6 +65,7 @@ export const LONGTAIL_KEYWORDS = [
   "build a semantic search engine with pgvector",
   "production RAG pipeline with pgvector and Gemini",
   "agentic AI orchestration and tool execution",
+  "deterministic AI agents with Zod validation",
   "NestJS API development for SaaS",
   "reduce LLM hallucinations with RAG",
   "custom REST and GraphQL API development",
@@ -138,107 +143,24 @@ export const AREA_SERVED = [
   "Worldwide (Remote)",
 ];
 
-/** Concrete, problem-oriented services offered. */
-export const SERVICES = [
-  {
-    name: "Custom Knowledge Bases & RAG Systems",
-    description:
-      "Build production-grade AI chatbots for websites and SaaS grounded in custom knowledge bases with pgvector, semantic search, and hallucination mitigation.",
-    price: "900",
-    priceCurrency: "USD",
-    priceLabel: "From $900 / ₹75,000",
-  },
-  {
-    name: "AI Agents & Workflow Automation",
-    description:
-      "Develop production-grade AI agent workflows that use tools, APIs, structured schemas, and guardrails to automate multi-step business tasks.",
-    price: "800",
-    priceCurrency: "USD",
-    priceLabel: "From $800 / ₹65,000",
-  },
-  {
-    name: "AI Product Development & Integration",
-    description:
-      "Turn AI use cases into production-ready product features, from discovery and rapid prototypes to seamless database and UI integration.",
-    price: "1200",
-    priceCurrency: "USD",
-    priceLabel: "From $1,200 / ₹1,00,000",
-  },
-  {
-    name: "LLM Integration & AI User Experiences",
-    description:
-      "Integrate LLMs into applications with low-latency streaming responses, conversational workflows, usage controls, and reliable error recovery.",
-    price: "500",
-    priceCurrency: "USD",
-    priceLabel: "From $500 / ₹40,000",
-  },
-  {
-    name: "Production Backend APIs & System Design",
-    description:
-      "Design and build reliable backend systems, REST/GraphQL APIs, authentication, database architecture, caching, and performance improvements.",
-    price: "600",
-    priceCurrency: "USD",
-    priceLabel: "From $600 / ₹50,000",
-  },
-  {
-    name: "Event-Driven Systems & Background Processing",
-    description:
-      "Build scalable asynchronous workflows using queues, event-driven architecture, scheduled jobs, and distributed processing.",
-    price: "500",
-    priceCurrency: "USD",
-    priceLabel: "From $500 / ₹40,000",
-  },
-  {
-    name: "Cloud, DevOps & Observability",
-    description:
-      "Containerize applications and establish CI/CD, logging, monitoring, metrics, tracing, and production reliability practices.",
-    price: "400",
-    priceCurrency: "USD",
-    priceLabel: "From $400 / ₹35,000",
-  },
-  {
-    name: "Custom Website Development & Landing Pages",
-    description:
-      "Build fast, modern, and mobile-responsive business websites and high-converting landing pages with Next.js, React, and Tailwind CSS.",
-    price: "300",
-    priceCurrency: "USD",
-    priceLabel: "From $300 / ₹25,000",
-  },
-  {
-    name: "SEO Services & Search Engine Optimization",
-    description:
-      "Comprehensive SEO services including technical SEO audits, on-page optimization, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO).",
-    price: "200",
-    priceCurrency: "USD",
-    priceLabel: "From $200 / ₹15,000",
-  },
-  {
-    name: "Website Redesign & Speed Optimization",
-    description:
-      "Modernize slow-loading, outdated websites to score 90+ on Google PageSpeed Insights and ace Core Web Vitals (LCP, CLS, INP).",
-    price: "250",
-    priceCurrency: "USD",
-    priceLabel: "From $250 / ₹20,000",
-  },
-  {
-    name: "Full-Stack Web Application Development",
-    description:
-      "Build custom web applications, customer portals, and SaaS dashboards with Next.js, React, Node.js, and secure databases.",
-    price: "1200",
-    priceCurrency: "USD",
-    priceLabel: "From $1,200 / ₹1,00,000",
-  },
-  {
-    name: "AI-Accelerated Engineering",
-    description:
-      "Ship production features fast with Cursor, Claude Code, and Copilot while personally owning architecture, security, testing, and critical logic.",
-    price: "0",
-    priceCurrency: "USD",
-    priceLabel: "Included with all engagements",
-  },
-] as const;
+/** Concrete, problem-oriented services offered dynamically mapped from the canonical service definitions. */
+export const SERVICES = SERVICE_CATEGORIES.flatMap((cat) =>
+  cat.services.map((service) => ({
+    id: service.id,
+    name: service.title,
+    description: service.description,
+    price: service.priceAmount || "0",
+    priceCurrency: service.priceCurrency || "USD",
+    priceLabel: service.startingPrice || "Custom Quote",
+    category: cat.title,
+    serviceType: service.title,
+    audience: service.audience,
+    deliverables: service.deliverables,
+    techStack: service.techStack,
+  }))
+);
 
-/** Reusable Offer nodes built from SERVICES (shared by Person + Organization). */
+/** Reusable Offer nodes built from SERVICES (shared by Person, Organization, and ProfessionalService). */
 const SERVICE_OFFERS = SERVICES.map((service) => ({
   "@type": "Offer",
   ...(service.price !== "0" && {
@@ -251,17 +173,29 @@ const SERVICE_OFFERS = SERVICES.map((service) => ({
       unitText: service.priceLabel,
     },
   }),
-  url: `${APP_URL}/services`,
+  url: `${APP_URL}/services#${service.id}`,
+  availability: "https://schema.org/InStock",
+  validFrom: "2025-01-01",
   itemOffered: {
     "@type": "Service",
     name: service.name,
     serviceType: service.name,
+    category: service.category,
     description: service.description,
+    url: `${APP_URL}/services#${service.id}`,
     provider: {
       "@type": "Person",
       name: AUTHOR_NAME,
       url: APP_URL,
     },
+    areaServed: AREA_SERVED,
+    termsOfService: `${APP_URL}/terms-of-service`,
+    ...(service.audience && {
+      audience: {
+        "@type": "Audience",
+        audienceType: service.audience,
+      },
+    }),
   },
 }));
 
@@ -293,6 +227,16 @@ export function getRootJsonLd() {
         educationalCredentialAwarded: "Bachelor of Technology in Information Technology",
       },
       hasOccupation: [
+        {
+          "@type": "Occupation",
+          name: "Forward Deployed Engineer (FDE)",
+          occupationLocation: {
+            "@type": "Country",
+            name: "IN",
+          },
+          skills: "AI Backend Engineering, Rapid Prototyping, Customer-Embedded Delivery, Production RAG Systems, AI Agents, PostgreSQL, pgvector, Next.js, API Integration, Production Hardening",
+          validFrom: "2026",
+        },
         {
           "@type": "Occupation",
           name: "Freelance AI Developer",
@@ -527,22 +471,39 @@ export function getServiceJsonLd() {
     url: `${APP_URL}/services`,
     image: `${APP_URL}/Filled_Logo.png`,
     description:
-      "Freelance AI and full-stack engineering services: custom knowledge bases, RAG chatbots, AI workflow automation, Next.js web applications, high-throughput APIs, and technical SEO with transparent sprint pricing for startups and businesses.",
+      "Freelance AI developer, full-stack engineer, and Forward Deployed Engineer (FDE). Custom knowledge bases, production RAG chatbots, deterministic AI agents, high-converting Next.js business websites, scalable backend APIs, and technical SEO with fixed milestone pricing.",
     provider: {
       "@type": "Person",
       name: AUTHOR_NAME,
       url: APP_URL,
+      email: AUTHOR_EMAIL,
+      telephone: AUTHOR_PHONE,
+      jobTitle: "Freelance AI Developer & Full Stack Engineer",
+      sameAs: SAME_AS,
     },
     areaServed: AREA_SERVED,
-    knowsAbout: INDUSTRIES_SERVED,
+    knowsAbout: [
+      ...INDUSTRIES_SERVED,
+      "Retrieval-Augmented Generation (RAG)",
+      "PostgreSQL pgvector & Semantic Search",
+      "AI Agent Workflows & Tool Calling",
+      "Next.js 16 & React 19 Full-Stack Engineering",
+      "Technical SEO & Schema.org JSON-LD",
+      "Core Web Vitals Speed Optimization",
+      "Distributed Backend Systems & BullMQ",
+    ],
+    priceRange: "$200 - $2500+",
+    currenciesAccepted: "USD, INR",
+    paymentAccepted: "Bank Transfer, Stripe, Wire Transfer",
     keywords: LONGTAIL_KEYWORDS.join(", "),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Freelance AI & Web Engineering Services",
+      name: "Freelance AI, Backend & Web Engineering Services",
       itemListElement: SERVICE_OFFERS,
     },
   };
 }
+
 
 /**
  * ContactPage JSON-LD for the /contact page.
