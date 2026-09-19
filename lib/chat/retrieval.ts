@@ -5,8 +5,124 @@ import { contentChunks, blogs, projects } from '@/lib/schema';
 import { cosineDistance, inArray } from 'drizzle-orm';
 import { getRecentGithubEvents } from '@/lib/github';
 import { FAQS } from '@/lib/data/faqs';
+import {
+  SERVICE_CATEGORIES,
+  ENGAGEMENT_MODELS,
+  SERVICES_FAQS,
+} from '@/lib/data/services';
 
 const MAX_DISTANCE = 0.5;
+
+const ALL_SERVICES = SERVICE_CATEGORIES.flatMap((c) =>
+  c.services.map((s) => ({ ...s, category: c.title }))
+);
+
+function getMatchingServices(queryText: string): string {
+  const query = queryText.toLowerCase().trim();
+  if (!query) return '';
+  const words = query.split(/\s+/).filter((w) => w.length > 2);
+  if (words.length === 0) return '';
+
+  // 1. Match individual service offerings
+  const matchedServices = ALL_SERVICES.map((service) => {
+    let score = 0;
+    const titleLower = service.title.toLowerCase();
+    const taglineLower = service.tagline.toLowerCase();
+    const descLower = service.description.toLowerCase();
+    const techLower = service.techStack.map((t) => t.toLowerCase());
+    const delivLower = service.deliverables.map((d) => d.toLowerCase());
+
+    if (titleLower.includes(query)) score += 10;
+    if (taglineLower.includes(query)) score += 6;
+
+    for (const word of words) {
+      if (titleLower.includes(word)) score += 4;
+      if (taglineLower.includes(word)) score += 3;
+      if (techLower.some((t) => t.includes(word))) score += 2;
+      if (delivLower.some((d) => d.includes(word))) score += 2;
+      if (descLower.includes(word)) score += 1;
+    }
+    return { service, score };
+  })
+    .filter((item) => item.score >= 4)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2);
+
+  // 2. Match engagement models (e.g., retainer, sprint, FDE, contract)
+  const matchedEngagements = ENGAGEMENT_MODELS.map((model) => {
+    let score = 0;
+    const titleLower = model.title.toLowerCase();
+    const subLower = model.subtitle.toLowerCase();
+    const highlightsLower = model.highlights.map((h) => h.toLowerCase());
+
+    if (titleLower.includes(query)) score += 8;
+
+    for (const word of words) {
+      if (titleLower.includes(word)) score += 3;
+      if (subLower.includes(word)) score += 2;
+      if (highlightsLower.some((h) => h.includes(word))) score += 2;
+    }
+    return { model, score };
+  })
+    .filter((item) => item.score >= 4)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 1);
+
+  // 3. Match services FAQs
+  const matchedServicesFaqs = SERVICES_FAQS.map((faq) => {
+    let score = 0;
+    const qLower = faq.question.toLowerCase();
+    const aLower = faq.answer.toLowerCase();
+
+    if (qLower.includes(query)) score += 10;
+    for (const word of words) {
+      if (qLower.includes(word)) score += 3;
+      if (aLower.includes(word)) score += 1;
+    }
+    return { faq, score };
+  })
+    .filter((item) => item.score >= 4)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 1);
+
+  const parts: string[] = [];
+
+  matchedServices.forEach((m, i) => {
+    parts.push(
+      `--- Context Service ${i + 1} (Services & Offerings) ---\n` +
+      `Exact Title: Service - ${m.service.title}\n` +
+      `URL: /services#${m.service.id}\n` +
+      `Starting Price: ${m.service.startingPrice || 'Custom Quote'}\n` +
+      `Summary: ${m.service.tagline}\n` +
+      `Description: ${m.service.description}\n` +
+      `Key Deliverables:\n${m.service.deliverables.map((d) => `- ${d}`).join('\n')}\n` +
+      `Tech Stack: ${m.service.techStack.join(', ')}`
+    );
+  });
+
+  matchedEngagements.forEach((m) => {
+    parts.push(
+      `--- Context Engagement Model (Services & Engagement) ---\n` +
+      `Exact Title: Engagement Model - ${m.model.title}\n` +
+      `URL: /services\n` +
+      `Starting Rate: ${m.model.startingPrice}\n` +
+      `Overview: ${m.model.subtitle}\n` +
+      `Highlights:\n${m.model.highlights.map((h) => `- ${h}`).join('\n')}`
+    );
+  });
+
+  matchedServicesFaqs.forEach((m) => {
+    parts.push(
+      `--- Context Service FAQ (Services Knowledge Base) ---\n` +
+      `Exact Title: Service FAQ - ${m.faq.question}\n` +
+      `URL: /services\n` +
+      `Question: ${m.faq.question}\n` +
+      `Answer: ${m.faq.answer}`
+    );
+  });
+
+  return parts.join('\n\n');
+}
 
 function getMatchingFaqs(queryText: string): string {
   const query = queryText.toLowerCase().trim();
@@ -75,6 +191,7 @@ export async function getRelevantContext(messages: string[]): Promise<string> {
   try {
     const latestMessage = messages[messages.length - 1] || '';
     const matchedFaqs = getMatchingFaqs(latestMessage);
+    const matchedServices = getMatchingServices(latestMessage);
 
     // Embed last 2-3 messages joined for better follow-up understanding
     const embedWindow = messages.slice(-3).join(' ');
@@ -162,6 +279,11 @@ export async function getRelevantContext(messages: string[]): Promise<string> {
     // Append in-memory matched FAQs if relevant
     if (matchedFaqs) {
       contextText = contextText ? `${contextText}\n\n${matchedFaqs}` : matchedFaqs;
+    }
+
+    // Append in-memory matched Services if relevant
+    if (matchedServices) {
+      contextText = contextText ? `${contextText}\n\n${matchedServices}` : matchedServices;
     }
 
     return contextText;
