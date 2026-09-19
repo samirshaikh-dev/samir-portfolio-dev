@@ -1,3 +1,23 @@
+interface LanguageEdge {
+  size: number;
+}
+
+interface RepoNode {
+  stargazerCount: number;
+  languages?: {
+    edges?: LanguageEdge[];
+  };
+}
+
+interface ContributionDayItem {
+  contributionCount: number;
+  date: string;
+}
+
+interface ContributionWeekItem {
+  contributionDays: ContributionDayItem[];
+}
+
 export async function getGithubStats(token: string, username: string) {
   const query = `
     query($username: String!) {
@@ -46,7 +66,7 @@ export async function getGithubStats(token: string, username: string) {
       query,
       variables: { username },
     }),
-    next: { revalidate: 3600 },
+    cache: "no-store",
   });
 
   if (!response.ok) {
@@ -63,10 +83,10 @@ export async function getGithubStats(token: string, username: string) {
   let totalStars = 0;
   let totalBytes = 0;
 
-  user.repositories.nodes.forEach((repo: any) => {
+  (user.repositories.nodes as RepoNode[]).forEach((repo) => {
     totalStars += repo.stargazerCount;
     if (repo.languages && repo.languages.edges) {
-      repo.languages.edges.forEach((edge: any) => {
+      repo.languages.edges.forEach((edge) => {
         totalBytes += edge.size;
       });
     }
@@ -74,21 +94,44 @@ export async function getGithubStats(token: string, username: string) {
 
   const linesOfCode = Math.floor(totalBytes / 35);
 
+  const calendarWeeks = user.contributionsCollection.contributionCalendar.weeks as ContributionWeekItem[];
+  const allContributionDays = calendarWeeks.flatMap((week) => week.contributionDays);
+  const commitsLast28Days = allContributionDays
+    .slice(-28)
+    .reduce((sum, day) => sum + (day.contributionCount || 0), 0);
+
   return {
     followers: user.followers.totalCount,
     totalStars,
     totalRepos: user.repositories.totalCount,
     totalPRs: user.contributionsCollection.totalPullRequestContributions,
-    commits: user.contributionsCollection.totalCommitContributions,
+    commits: commitsLast28Days,
+    commitsLast28Days,
+    totalYearCommits: user.contributionsCollection.totalCommitContributions,
     contributedTo: user.repositoriesContributedTo.totalCount,
     linesOfCode,
-    calendar: user.contributionsCollection.contributionCalendar.weeks,
+    calendar: calendarWeeks,
   };
 }
 
 export type GithubEventsResult =
   | { ok: true; data: string }
   | { ok: false };
+
+interface GithubEventPayload {
+  commits?: Array<{ message: string }>;
+  action?: string;
+  pull_request?: { title?: string };
+  issue?: { title?: string };
+  ref_type?: string;
+}
+
+interface GithubEventItem {
+  type: string;
+  repo: { name: string };
+  created_at: string;
+  payload: GithubEventPayload;
+}
 
 export async function getRecentGithubEvents(token: string, username: string): Promise<GithubEventsResult> {
   if (!token) return { ok: false };
@@ -98,24 +141,24 @@ export async function getRecentGithubEvents(token: string, username: string): Pr
         Authorization: `Bearer ${token}`,
         Accept: "application/vnd.github.v3+json",
       },
-      next: { revalidate: 3600 },
+      cache: "no-store",
     });
 
     if (!response.ok) return { ok: false };
 
-    const events = await response.json();
+    const events = (await response.json()) as GithubEventItem[];
     if (!Array.isArray(events) || events.length === 0) return { ok: false };
 
     const recentActivities = events
-      .filter((e: any) => ["PushEvent", "PullRequestEvent", "IssuesEvent", "CreateEvent"].includes(e.type))
+      .filter((e) => ["PushEvent", "PullRequestEvent", "IssuesEvent", "CreateEvent"].includes(e.type))
       .slice(0, 5)
-      .map((e: any) => {
+      .map((e) => {
         const repoName = e.repo.name;
         const date = new Date(e.created_at).toLocaleDateString();
         
         if (e.type === "PushEvent") {
           const commits = (e.payload.commits && Array.isArray(e.payload.commits)) 
-            ? e.payload.commits.map((c: any) => c.message).join(', ') 
+            ? e.payload.commits.map((c) => c.message).join(', ') 
             : "updates";
           return `- On ${date}, pushed to [${repoName}](https://github.com/${repoName}): ${commits}`;
         } else if (e.type === "PullRequestEvent") {
