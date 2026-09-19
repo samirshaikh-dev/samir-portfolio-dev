@@ -24,7 +24,7 @@
 
 ---
 
-## 1. Professional Overview & Core Identity
+## 1. Professional Overview & Core Identity (Who is Samir Shaikh?)
 
 Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) who designs, builds, and maintains production-grade full-stack applications and agentic AI systems. His core expertise lies at the intersection of robust backend system design (Node.js, TypeScript, Next.js, React, PostgreSQL, distributed messaging) and practical AI engineering (Retrieval-Augmented Generation with pgvector, vector search with Gemini embeddings, tool-using AI agents, and multi-model LLM orchestration). He goes deeper on the backend and AI layer while shipping complete features end to end.
 
@@ -39,7 +39,7 @@ He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Sta
 
 ---
 
-## 2. Background, Education & Experience
+## 2. Background, Education & Experience (What is Samir Shaikh's background?)
 
 ### Academic Foundation
 - **Degree**: Bachelor of Technology (B.Tech) in Information Technology
@@ -74,7 +74,7 @@ He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Sta
 
 ---
 
-## 3. Comprehensive Technical Skills Matrix
+## 3. Comprehensive Technical Skills Matrix (What is Samir Shaikh's tech stack?)
 
 ### Languages & Runtime Environments
 - **TypeScript**: Strict mode, generic types, utility types, schema validation (Zod).
@@ -115,7 +115,7 @@ He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Sta
 
 ---
 
-## 4. In-Depth Project Case Studies & Benchmarks
+## 4. In-Depth Project Case Studies & Benchmarks (What production systems has Samir built?)
 
 ### Project 1: Production AI Portfolio RAG Chatbot
 - **Live URL**: https://samir-portfolio-dev.vercel.app
@@ -175,7 +175,7 @@ He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Sta
 
 ---
 
-## 5. Engineering & Freelance Services Catalog
+## 5. Engineering & Freelance Services Catalog (What services does Samir provide?)
 
 Canonical Services URL: https://samir-portfolio-dev.vercel.app/services
 
@@ -374,7 +374,7 @@ Agent-assisted development workflow that ships production-ready code fast — wi
 
 ---
 
-## 6. Automated Content Generation & Grounding Pipeline
+## 6. Automated Content Generation & Grounding Pipeline (How is technical content published?)
 
 Samir's portfolio features an automated technical content publication engine located in `scripts/blog/`:
 - **Trigger**: GitHub Actions cron workflow executes every 3 days.
@@ -386,7 +386,7 @@ Samir's portfolio features an automated technical content publication engine loc
 
 ---
 
-## 7. Forward Deployed Engineering (FDE) Philosophy
+## 7. Forward Deployed Engineering (FDE) Philosophy (What is Samir's approach as an FDE?)
 
 Forward Deployed Engineering is the deliberate union of software engineering depth with direct customer immersion. Originating at companies like Palantir, OpenAI, and Anthropic, the role demands engineers who thrive on ambiguity and own the entire lifecycle of a solution.
 

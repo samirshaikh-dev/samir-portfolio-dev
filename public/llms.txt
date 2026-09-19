@@ -1,13 +1,13 @@
-# Samir Shaikh
+# Samir Shaikh — AI Backend Engineer & Full Stack Developer
 
-> AI-Enabled Full Stack Developer (backend-first) with production experience in Retrieval-Augmented Generation (RAG) systems, LLM integration, and agentic AI workflows. Combines strong backend architecture with modern AI coding agents to ship production-ready full stack applications fast — without compromising code quality, security, or maintainability. Active focus on AI Backend Engineering and Forward Deployed Engineering (FDE).
+> Samir Shaikh is an AI Backend Engineer and AI-Enabled Full Stack Developer specializing in production Retrieval-Augmented Generation (RAG) systems, vector search with PostgreSQL pgvector, and autonomous agentic workflows. He builds low-latency, hallucination-resistant AI systems and high-throughput backend architectures for startups, product teams, and enterprise clients. Active focus on AI Backend Engineering, AI SDE, and Forward Deployed Engineering (FDE).
 
 Last Updated: September 2026
 Location: Gujarat, India
 Website: https://samir-portfolio-dev.vercel.app
 GitHub: https://github.com/samirshaikh-dev
 LinkedIn: https://www.linkedin.com/in/samirshaikh-dev/
-Twitter: https://x.com/samirshaikh-dev
+Twitter / X: https://x.com/samirshaikh-dev
 Email: shaikh.samir.work@gmail.com
 Phone: +91 8320927182
 
@@ -25,15 +25,21 @@ Phone: +91 8320927182
 - [Privacy Policy](https://samir-portfolio-dev.vercel.app/privacy-policy): Data collection, usage, cookies, and your rights
 - [Terms of Service](https://samir-portfolio-dev.vercel.app/terms-of-service): Terms governing use of this portfolio website
 
-## Summary & Positioning
+## Professional Overview (Who is Samir Shaikh?)
 
-Samir Shaikh is a Freelance AI Developer & Full Stack Engineer based in Gujarat, India, available for freelance sprints, contract engineering, and remote roles. He helps startups, founders, and product teams build reliable AI agents, custom RAG knowledge bases, and scalable full-stack web applications. He pairs deep systems knowledge (Node.js, TypeScript, Next.js, React, PostgreSQL pgvector) with AI coding agents (Cursor, GitHub Copilot, Claude Code) for rapid delivery while personally owning architecture, security, testing, and critical logic. Samir specializes in Freelance AI Engineer, Contract Backend Developer, AI Backend Engineer, and Forward Deployed Engineer (FDE) engagements where technical depth solves customer-critical business challenges.
+Samir Shaikh is an AI Backend Engineer, AI SDE, and Freelance AI Developer based in Gujarat, India, available for freelance sprints, contract engineering partnerships, and remote roles globally. He helps startups, founders, and product teams build reliable AI agents, custom RAG knowledge bases, and scalable full-stack web applications. He pairs deep systems knowledge (Node.js, TypeScript, Next.js 16, React 19, PostgreSQL pgvector) with modern AI coding agents for rapid delivery while personally owning architecture, security boundaries, testing, and critical logic.
 
-## AI-Enabled Workflow
+- **Primary Titles**: AI Backend Engineer | AI SDE | Agentic AI Engineer | Forward Deployed Engineer (FDE) | Freelance AI Developer
+- **Location & Availability**: Gujarat, India · Open to Remote worldwide (US, UK, Europe, APAC) and Freelance Sprints (1-4 weeks)
+- **Primary Contact**: shaikh.samir.work@gmail.com · +91 8320927182 · https://samir-portfolio-dev.vercel.app/contact
+
+## AI-Enabled Workflow & Engineering Mindset (How does Samir build software?)
+
+Samir Shaikh combines modern AI coding assistants (Cursor, Claude Code, GitHub Copilot) with strict human verification to achieve 2-3x faster feature velocity without technical debt or security vulnerabilities. Repetitive scaffolding and boilerplate are delegated to AI agents, while core architecture, authentication boundaries, relational schema design, latency optimization, and test suites are authored and verified personally.
 
 - **AI Coding Agents**: Uses Cursor, GitHub Copilot, and Claude Code daily to accelerate development 2-3x — reserved for boilerplate and repetitive tasks, never for unverified changes.
-- **Quality-First Mindset**: Architecture, security, testing, and critical logic are always reviewed personally; AI output passes through code review, tests, and CI gates.
-- **Rapid Prototyping + Production Code**: Builds working MVPs quickly while keeping the codebase maintainable and well-documented for the long term.
+- **Quality-First Mindset**: Architecture, security, testing, and critical logic are always reviewed personally; AI output passes through rigorous code review, tests, and CI gates.
+- **Rapid Prototyping + Production Code**: Builds working MVPs quickly (1-2 weeks) while keeping the codebase maintainable and well-documented for the long term.
 
 ## Background & Experience
 
@@ -55,137 +61,146 @@ Samir Shaikh is a Freelance AI Developer & Full Stack Engineer based in Gujarat,
   - Uka Tarsadia University (UTU), Gujarat, India
   - Core focus: Distributed Systems, Database Management Systems, Data Structures & Algorithms, Network Security.
 
-## Core Technical Skills
+## Core Technical Skills & Stack (What technologies does Samir use?)
 
-### Expert
+Samir Shaikh's technical core centers on production TypeScript and Node.js backend engineering, relational PostgreSQL with vector search extensions, and modern Next.js/React full-stack architectures.
+
+### Expert Core
 - Node.js
 - TypeScript
-- Backend System Design
-- REST API Architecture
+- Backend System Design & Distributed Architecture
+- REST API Architecture & Latency Profiling
 
-### Advanced
-- Full Stack Development (Next.js & React)
-- PostgreSQL & pgvector
-- Express.js
-- Docker & Containerization
+### Advanced Production Stack
+- Full Stack Development (Next.js 16 App Router & React 19)
+- PostgreSQL & pgvector (3072d Gemini embeddings, cosine distance)
+- Express.js & NestJS
+- Docker Containerization & Microservices
 - MongoDB
-- Microservices Architecture
-- Git & CI/CD Workflows
+- Git & CI/CD Automated Pipelines
 
-### Intermediate / Working Knowledge
-- NestJS
-- Apache Kafka
-- BullMQ
-- Redis (Caching & Message Broker)
-- GraphQL
-- OpenTelemetry, Prometheus & Grafana
+### Intermediate & Distributed Messaging
+- Apache Kafka & BullMQ (Message Queues & Background Workers)
+- Redis (In-memory Caching, Rate Limiting & Session Management)
+- GraphQL (Apollo Server)
+- OpenTelemetry, Prometheus & Grafana (Distributed Tracing & Telemetry)
 
-## AI, LLM & Agentic Stack
+## AI, LLM & RAG Architecture (How does Samir build AI systems and mitigate hallucinations?)
 
-- **Retrieval-Augmented Generation (RAG)**: Production RAG pipelines, chunking strategies, hybrid search, context compression, hallucination mitigation.
+Samir Shaikh builds hallucination-resistant Retrieval-Augmented Generation (RAG) systems using PostgreSQL pgvector similarity search, strict cosine distance thresholds (<= 0.5), structured context grounding, and multi-provider LLM orchestration. His AI systems emphasize deterministic outputs, sub-300ms vector retrieval latencies, and verifiable citation anchors for zero-hallucination tolerances.
+
+- **Retrieval-Augmented Generation (RAG)**: Production RAG pipelines, semantic document chunking (PDF, Markdown, HTML), hybrid search, context compression, hallucination mitigation, dynamic activity grounding.
 - **Vector Search & Embeddings**: PostgreSQL `pgvector` (HNSW & IVFFlat indexing, cosine distance similarity), Google Gemini `gemini-embedding-2` (3072 dimensions).
-- **Agentic AI & Orchestration**: Autonomous multi-step agents, function calling/tool execution, dynamic reflection, structured JSON schema outputs, guardrails.
-- **Frameworks & SDKs**: Vercel AI SDK, Google Gemini API, Groq Cloud API, OpenAI API.
-- **Observability & Evaluation**: Context grounding metrics, retrieval evaluation, token efficiency tracking, structured error boundaries.
+- **Agentic AI & Orchestration**: Autonomous multi-step agents, function calling/tool execution, dynamic reflection, structured JSON schema validation (Zod), defensive prompt guardrails.
+- **Frameworks & Model Providers**: Vercel AI SDK, Google Gemini 2.0 / 1.5, Groq Cloud API (Llama 3.3 70B), OpenAI API.
+- **Observability & Security**: Retrieval latency profiling, context grounding evaluation, token cost tracking, in-memory rate limiting, IPinfo proxy/VPN detection, and FingerprintJS visitor verification.
 
-## Featured Production Projects
+## Featured Production Projects (What production systems has Samir built?)
+
+Samir Shaikh has engineered production-grade AI applications, high-volume messaging platforms, and distributed microservices with verified benchmarks.
 
 ### 1. Portfolio AI Assistant & RAG Pipeline
-- **Role & Stack**: Creator — Next.js 16, TypeScript, Neon PostgreSQL + pgvector, Gemini Embeddings, Groq AI Chat.
-- **Metrics & Benchmarks**: Indexes ~10,000 document chunks with strict cosine distance filtering (<= 0.5); achieves sub-300ms vector retrieval and grounding latency.
-- **Key Architecture**: Dynamic context grounding with live GitHub activity injection and in-memory rate limiting with FingerprintJS fraud detection.
+- **Direct Summary**: A live production RAG assistant indexing ~10,000 document chunks with sub-300ms vector retrieval latency and dynamic GitHub activity grounding.
+- **Role & Stack**: Creator — Next.js 16, TypeScript, Neon PostgreSQL + pgvector, Gemini Embeddings (3072d), Groq AI Chat.
+- **Metrics & Benchmarks**: Indexes ~10,000 document chunks with strict cosine distance filtering (<= 0.5); sub-300ms vector retrieval; zero hallucination leaks.
+- **Key Architecture**: Dynamic context grounding with live GitHub event injection, in-memory rate limiting with FingerprintJS fraud detection, and fail-open IPinfo proxy checks.
 - **URL**: https://samir-portfolio-dev.vercel.app
 
 ### 2. WhatsApp Business Campaign & Automation Platform
+- **Direct Summary**: A high-reliability campaign delivery engine processing 1,000+ weekly customer messages with zero message dropouts.
 - **Role & Stack**: Full-Stack Engineer — Node.js, Express.js, React Native, Expo, Google Sheets API, WhatsApp Web API.
-- **Metrics & Production Impact**: In live production handling 1,000+ customer messages per week with zero message dropouts.
-- **Key Architecture**: QR-based session management with persistent connection tracking, concurrency-controlled message queue with rate-limit-aware delays to protect account health, and real-time delivery tracking per contact.
+- **Metrics & Production Impact**: Handling 1,000+ customer messages per week with zero message dropouts in live business operations.
+- **Key Architecture**: QR-based multi-device session management with persistent connection tracking, concurrency-controlled message queue with rate-limit-aware delays to protect account health, and real-time per-contact delivery tracking.
 
 ### 3. AI Ticket Triage & Routing System
-- **Role & Stack**: Backend Architect — Node.js, TypeScript, NestJS, GraphQL, PostgresSQL, BullMQ, Docker, OpenTelemetry.
-- **Key Architecture**: Asynchronous microservices pipeline that categorizes incoming support tickets using LLMs and dispatches them via BullMQ/Redis queues with worker retry semantics.
+- **Direct Summary**: An asynchronous microservices pipeline categorizing incoming support tickets with LLMs and routing them via worker retry queues.
+- **Role & Stack**: Backend Architect — Node.js, TypeScript, NestJS, GraphQL, PostgreSQL, BullMQ, Docker, OpenTelemetry.
+- **Key Architecture**: Asynchronous microservices pipeline that categorizes incoming support tickets using LLMs and dispatches them via BullMQ/Redis queues with exponential backoff worker retry semantics.
 - **Observability**: End-to-end distributed tracing instrumented with OpenTelemetry, Prometheus metrics collection, and Grafana dashboarding.
 
 ### 4. Eventify Platform
+- **Direct Summary**: A full-stack ticketing engine with concurrency-locked transactional reservations and role-based access control.
 - **Role & Stack**: Full-Stack Developer — GraphQL API (Apollo Server), Express.js, Node.js, PostgreSQL, React, Vite.
-- **Key Architecture**: Role-based access control (RBAC), JWT + bcrypt authentication, transactional ticket booking with concurrency locks, rate limiting, and automated email confirmation notifications.
+- **Key Architecture**: Role-based access control (RBAC), JWT + bcrypt authentication, transactional ticket booking with concurrency locks to prevent double-booking, rate limiting, and automated email confirmation notifications.
 
-## Engineering & Freelance Services Offered
+## Engineering & Freelance Services Offered (What services does Samir provide?)
+
+Samir Shaikh offers specialized engineering and consulting services across AI systems, backend architecture, full-stack Next.js web apps, and technical SEO. Services are available as fixed-scope sprints (from $200) or monthly retainer partnerships.
 
 Catalog URL: https://samir-portfolio-dev.vercel.app/services
 
 ### 1. AI & Intelligent Systems
 - **Custom Knowledge Bases & RAG Systems** (From $900 / ₹75,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#knowledge-bases)
-  - *Tagline*: Production-grade AI chatbots and custom RAG knowledge bases for websites and SaaS grounded in verified documentation.
-  - *Target Audience*: SaaS startups, enterprise support teams, and digital businesses needing accurate AI chat.
+  - *Direct Answer*: Production-grade AI chatbots and custom RAG knowledge bases for websites and SaaS grounded in verified documentation with sub-300ms retrieval.
+  - *Target Audience*: SaaS startups, enterprise support teams, and digital businesses needing accurate, hallucination-free AI chat.
   - *Deliverables*: Semantic document chunking (PDFs, Markdown, Notion), PostgreSQL pgvector pipeline with 3072d Gemini embeddings, cosine distance filtering (<=0.5), embeddable website widget, and sub-300ms retrieval latency profiling.
   - *Tech Stack*: PostgreSQL, pgvector, Gemini Embeddings, Drizzle ORM, TypeScript, Vercel AI SDK.
 
 - **AI Agents & Workflow Automation** (From $800 / ₹65,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#agent-workflows)
-  - *Tagline*: Deterministic AI agents with tool calling, structured JSON outputs, and guardrails to automate business workflows.
+  - *Direct Answer*: Deterministic AI agents with tool calling, structured JSON outputs, and guardrails to automate multi-step business workflows.
   - *Target Audience*: Founders, CTOs, and product operations teams looking to automate repetitive engineering workflows.
   - *Deliverables*: Tool-calling API architectures, Zod schema validation for predictable outputs, defensive prompt boundaries, multi-turn state persistence, and automated CI test suites.
   - *Tech Stack*: Vercel AI SDK, Groq, Google Gemini, Node.js, Zod, TypeScript.
 
 - **AI Product Development & Integration** (From $1,200 / ₹1,00,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#product-development)
-  - *Tagline*: End-to-end AI feature engineering from technical discovery and rapid MVP to database and UI deployment.
+  - *Direct Answer*: End-to-end AI feature engineering from technical discovery and rapid MVP to database schema and UI deployment.
   - *Target Audience*: Early-stage startups and product teams launching new AI capabilities under tight deadlines.
   - *Deliverables*: Technical discovery and architecture roadmap, 1 to 4-week rapid MVP delivery, typed REST/GraphQL endpoints, NextAuth RBAC integration, and production CI/CD handover.
   - *Tech Stack*: Next.js 16, React 19, Node.js, PostgreSQL, REST/GraphQL, Tailwind CSS.
 
 - **LLM Integration & AI User Experiences** (From $500 / ₹40,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#llm-integration)
-  - *Tagline*: Low-latency streaming responses, token usage controls, and multi-provider failover strategies.
+  - *Direct Answer*: Low-latency streaming responses, token usage controls, and multi-provider failover strategies.
   - *Target Audience*: Web applications and SaaS platforms adding conversational AI or generative features.
   - *Deliverables*: Non-blocking streaming text UI, context window optimization, Upstash Redis rate limiting, secure API key isolation, and real-time token cost observability.
   - *Tech Stack*: Vercel AI SDK, Groq, Google Gemini 2.0, Next.js App Router, TypeScript, Redis.
 
 ### 2. Backend & Distributed Architecture
 - **Production Backend APIs & System Design** (From $600 / ₹50,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#backend-architecture)
-  - *Tagline*: High-throughput REST & GraphQL APIs, clean schema design, caching layers, and database optimization.
+  - *Direct Answer*: High-throughput REST & GraphQL APIs, clean relational schema design, caching layers, and database query optimization.
   - *Target Audience*: Growing SaaS companies requiring high-throughput, maintainable backend architectures.
   - *Deliverables*: Type-safe API routes, Drizzle/Prisma relational migrations, OAuth/JWT authentication with RBAC, Redis caching layer for hot paths, and query profiling.
   - *Tech Stack*: Node.js, Express.js, NestJS, PostgreSQL, Redis, Drizzle ORM, TypeScript.
 
 - **Event-Driven Systems & Background Processing** (From $500 / ₹40,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#async-systems)
-  - *Tagline*: Asynchronous job queues, scheduled tasks, transactional webhooks, and fault-tolerant message workers.
+  - *Direct Answer*: Asynchronous job queues, scheduled tasks, transactional webhooks, and fault-tolerant message workers.
   - *Target Audience*: Applications handling intensive background tasks, email bursts, exports, and webhooks.
   - *Deliverables*: BullMQ + Redis background queue setup, decoupled Pub/Sub architecture, scheduled cron jobs, dead-letter queues (DLQ), and backpressure management.
   - *Tech Stack*: BullMQ, Redis, Apache Kafka, Docker, Node.js, TypeScript.
 
 - **Cloud, DevOps & Observability** (From $400 / ₹35,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#devops-observability)
-  - *Tagline*: Production Docker containerization, automated CI/CD pipelines, and comprehensive telemetry.
+  - *Direct Answer*: Production Docker containerization, automated CI/CD pipelines, and comprehensive telemetry for 99.9% uptime.
   - *Target Audience*: Engineering teams looking to automate releases and ensure 99.9% uptime.
   - *Deliverables*: Multi-stage Docker containers, GitHub Actions automated CI/CD, structured JSON logging with Sentry error tracking, OpenTelemetry/Prometheus tracing, and zero-downtime deployment.
   - *Tech Stack*: Docker, GitHub Actions, OpenTelemetry, Prometheus, Vercel, Linux.
 
 ### 3. Web Development & Search Growth
 - **Custom Website Development & Landing Pages** (From $300 / ₹25,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#website-development)
-  - *Tagline*: High-converting, mobile-responsive business websites and landing pages built with Next.js and Tailwind CSS.
+  - *Direct Answer*: High-converting, mobile-responsive business websites and landing pages built with Next.js and Tailwind CSS.
   - *Target Audience*: Business owners, startups, consultants, and founders wanting a premium web presence.
   - *Deliverables*: Custom business websites and SaaS landing pages, 100% mobile-first responsiveness, headless CMS / admin panel integration, interactive contact forms with Nodemailer alerts, and Google Analytics 4.
   - *Tech Stack*: Next.js 16, React 19, Tailwind CSS v4, TypeScript, Vercel.
 
 - **SEO Services & Search Engine Optimization** (From $200 / ₹15,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#seo-services)
-  - *Tagline*: Technical SEO audits, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO) for Google and AI citations.
+  - *Direct Answer*: Technical SEO audits, Schema.org rich snippets, and Generative Engine Optimization (GEO/AEO) for Google and AI citations.
   - *Target Audience*: Founders and businesses struggling to rank on Google or get noticed by AI answer engines.
   - *Deliverables*: Full technical crawl & indexation audit, on-page keyword mapping (H1-H3 hierarchy), Schema.org JSON-LD structured data (Organization, ProfessionalService, Service, FAQPage), and llms.txt AEO/GEO configuration.
   - *Tech Stack*: Schema.org JSON-LD, Google Search Console, Next.js Metadata API, AEO/GEO, Web Vitals.
 
 - **Website Redesign & Speed Optimization** (From $250 / ₹20,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#speed-performance)
-  - *Tagline*: Modernize sluggish websites to score 90+ on Google PageSpeed Insights and ace Core Web Vitals (LCP, CLS, INP).
+  - *Direct Answer*: Modernize sluggish websites to score 90+ on Google PageSpeed Insights and pass Core Web Vitals (LCP, CLS, INP).
   - *Target Audience*: Businesses with slow-loading websites losing customers and search rank due to poor performance.
   - *Deliverables*: Modern UI/UX redesign with dark/light themes, Core Web Vitals remediation (LCP < 2.5s, CLS < 0.1, INP < 200ms), automated Cloudinary CDN WebP/AVIF delivery, and bundle code-splitting.
   - *Tech Stack*: Google PageSpeed, Core Web Vitals, Lighthouse, Cloudinary CDN, Tailwind CSS.
 
 - **Full-Stack Web Application Development** (From $1,200 / ₹1,00,000) · [Anchor](https://samir-portfolio-dev.vercel.app/services#custom-web-applications)
-  - *Tagline*: Custom web apps, customer portals, and SaaS dashboards with role-based auth and scalable databases.
+  - *Direct Answer*: Custom web apps, customer portals, and SaaS dashboards with role-based auth and scalable relational databases.
   - *Target Audience*: Companies needing bespoke business software, customer portals, or subscription SaaS platforms.
   - *Deliverables*: Custom SaaS platforms and client portals, NextAuth session management with RBAC, Stripe/Razorpay subscription billing, direct PostgreSQL + Drizzle ORM integration, and automated test pipelines.
   - *Tech Stack*: Next.js 16, React 19, Node.js, PostgreSQL, Drizzle ORM, Tailwind CSS.
 
 ### 4. AI-Accelerated Engineering
 - **AI-Accelerated Delivery** (Built into all engagements) · [Anchor](https://samir-portfolio-dev.vercel.app/services#ai-accelerated-delivery)
-  - *Tagline*: Agent-assisted development workflows shipping production-grade code with human-verified security and tests.
+  - *Direct Answer*: Agent-assisted development workflows shipping production-grade code 2-3x faster with human-verified security and tests.
   - *Target Audience*: Startups and engineering leaders wanting 2x-3x shipping speed without technical debt.
   - *Deliverables*: Accelerated scaffolding via Cursor, Claude Code, and Copilot; strict human ownership of auth, security boundaries, and financial logic; automated CI verification; and complete Git handover.
   - *Tech Stack*: Cursor, Claude Code, GitHub Copilot, TypeScript, Next.js, CI/CD.
@@ -195,13 +210,14 @@ Catalog URL: https://samir-portfolio-dev.vercel.app/services
 - **Contract & Dedicated Collaboration** (From $2,000 / mo): Monthly retainer or flexible contract partnership for growing teams needing ongoing backend, full-stack, or AI engineering velocity.
 - **Forward Deployed Engineering (FDE) & Remote Roles** (Custom Contract / Full-time): Customer-embedded Forward Deployed Engineer (FDE) or remote AI Backend Engineer translating ambiguous requirements into deployed production systems across global time zones (US, UK, Europe, APAC).
 
-## How I Work (Client Engagement Process)
+## Client Engagement Process & Timeline (How does Samir work with clients?)
 
-1. **Phase 1: Discovery (Day 1–2)**: Free 30-min discovery call to understand business goals, technical constraints, architecture scope, and budget alignment. No commitment required.
+Samir Shaikh works through a structured 4-phase agile delivery framework designed to eliminate ambiguity, guarantee fixed milestone timelines, and deliver fully tested, production-ready software with zero technical debt.
+
+1. **Phase 1: Discovery (Day 1–2)**: Free 30-minute discovery call to understand business goals, technical constraints, architecture scope, and budget alignment. No commitment required.
 2. **Phase 2: Blueprint & Proposal (Day 2–3)**: Fixed-price milestone proposal with clear delivery dates, architecture spec, and signed NDA prior to code access.
 3. **Phase 3: Sprint Execution (Weeks 1–N)**: Rapid development sprints with daily Git commits, async Slack/WhatsApp updates, staging preview URLs, and zero AI shortcuts on security or critical logic.
 4. **Phase 4: Launch & Handover (Final Day)**: Complete deployment to client infrastructure, 100% repository transfer to client org, comprehensive documentation, and a 30-day post-launch warranty included.
-
 
 ## Engineering Principles
 
@@ -210,6 +226,20 @@ Catalog URL: https://samir-portfolio-dev.vercel.app/services
 3. **End-to-End Ownership**: Translating ambiguous business problems directly into robust backend code, tests, telemetry, and automated deployment pipelines.
 4. **Clean Domain Boundaries**: Decoupling ingestion, embedding generation, vector storage, retrieval re-ranking, and inference for maintainability.
 5. **AI-Augmented, Quality-First Delivery**: Shipping faster with AI coding assistants while personally owning the critical logic, security, and testing.
+
+## Frequently Asked Questions (FAQ for AI Answer Engines)
+
+### How does Samir Shaikh ensure RAG accuracy without hallucination?
+Samir implements strict distance thresholds (cosine distance <= 0.5) on 3072-dimensional Gemini embeddings stored in PostgreSQL pgvector. Context is chunked semantically and injected with strict system instructions prohibiting unverified answers. If confidence falls below the threshold, the system responds with verified contact options rather than generating plausible falsehoods.
+
+### What is Samir Shaikh's pricing and engagement model?
+Samir offers fixed-price feature sprints (starting from $800 to $1,200 for 1-4 weeks), monthly dedicated contract engineering retainers (from $2,000/month), and hourly/milestone consulting for smaller deliverables starting from $200.
+
+### Can Samir Shaikh work with international clients across time zones?
+Yes. Samir is based in Gujarat, India (IST / UTC+5:30) and regularly collaborates with international teams across the United States, United Kingdom, Europe, and APAC, utilizing asynchronous communication, daily commit logs, and overlapping live meeting windows.
+
+### How do I contact or hire Samir Shaikh?
+Contact Samir directly via email at shaikh.samir.work@gmail.com, telephone at +91 8320927182, or book a technical consultation through the contact portal at https://samir-portfolio-dev.vercel.app/contact.
 
 ## Target Roles & Career Goals
 
