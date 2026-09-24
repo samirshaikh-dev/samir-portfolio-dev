@@ -1,5 +1,6 @@
 import Hero from "@/components/home/Hero";
 import HowIWork from "@/components/HowIWork";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import { getSpeakableJsonLd } from "@/lib/seo/structured-data";
 import { db } from "@/lib/db";
 import { projects as projectsSchema, blogs as blogsSchema } from "@/lib/schema";
@@ -60,6 +61,8 @@ export default async function Home() {
       <Hero />
 
       <HowIWork variant="compact" />
+
+      <TestimonialsSection variant="homepage" />
 
       <section className="px-6 md:px-10 py-16">
         <div className="max-w-6xl mx-auto">

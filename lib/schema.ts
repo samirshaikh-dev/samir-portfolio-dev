@@ -114,3 +114,19 @@ export const contentChunks = pgTable('content_chunks', {
     embedding: vector('embedding', { dimensions: 3072 }).notNull(),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
 });
+
+export const testimonials = pgTable('testimonials', {
+    id: uuid('id').defaultRandom().primaryKey(),
+    name: text('name').notNull(),
+    role: text('role').notNull(),
+    company: text('company'),
+    avatarUrl: text('avatar_url'),
+    linkedinUrl: text('linkedin_url'),
+    quote: text('quote').notNull(),
+    rating: integer('rating').default(5),
+    source: text('source'),
+    isPublished: boolean('is_published').default(false),
+    displayOrder: integer('display_order').default(0),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
+});

@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import HowIWork from "@/components/HowIWork";
+import TestimonialsSection from "@/components/TestimonialsSection";
 import { APP_URL, AUTHOR_EMAIL } from "@/lib/site-config";
 import {
   getServiceJsonLd,
@@ -369,6 +370,11 @@ export default function ServicesPage() {
         {/* How I Work */}
         <div className="mb-20">
           <HowIWork variant="full" />
+        </div>
+
+        {/* Testimonials */}
+        <div className="mb-20">
+          <TestimonialsSection variant="services" />
         </div>
 
         {/* Services FAQ */}

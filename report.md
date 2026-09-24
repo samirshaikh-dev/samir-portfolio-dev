@@ -408,3 +408,166 @@ Add below each: *"Exact quote within 48h after a free discovery call."*
 ---
 
 *Generated from live portfolio audit of `samir-portfolio-dev`, live SERP research, market research on Upwork/LinkedIn/Toptal pricing, and `personal-seo-profile-optimizer` + `seo-keyword-research-implementation` skills.*
+
+---
+
+## ✅ Implementation Progress Log
+
+> **Last updated:** September 2026  
+> This section tracks what has actually been built since the initial audit. Cross-reference against the Action Plan above.
+
+---
+
+### ✅ COMPLETED — `/services` Page Full Overhaul
+
+**Status: Shipped** · Files: [`app/services/page.tsx`](file:///s:/portfolio/samir-portfolio-dev/app/services/page.tsx), [`lib/data/services.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/data/services.ts)
+
+The `/services` page has been fully rebuilt from scratch with:
+
+#### Availability Signal ✅
+- Green "● Available for Freelance Projects, Contracts & Forward Deployed Roles" badge prominently displayed in the hero banner at the top of the page.
+
+#### Hero Value Banner ✅
+- Full-width banner with client-value headline: *"Ship production-grade software that drives real business results."*
+- Two CTAs: **"Discuss a Project"** (→ `/contact`) and **"Email Directly"** (mailto link)
+
+#### Pricing Transparency ✅
+3-column trust bar displays:
+- ✓ Transparent Starting Rates (clear budget guidance, zero surprise scope bloat)
+- ✓ Fixed-Price Quotes in 48h (detailed milestone scope after free discovery call)
+- ✓ 100% Code & IP Ownership (committed directly to your private repositories)
+
+#### Service Categories with Starting Prices ✅ (in `lib/data/services.ts`)
+
+| Service | Starting Price |
+|:---|:---|
+| Custom Knowledge Bases & RAG Systems | From $900 / ₹75,000 |
+| AI Chatbot for Websites & SaaS | From $900 / ₹75,000 |
+| AI Workflow Automation & Agent Systems | From $1,200 / ₹1,00,000 |
+| Custom Business Website Development | From $300 / ₹25,000 |
+| Full-Stack Web Application Development | From $1,200 / ₹1,00,000 |
+| Technical SEO & AEO/GEO Optimization | From $200 / ₹15,000 |
+| Website Speed & Core Web Vitals Optimization | From $200 / ₹15,000 |
+| Node.js / TypeScript Backend APIs | From $500 / ₹40,000 |
+| WhatsApp Business Automation | From $600 / ₹50,000 |
+| Monthly Maintenance & Engineering Retainer | From $250/mo / ₹20,000/mo |
+
+Each service card includes: badge, tagline, description, detailed deliverables checklist, tech stack badges, starting price tag, and a "Request quote →" CTA linking to `/contact?service=<id>`.
+
+#### Engagement Models ✅
+Three engagement models built in `lib/data/services.ts` and rendered on the page:
+- **Fixed-Price Sprint** — From $300 / ₹25,000
+- **Weekly Engineering Retainer** — From $500/week / ₹40,000/week
+- **Monthly Partnership Retainer** — From $250/mo / ₹20,000/mo
+
+#### 4-Stage Delivery Process Section ✅
+Process steps rendered from `PROCESS_STEPS` data: Discovery → Blueprint → Sprint Execution → Launch & Handover.
+
+#### Services-Specific FAQs ✅
+`SERVICES_FAQS` array in `lib/data/services.ts` (12 FAQs) with `FAQPage` JSON-LD emitted inline on the page covering: RAG/hallucinations, custom knowledge bases, production-grade AI definition, Forward Deployed Engineer, code ownership, project timelines, website vs WordPress, full-stack capabilities, and existing codebase integration.
+
+#### Schema.org Structured Data ✅
+- `Service` + `Offer` JSON-LD via `getServiceJsonLd()` from `lib/seo/structured-data.ts`
+- `FAQPage` JSON-LD from `SERVICES_FAQS`
+- `SpeakableSpecification` JSON-LD targeting `h1`, `h2`, `.service-desc`
+
+---
+
+### ✅ COMPLETED — `HowIWork` Component
+
+**Status: Shipped** · File: [`components/HowIWork.tsx`](file:///s:/portfolio/samir-portfolio-dev/components/HowIWork.tsx)
+
+Built as a reusable component with two variants:
+- `variant="full"` — used on `/services` page with full 4-phase grid
+- `variant="compact"` — designed for homepage integration
+
+**4 phases documented with deliverables:**
+1. **Discovery** (Day 1–2) — Free 30-min call, architecture review, scope definition
+2. **Blueprint** (Day 2–3) — Fixed-price proposal, tech spec, NDA signing
+3. **Sprint Execution** (Week 1–N) — Daily commits, async updates, staging previews, revision rounds at zero extra cost
+4. **Launch & Handover** (Final day) — CI/CD deploy to client accounts, docs, 100% repo transfer, 30-day warranty
+
+> This directly addresses **Priority 5** from the action plan (How I Work section).
+
+---
+
+### ✅ COMPLETED — Expanded FAQs (`lib/data/faqs.ts`)
+
+**Status: Shipped** · File: [`lib/data/faqs.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/data/faqs.ts)
+
+621-line FAQ data file with **10 FAQ categories** and 38+ Q&As:
+
+| Category | Coverage |
+|:---|:---|
+| Pricing & Payment | Costs, fixed vs hourly, milestones (30/35/35), revisions, hosting costs |
+| Process & Timeline | Timelines, git workflow, client communication |
+| Trust & Guarantees | 30-day warranty, NDA, IP ownership, code quality |
+| AI & RAG Systems | Hallucination prevention, pgvector, production-grade definition, FDE role |
+| Backend & Architecture | Node.js, TypeScript, scalability, existing codebase integration |
+| Forward Deployed & Roles | FDE definition, when to hire, enterprise deployment |
+| Background & Contact | Discovery call, free audit, contact info, location (Vapi, Gujarat) |
+| Local SEO & Digital Marketing | Vapi/Gujarat/Mumbai market, Google Business Profile, local rankings |
+| Web Design & Business Websites | Custom vs WordPress/Wix, PageSpeed, responsive design |
+| WhatsApp & Business Automation | WhatsApp Business API, broadcast automation, catalog integration |
+
+**Local SEO targeting added** for Vapi, Daman, Silvassa, Surat, Valsad corridor — relevant for in-person client leads.
+
+> This directly expands **Priority 6** (Distribution/SEO inbound pipeline) via long-tail commercial intent Q&As that can be cited by AI answer engines (AEO/GEO).
+
+---
+
+### ✅ COMPLETED — `list.txt` — Vapi Business Category Research
+
+**Status: Documented** · File: [`list.txt`](file:///s:/portfolio/samir-portfolio-dev/list.txt)
+
+A comprehensive business category map for Vapi & surrounding industrial belt (Vapi → Dungra → Chala → Chanod → Koparli → Pardi → Sarigam → Bhilad → Umargam → Daman → Silvassa → Naroli) covering:
+
+- 🏭 Industrial & Manufacturing (17 sectors: chemical, pharma, textile, packaging, etc.)
+- 🏥 Healthcare (18 types)
+- 🍽️ Food & Hospitality (16 types)
+- 🛍️ Retail (14 types)
+- 💼 Professional Services (13 types: CA firms, architects, IT companies, etc.)
+- 🚗 Automobile (10 types)
+- 🏠 Home & Construction (14 types)
+- 🎓 Education (10 types)
+- 💇 Personal & Lifestyle (10 types)
+- 📦 Logistics & Business Support (11 types)
+- 🎉 Events & Entertainment (9 types)
+
+**Purpose:** Research asset for local B2B outreach targeting — maps which Vapi-area business sectors are highest-opportunity clients for website development, SEO, WhatsApp automation, and AI chatbot services.
+
+---
+
+## 🔴 Still Remaining — From Original Action Plan
+
+| Priority | Item | Status |
+|:---|:---|:---|
+| 🔴 P1 | **Testimonials section** (homepage + `/contact` + `/services`) | ❌ Not started |
+| 🔴 P1 | **Collect 2–3 real testimonials** from Xira/LOGICWIND contacts | ❌ Not started |
+| 🔴 P2 | **Reframe projects as case studies** with quantified outcomes | ❌ Not started |
+| 🔴 P3 | **Hero CTA buttons** on homepage (View Services / Book a Call) | ❌ Not started |
+| 🔴 P3 | **Availability badge** above H1 on homepage | ❌ Partial (only on `/services`) |
+| 🟠 P4 | **Contact page subtitle upgrade** (24h reply, free call, fixed quote) | ❌ Not started |
+| 🟠 P4 | **"What happens next" 4-step flow** on `/contact` | ❌ Not started |
+| 🟠 P5 | `HowIWork` compact variant on **homepage** | ❌ Not integrated yet |
+| 🟡 P6 | **LinkedIn profile optimization** + 3×/week posting | ❌ Not started |
+| 🟡 P6 | **Upwork profile** using `/services` + `/faq` content | ❌ Not started |
+| 🟡 P6 | **10 personalized cold outreach DMs** to Vapi/Gujarat businesses | ❌ Not started |
+
+---
+
+## 🔄 Updated Scorecard (Post-Implementation)
+
+| Dimension | Before Audit | After Sprint | Target |
+|:---|:---|:---|:---|
+| Technical credibility | 9/10 | 9/10 | 9/10 ✅ |
+| Social proof (testimonials) | 1/10 | 1/10 | 7/10 🔴 |
+| Project outcomes (quantified) | 2/10 | 2/10 | 8/10 🔴 |
+| Hero CTA clarity | 3/10 | 4/10 | 8/10 🔴 |
+| Services page conversion | 4/10 | **8/10** ✅ | 8/10 |
+| Pricing transparency | 0/10 | **8/10** ✅ | 8/10 |
+| Contact page conversion | 4/10 | 4/10 | 8/10 🟠 |
+| How I Work / Process | 0/10 | **9/10** ✅ | 8/10 |
+| SEO/AEO FAQ coverage | 7/10 | **9/10** ✅ | 9/10 |
+| Local SEO (Vapi/Gujarat) | 0/10 | **6/10** ✅ | 7/10 |
+| Active outreach (LinkedIn/Upwork) | 0/10 | 0/10 | 7/10 🟠 |
