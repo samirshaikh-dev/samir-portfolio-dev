@@ -127,6 +127,14 @@ export const FAQS: FAQItem[] = [
       "Yes, I integrate smoothly into existing teams and codebases. Whether contributing as an embedded specialist on a specific feature, reviewing architecture decisions, or owning an independent microservice, I follow your team's Git workflow, PR review process, and coding standards with zero friction. I've collaborated with cross-functional teams using Jira, Linear, Notion, and Slack.",
     tags: ["Team Collaboration", "Embedded Engineer", "Existing Codebase", "PR Reviews", "Jira Linear Slack"],
   },
+  {
+    id: "emergency-troubleshooting-sprint",
+    category: "Process & Timeline",
+    question: "Can you provide emergency troubleshooting or critical bug-fixing on short notice?",
+    answer:
+      "Yes. For production outages, broken APIs, database locks, or urgent launch blockers, I offer fast-turnaround emergency troubleshooting sprints (typically resolving blockers within 24 to 48 hours). I conduct rapid root-cause analysis, isolate regressions, and deploy verified hotfixes with regression safeguards.",
+    tags: ["Emergency Bug Fix", "Production Support", "Rapid Troubleshooting", "Hotfix Sprint", "Critical Issue Resolution"],
+  },
 
   // 3. Trust & Guarantees (Legal, IP & Data Protection)
   {
@@ -229,6 +237,22 @@ export const FAQS: FAQItem[] = [
       "Model selection is driven by four factors: task complexity (reasoning depth vs. pattern matching), latency requirements (streaming chat vs. batch processing), cost per token at production scale, and data privacy constraints (cloud-hosted vs. locally-hosted open-source models). For most production RAG and chatbot applications, I recommend a hybrid: Gemini embeddings for retrieval with Groq-hosted LLaMA 3.3 for fast streaming inference — delivering sub-second responses at a fraction of GPT-4 costs.",
     tags: ["AI Model Selection", "GPT-4 vs Gemini", "LLaMA 3.3", "Groq", "Model Comparison", "LLM Cost Optimization"],
   },
+  {
+    id: "text-to-sql-database-ai-assistant",
+    category: "AI & RAG Systems",
+    question: "Can you build an AI assistant that securely queries our internal PostgreSQL database or CRM in natural language?",
+    answer:
+      "Yes, I build secure Text-to-SQL and database querying AI agents using read-only database roles, parameterized query generation, and strict schema isolation. The system converts user questions into validated SQL queries, validates execution plans, prevents dangerous write operations, and formats the output into interactive tables and charts with verified data provenance.",
+    tags: ["Text to SQL", "Database AI Assistant", "Internal CRM AI", "Read-Only SQL Agent", "PostgreSQL Agent", "Data Analysis AI"],
+  },
+  {
+    id: "rag-evaluation-benchmarking",
+    category: "AI & RAG Systems",
+    question: "How do you measure and benchmark the accuracy of a custom RAG pipeline?",
+    answer:
+      "I evaluate RAG accuracy using systematic benchmarking frameworks (such as RAGAS metrics) focusing on three core criteria: Faithfulness (is the answer strictly grounded in retrieved context?), Answer Relevancy (did it address the user query without fluff?), and Context Recall (did vector search retrieve the required chunks?). Any drop in evaluation score triggers chunking refinement, threshold tuning, or prompt guardrail updates.",
+    tags: ["RAG Evaluation", "RAGAS Metrics", "Faithfulness Score", "Vector Search Quality", "RAG Benchmarking", "LLM Evaluation"],
+  },
 
   // 5. Backend & Architecture (Distributed Systems & Performance)
   {
@@ -287,6 +311,22 @@ export const FAQS: FAQItem[] = [
       "Yes, every application is engineered with technical SEO and Generative Engine Optimization (GEO/AEO) from day one: semantic HTML5 hierarchy, Schema.org JSON-LD structured data, dynamic OpenGraph social cards, XML sitemaps, and sub-second Core Web Vitals to maximize search rankings and AI citations.",
     tags: ["Technical SEO", "AEO", "GEO", "Schema.org JSON-LD", "Google Rankings", "Perplexity Citation"],
   },
+  {
+    id: "background-jobs-message-queues",
+    category: "Backend & Architecture",
+    question: "How do you handle heavy background tasks, email delivery, and asynchronous queues in Next.js?",
+    answer:
+      "In serverless Next.js environments, long-running processes must be offloaded to prevent HTTP gateway timeouts. I implement distributed queue pipelines using BullMQ with Redis or serverless event brokers (Inngest, Apache Kafka). Tasks like document vectorization, bulk email notifications, PDF generation, and third-party webhook processing execute reliably in background workers with automatic retries, dead-letter queues (DLQ), and failure alerts.",
+    tags: ["Background Jobs", "BullMQ", "Redis Queue", "Asynchronous Processing", "Message Queues", "Next.js Background Tasks", "Kafka"],
+  },
+  {
+    id: "production-monitoring-observability",
+    category: "Backend & Architecture",
+    question: "What monitoring, error tracking, and observability tools do you configure for production apps?",
+    answer:
+      "I integrate complete production observability suites including Sentry for real-time error tracking and source-mapped stack traces, structured JSON logging, OpenTelemetry instrumentation for distributed request tracing, and Vercel Analytics for Core Web Vitals monitoring. This ensures system anomalies and API degradations are detected and alerted before users report them.",
+    tags: ["Production Monitoring", "Sentry", "Error Tracking", "Observability", "OpenTelemetry", "Uptime Monitoring", "Core Web Vitals"],
+  },
 
   // 6. Forward Deployed & Roles (Career, Hiring & Enterprise Alignment)
   {
@@ -313,6 +353,30 @@ export const FAQS: FAQItem[] = [
       "I navigate ambiguous requirements by building early functional prototypes that validate user assumptions in days rather than weeks. By breaking high-level objectives into concrete technical specifications and maintaining continuous feedback loops, client needs are validated before scaling production architecture.",
     tags: ["Technical Discovery", "Customer Discovery", "Requirements Scoping", "Agile Validation"],
   },
+  {
+    id: "fde-onboarding-speed",
+    category: "Forward Deployed & Roles",
+    question: "How quickly can you onboard and start contributing to our sprint or existing codebase?",
+    answer:
+      "I typically onboard and make meaningful Git contributions within 24 to 48 hours. By analyzing existing architecture diagrams, repository READMEs, type definitions, and test suites, I rapidly map the data flow and isolate task boundaries, requiring minimal hand-holding from your senior engineers.",
+    tags: ["Fast Onboarding", "FDE Onboarding", "Sprint Velocity", "Autonomous Engineer", "Git Contributions", "Day 1 Productivity"],
+  },
+  {
+    id: "client-facing-technical-demos",
+    category: "Forward Deployed & Roles",
+    question: "Can you conduct customer-facing technical demos and enterprise stakeholder presentations?",
+    answer:
+      "Yes. As a Forward Deployed Engineer, bridging deep technical mechanics with clear commercial value is a core competency. I regularly lead live technical discovery sessions, present architecture proposals, run interactive product demos with prospective clients, and explain trade-offs without confusing jargon.",
+    tags: ["Client-Facing Engineer", "Stakeholder Communication", "Technical Demos", "Discovery Calls", "Enterprise FDE", "Solution Engineering"],
+  },
+  {
+    id: "fde-day-in-life-workflow",
+    category: "Forward Deployed & Roles",
+    question: "What does your typical workflow look like when embedded with a startup or product team?",
+    answer:
+      "My embedded workflow centers on rapid iterative execution: morning async standup updates, dedicated deep-work blocks for feature delivery and PR creation, rapid prototyping of experimental customer requirements, and bi-weekly architecture reviews. I keep all work transparently tracked through Linear, Jira, or GitHub Projects with detailed PR notes and staging previews.",
+    tags: ["Embedded Engineer", "Agile Workflow", "Linear Jira", "Remote Engineering", "PR Review Culture", "Async Standup"],
+  },
 
   // 7. Background & Contact (Bio, Credentials & Getting Started)
   {
@@ -338,6 +402,30 @@ export const FAQS: FAQItem[] = [
     answer:
       "You can get started immediately by submitting an inquiry on the Contact page (/contact) or emailing shaikh.samir.work@gmail.com with your project overview and timeline. I respond to all business and hiring inquiries within 24 to 48 hours to schedule a free 30-minute discovery consultation.",
     tags: ["Contact Samir", "Free Discovery Call", "Hire Samir Shaikh", "Project Consultation"],
+  },
+  {
+    id: "location-in-person-meetings",
+    category: "Background & Contact",
+    question: "Where are you based and are you available for in-person meetings in Gujarat or Mumbai?",
+    answer:
+      "I am based in Vapi, Gujarat — strategically located on the industrial corridor between Surat and Mumbai. While 90% of my client collaborations operate smoothly via remote async channels, I am readily available for in-person kick-off meetings, sprint planning, and discovery workshops across Vapi, Daman, Silvassa, Surat, Valsad, and Mumbai.",
+    tags: ["Vapi Developer", "In-Person Meetings", "Gujarat Software Engineer", "Mumbai Developer", "Daman Silvassa", "Local Consultant"],
+  },
+  {
+    id: "free-discovery-call-audit",
+    category: "Background & Contact",
+    question: "Do you offer a free technical discovery call or website audit before we commit?",
+    answer:
+      "Yes, I offer a complimentary 30-minute technical discovery call to review your project scope, evaluate architectural feasibility, and outline preliminary timelines and fixed costs. For businesses with existing websites, I also provide a high-level technical SEO and performance audit pinpointing speed bottlenecks and local ranking opportunities.",
+    tags: ["Free Discovery Call", "Technical Audit", "Free Consultation", "Website Review", "Scope Feasibility", "Project Estimate"],
+  },
+  {
+    id: "references-case-studies",
+    category: "Background & Contact",
+    question: "Can you share references, testimonials, or case studies of your past work?",
+    answer:
+      "Yes, you can explore detailed production case studies directly in my Projects showcase (/projects), featuring architecture breakdowns, tech stack decisions, and live links. For verified client references and commercial testimonials, feel free to reach out via the Contact page or email, and I will connect you with past collaborators.",
+    tags: ["Case Studies", "Client References", "Portfolio Projects", "Testimonials", "Past Work", "Track Record"],
   },
 
   // 8. Local SEO & Digital Marketing
@@ -381,6 +469,30 @@ export const FAQS: FAQItem[] = [
       "I provide end-to-end digital marketing services tailored to local businesses: Local SEO and Google Business Profile optimization, business website development, technical SEO audits, WhatsApp Business automation, social media content strategy, and Google Ads campaign setup. Services are designed to generate real customer inquiries — not just traffic metrics — for businesses across Vapi, Daman, Silvassa, Umargam, Sarigam, Bhilad, and the surrounding GIDC industrial belt.",
     tags: ["Digital Marketing Vapi", "Digital Marketing Gujarat", "SEO Services Vapi", "Online Marketing", "Google Ads", "Local Business Marketing"],
   },
+  {
+    id: "rank-in-google-maps-near-me",
+    category: "Local SEO & Digital Marketing",
+    question: "How can my business rank in the Google Maps '3-Pack' for 'near me' searches in Vapi, Daman, or Silvassa?",
+    answer:
+      "Ranking in the Google Maps 3-Pack requires three core signals: Proximity, Prominence, and Relevance. We optimize your Google Business Profile with accurate primary and secondary categories, exact geo-coordinates, hyper-local service descriptions (targeting areas like GIDC Vapi, Chala, Gunjan, Daman, Silvassa), consistent NAP across Indian business directories (Justdial, IndiaMART, Sulekha), and structured LocalBusiness schema on your website.",
+    tags: ["Google Maps 3-Pack", "Near Me Ranking", "Local SEO Vapi", "Google Business Profile", "Local Pack", "Daman Silvassa SEO", "NAP Consistency"],
+  },
+  {
+    id: "local-seo-vs-paid-ads",
+    category: "Local SEO & Digital Marketing",
+    question: "What is the difference between Local SEO and running Google or Meta Ads for a local business?",
+    answer:
+      "Google and Meta Ads generate immediate visibility, but traffic disappears the moment you pause ad spend. In contrast, Local SEO builds enduring organic equity: ranking #1 on Google Maps and organic local search delivers continuous, high-intent buyer inquiries month after month with zero cost per click (CPC). The most effective local marketing strategy pairs targeted initial ads with long-term Local SEO compounding.",
+    tags: ["Local SEO vs Google Ads", "SEO vs PPC", "Zero CPC", "Organic Lead Generation", "Marketing ROI", "Local Advertising"],
+  },
+  {
+    id: "localbusiness-schema-voice-ai-search",
+    category: "Local SEO & Digital Marketing",
+    question: "What is LocalBusiness schema markup and how does it help search engines and AI assistants?",
+    answer:
+      "LocalBusiness schema markup is structured JSON-LD code embedded in your website that explicitly tells Google, ChatGPT, Perplexity, and Apple Maps your exact business name, address, phone number, operating hours, geo-coordinates, price range, and accepted payment methods. This eliminates ambiguity, powers rich search snippets, and directly enables AI voice assistants to recommend your business.",
+    tags: ["LocalBusiness Schema", "JSON-LD Markup", "Voice Search SEO", "AI Answer Engine Optimization", "Rich Snippets", "Schema.org"],
+  },
 
   // 9. Web Design & Business Websites
   {
@@ -423,6 +535,30 @@ export const FAQS: FAQItem[] = [
       "Yes — I design and develop professional websites across all local business categories: restaurant and hotel websites with menu and booking integration, clinic and hospital websites with appointment forms, manufacturing and B2B company profiles, retail and e-commerce storefronts, CA and legal firm websites, event management portfolios, real estate listings, and education institute pages. Every website is built mobile-first and SEO-ready from day one.",
     tags: ["Restaurant Website", "Hospital Website", "Manufacturer Website", "Clinic Website", "Business Website Design", "Industry Website India"],
   },
+  {
+    id: "mobile-responsive-core-web-vitals",
+    category: "Web Design & Business Websites",
+    question: "Will my business website load fast on mobile devices and meet Google Core Web Vitals?",
+    answer:
+      "Yes, every website I build is mobile-first, responsive across all screen sizes (smartphones, tablets, laptops), and engineered to score 90+ on Google PageSpeed Insights. By leveraging Next.js static generation (SSG/ISR), WebP/AVIF automated image compression via Cloudinary, and zero-runtime CSS, your pages achieve sub-second Largest Contentful Paint (LCP) and zero Cumulative Layout Shift (CLS).",
+    tags: ["Mobile Friendly Website", "Core Web Vitals", "Google PageSpeed 90+", "Next.js Speed", "Fast Loading Website", "Responsive Web Design"],
+  },
+  {
+    id: "custom-calculator-quote-forms",
+    category: "Web Design & Business Websites",
+    question: "Can you add interactive features like custom price calculators, booking calendars, or product catalogs?",
+    answer:
+      "Yes, I build tailored interactive web widgets to convert visitors into qualified leads. Common implementations include instant pricing and quotation calculators for industrial manufacturers, appointment booking calendars for healthcare clinics and salons, interactive digital menus for restaurants, and filterable product catalogs with direct 'Inquire on WhatsApp' buttons.",
+    tags: ["Custom Quote Calculator", "Appointment Booking System", "Interactive Product Catalog", "WhatsApp Inquiry Button", "Lead Generation Features", "Web Widgets"],
+  },
+  {
+    id: "website-maintenance-backups-uptime",
+    category: "Web Design & Business Websites",
+    question: "What website maintenance is required after launch and what happens if something goes down?",
+    answer:
+      "Modern serverless websites require virtually zero manual OS patching, and uptime is maintained by global edge networks (99.99% SLA). My post-launch maintenance retainers provide automated daily database backups, SSL certificate renewals, security dependency updates, uptime monitoring with instant SMS/email alerts, and ongoing content edits.",
+    tags: ["Website Maintenance", "Database Backups", "Uptime Monitoring", "SSL Renewal", "Website Care Plan", "99.99% Uptime"],
+  },
 
   // 10. WhatsApp & Business Automation
   {
@@ -456,5 +592,29 @@ export const FAQS: FAQItem[] = [
     answer:
       "Yes — WhatsApp automation integrates with your existing website contact forms, booking systems, CRMs (Zoho, HubSpot, custom), Google Sheets, and payment gateways via the WhatsApp Business API and webhooks. When a customer fills your website contact form or makes a booking, they automatically receive a WhatsApp confirmation — and your team gets an instant notification — without manual intervention.",
     tags: ["WhatsApp CRM Integration", "WhatsApp Webhook", "WhatsApp API Integration", "WhatsApp Booking System", "Automated Lead Follow-up"],
+  },
+  {
+    id: "whatsapp-lead-capture-google-sheets",
+    category: "WhatsApp & Business Automation",
+    question: "Can you automate lead collection from our website forms directly into WhatsApp and Google Sheets?",
+    answer:
+      "Yes. When a prospect submits an inquiry form on your website, our webhook pipeline instantly appends the lead's details into a shared Google Sheet, sends an instant notification to your sales team's WhatsApp group, and triggers a personalized, automated acknowledgment message to the customer within seconds.",
+    tags: ["Lead Capture Automation", "Website to WhatsApp", "Google Sheets CRM", "Instant Lead Alert", "Sales Automation", "Webhook Integration"],
+  },
+  {
+    id: "whatsapp-payment-reminders-gst-invoices",
+    category: "WhatsApp & Business Automation",
+    question: "Can WhatsApp automation send automated payment reminders, GST invoices, and dispatch alerts?",
+    answer:
+      "Yes, for B2B manufacturers, distributors, and retailers, we configure automated transactional workflows: sending payment reminder alerts before invoice due dates, dispatching order delivery tracking updates, and delivering PDF tax invoices directly to the customer's WhatsApp upon billing in your accounting software or ERP.",
+    tags: ["WhatsApp Invoicing", "Payment Reminders", "GST Invoice on WhatsApp", "Dispatch Alerts", "B2B WhatsApp Automation", "Accounting Integration"],
+  },
+  {
+    id: "whatsapp-official-api-ban-prevention",
+    category: "WhatsApp & Business Automation",
+    question: "Will my WhatsApp business number get banned or blocked for sending automated messages?",
+    answer:
+      "No. We build automation exclusively on the official Meta WhatsApp Cloud API and verified Meta Business Manager accounts, strictly adhering to WhatsApp's Business Messaging Policy. Unlike unauthorized third-party bulk-messaging software or scraping tools that trigger instant phone number bans, official API accounts provide verified green checkmark eligibility, pre-approved message templates, and guaranteed delivery compliance.",
+    tags: ["Official WhatsApp API", "Meta Cloud API", "No Ban WhatsApp", "Verified Business Account", "WhatsApp Compliance", "Meta Business Manager"],
   },
 ];
