@@ -13,15 +13,28 @@ import {
 
 const MAX_DISTANCE = 0.5;
 
+export interface GroundingSource {
+  title: string;
+  type: 'project' | 'blog' | 'service' | 'experience' | 'github' | 'faq' | 'about';
+  url?: string;
+}
+
+export interface ContextResult {
+  contextText: string;
+  sources: GroundingSource[];
+}
+
 const ALL_SERVICES = SERVICE_CATEGORIES.flatMap((c) =>
   c.services.map((s) => ({ ...s, category: c.title }))
 );
 
-function getMatchingServices(queryText: string): string {
+function getMatchingServices(queryText: string): { text: string; sources: GroundingSource[] } {
   const query = queryText.toLowerCase().trim();
-  if (!query) return '';
+  if (!query) return { text: '', sources: [] };
   const words = query.split(/\s+/).filter((w) => w.length > 2);
-  if (words.length === 0) return '';
+  if (words.length === 0) return { text: '', sources: [] };
+
+  const sources: GroundingSource[] = [];
 
   // 1. Match individual service offerings
   const matchedServices = ALL_SERVICES.map((service) => {
@@ -92,6 +105,11 @@ function getMatchingServices(queryText: string): string {
   const parts: string[] = [];
 
   matchedServices.forEach((m, i) => {
+    sources.push({
+      title: m.service.title,
+      type: 'service',
+      url: `/services#${m.service.id}`,
+    });
     parts.push(
       `--- Context Service ${i + 1} (Services & Offerings) ---\n` +
       `Exact Title: Service - ${m.service.title}\n` +
@@ -105,6 +123,11 @@ function getMatchingServices(queryText: string): string {
   });
 
   matchedEngagements.forEach((m) => {
+    sources.push({
+      title: `Engagement Model: ${m.model.title}`,
+      type: 'service',
+      url: '/services',
+    });
     parts.push(
       `--- Context Engagement Model (Services & Engagement) ---\n` +
       `Exact Title: Engagement Model - ${m.model.title}\n` +
@@ -125,14 +148,14 @@ function getMatchingServices(queryText: string): string {
     );
   });
 
-  return parts.join('\n\n');
+  return { text: parts.join('\n\n'), sources };
 }
 
-function getMatchingFaqs(queryText: string): string {
+function getMatchingFaqs(queryText: string): { text: string; sources: GroundingSource[] } {
   const query = queryText.toLowerCase().trim();
-  if (!query) return '';
+  if (!query) return { text: '', sources: [] };
   const words = query.split(/\s+/).filter((w) => w.length > 2);
-  if (words.length === 0) return '';
+  if (words.length === 0) return { text: '', sources: [] };
 
   const matched = FAQS.map((faq) => {
     let score = 0;
@@ -153,14 +176,22 @@ function getMatchingFaqs(queryText: string): string {
     .sort((a, b) => b.score - a.score)
     .slice(0, 2);
 
-  if (matched.length === 0) return '';
+  if (matched.length === 0) return { text: '', sources: [] };
 
-  return matched
+  const sources: GroundingSource[] = matched.map((m) => ({
+    title: m.faq.question,
+    type: 'faq',
+    url: `/faq#${m.faq.id}`,
+  }));
+
+  const text = matched
     .map(
       (m, i) =>
         `--- Context FAQ ${i + 1} (FAQ Knowledge Base) ---\nExact Title: FAQ - ${m.faq.question}\nURL: /faq#${m.faq.id}\nQuestion: ${m.faq.question}\nAnswer: ${m.faq.answer}`
     )
     .join('\n\n');
+
+  return { text, sources };
 }
 
 const GITHUB_INTENT_RE =
@@ -191,11 +222,14 @@ async function getGithubEventsCached(): Promise<string | null> {
   return null;
 }
 
-export async function getRelevantContext(messages: string[]): Promise<string> {
+export async function getRelevantContextWithSources(messages: string[]): Promise<ContextResult> {
+  const sources: GroundingSource[] = [];
   try {
     const latestMessage = messages[messages.length - 1] || '';
-    const matchedFaqs = getMatchingFaqs(latestMessage);
-    const matchedServices = getMatchingServices(latestMessage);
+    const { text: matchedFaqs, sources: faqSources } = getMatchingFaqs(latestMessage);
+    const { text: matchedServices, sources: serviceSources } = getMatchingServices(latestMessage);
+
+    sources.push(...serviceSources, ...faqSources);
 
     // Embed last 2-3 messages joined for better follow-up understanding
     const embedWindow = messages.slice(-3).join(' ');
@@ -261,12 +295,25 @@ export async function getRelevantContext(messages: string[]): Promise<string> {
         const exactTitle = titleMap.get(chunk.sourceId);
 
         let header = `--- Context ${i + 1} (${chunk.sourceType}) ---`;
-        if (exactTitle) header += `\nExact Title: ${exactTitle}`;
-        if (exactUrl) header += `\nURL: ${exactUrl}`;
-        if (chunk.sourceType === 'about' && !exactTitle)
-          header += `\nExact Title: About Samir`;
-        if (chunk.sourceType === 'experience' && !exactTitle)
-          header += `\nExact Title: Work Experience`;
+        if (exactTitle) {
+          header += `\nExact Title: ${exactTitle}`;
+          sources.push({
+            title: exactTitle,
+            type: chunk.sourceType as GroundingSource['type'],
+            url: exactUrl,
+          });
+        } else if (exactUrl) {
+          header += `\nURL: ${exactUrl}`;
+        }
+
+        if (chunk.sourceType === 'about') {
+          if (!exactTitle) header += `\nExact Title: About Samir`;
+          sources.push({ title: 'About Samir', type: 'about', url: '/about' });
+        }
+        if (chunk.sourceType === 'experience') {
+          if (!exactTitle) header += `\nExact Title: Work Experience`;
+          sources.push({ title: 'Work Experience', type: 'experience', url: '/about#experience' });
+        }
 
         return `${header}\n${chunk.text}`;
       })
@@ -277,6 +324,11 @@ export async function getRelevantContext(messages: string[]): Promise<string> {
       const githubEvents = await getGithubEventsCached();
       if (githubEvents) {
         contextText += `\n\n--- Context ${filteredChunks.length + 1} (github_activity) ---\n${githubEvents}`;
+        sources.push({
+          title: 'Recent GitHub Activity',
+          type: 'github',
+          url: 'https://github.com/samirshaikh-dev',
+        });
       }
     }
 
@@ -290,9 +342,23 @@ export async function getRelevantContext(messages: string[]): Promise<string> {
       contextText = contextText ? `${contextText}\n\n${matchedServices}` : matchedServices;
     }
 
-    return contextText;
+    // Deduplicate sources
+    const seen = new Set<string>();
+    const uniqueSources = sources.filter((s) => {
+      const key = `${s.type}:${s.title}:${s.url || ''}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+
+    return { contextText, sources: uniqueSources };
   } catch (error) {
     console.error('[RAG] Failed to retrieve context:', error);
-    return '';
+    return { contextText: '', sources: [] };
   }
+}
+
+export async function getRelevantContext(messages: string[]): Promise<string> {
+  const result = await getRelevantContextWithSources(messages);
+  return result.contextText;
 }
