@@ -5,7 +5,10 @@ export type FAQCategory =
   | "AI & RAG Systems"
   | "Backend & Architecture"
   | "Forward Deployed & Roles"
-  | "Background & Contact";
+  | "Background & Contact"
+  | "Local SEO & Digital Marketing"
+  | "Web Design & Business Websites"
+  | "WhatsApp & Business Automation";
 
 export interface FAQItem {
   id: string;
@@ -335,5 +338,123 @@ export const FAQS: FAQItem[] = [
     answer:
       "You can get started immediately by submitting an inquiry on the Contact page (/contact) or emailing shaikh.samir.work@gmail.com with your project overview and timeline. I respond to all business and hiring inquiries within 24 to 48 hours to schedule a free 30-minute discovery consultation.",
     tags: ["Contact Samir", "Free Discovery Call", "Hire Samir Shaikh", "Project Consultation"],
+  },
+
+  // 8. Local SEO & Digital Marketing
+  {
+    id: "what-is-local-seo-vapi",
+    category: "Local SEO & Digital Marketing",
+    question: "What is Local SEO and why does my business in Vapi, Daman, or Silvassa need it?",
+    answer:
+      "Local SEO is the process of optimizing your business to appear prominently in Google search results and Google Maps when nearby customers search for your services. For businesses in Vapi, Daman, Silvassa, and the surrounding industrial and commercial belt, Local SEO is the highest-ROI digital investment — it puts your business in front of customers who are actively ready to buy, not just browsing.",
+    tags: ["Local SEO", "Local SEO Vapi", "Google Maps Ranking", "Local Business SEO", "SEO Daman", "SEO Silvassa", "Gujarat SEO"],
+  },
+  {
+    id: "google-business-profile-optimization",
+    category: "Local SEO & Digital Marketing",
+    question: "How do I get my business to appear on Google search and Google Maps?",
+    answer:
+      "The foundation is a fully optimized Google Business Profile (GBP) — with accurate NAP (name, address, phone), business category, service areas, photos, and regular posts. Beyond GBP, consistent local citations, structured LocalBusiness schema markup on your website, and location-specific landing pages drive sustained Google Maps and local pack visibility for your business.",
+    tags: ["Google Business Profile", "Google Maps", "GBP Optimization", "Local Pack Ranking", "NAP Consistency", "Local Citations"],
+  },
+  {
+    id: "local-seo-timeline-results",
+    category: "Local SEO & Digital Marketing",
+    question: "How long does Local SEO take to show results for a small business?",
+    answer:
+      "Most local businesses begin seeing measurable improvements in Google Maps visibility and organic local rankings within 60 to 90 days of consistent optimization. The fastest wins come from completing your Google Business Profile, fixing NAP inconsistencies, and adding LocalBusiness schema markup. Full competitive local rankings for high-intent service keywords typically develop within 3 to 6 months.",
+    tags: ["SEO Timeline", "How Long Does SEO Take", "Local SEO Results", "SEO for Small Business", "Google Maps Ranking Time"],
+  },
+  {
+    id: "local-seo-for-industries-vapi",
+    category: "Local SEO & Digital Marketing",
+    question: "Do restaurants, clinics, hotels, and manufacturers in Vapi need SEO?",
+    answer:
+      "Absolutely. Every local business — from restaurants and multi-specialty hospitals to chemical manufacturers, CA firms, and event planners — benefits from Local SEO. When a customer in Vapi, Pardi, Umargam, or Silvassa searches for your service, a well-optimized business appears in the Google Maps local pack and organic results ahead of competitors who haven't invested in local visibility.",
+    tags: ["SEO for Restaurants", "SEO for Clinics", "SEO for Hotels", "SEO for Manufacturers", "Local SEO Vapi", "Vapi Business Marketing"],
+  },
+  {
+    id: "digital-marketing-services-vapi",
+    category: "Local SEO & Digital Marketing",
+    question: "What digital marketing services do you provide for businesses in Vapi and Gujarat?",
+    answer:
+      "I provide end-to-end digital marketing services tailored to local businesses: Local SEO and Google Business Profile optimization, business website development, technical SEO audits, WhatsApp Business automation, social media content strategy, and Google Ads campaign setup. Services are designed to generate real customer inquiries — not just traffic metrics — for businesses across Vapi, Daman, Silvassa, Umargam, Sarigam, Bhilad, and the surrounding GIDC industrial belt.",
+    tags: ["Digital Marketing Vapi", "Digital Marketing Gujarat", "SEO Services Vapi", "Online Marketing", "Google Ads", "Local Business Marketing"],
+  },
+
+  // 9. Web Design & Business Websites
+  {
+    id: "business-website-cost-india",
+    category: "Web Design & Business Websites",
+    question: "How much does a business website cost in India for a small business or local shop?",
+    answer:
+      "A professional business website in India typically costs between ₹15,000 and ₹50,000 for a clean, mobile-friendly 5 to 8-page website — covering homepage, services, about, contact, and a blog. Full-stack web applications with booking systems, admin panels, or e-commerce functionality range from ₹50,000 to ₹2,00,000+ depending on feature complexity. Every project includes a fixed-price quote with zero surprise billing.",
+    tags: ["Business Website Cost India", "Website Development Cost", "Web Design Price India", "Affordable Website", "Website Cost Gujarat", "Small Business Website"],
+  },
+  {
+    id: "does-local-business-need-website",
+    category: "Web Design & Business Websites",
+    question: "Does my local business or shop in Vapi need a website in 2025?",
+    answer:
+      "Yes — a website is the single most credible digital asset a local business can own. Customers searching for restaurants, clinics, salons, automobile dealers, CA firms, and retail shops in Vapi, Daman, and Silvassa consistently check websites before making a purchase or booking decision. A professional website with Local SEO gives you 24/7 visibility and a platform for customer inquiries, bookings, and portfolio display — independently of any social media platform.",
+    tags: ["Does My Business Need a Website", "Local Business Website", "Business Website Vapi", "Why Have a Website", "Online Presence", "Small Business Website India"],
+  },
+  {
+    id: "website-development-timeline",
+    category: "Web Design & Business Websites",
+    question: "How long does it take to build a professional business website?",
+    answer:
+      "A professional 5 to 8-page business website is typically delivered in 7 to 14 business days. More complex builds with booking/appointment systems, e-commerce, admin dashboards, or multi-language support take 3 to 6 weeks. All projects are managed with clear milestone demos on a live staging URL so you can review progress before final delivery.",
+    tags: ["Website Development Timeline", "How Long to Build Website", "Website Delivery Time", "Fast Website Development", "Business Website India"],
+  },
+  {
+    id: "website-redesign-existing",
+    category: "Web Design & Business Websites",
+    question: "Can you redesign my existing outdated website or migrate it from WordPress?",
+    answer:
+      "Yes, I specialize in modernizing outdated websites and migrating from slow WordPress or Wix sites to high-performance Next.js builds. A redesign typically includes mobile-first responsive layouts, sub-second Core Web Vitals scores, integrated Local SEO, and a clean CMS for your team to update content without touching code. You retain 100% ownership of the final codebase.",
+    tags: ["Website Redesign", "WordPress Migration", "Modernize Website", "Website Revamp", "Wix to Next.js", "Website Performance"],
+  },
+  {
+    id: "website-for-industry-types",
+    category: "Web Design & Business Websites",
+    question: "Can you build websites for restaurants, hospitals, manufacturers, and service businesses?",
+    answer:
+      "Yes — I design and develop professional websites across all local business categories: restaurant and hotel websites with menu and booking integration, clinic and hospital websites with appointment forms, manufacturing and B2B company profiles, retail and e-commerce storefronts, CA and legal firm websites, event management portfolios, real estate listings, and education institute pages. Every website is built mobile-first and SEO-ready from day one.",
+    tags: ["Restaurant Website", "Hospital Website", "Manufacturer Website", "Clinic Website", "Business Website Design", "Industry Website India"],
+  },
+
+  // 10. WhatsApp & Business Automation
+  {
+    id: "what-is-whatsapp-automation",
+    category: "WhatsApp & Business Automation",
+    question: "What is WhatsApp Business automation and how can it help my business?",
+    answer:
+      "WhatsApp Business automation uses the official WhatsApp Business API to send automated replies, appointment confirmations, order updates, promotional messages, and lead follow-ups — without manual effort. For businesses in industries like restaurants, clinics, retail, logistics, and hospitality, WhatsApp automation reduces response time to seconds, increases customer retention, and eliminates missed inquiry leads 24/7.",
+    tags: ["WhatsApp Automation", "WhatsApp Business API", "WhatsApp Bot", "Business Automation", "Customer Engagement Automation", "WhatsApp Marketing"],
+  },
+  {
+    id: "whatsapp-automation-use-cases",
+    category: "WhatsApp & Business Automation",
+    question: "Which types of businesses in Vapi can benefit from WhatsApp automation?",
+    answer:
+      "WhatsApp automation delivers measurable ROI for virtually every local business category: restaurants sending daily menus and order confirmations, clinics automating appointment reminders and reports, hotels managing booking inquiries, retail shops sending restock alerts, logistics companies tracking delivery updates, real estate agencies sharing property listings, and event planners coordinating guest communication — all without a single manual reply.",
+    tags: ["WhatsApp for Restaurants", "WhatsApp for Clinics", "WhatsApp for Hotels", "WhatsApp Automation Vapi", "WhatsApp Business India", "Automated Replies"],
+  },
+  {
+    id: "whatsapp-automation-cost",
+    category: "WhatsApp & Business Automation",
+    question: "How much does WhatsApp Business automation cost for a small business in India?",
+    answer:
+      "WhatsApp Business automation setup typically costs between ₹10,000 and ₹40,000 depending on the number of automated flows, integration complexity (CRM, booking system, payment gateway), and conversation volume. The WhatsApp Business API has per-conversation pricing through Meta — most small businesses with moderate message volumes spend ₹500 to ₹3,000/month on API costs. I provide a full cost breakdown before starting any automation project.",
+    tags: ["WhatsApp Automation Cost", "WhatsApp API Price India", "Business Automation Cost", "WhatsApp Business Setup", "WhatsApp Chatbot Cost India"],
+  },
+  {
+    id: "whatsapp-automation-integration",
+    category: "WhatsApp & Business Automation",
+    question: "Can WhatsApp automation be connected to my existing website, CRM, or booking system?",
+    answer:
+      "Yes — WhatsApp automation integrates with your existing website contact forms, booking systems, CRMs (Zoho, HubSpot, custom), Google Sheets, and payment gateways via the WhatsApp Business API and webhooks. When a customer fills your website contact form or makes a booking, they automatically receive a WhatsApp confirmation — and your team gets an instant notification — without manual intervention.",
+    tags: ["WhatsApp CRM Integration", "WhatsApp Webhook", "WhatsApp API Integration", "WhatsApp Booking System", "Automated Lead Follow-up"],
   },
 ];
