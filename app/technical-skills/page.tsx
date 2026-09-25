@@ -183,8 +183,9 @@ export default function TechnicalSkillsPage() {
       <div className="space-y-12 mt-4">
         {/* Section 1: Developer Overview */}
         <section
+          id="overview"
           aria-labelledby="overview-heading"
-          className="rounded-xl border border-border-primary bg-background/80 p-6 md:p-8 backdrop-blur-sm relative overflow-hidden"
+          className="scroll-mt-24 rounded-xl border border-border-primary bg-background/80 p-6 md:p-8 backdrop-blur-sm relative overflow-hidden"
         >
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-text-muted/20 to-transparent dark:via-green-400/30" />
           <div className="flex items-center gap-3 mb-4">
@@ -244,7 +245,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 2: Programming Languages */}
-        <section aria-labelledby="languages-heading">
+        <section id="languages" aria-labelledby="languages-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               02
@@ -304,7 +305,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 3: Frontend Development */}
-        <section aria-labelledby="frontend-heading">
+        <section id="frontend" aria-labelledby="frontend-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               03
@@ -367,7 +368,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 4: Backend & API Development */}
-        <section aria-labelledby="backend-heading">
+        <section id="backend" aria-labelledby="backend-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               04
@@ -431,7 +432,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 5: Databases & BaaS */}
-        <section aria-labelledby="databases-heading">
+        <section id="databases" aria-labelledby="databases-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               05
@@ -479,7 +480,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 6: Testing */}
-        <section aria-labelledby="testing-heading">
+        <section id="testing" aria-labelledby="testing-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               06
@@ -531,7 +532,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 7: Software Engineering & System Design Concepts */}
-        <section aria-labelledby="concepts-heading">
+        <section id="system-design" aria-labelledby="concepts-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               07
@@ -628,7 +629,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 8: AI-Assisted Development */}
-        <section aria-labelledby="ai-dev-heading">
+        <section id="ai" aria-labelledby="ai-dev-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               08
@@ -671,7 +672,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 9: Messaging & Queues */}
-        <section aria-labelledby="queues-heading">
+        <section id="queues" aria-labelledby="queues-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               09
@@ -709,7 +710,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 10: Cloud & DevOps */}
-        <section aria-labelledby="devops-heading">
+        <section id="devops" aria-labelledby="devops-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               10
@@ -753,7 +754,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 11: Monitoring & Observability */}
-        <section aria-labelledby="monitoring-heading">
+        <section id="monitoring" aria-labelledby="monitoring-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               11
@@ -810,7 +811,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 12: Soft Skills */}
-        <section aria-labelledby="soft-skills-heading">
+        <section id="soft-skills" aria-labelledby="soft-skills-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               12
@@ -857,7 +858,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 13: Development Tools & Workflow */}
-        <section aria-labelledby="workflow-heading">
+        <section id="workflow" aria-labelledby="workflow-heading" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               13
@@ -924,7 +925,7 @@ export default function TechnicalSkillsPage() {
         </section>
 
         {/* Section 14: Frequently Asked Questions */}
-        <section aria-labelledby="faq-heading" className="pt-4">
+        <section id="faq" aria-labelledby="faq-heading" className="scroll-mt-24 pt-4">
           <div className="flex items-center gap-3 mb-6">
             <span className="font-mono text-xs px-2.5 py-0.5 rounded border border-border-primary text-text-muted">
               14

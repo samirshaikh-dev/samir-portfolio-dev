@@ -450,6 +450,21 @@ export default function Chatbot() {
                                       </Link>
                                     );
                                   }
+                                  if (href && href.startsWith('/technical-skills')) {
+                                    return (
+                                      <Link
+                                        href={href}
+                                        onClick={() => setIsOpen(false)}
+                                        className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+                                        {...props}
+                                      >
+                                        <span>{children}</span>
+                                        <span className="text-[10px] uppercase font-mono px-1.5 py-0.2 rounded bg-primary/10 border border-primary/20 no-underline inline-flex items-center gap-0.5">
+                                          Tech Skills <FiArrowUpRight className="w-2.5 h-2.5" />
+                                        </span>
+                                      </Link>
+                                    );
+                                  }
                                   if (href && href.startsWith('/')) {
                                     return (
                                       <Link

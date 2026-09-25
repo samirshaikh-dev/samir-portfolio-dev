@@ -10,12 +10,16 @@ import {
   ENGAGEMENT_MODELS,
   SERVICES_FAQS,
 } from '@/lib/data/services';
+import {
+  TECHNICAL_SKILLS_FAQS,
+  SYSTEM_DESIGN_CONCEPTS,
+} from '@/lib/data/technical-skills';
 
 const MAX_DISTANCE = 0.5;
 
 export interface GroundingSource {
   title: string;
-  type: 'project' | 'blog' | 'service' | 'experience' | 'github' | 'faq' | 'about';
+  type: 'project' | 'blog' | 'service' | 'experience' | 'github' | 'faq' | 'about' | 'skill';
   url?: string;
 }
 
@@ -194,6 +198,138 @@ function getMatchingFaqs(queryText: string): { text: string; sources: GroundingS
   return { text, sources };
 }
 
+function getMatchingTechnicalSkills(queryText: string): { text: string; sources: GroundingSource[] } {
+  const query = queryText.toLowerCase().trim();
+  if (!query) return { text: '', sources: [] };
+
+  const words = query
+    .replace(/[^a-z0-9+#.-]/g, ' ')
+    .split(/\s+/)
+    .filter((w) => w.length >= 3 || ['ai', 'db', 'go', 'js', 'ts', 'ci', 'cd', 'ui'].includes(w));
+
+  if (words.length === 0) return { text: '', sources: [] };
+
+  const sources: GroundingSource[] = [];
+  const parts: string[] = [];
+
+  // 1. Match System Design Concepts (Microservices, Monolith, Modular Monolith, Event-Driven, etc.)
+  const matchedSystemDesign = SYSTEM_DESIGN_CONCEPTS.map((concept) => {
+    let score = 0;
+    const nameLower = concept.name.toLowerCase();
+    const subLower = concept.sub.toLowerCase();
+    const descLower = concept.description.toLowerCase();
+    const highlightsLower = concept.highlights.map((h) => h.toLowerCase());
+
+    if (query.includes(nameLower)) score += 12;
+    if (nameLower.includes(query)) score += 10;
+    if (subLower.includes(query)) score += 6;
+
+    for (const word of words) {
+      if (['samir', 'shaikh', 'does', 'what', 'with', 'about', 'how'].includes(word)) continue;
+      if (nameLower.includes(word)) score += 5;
+      if (subLower.includes(word)) score += 3;
+      if (highlightsLower.some((h) => h.includes(word))) score += 3;
+      if (descLower.includes(word)) score += 1;
+    }
+    return { concept, score };
+  })
+    .filter((item) => item.score >= 5)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2);
+
+  // 2. Match Technical Skills FAQs
+  const matchedFaqs = TECHNICAL_SKILLS_FAQS.map((faq) => {
+    let score = 0;
+    const qLower = faq.question.toLowerCase();
+    const aLower = faq.answer.toLowerCase();
+    const catLower = faq.category.toLowerCase();
+    const tagsLower = faq.tags?.map((t) => t.toLowerCase()) || [];
+
+    if (qLower.includes(query)) score += 12;
+    if (catLower.includes(query)) score += 8;
+
+    for (const word of words) {
+      if (['samir', 'shaikh', 'does', 'what', 'with', 'about', 'how'].includes(word)) continue;
+      if (qLower.includes(word)) score += 4;
+      if (tagsLower.some((t) => t.includes(word) || word.includes(t))) score += 4;
+      if (catLower.includes(word)) score += 3;
+      if (aLower.includes(word)) score += 1;
+    }
+    return { faq, score };
+  })
+    .filter((item) => item.score >= 5)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2);
+
+  // 3. Detect broad technical stack query intent
+  const isBroadTechQuery =
+    /\b(tech\s*stack|technolog(?:y|ies)|skills|languages|developer\s*expertise|what\s+can\s+samir\s+code|what\s+does\s+samir\s+know|frameworks|tools)\b/i.test(
+      query
+    );
+
+  matchedSystemDesign.forEach((m) => {
+    sources.push({
+      title: `System Design: ${m.concept.name}`,
+      type: 'skill',
+      url: '/technical-skills#system-design',
+    });
+    parts.push(
+      `--- Context System Design Concept (Architecture & System Design) ---\n` +
+      `Exact Title: System Design - ${m.concept.name}\n` +
+      `URL: /technical-skills#system-design\n` +
+      `Architecture Pattern: ${m.concept.name} (${m.concept.sub})\n` +
+      `Description: ${m.concept.description}\n` +
+      `Key Highlights: ${m.concept.highlights.join(', ')}`
+    );
+  });
+
+  matchedFaqs.forEach((m, i) => {
+    sources.push({
+      title: m.faq.question,
+      type: 'skill',
+      url: `/technical-skills#${m.faq.id}`,
+    });
+    parts.push(
+      `--- Context Technical Skill FAQ ${i + 1} (Technical Skills & Developer Expertise) ---\n` +
+      `Exact Title: Technical Skill - ${m.faq.question}\n` +
+      `URL: /technical-skills#${m.faq.id}\n` +
+      `Category: ${m.faq.category}\n` +
+      `Question: ${m.faq.question}\n` +
+      `Answer: ${m.faq.answer}`
+    );
+  });
+
+  if (
+    isBroadTechQuery ||
+    (matchedSystemDesign.length === 0 &&
+      matchedFaqs.length === 0 &&
+      /\b(programming|code|coder|stack|dev|engineer|backend|frontend|fullstack)\b/i.test(query))
+  ) {
+    sources.push({
+      title: 'Technical Skills & Developer Expertise',
+      type: 'skill',
+      url: '/technical-skills',
+    });
+    parts.push(
+      `--- Context Technical Skills Overview (Core Stack & Expertise) ---\n` +
+      `Exact Title: Technical Skills & Developer Expertise\n` +
+      `URL: /technical-skills\n` +
+      `Summary: Samir Shaikh is an AI Backend Engineer and Full-Stack Developer (backend-first) with production expertise across TypeScript, Node.js, Next.js, Distributed Systems, Event-Driven Architecture, PostgreSQL, MongoDB, Redis, Apache Kafka, BullMQ, and Docker.\n` +
+      `Key Domains:\n` +
+      `- Languages: TypeScript (Strict mode, Generics), JavaScript (ES6+/ESM, Async/Await), Python, Go, SQL\n` +
+      `- Backend & APIs: Node.js, Express.js, GraphQL (Apollo Server, Apollo Client, DataLoader), REST APIs, WebSockets (Socket.io), RBAC authorization, JWT authentication\n` +
+      `- System Design & Architecture: Microservices, Modular Monolith, Monolithic Architecture, Event-Driven Architecture (EDA), API Gateway Pattern, Distributed Caching (Redis), Circuit Breakers, CQRS\n` +
+      `- Databases & Caching: PostgreSQL, Neon Serverless, MongoDB, MySQL, Redis (sub-millisecond cache-aside), Firebase\n` +
+      `- Queues & Streaming: Apache Kafka (partitioned topics, event streaming), BullMQ (Redis-backed queues)\n` +
+      `- Cloud & DevOps: Docker, Docker Compose, GitHub Actions CI/CD, Vercel, Prometheus & Grafana observability\n` +
+      `- AI & LLMs: Gemini embeddings (pgvector), Groq, OpenAI, Claude, Vercel AI SDK, Agentic AI, Cursor, Copilot\n` +
+      `- Testing & Quality: Jest (Unit & Integration Testing), ESLint, Defensive Architecture`
+    );
+  }
+
+  return { text: parts.join('\n\n'), sources };
+}
+
 const GITHUB_INTENT_RE =
   /\b(github|commit[s]?|repo(?:s|sitory|sitories)?|pull\s*request|pr\b|issue[s]?|push(?:ed)?|open\s*source|contribut(?:e|ion|ed|ing)|star(?:red)?|fork(?:ed)?|activity|recent|latest|working\s*on|coding|develop(?:ing|ed)?)\b/i;
 
@@ -228,8 +364,9 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
     const latestMessage = messages[messages.length - 1] || '';
     const { text: matchedFaqs, sources: faqSources } = getMatchingFaqs(latestMessage);
     const { text: matchedServices, sources: serviceSources } = getMatchingServices(latestMessage);
+    const { text: matchedTechSkills, sources: techSkillSources } = getMatchingTechnicalSkills(latestMessage);
 
-    sources.push(...serviceSources, ...faqSources);
+    sources.push(...serviceSources, ...faqSources, ...techSkillSources);
 
     // Embed last 2-3 messages joined for better follow-up understanding
     const embedWindow = messages.slice(-3).join(' ');
@@ -340,6 +477,11 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
     // Append in-memory matched Services if relevant
     if (matchedServices) {
       contextText = contextText ? `${contextText}\n\n${matchedServices}` : matchedServices;
+    }
+
+    // Append in-memory matched Technical Skills & System Design if relevant
+    if (matchedTechSkills) {
+      contextText = contextText ? `${contextText}\n\n${matchedTechSkills}` : matchedTechSkills;
     }
 
     // Deduplicate sources
