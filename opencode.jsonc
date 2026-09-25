@@ -47,7 +47,7 @@
       "git diff*": "allow",
       "ls*": "allow",
       "dir*": "allow",
-      "*": "ask"
+      "*": "allow"
     },
     "external_directory": {
       "*": "ask"

@@ -83,15 +83,16 @@ app/                            # Next.js App Router
 │       └── opengraph-image.tsx# Dynamic OpenGraph card generation (1200x630)
 ├── resume/                    # ResumeViewer (react-pdf) + download button
 ├── schema/                    # Raw database schema SQL definition (schema.sql)
-├── services/                  # Commercial services showcase (10 offerings, deliverables, tech badges, Service & Offer schemas)
+├── services/                  # Commercial services showcase (12 offerings across 4 pillars, deliverables, tech badges, Service & Offer schemas)
 ├── sitemap/                   # Visual HTML sitemap page with directory of all links
-├── technical-skills/          # Technical skills & architecture index (14 categories, system design concepts, FAQ Client)
+├── technical-skills/          # Technical skills & architecture index (15 categories, system design concepts, FAQ Client)
 ├── terms-of-service/          # Website terms, IP ownership, liability disclaimers, WebPage schema
 ├── error.tsx                  # Root error boundary
 ├── not-found.tsx              # Root 404 page with interactive animated flip card illustration
 ├── layout.tsx                 # Root layout: AppProviders, Navbar, Footer via ConditionalFooter (Suspense), LazyClientComponents, GA, ScrollDepthTracker, JSON-LD
 ├── page.tsx                   # Home: Hero (GitHub stats bento) + HowIWork + Testimonials + recent writings & projects
 ├── globals.css                # Tailwind v4 + prose styles + CSS color variables
+├── favicon.ico                # Site favicon
 ├── manifest.ts                # PWA web app manifest
 ├── sitemap.ts                 # Dynamic XML sitemap generator (projects, blogs, static + legal routes incl. /faq)
 ├── robots.ts                  # Robots.txt (multi-agent crawler rules: general + explicit AI bot allows, points to /sitemap.xml)
@@ -108,6 +109,7 @@ components/
 ├── projects/                  # ProjectList (searchable grid)
 ├── providers/                 # AppProviders (ThemeProvider with class strategy)
 ├── resume/                    # PDFViewer (react-pdf wrapper), ResumeViewer
+├── technical-skills/          # TechnicalSkillsFAQClient (category filter + live search accordion), TechnicalSkillsFAQItem
 ├── ui/                        # Skeleton loader
 ├── Chatbot.tsx                # Floating AI assistant drawer (useChat + grounding sources + follow-up chips + FingerprintJS)
 ├── ContentWithToc.tsx         # Combines HtmlParser + TableOfContents
@@ -130,7 +132,7 @@ lib/
 ├── email/                     # Transactional email pipeline with Nodemailer
 │   ├── index.ts               # Transporter setup & dispatch functions (sendContactConfirmationEmail, sendAdminContactNotification, sendContactReplyEmail)
 │   └── templates/             # Branded HTML & plain-text templates (admin-notification, confirmation, reply)
-├── data/                      # Static content modules (faqs.ts for /faq, services.ts for /services catalog)
+├── data/                      # Static content modules (faqs.ts for /faq, services.ts for /services catalog, technical-skills.ts for /technical-skills)
 ├── fonts.ts                   # Geist Sans, Geist Mono, and Playfair Display font loaders
 ├── github.ts                  # GitHub GraphQL user stats + REST public event fetcher (10m-1h cache)
 ├── rag.ts                     # Document chunking, Gemini embedding generation, and pgvector upsert/delete
@@ -147,13 +149,14 @@ lib/
     └── structured-data.ts     # JSON-LD generators (Person/WebSite/Organization root, Collections, Service/Offer, Contact, FAQPage, Speakable)
 scripts/
 └── blog/                      # Modular automated blog generation pipeline
-    ├── api/                   # API clients (fetch-existing-titles, publish-blog, notify-subscribers)
+    ├── api/                   # API clients (index, fetch-existing-titles, publish-blog, notify-subscribers)
     ├── config.mjs             # Environment checks and constants
     ├── convert.mjs            # Markdown → sanitized HTML (unified, remark, rehype, rehype-sanitize)
     ├── generate.mjs           # AI content generator grounded in public/llms.txt + SEO skills, with retry logic
     ├── generate-blog.mjs      # Main entry point / orchestrator script (pnpm run generate-blog)
     ├── skills.mjs             # Loads the 3 SEO skill files at runtime for prompt grounding (fail-open)
     ├── topics.mjs             # Rotating topic pillars with SEO metadata, target keywords, and outlines
+    ├── utils.mjs              # Shared helpers (requireEnv, slugify, site URL resolution)
     └── validate.mjs           # 9-point quality gate (word count, code snippets, keyword in title, direct answer)
 docs/                          # Documentation
 ├── design.md                  # Design system & aesthetic guidelines
@@ -204,10 +207,11 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 - **Component Exports:** Components use default exports (e.g., `export default function BlogList(...)`, `export default function Breadcrumbs(...)`).
 
 ### Commercial Services Architecture (`/services`)
-- Data-driven offerings page (content sourced from `lib/data/services.ts`) presenting 10 specialized services across 3 pillars:
-  1. **AI Systems & RAG:** RAG Systems & Knowledge Retrieval, AI Agents & Tool Orchestration, AI Product Development & Integration, LLM Integration & User Experiences.
-  2. **Backend & Distributed Systems:** Production Backend APIs & System Design, Event-Driven Systems & Background Processing, Cloud/DevOps & Observability.
-  3. **Full-Stack & Growth:** Full-Stack Web Development, Technical SEO / AEO / Web Performance, AI-Accelerated Engineering Delivery.
+- Data-driven offerings page (content sourced from `lib/data/services.ts`) presenting 12 specialized services across 4 pillars:
+  1. **AI & Intelligent Systems:** Custom Knowledge Bases & RAG Systems, AI Agents & Workflow Automation, AI Product Development & Integration, LLM Integration & AI User Experiences.
+  2. **Backend & Distributed Architecture:** Production Backend APIs & System Design, Event-Driven Systems & Background Processing, Cloud, DevOps & Observability.
+  3. **Web Development & Search Growth:** Custom Website Development & Landing Pages, SEO Services & Search Engine Optimization, Website Redesign & Speed Optimization, Full-Stack Web Application Development.
+  4. **AI-Accelerated Engineering:** AI-Accelerated Engineering delivery.
 - Contains interactive deliverables breakdowns, tech stack tags, starting rates, process steps + engagement models, structured consultation CTAs, FAQ accordion, and embedded `HowIWork` + `TestimonialsSection` blocks. Client testimonials also render on the homepage.
 
 ### Email Notification & Reply Workflow (`lib/email/`)
