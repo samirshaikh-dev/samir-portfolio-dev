@@ -1,10 +1,13 @@
-import { AUTHOR_NAME, AUTHOR_EMAIL, AUTHOR_PHONE, APP_URL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site-config";
+import { AUTHOR_NAME, AUTHOR_EMAIL, AUTHOR_PHONE, APP_URL } from "@/lib/site-config";
+import { renderEmailLayout, renderCtaButton, EmailAccent } from "./layout";
 
 export interface ReplyEmailProps {
   name: string;
   replyText: string;
   originalSubject?: string;
 }
+
+const ACCENT: EmailAccent = "neutral";
 
 export function renderReplyEmail({
   name,
@@ -15,149 +18,45 @@ export function renderReplyEmail({
     ? originalSubject
     : `Re: ${originalSubject || "Your Inquiry to Samir Shaikh"}`;
 
-  const sanitizedName = name || "there";
-  const currentYear = new Date().getFullYear();
+  const greetingName = (name || "there").trim();
 
-  const formattedReply = replyText
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/\n/g, "<br />");
+  const escaped = (value: string) =>
+    value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\n/g, "<br />");
 
-  const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${emailSubject}</title>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #09090b;
-      color: #ededed;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-    table {
-      border-spacing: 0;
-      border-collapse: collapse;
-    }
-    .wrapper {
-      width: 100%;
-      background-color: #09090b;
-      padding: 24px 12px 40px;
-    }
-    .main {
-      background-color: #121215;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 600px;
-      border: 1px solid #27272a;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .header {
-      padding: 28px 32px;
-      border-bottom: 1px solid #27272a;
-      background: linear-gradient(180deg, #18181b 0%, #121215 100%);
-    }
-    .brand-title {
-      font-size: 20px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0 0 4px;
-    }
-    .brand-sub {
-      font-size: 12px;
-      color: #a1a1aa;
-      margin: 0;
-    }
-    .content {
-      padding: 32px;
-    }
-    .greeting {
-      font-size: 16px;
-      font-weight: 600;
-      color: #fafafa;
-      margin: 0 0 16px;
-    }
-    .reply-body {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #e4e4e7;
-      margin: 0 0 24px;
-    }
-    .signoff {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #a1a1aa;
-      border-top: 1px solid #27272a;
-      padding-top: 20px;
-    }
-    .footer {
-      padding: 20px 32px;
-      background-color: #0c0c0e;
-      border-top: 1px solid #27272a;
-      text-align: center;
-      font-size: 11px;
-      color: #71717a;
-      line-height: 1.6;
-    }
-    .footer a {
-      color: #a1a1aa;
-      text-decoration: none;
-      margin: 0 6px;
-    }
-  </style>
-</head>
-<body>
-  <div class="wrapper">
-    <table role="presentation" width="100%">
-      <tr>
-        <td align="center">
-          <table role="presentation" class="main">
-            <tr>
-              <td class="header">
-                <h1 class="brand-title">${AUTHOR_NAME}</h1>
-                <p class="brand-sub">AI-Enabled Full Stack Developer &bull; Backend-First</p>
-              </td>
-            </tr>
-            <tr>
-              <td class="content">
-                <p class="greeting">Hi ${sanitizedName},</p>
-                <div class="reply-body">
-                  ${formattedReply}
-                </div>
-                <div class="signoff">
-                  Warm regards,<br />
-                  <strong style="color: #ffffff;">${AUTHOR_NAME}</strong><br />
-                  <span style="font-size: 12px; color: #71717a;">AI-Enabled Full Stack Developer (Backend-First)</span><br />
-                  <span style="font-size: 12px; color: #71717a;">${AUTHOR_EMAIL} | ${AUTHOR_PHONE}</span>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td class="footer">
-                <p style="margin: 0 0 8px;">
-                  <a href="${APP_URL}">Portfolio</a> &bull;
-                  <a href="${GITHUB_URL}">GitHub</a> &bull;
-                  <a href="${LINKEDIN_URL}">LinkedIn</a> &bull;
-                  <a href="https://wa.me/${AUTHOR_PHONE.replace(/[^0-9]/g, "")}">WhatsApp</a>
-                </p>
-                <p style="margin: 0;">
-                  &copy; ${currentYear} ${AUTHOR_NAME}. All rights reserved.
-                </p>
-              </td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
-  </div>
-</body>
-</html>`;
+  const safeReply = escaped(replyText);
 
-  const text = `Hi ${sanitizedName},
+  const body = `
+    <h2 class="greeting">Hi ${greetingName},</h2>
+    <div style="font-size: 14px; line-height: 1.7; color: #e4e4e7; margin: 0 0 24px;">
+      ${safeReply}
+    </div>
+
+    <div style="border-top: 1px solid #1f1f23; padding-top: 20px;">
+      <p style="font-size: 14px; color: #a1a1aa; margin: 0 0 16px;">
+        Warm regards,<br />
+        <strong style="color: #ffffff;">${AUTHOR_NAME}</strong><br />
+        <span style="font-size: 12px; color: #71717a;">AI Backend Engineer &bull; Forward Deployed Engineer</span><br />
+        <span style="font-size: 12px; color: #71717a;">${AUTHOR_EMAIL} | ${AUTHOR_PHONE}</span>
+      </p>
+    </div>
+
+    ${renderCtaButton({ href: `${APP_URL}/services`, label: "View Services & Pricing", accent: ACCENT })}
+  `;
+
+  const html = renderEmailLayout({
+    badge: "Personal Reply",
+    headline: "Your inquiry — answered",
+    subhead: `A direct response to "${originalSubject || "your inquiry"}".`,
+    accent: ACCENT,
+    body,
+    documentTitle: emailSubject,
+  });
+
+  const text = `Hi ${greetingName},
 
 ${replyText}
 

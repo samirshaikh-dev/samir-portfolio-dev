@@ -1,4 +1,4 @@
-import { pgTable, text, boolean, timestamp, uuid, integer, jsonb, date, vector, index } from "drizzle-orm/pg-core";
+import { pgTable, text, boolean, timestamp, uuid, integer, jsonb, date, vector } from "drizzle-orm/pg-core";
 
 export const adminUsers = pgTable('admin_users', {
     id: uuid('id').defaultRandom().primaryKey(),
@@ -130,3 +130,25 @@ export const testimonials = pgTable('testimonials', {
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
 });
+
+export const certificates = pgTable('certificates', {
+    id: uuid('id').defaultRandom().primaryKey(),
+    title: text('title').notNull(),
+    issuer: text('issuer').notNull(),
+    issuerLogoUrl: text('issuer_logo_url'),
+    issueDate: date('issue_date', { mode: 'string' }).notNull(),
+    expirationDate: date('expiration_date', { mode: 'string' }),
+    credentialId: text('credential_id'),
+    credentialUrl: text('credential_url'),
+    certificateImageUrl: text('certificate_image_url'),
+    certificatePdfUrl: text('certificate_pdf_url'),
+    description: text('description'),
+    skills: text('skills').array(),
+    isPublished: boolean('is_published').default(false),
+    displayOrder: integer('display_order').default(0),
+    createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
+});
+
+export type Certificate = typeof certificates.$inferSelect;
+export type NewCertificate = typeof certificates.$inferInsert;

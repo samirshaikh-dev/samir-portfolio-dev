@@ -17,6 +17,7 @@ Phone: +91 8320927182
 - [Resume](https://samir-portfolio-dev.vercel.app/resume): Current resume and professional qualifications
 - [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, and case studies
 - [Technical Skills](https://samir-portfolio-dev.vercel.app/technical-skills): Comprehensive index of 14 skill categories, architectural patterns (Microservices, Modular Monolith, Event-Driven Architecture, CQRS, Circuit Breaker), databases, testing, observability, and technical FAQs
+- [Certificates](https://samir-portfolio-dev.vercel.app/certificates): Verified accreditations, system architecture certifications, and technical specializations across backend engineering, cloud platforms, and distributed systems
 - [Services](https://samir-portfolio-dev.vercel.app/services): Freelance AI developer & engineering services (production-grade AI chatbots for websites/SaaS, custom knowledge bases, RAG systems, backend APIs, Next.js web apps, technical SEO)
 - [FAQ](https://samir-portfolio-dev.vercel.app/faq): Frequently asked questions on AI systems, RAG architecture, backend design, engineering roles, and commercial services
 - [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design

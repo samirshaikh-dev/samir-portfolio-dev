@@ -12,7 +12,8 @@ export type FollowUpTopic =
   | 'experience'
   | 'education'
   | 'contact'
-  | 'resume';
+  | 'resume'
+  | 'certificates';
 
 const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
   services: [
@@ -100,6 +101,16 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
     'download',
     'pdf',
   ],
+  certificates: [
+    'certificate',
+    'certification',
+    'credential',
+    'accreditation',
+    'license',
+    'meta certified',
+    'aws certified',
+    'course',
+  ],
 };
 
 const TOPIC_FALLBACKS: Record<FollowUpTopic, FollowUp[]> = {
@@ -137,6 +148,11 @@ const TOPIC_FALLBACKS: Record<FollowUpTopic, FollowUp[]> = {
     { label: 'Download Resume', question: 'How can I download Samir\'s official resume PDF?' },
     { label: 'Top Projects', question: 'What are his standout portfolio projects?' },
     { label: 'Get in Touch', question: 'How can I schedule a call or message Samir?' },
+  ],
+  certificates: [
+    { label: 'Verified Certificates', question: 'What professional certifications and credentials has Samir earned?' },
+    { label: 'Technical Stack', question: 'What core technologies are covered in his certifications?' },
+    { label: 'View Portfolio Projects', question: 'How do his certifications translate into real-world projects?' },
   ],
 };
 

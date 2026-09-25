@@ -564,3 +564,43 @@ export function getFaqPageJsonLd(
   };
 }
 
+/**
+ * CollectionPage and EducationalOccupationalCredential JSON-LD for /certificates
+ */
+export function getCertificatesPageJsonLd(
+  certList: Array<{
+    title: string;
+    issuer: string;
+    issueDate: string;
+    credentialUrl?: string | null;
+    credentialId?: string | null;
+    description?: string | null;
+  }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: `Professional Certificates & Credentials | ${AUTHOR_NAME}`,
+    description: `Verified accreditations, system architecture certifications, and technical specializations completed by ${AUTHOR_NAME}.`,
+    url: `${APP_URL}/certificates`,
+    author: {
+      "@type": "Person",
+      name: AUTHOR_NAME,
+      url: APP_URL,
+    },
+    hasPart: certList.map((cert) => ({
+      "@type": "EducationalOccupationalCredential",
+      name: cert.title,
+      credentialCategory: "Professional Certification",
+      recognizedBy: {
+        "@type": "Organization",
+        name: cert.issuer,
+      },
+      dateCreated: cert.issueDate,
+      ...(cert.credentialId ? { identifier: cert.credentialId } : {}),
+      ...(cert.credentialUrl ? { url: cert.credentialUrl } : {}),
+      ...(cert.description ? { description: cert.description } : {}),
+    })),
+  };
+}
+

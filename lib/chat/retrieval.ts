@@ -1,8 +1,8 @@
 import { embed } from 'ai';
 import { google } from '@ai-sdk/google';
 import { db } from '@/lib/db';
-import { contentChunks, blogs, projects } from '@/lib/schema';
-import { cosineDistance, inArray } from 'drizzle-orm';
+import { contentChunks, blogs, projects, certificates } from '@/lib/schema';
+import { cosineDistance, inArray, eq, asc } from 'drizzle-orm';
 import { getRecentGithubEvents } from '@/lib/github';
 import { FAQS } from '@/lib/data/faqs';
 import {
@@ -19,7 +19,7 @@ const MAX_DISTANCE = 0.5;
 
 export interface GroundingSource {
   title: string;
-  type: 'project' | 'blog' | 'service' | 'experience' | 'github' | 'faq' | 'about' | 'skill';
+  type: 'project' | 'blog' | 'service' | 'experience' | 'github' | 'faq' | 'about' | 'skill' | 'certificate';
   url?: string;
 }
 
@@ -358,6 +358,46 @@ async function getGithubEventsCached(): Promise<string | null> {
   return null;
 }
 
+async function getMatchingCertificates(queryText: string): Promise<{ text: string; sources: GroundingSource[] }> {
+  const query = queryText.toLowerCase().trim();
+  const certKeywords = ['certif', 'credential', 'license', 'accredit', 'qualification', 'course', 'meta', 'aws', 'diploma'];
+  const hasKeyword = certKeywords.some((k) => query.includes(k));
+  if (!hasKeyword) return { text: '', sources: [] };
+
+  try {
+    const certList = await db
+      .select()
+      .from(certificates)
+      .where(eq(certificates.isPublished, true))
+      .orderBy(asc(certificates.displayOrder));
+
+    if (certList.length === 0) return { text: '', sources: [] };
+
+    const sources: GroundingSource[] = [
+      {
+        title: 'Certificates & Credentials',
+        type: 'certificate',
+        url: '/certificates',
+      },
+    ];
+
+    const lines = certList.map((c) => {
+      let desc = `- ${c.title} by ${c.issuer} (Issued: ${c.issueDate})`;
+      if (c.credentialId) desc += ` [ID: ${c.credentialId}]`;
+      if (c.skills && c.skills.length > 0) desc += ` (Skills: ${c.skills.join(', ')})`;
+      if (c.credentialUrl) desc += ` [Verification: ${c.credentialUrl}]`;
+      return desc;
+    });
+
+    const text = `--- Context (certificates) ---\nVerified Professional Certificates & Credentials of Samir Shaikh:\n${lines.join('\n')}\nURL: /certificates`;
+
+    return { text, sources };
+  } catch (err) {
+    console.error('[RAG] getMatchingCertificates error:', err);
+    return { text: '', sources: [] };
+  }
+}
+
 export async function getRelevantContextWithSources(messages: string[]): Promise<ContextResult> {
   const sources: GroundingSource[] = [];
   try {
@@ -365,8 +405,9 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
     const { text: matchedFaqs, sources: faqSources } = getMatchingFaqs(latestMessage);
     const { text: matchedServices, sources: serviceSources } = getMatchingServices(latestMessage);
     const { text: matchedTechSkills, sources: techSkillSources } = getMatchingTechnicalSkills(latestMessage);
+    const { text: matchedCerts, sources: certSources } = await getMatchingCertificates(latestMessage);
 
-    sources.push(...serviceSources, ...faqSources, ...techSkillSources);
+    sources.push(...serviceSources, ...faqSources, ...techSkillSources, ...certSources);
 
     // Embed last 2-3 messages joined for better follow-up understanding
     const embedWindow = messages.slice(-3).join(' ');
@@ -482,6 +523,11 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
     // Append in-memory matched Technical Skills & System Design if relevant
     if (matchedTechSkills) {
       contextText = contextText ? `${contextText}\n\n${matchedTechSkills}` : matchedTechSkills;
+    }
+
+    // Append in-memory matched Certificates if relevant
+    if (matchedCerts) {
+      contextText = contextText ? `${contextText}\n\n${matchedCerts}` : matchedCerts;
     }
 
     // Deduplicate sources

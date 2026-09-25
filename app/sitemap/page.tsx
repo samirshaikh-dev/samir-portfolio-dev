@@ -44,6 +44,7 @@ export default async function SitemapPage() {
     { label: "Projects", href: "/projects" },
     { label: "Blog", href: "/blogs" },
     { label: "Services", href: "/services" },
+    { label: "Certificates", href: "/certificates" },
     { label: "Contact", href: "/contact" },
     { label: "Resume", href: "/resume" },
   ];
