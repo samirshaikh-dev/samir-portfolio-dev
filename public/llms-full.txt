@@ -17,6 +17,7 @@
 - **FAQ Knowledge Base**: https://samir-portfolio-dev.vercel.app/faq
 - **Blog Archive**: https://samir-portfolio-dev.vercel.app/blogs
 - **Projects Archive**: https://samir-portfolio-dev.vercel.app/projects
+- **Technical Skills & Architecture Index**: https://samir-portfolio-dev.vercel.app/technical-skills
 - **Contact**: https://samir-portfolio-dev.vercel.app/contact
 - **RSS Syndication Feed**: https://samir-portfolio-dev.vercel.app/api/feed
 - **Privacy Policy**: https://samir-portfolio-dev.vercel.app/privacy-policy
@@ -76,29 +77,56 @@ He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Sta
 
 ## 3. Comprehensive Technical Skills Matrix (What is Samir Shaikh's tech stack?)
 
+> **Canonical Web Index**: https://samir-portfolio-dev.vercel.app/technical-skills
+> Contains verified skill taxonomies, code examples, architectural trade-offs, and 17 technical FAQ entries across 14 dedicated categories.
+
 ### Languages & Runtime Environments
-- **TypeScript**: Strict mode, generic types, utility types, schema validation (Zod).
-- **JavaScript (Node.js)**: Event loop internals, Streams, Worker threads, Buffer manipulation, modern ESNext features.
-- **SQL**: Complex joins, indexing strategies (B-Tree, GIN, HNSW, IVFFlat), transactions, window functions, explain analyze query tuning.
-- **HTML5 & CSS3**: Semantic structuring, responsive design, modern Tailwind CSS variables.
+- **TypeScript**: Strict compiler flags, generic interfaces, utility types, compile-time contract enforcement, and runtime schema validation with Zod.
+- **JavaScript (ES6+ / ESM)**: Modern ECMAScript features, native ESM modules, asynchronous event loop mechanics, non-blocking I/O, closures, and Promises.
+- **Python & Go**: Scripting, data transformers, concurrency primitives, and microservice prototypes.
+- **SQL**: Complex relational joins, multi-table transactions, indexing strategies (B-Tree, GIN, HNSW, IVFFlat), explain analyze execution plan tuning.
+- **HTML5 & CSS3**: Semantic document outlines, responsive design, modern Tailwind CSS v4 variables, accessibility standards (WCAG).
+
+### System Design & Architectural Patterns
+- **Microservices**: Decoupled, independently deployable services organized around business capabilities, communicating via lightweight REST/gRPC or asynchronous event streams (Kafka / BullMQ) with isolated datastores.
+- **Modular Monolith**: Single unified deployable unit organized strictly into isolated, bounded domain modules with explicit dependency contracts and private schemas, avoiding premature distributed systems overhead while keeping clear migration pathways.
+- **Monolithic Architecture**: Unified codebase and single runtime deployment sharing a centralized database, ideal for rapid prototyping, transactional consistency across domains, and zero inter-service network complexity.
+- **Event-Driven Architecture (EDA)**: Designing systems around state-change events using message brokers (Apache Kafka, BullMQ). Services produce and consume immutable event streams asynchronously, eliminating synchronous request-response bottlenecks.
+- **API Gateway Pattern**: Centralized entry point managing traffic routing, rate limiting, SSL/TLS termination, JWT authentication verification, telemetry collection, and dynamic routing to upstream backend services.
+- **Distributed Caching**: Strategic implementation of Redis cache-aside and write-through patterns with TTL eviction policies to drastically reduce relational database load and achieve sub-millisecond response times.
+- **Circuit Breaker & Resilience**: Safeguarding distributed architectures against downstream outages using circuit breakers, automated exponential backoff retries, dead-letter queues (DLQ), and graceful degradation fallbacks.
+- **CQRS & Data Segregation**: Architecturally separating state-mutating command workflows from high-throughput query read paths, enabling dedicated read replicas, schema indexing optimizations, and projection tables.
 
 ### Backend Frameworks & API Architecture
-- **Express.js**: Production middleware design, error handling pipelines, authentication flow enforcement, rate limiting.
-- **NestJS**: Dependency injection, modular architecture, guard validation, custom interceptors, microservice transports.
-- **Next.js (App Router)**: Server Components (RSC), Incremental Static Regeneration (ISR), Server Actions, Route Handlers, SSR-free client component boundaries.
-- **REST & GraphQL**: RESTful API design standards, GraphQL schemas, resolvers, Apollo/Yoga servers, schema-first design.
-- **Authentication & Security**: NextAuth v5, JWT, bcrypt, timingSafeEqual comparison for token validation, Role-Based Access Control (RBAC), CORS, helmet headers.
+- **Node.js**: Asynchronous event loop, cluster module, Streams, Worker threads, Buffer manipulation, native HTTP handling.
+- **Express.js**: Production middleware design, error handling pipelines, authentication flow enforcement, rate limiting, and RESTful routing.
+- **Sequelize ORM & Drizzle ORM**: Type-safe schema definition, relational queries, transaction primitives, and migration lifecycle management.
+- **GraphQL Ecosystem**: Apollo Server and Apollo Client, strongly typed schemas and resolvers, DataLoader batching and caching to eliminate the N+1 query problem.
+- **Next.js 16 (App Router)**: Server Components (RSC), Incremental Static Regeneration (ISR), Server Actions, Route Handlers, SSR-free client component boundaries.
+- **API Security & Cryptography**: Role-Based Access Control (RBAC), stateless JWT token lifecycles, bcrypt password hashing, constant-time token comparison (`timingSafeEqual`), CORS policy, Helmet security headers, rate limiting.
 
 ### Databases, Vector Stores & Caching
-- **PostgreSQL**: Neon Serverless PostgreSQL, connection pooling, migration management via Drizzle ORM and Drizzle Kit.
-- **pgvector**: High-dimensional vector indexing (HNSW, IVFFlat), cosine distance (`<=>`), inner product (`<#>`), Euclidean distance (`<->`), hybrid vector + metadata filtering.
-- **MongoDB**: Schema modeling, aggregation pipelines, replica set transactions.
-- **Redis**: In-memory caching, distributed locks, session management, Pub/Sub channels, queue backplanes.
-- **Drizzle ORM**: Type-safe schema definition, relational queries, transaction primitives, schema migrations.
+- **PostgreSQL**: Neon Serverless PostgreSQL, connection pooling, complex relational modeling, query optimization with EXPLAIN ANALYZE, compound indexes.
+- **pgvector**: High-dimensional vector indexing (HNSW, IVFFlat), cosine distance (`<=>`), inner product (`<#>`), Euclidean distance (`<->`), hybrid vector + metadata filtering for sub-300ms retrieval.
+- **MongoDB & Firestore**: Document persistence, indexing, aggregation pipelines, replica set transactions.
+- **MySQL**: Relational data modeling, ACID transactions, B-Tree indexing.
+- **Redis**: In-memory caching, distributed locks, session management, Pub/Sub channels, queue backplanes, TTL eviction strategies.
 
 ### Event Streaming & Message Queues
-- **Apache Kafka**: Topics, partitions, consumer groups, event serialization, offset management, event-driven decoupling.
-- **BullMQ**: Redis-backed distributed task queues, retry backoff strategies, rate-limited workers, dead-letter queue (DLQ) workflows.
+- **Apache Kafka**: Partitioned topics, event streaming logs, consumer groups, offset tracking, event serialization, decoupled microservice communication.
+- **BullMQ**: Redis-backed distributed task queues, delayed jobs, priority workers, exponential retry backoff strategies, dead-letter queue (DLQ) workflows.
+- **Firebase Cloud Messaging (FCM)**: Cross-platform push notifications and client alert delivery.
+
+### Frontend Engineering & UI Systems
+- **React.js & React 19**: Server Components, React Hooks, Component Architecture, concurrent features, controlled form states.
+- **Next.js 16**: App Router architecture, zero-CLS image optimization, streaming SSR, dynamic metadata generation.
+- **State Management**: Redux Toolkit (RTK), Context API, atomic client-state isolation.
+- **Styling**: Tailwind CSS v4, shadcn/ui headless components, Framer Motion, responsive design, dark/light theme tokens.
+
+### Testing & Quality Assurance
+- **Automated Testing**: Jest test runner, assertion library, and mock runtime.
+- **Unit Testing**: Isolated verification of domain business rules, pure utility algorithms, and data transformers.
+- **Integration Testing**: Validating API routes, database queries, and middleware pipelines together against edge cases and network boundaries.
 
 ### AI, Machine Learning & LLM Technologies
 - **Vector Embeddings**: Google Gemini `gemini-embedding-2` generating 3072-dimensional embeddings, OpenAI `text-embedding-3-small/large`.
@@ -108,10 +136,16 @@ He is actively positioning toward **AI Backend Engineer**, **AI-Enabled Full Sta
 - **Retrieval-Augmented Generation (RAG)**: Chunking algorithms, hybrid keyword + vector retrieval, strict distance cutoff thresholds (<= 0.5), context injection, dynamic entity grounding.
 
 ### Infrastructure, DevOps & Observability
-- **Containerization**: Docker, Docker Compose, multi-stage production builds, minimal image footprints.
-- **CI/CD**: GitHub Actions workflows for testing, linting, semantic releases, and automated deployment.
-- **Observability & APM**: OpenTelemetry instrumentation, trace context propagation, Prometheus metrics scrapers, Grafana dashboards.
+- **Containerization**: Docker, Docker Compose multi-service parity, multi-stage production builds, minimal image footprints.
+- **CI/CD**: GitHub Actions workflows for automated testing, linting, semantic releases, and continuous deployment.
+- **Observability & APM**: OpenTelemetry instrumentation, Prometheus time-series metric scrapers, Grafana dashboards and alerting rules.
 - **Cloud & Edge Platforms**: Vercel Serverless & Edge, Cloudinary v2 image CDN optimization, Neon Serverless Postgres.
+
+### Engineering Workflow & Collaboration
+- **API Prototyping**: Postman schema testing, endpoint mock contracts, automated collection runs.
+- **AI-Assisted Velocity**: Cursor AI-native IDE, Claude Code, GitHub Copilot for boilerplate acceleration with manual architecture ownership.
+- **Version Control & Quality**: Atomic Git commits, feature-branch workflows, rigorous peer code reviews, Architecture Decision Records (ADRs).
+- **Soft Skills**: Structured analytical problem-solving, cross-functional agile sprints, clear technical documentation.
 
 ---
 

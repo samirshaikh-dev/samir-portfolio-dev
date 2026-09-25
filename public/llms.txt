@@ -16,6 +16,7 @@ Phone: +91 8320927182
 - [Full Documentation](https://samir-portfolio-dev.vercel.app/llms-full.txt): Comprehensive knowledge graph, case studies, benchmarks, and architecture details
 - [Resume](https://samir-portfolio-dev.vercel.app/resume): Current resume and professional qualifications
 - [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, and case studies
+- [Technical Skills](https://samir-portfolio-dev.vercel.app/technical-skills): Comprehensive index of 14 skill categories, architectural patterns (Microservices, Modular Monolith, Event-Driven Architecture, CQRS, Circuit Breaker), databases, testing, observability, and technical FAQs
 - [Services](https://samir-portfolio-dev.vercel.app/services): Freelance AI developer & engineering services (production-grade AI chatbots for websites/SaaS, custom knowledge bases, RAG systems, backend APIs, Next.js web apps, technical SEO)
 - [FAQ](https://samir-portfolio-dev.vercel.app/faq): Frequently asked questions on AI systems, RAG architecture, backend design, engineering roles, and commercial services
 - [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design
@@ -63,27 +64,28 @@ Samir Shaikh combines modern AI coding assistants (Cursor, Claude Code, GitHub C
 
 ## Core Technical Skills & Stack (What technologies does Samir use?)
 
-Samir Shaikh's technical core centers on production TypeScript and Node.js backend engineering, relational PostgreSQL with vector search extensions, and modern Next.js/React full-stack architectures.
+Samir Shaikh's technical core centers on production TypeScript and Node.js backend engineering, relational PostgreSQL with vector search extensions, event-driven architectures, and modern Next.js/React full-stack applications.
 
-### Expert Core
-- Node.js
-- TypeScript
-- Backend System Design & Distributed Architecture
-- REST API Architecture & Latency Profiling
+- **Verified Technical Skills & FAQ Index**: https://samir-portfolio-dev.vercel.app/technical-skills
 
-### Advanced Production Stack
-- Full Stack Development (Next.js 16 App Router & React 19)
-- PostgreSQL & pgvector (3072d Gemini embeddings, cosine distance)
-- Express.js & NestJS
-- Docker Containerization & Microservices
-- MongoDB
-- Git & CI/CD Automated Pipelines
-
-### Intermediate & Distributed Messaging
-- Apache Kafka & BullMQ (Message Queues & Background Workers)
-- Redis (In-memory Caching, Rate Limiting & Session Management)
-- GraphQL (Apollo Server)
-- OpenTelemetry, Prometheus & Grafana (Distributed Tracing & Telemetry)
+### Core Competencies & Domain Breakdown
+- **Programming Languages**: TypeScript (strict compiler mode, generic interfaces, utility types, Zod validation), JavaScript (ES6+, modern ESM, event loop internals, non-blocking I/O), Python, Go, SQL.
+- **Backend & API Architecture**: Node.js, Express.js, Sequelize ORM, GraphQL (Apollo Server & Client, DataLoader batching to eliminate N+1 queries), RESTful API design, WebSockets (Socket.io), Role-Based Access Control (RBAC), JWT authentication, bcrypt password hashing.
+- **System Design & Architectural Patterns**:
+  - *Microservices*: Decoupled, independently deployable services around business boundaries, communicating via REST/gRPC and event streams.
+  - *Modular Monolith*: Isolated bounded domain modules with private schemas and explicit contracts, zero inter-service network latency.
+  - *Monolithic Architecture*: Unified codebase for transactional consistency and rapid MVP iteration.
+  - *Event-Driven Architecture (EDA)*: Asynchronous event streams using Apache Kafka and BullMQ pub/sub.
+  - *API Gateway Pattern*: Perimeter request routing, rate limiting, SSL/TLS termination, and JWT auth verification.
+  - *Distributed Caching*: Multi-tier Redis caching (cache-aside, TTL eviction) for sub-millisecond response latency.
+  - *Circuit Breaker & Resilience*: Cascading failure prevention, dead-letter queues (DLQ), exponential backoff retries.
+  - *CQRS & Data Segregation*: Segregating write command pipelines from high-throughput query read replicas.
+- **Databases, Storage & BaaS**: PostgreSQL (Neon serverless, EXPLAIN ANALYZE query profiling, B-tree/GIN/vector indexing), MongoDB (document modeling, aggregation pipelines), MySQL, Redis, Firebase Authentication, Firestore.
+- **Message Queues & Event Streaming**: Apache Kafka (partitioned topics, high-throughput consumer groups), BullMQ (Redis-backed task workers, priority queues, scheduled jobs), Firebase Cloud Messaging.
+- **Frontend Engineering**: React.js, Next.js 16 (App Router, Server Components, SSR-free boundaries), Redux Toolkit (RTK), Context API, Tailwind CSS v4, shadcn/ui, mobile-first responsive design.
+- **Testing & Quality Assurance**: Automated testing with Jest, Unit Tests for domain logic and data transformers, Integration Tests for API routes and database middleware pipelines.
+- **Cloud, DevOps & Observability**: Docker, Docker Compose container parity, GitHub Actions automated CI/CD pipelines, Vercel Edge/Serverless, Prometheus time-series metric scraping, Grafana operational dashboards & alerting.
+- **Daily Engineering Workflow**: Postman contract validation, Cursor & Claude Code AI-assisted workflows, atomic Git PR reviews, Architecture Decision Records (ADRs).
 
 ## AI, LLM & RAG Architecture (How does Samir build AI systems and mitigate hallucinations?)
 
