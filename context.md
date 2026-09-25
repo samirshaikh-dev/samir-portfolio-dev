@@ -3,7 +3,7 @@
 ## Project Overview
 Personal portfolio, technical blog, commercial services showcase, and interactive AI showcase for **Samir Shaikh** — AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI SDE, and Agentic AI Engineer exploring Forward Deployed Engineer (FDE) roles.
 - **Production URL:** `https://samir-portfolio-dev.vercel.app` (configured in `lib/site-config.ts` with fallback via `NEXTAUTH_URL`).
-- **Key Features:** Admin panel, RAG-powered AI chatbot with GitHub activity grounding, inline contact-inquiry tool and follow-up suggestions, client testimonials & social proof, searchable FAQ (`/faq`), commercial services catalog (`/services`), legal compliance pages (`/privacy-policy`, `/terms-of-service`), dual-tier LLM knowledge graph (`llms.txt`, `llms-full.txt`), automated transactional email system with Nodemailer templates (confirmations, admin alerts, threaded replies), Web Push notifications, PWA (Serwist), blog with comments & star interactions, dynamic RSS feed, automated SEO/AEO/GEO structured data, dynamic OpenGraph cards, and an unattended AI-driven blog generation pipeline.
+- **Key Features:** Admin panel, RAG-powered AI chatbot with GitHub activity grounding, inline contact-inquiry tool and follow-up suggestions, client testimonials & social proof, searchable FAQ (`/faq`), technical skills & architecture index (`/technical-skills`), commercial services catalog (`/services`), legal compliance pages (`/privacy-policy`, `/terms-of-service`), dual-tier LLM knowledge graph (`llms.txt`, `llms-full.txt`), automated transactional email system with Nodemailer templates (confirmations, admin alerts, threaded replies), Web Push notifications, PWA (Serwist), blog with comments & star interactions, dynamic RSS feed, automated SEO/AEO/GEO structured data, dynamic OpenGraph cards, and an unattended AI-driven blog generation pipeline.
 
 ## Tech Stack
 - **Framework:** Next.js 16 (App Router, webpack build), React 19, TypeScript 5
@@ -85,6 +85,7 @@ app/                            # Next.js App Router
 ├── schema/                    # Raw database schema SQL definition (schema.sql)
 ├── services/                  # Commercial services showcase (10 offerings, deliverables, tech badges, Service & Offer schemas)
 ├── sitemap/                   # Visual HTML sitemap page with directory of all links
+├── technical-skills/          # Technical skills & architecture index (14 categories, system design concepts, FAQ Client)
 ├── terms-of-service/          # Website terms, IP ownership, liability disclaimers, WebPage schema
 ├── error.tsx                  # Root error boundary
 ├── not-found.tsx              # Root 404 page with interactive animated flip card illustration
@@ -143,7 +144,7 @@ lib/
 │   └── security.ts            # In-memory rate limiting (IP + visitorId) + IPinfo VPN/proxy detection (fail-open)
 └── seo/
     ├── metadata.ts            # Centralized root metadata, viewport, keywords, and OpenGraph defaults
-    └── structured-data.ts     # JSON-LD generators (Person, WebSite, Organization, ProfessionalService, Service, Offer, Collections, Speakable)
+    └── structured-data.ts     # JSON-LD generators (Person/WebSite/Organization root, Collections, Service/Offer, Contact, FAQPage, Speakable)
 scripts/
 └── blog/                      # Modular automated blog generation pipeline
     ├── api/                   # API clients (fetch-existing-titles, publish-blog, notify-subscribers)
@@ -207,7 +208,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
   1. **AI Systems & RAG:** RAG Systems & Knowledge Retrieval, AI Agents & Tool Orchestration, AI Product Development & Integration, LLM Integration & User Experiences.
   2. **Backend & Distributed Systems:** Production Backend APIs & System Design, Event-Driven Systems & Background Processing, Cloud/DevOps & Observability.
   3. **Full-Stack & Growth:** Full-Stack Web Development, Technical SEO / AEO / Web Performance, AI-Accelerated Engineering Delivery.
-- Contains interactive deliverables breakdowns, tech stack tags, starting rates, process steps + engagement models, structured consultation CTAs, FAQ accordion, and embedded `HowIWork` + `TestimonialsSection` blocks. Client testimonials also render on the homepage and contact page.
+- Contains interactive deliverables breakdowns, tech stack tags, starting rates, process steps + engagement models, structured consultation CTAs, FAQ accordion, and embedded `HowIWork` + `TestimonialsSection` blocks. Client testimonials also render on the homepage.
 
 ### Email Notification & Reply Workflow (`lib/email/`)
 - **Contact Submission (`POST /api/contact`):**
@@ -235,7 +236,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 ### SEO, AEO/GEO, Structured Data & AI Crawler Directives
 - **Site Constants:** Centralized in `lib/site-config.ts` (`APP_URL`, `AUTHOR_NAME`, `SITE_NAME`, `AUTHOR_EMAIL`, `AUTHOR_PHONE`, `TWITTER_HANDLE`, `GITHUB_URL`, `LINKEDIN_URL`).
 - **Breadcrumbs:** `components/layout/Breadcrumbs.tsx` renders accessible breadcrumbs with embedded `BreadcrumbList` schema.
-- **JSON-LD Schema (`lib/seo/structured-data.ts`):** Emits rich entities including `Person`, `WebSite`, `Organization`, `ProfessionalService`, `Service` / `Offer`, `CollectionPage`, and `SpeakableSpecification`.
+- **JSON-LD Schema (`lib/seo/structured-data.ts`):** Emits rich entities including `Person`, `WebSite`, `Organization`, `ProfessionalService`, `Service` / `Offer`, `CollectionPage`, `BreadcrumbList`, `FAQPage`, and `SpeakableSpecification`.
 - **Dynamic OpenGraph:** Dedicated `opengraph-image.tsx` routes under `/blogs/[slug]` and `/projects/[slug]` generate branded 1200x630 social preview images using `@vercel/og`.
 - **AI Crawler Directives (`app/robots.ts`):** Explicit configuration granting 15+ AI crawler user-agents (`GPTBot`, `ChatGPT-User`, `OAI-SearchBot`, `ClaudeBot`, `Claude-Web`, `Anthropic-AI`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`, `Meta-ExternalAgent`, `cohere-ai`, `YouBot`, etc.) crawl access to `/`, `/llms.txt`, `/llms-full.txt`, legal pages, and the RSS feed, while strictly disallowing `/admin/`, `/api/`, and `/login/`.
 - **Dual-Tier LLM Context Files:**

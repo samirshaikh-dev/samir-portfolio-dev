@@ -49,6 +49,7 @@ Personal portfolio, technical publication platform, and interactive engineering 
 | `/blogs/[slug]` | Blog Post Detail | `ContentWithToc`, `BlogInteractions`, `BlogShareButtons`, dynamic `opengraph-image.tsx` |
 | `/contact` | Inquiries & Work Inquiries | `ContactForm` (client component), `ProfessionalService` JSON-LD schema, email dispatch |
 | `/resume` | Resume & CV Viewer | `ResumeViewer` (react-pdf), PDF download link, `BreadcrumbList` schema |
+| `/technical-skills` | Technical Skills & Architecture | 14 skill categories, System Design patterns, `FAQClient`, `FAQPage` & `ProfilePage` JSON-LD |
 | `/sitemap` | Visual HTML Directory | Directory linking all published projects, articles, and static pages |
 | `/login` | Admin Authentication | GitHub OAuth & credentials login (`ADMIN_USERNAME`/`ADMIN_PASSWORD`) |
 | `/admin/*` | Protected Admin Dashboard | Content CRUD (`blogs`, `projects`, `experience`, `about`, `media`, `notifications`, `resume`, `socials`) |

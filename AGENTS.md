@@ -111,6 +111,7 @@ samir-portfolio-dev/
 │   ├── contact/                # ContactForm + ProfessionalService schema
 │   ├── resume/                 # PDF resume viewer + download
 │   ├── sitemap/                # Visual HTML sitemap directory
+│   ├── technical-skills/       # Technical skills & architecture index + FAQClient
 │   ├── error.tsx               # Root error boundary
 │   ├── not-found.tsx           # Custom 404 page
 │   ├── layout.tsx              # Root layout (Providers, Navbar, Footer, LazyClientComponents, JSON-LD)
@@ -130,6 +131,7 @@ samir-portfolio-dev/
 │   ├── projects/               # ProjectList
 │   ├── providers/              # AppProviders (ThemeProvider)
 │   ├── resume/                 # ResumeViewer, PDFViewer
+│   ├── technical-skills/       # TechnicalSkillsFAQClient, TechnicalSkillsFAQItem
 │   ├── ui/                     # Skeleton
 │   ├── Chatbot.tsx             # Floating AI assistant drawer
 │   ├── ContentWithToc.tsx      # Rich content with table of contents
