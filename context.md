@@ -3,7 +3,7 @@
 ## Project Overview
 Personal portfolio, technical blog, commercial services showcase, and interactive AI showcase for **Samir Shaikh** — AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI SDE, and Agentic AI Engineer exploring Forward Deployed Engineer (FDE) roles.
 - **Production URL:** `https://samir-portfolio-dev.vercel.app` (configured in `lib/site-config.ts` with fallback via `NEXTAUTH_URL`).
-- **Key Features:** Admin panel, RAG-powered AI chatbot with GitHub activity grounding, commercial services catalog (`/services`), legal compliance pages (`/privacy-policy`, `/terms-of-service`), dual-tier LLM knowledge graph (`llms.txt`, `llms-full.txt`), automated transactional email system with Nodemailer templates (confirmations, admin alerts, threaded replies), Web Push notifications, PWA (Serwist), blog with comments & star interactions, dynamic RSS feed, automated SEO/AEO/GEO structured data, dynamic OpenGraph cards, and an unattended AI-driven blog generation pipeline.
+- **Key Features:** Admin panel, RAG-powered AI chatbot with GitHub activity grounding, inline contact-inquiry tool and follow-up suggestions, client testimonials & social proof, searchable FAQ (`/faq`), commercial services catalog (`/services`), legal compliance pages (`/privacy-policy`, `/terms-of-service`), dual-tier LLM knowledge graph (`llms.txt`, `llms-full.txt`), automated transactional email system with Nodemailer templates (confirmations, admin alerts, threaded replies), Web Push notifications, PWA (Serwist), blog with comments & star interactions, dynamic RSS feed, automated SEO/AEO/GEO structured data, dynamic OpenGraph cards, and an unattended AI-driven blog generation pipeline.
 
 ## Tech Stack
 - **Framework:** Next.js 16 (App Router, webpack build), React 19, TypeScript 5
@@ -20,7 +20,7 @@ Personal portfolio, technical blog, commercial services showcase, and interactiv
 ## Project Structure
 ```
 app/                            # Next.js App Router
-├── api/                        # 15 API route groups (27 route.ts files)
+├── api/                        # 16 API route groups (29 route.ts files)
 │   ├── about/                 # GET, PUT
 │   ├── auth/[...nextauth]/    # NextAuth route handler
 │   ├── blogs/                 # GET (all published), POST (dual-auth admin/token)
@@ -28,7 +28,7 @@ app/                            # Next.js App Router
 │   │   │   ├── comment/       # POST (append comment JSONB)
 │   │   │   └── star/          # POST (increment stars)
 │   │   └── slug/[slug]/       # GET (single blog lookup)
-│   ├── chat/                  # POST (streaming AI with rate limiting & security checks)
+│   ├── chat/                  # POST (streaming AI, RAG grounding, contact-inquiry tool, follow-up chips, rate limiting)
 │   ├── contact/               # POST (public submit + dual email dispatch), GET (admin list)
 │   │   ├── [id]/              # DELETE, PATCH (mark seen)
 │   │   │   └── reply/         # POST (admin email reply via Nodemailer + mark seen)
@@ -47,6 +47,9 @@ app/                            # Next.js App Router
 │   ├── rag/seed/              # POST (re-chunk and rebuild vector store)
 │   ├── resume/                # GET, PUT (URL string)
 │   ├── socials/               # GET, PUT (bulk replace)
+│   ├── testimonials/          # GET (published), POST (admin create)
+│   │   ├── all/               # GET (admin: published + drafts)
+│   │   └── [id]/              # GET, PATCH, DELETE (admin)
 │   └── upload/                # POST (sharp resize + Cloudinary upload)
 ├── about/                     # Server page (ISR 3600), ExperienceTimeline, FAQ, Speakable JSON-LD
 ├── admin/                     # Protected admin dashboard layout + pages
@@ -64,11 +67,15 @@ app/                            # Next.js App Router
 │   │   ├── new/               # Create project
 │   │   └── [id]/edit/         # Edit project
 │   ├── resume/                # Resume URL updater + PDF preview
-│   └── socials/               # Social link manager with icon picker & reorder
+│   ├── socials/               # Social link manager with icon picker & reorder
+│   └── testimonials/          # Testimonial CRUD + publish toggle
+│       ├── new/               # Create testimonial
+│       └── [id]/edit/         # Edit testimonial
 ├── blogs/                     # Public blog archive (searchable grid, CollectionPage schema)
 │   └── [slug]/                # Blog detail page (ContentWithToc, BlogInteractions, BlogShareButtons)
 │       └── opengraph-image.tsx# Dynamic OpenGraph card generation (1200x630)
 ├── contact/                   # Server page + ContactForm (WhatsApp direct link, API submit, email triggers) + ProfessionalService schema
+├── faq/                       # Searchable category-filtered FAQ page (FAQClient + FAQPage JSON-LD)
 ├── login/                     # Admin login (GitHub OAuth + credentials)
 ├── privacy-policy/            # Legal privacy disclosures, GA/contact data processing, WebPage schema
 ├── projects/                  # Public project archive (searchable grid, CollectionPage schema)
@@ -81,35 +88,39 @@ app/                            # Next.js App Router
 ├── terms-of-service/          # Website terms, IP ownership, liability disclaimers, WebPage schema
 ├── error.tsx                  # Root error boundary
 ├── not-found.tsx              # Root 404 page with interactive animated flip card illustration
-├── layout.tsx                 # Root layout: AppProviders, Navbar, Footer (Suspense), LazyClientComponents, GA, JSON-LD
-├── page.tsx                   # Home: Hero (GitHub stats bento) + recent writings & projects
+├── layout.tsx                 # Root layout: AppProviders, Navbar, Footer via ConditionalFooter (Suspense), LazyClientComponents, GA, ScrollDepthTracker, JSON-LD
+├── page.tsx                   # Home: Hero (GitHub stats bento) + HowIWork + Testimonials + recent writings & projects
 ├── globals.css                # Tailwind v4 + prose styles + CSS color variables
 ├── manifest.ts                # PWA web app manifest
-├── sitemap.ts                 # Dynamic XML sitemap generator (projects, blogs, static routes, legal routes)
+├── sitemap.ts                 # Dynamic XML sitemap generator (projects, blogs, static + legal routes incl. /faq)
 ├── robots.ts                  # Robots.txt (multi-agent crawler rules: general + explicit AI bot allows, points to /sitemap.xml)
 └── sw.ts                      # Serwist service worker + push event listeners
 components/
 ├── about/                     # ExperienceTimeline (server), FAQ (accordion + JSON-LD)
 ├── admin/                     # AdminDashboard, BlogForm, ProjectForm, TipTapEditor, MediaLibraryModal, DatePicker, DeleteLogButton
-├── analytics/                 # GoogleAnalytics (loads gtag when NEXT_PUBLIC_GA_ID is set)
+├── analytics/                 # GoogleAnalytics (loads gtag when NEXT_PUBLIC_GA_ID is set) + AnalyticsEvents (ScrollDepthTracker)
 ├── blogs/                     # BlogList, BlogInteractions, BlogShareButtons, BlogStarInteraction
+├── faq/                       # FAQClient (category filter + live search accordion), FAQAccordionItem
 ├── home/                      # Hero (GitHub stats bento grid, server component)
-├── layout/                    # Breadcrumbs (with BreadcrumbList JSON-LD), CloudTransition, Footer, Navbar, PageHeader
+├── layout/                    # Breadcrumbs (with BreadcrumbList JSON-LD), CloudTransition, ConditionalFooter, Footer, Navbar, PageHeader
 ├── not-found/                 # NotFoundAnimation (interactive SVG flip card animation)
 ├── projects/                  # ProjectList (searchable grid)
 ├── providers/                 # AppProviders (ThemeProvider with class strategy)
 ├── resume/                    # PDFViewer (react-pdf wrapper), ResumeViewer
 ├── ui/                        # Skeleton loader
-├── Chatbot.tsx                # Floating AI assistant drawer (useChat + FingerprintJS)
+├── Chatbot.tsx                # Floating AI assistant drawer (useChat + grounding sources + follow-up chips + FingerprintJS)
 ├── ContentWithToc.tsx         # Combines HtmlParser + TableOfContents
+├── HowIWork.tsx               # 4-stage milestone-driven freelance delivery process (full/compact)
 ├── HtmlParser.tsx             # HTML → React transformer with next/image optimization
 ├── LazyClientComponents.tsx   # SSR:false boundary for Chatbot, PushSettings, and CloudTransition
 ├── PushSettings.tsx           # Web Push subscription prompt and topic selector
 ├── SocialIcons.tsx            # Platform name to react-icons mapping (60+ platforms)
 ├── TableOfContents.tsx        # IntersectionObserver heading tracker
+├── TestimonialsSection.tsx    # Published client testimonials (homepage | services | contact)
 ├── ThemeProvider.tsx          # next-themes wrapper
 └── ThemeToggle.tsx            # Dark/light mode switcher button
 lib/
+├── ai-config.ts               # Provider/model selection for chat & blog pipeline (groq | google)
 ├── api-auth.ts                # Timing-safe comparison for BLOG_AUTOMATION_TOKEN or admin session
 ├── auth.ts                    # NextAuth v5 config (GitHub OAuth whitelist + credentials)
 ├── cache.ts                   # unstable_cache wrappers for footer projects, blogs, and socials
@@ -118,13 +129,15 @@ lib/
 ├── email/                     # Transactional email pipeline with Nodemailer
 │   ├── index.ts               # Transporter setup & dispatch functions (sendContactConfirmationEmail, sendAdminContactNotification, sendContactReplyEmail)
 │   └── templates/             # Branded HTML & plain-text templates (admin-notification, confirmation, reply)
+├── data/                      # Static content modules (faqs.ts for /faq, services.ts for /services catalog)
 ├── fonts.ts                   # Geist Sans, Geist Mono, and Playfair Display font loaders
 ├── github.ts                  # GitHub GraphQL user stats + REST public event fetcher (10m-1h cache)
 ├── rag.ts                     # Document chunking, Gemini embedding generation, and pgvector upsert/delete
-├── schema.ts                  # 12 Drizzle ORM table definitions
+├── schema.ts                  # 13 Drizzle ORM table definitions
 ├── site-config.ts             # Centralized site constants (APP_URL, SITE_NAME, AUTHOR_*, TWITTER_HANDLE)
 ├── utils.ts                   # cn() clsx + tailwind-merge helper
 ├── chat/
+│   ├── followups.ts           # Structured 2–3 follow-up chips (topic detection + sanitize + fallbacks)
 │   ├── prompt.ts              # System prompt defining AI assistant tone, brevity, link rules, and constraints
 │   ├── retrieval.ts           # pgvector retrieval (<= 0.5 distance threshold) + GitHub event integration
 │   └── security.ts            # In-memory rate limiting (IP + visitorId) + IPinfo VPN/proxy detection (fail-open)
@@ -163,7 +176,7 @@ portfolio-theme.md             # Color & theme reference (design tokens, light/d
 opencode.jsonc                 # OpenCode assistant configuration & skills declaration
 ```
 
-## Database Schema (12 tables)
+## Database Schema (13 tables)
 
 | Table | Key Details |
 |---|---|
@@ -174,6 +187,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 | `resume` | `resume` (text URL) — single row representation |
 | `contact` | `id` (UUID), `name`, `email`, `subject`, `message`, `seen` (bool default false), `created_at` |
 | `socials` | `id` (UUID), `name`, `url`, `display_order` (int) |
+| `testimonials` | `id` (UUID), `name`, `role`, `company`, `avatar_url`, `linkedin_url`, `quote`, `rating` (int default 5), `source`, `is_published` (bool), `display_order` (int), `created_at`, `updated_at` |
 | `experiences` | `id` (UUID), `company_name`, `logo_url`, `position`, `description`, `start_date` (date string), `end_date` (date string), `pay`, `is_current` (bool), `display_order` (int), `created_at`, `updated_at` |
 | `media` | `id` (UUID), `url`, `public_id`, `created_at` |
 | `content_chunks` | `id` (UUID), `source_id` (UUID), `source_type` ('about' \| 'experience' \| 'blog' \| 'project'), `chunk_text`, `embedding` (vector 3072d), `created_at` |
@@ -189,11 +203,11 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 - **Component Exports:** Components use default exports (e.g., `export default function BlogList(...)`, `export default function Breadcrumbs(...)`).
 
 ### Commercial Services Architecture (`/services`)
-- Dedicated commercial offerings page presenting 10 specialized services across 3 pillars:
+- Data-driven offerings page (content sourced from `lib/data/services.ts`) presenting 10 specialized services across 3 pillars:
   1. **AI Systems & RAG:** RAG Systems & Knowledge Retrieval, AI Agents & Tool Orchestration, AI Product Development & Integration, LLM Integration & User Experiences.
   2. **Backend & Distributed Systems:** Production Backend APIs & System Design, Event-Driven Systems & Background Processing, Cloud/DevOps & Observability.
   3. **Full-Stack & Growth:** Full-Stack Web Development, Technical SEO / AEO / Web Performance, AI-Accelerated Engineering Delivery.
-- Contains interactive deliverables breakdowns, tech stack tags, structured consultation CTAs, and FAQ accordion.
+- Contains interactive deliverables breakdowns, tech stack tags, starting rates, process steps + engagement models, structured consultation CTAs, FAQ accordion, and embedded `HowIWork` + `TestimonialsSection` blocks. Client testimonials also render on the homepage and contact page.
 
 ### Email Notification & Reply Workflow (`lib/email/`)
 - **Contact Submission (`POST /api/contact`):**
@@ -241,6 +255,9 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 - **Vector Search:** `cosineDistance` search via pgvector on `content_chunks` filtered with distance `<= 0.5`.
 - **Chat System Prompt (`lib/chat/prompt.ts`):** Strict brevity, no meta-talk about "the context", enforces markdown links using exact URLs from context blocks, treats context purely as reference data, and enforces scoped domain knowledge.
 - **Intent-Based Retrieval:** GitHub event activity is selectively attached to context when the user asks about recent work, commits, or coding activity.
+- **Grounding Sources (`data-sources`):** Retrieved context chunks are streamed to the client as citeable source references alongside the answer.
+- **Contact Inquiry Tool:** The chat exposes a `sendContactInquiry` tool that validates name/email/message and inserts inquiries directly into the `contact` table (with non-fatal email dispatch).
+- **Follow-Up Suggestions (`lib/chat/followups.ts`):** After each answer, `generateObject` produces 2–3 structured follow-up chips (topic-detected, deduped, with fallbacks) streamed as `data-followUps` UI message parts. Disable with `ENABLE_CHAT_FOLLOWUPS=false`.
 
 ### Automated Blog Generation Pipeline
 - **Workflow:** `.github/workflows/auto-blog.yml` runs every 3 days (plus manual trigger) executing `scripts/blog/generate-blog.mjs`.
@@ -279,6 +296,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 | `NEXT_PUBLIC_GA_ID` | Google Analytics Measurement ID | Optional GA4 tracking |
 | `AI_SECURITY` | Enable VPN checks & rate limiting | Set to `'true'` to activate |
 | `AI_LIMIT` | Maximum chat queries per day | Defaults to 5 if unset |
+| `ENABLE_CHAT_FOLLOWUPS` | Enable chat follow-up suggestion chips | Set to `'false'` to disable; on by default |
 | `IPINFO_API` | IPinfo API token | Used for VPN/proxy privacy lookup |
 | `ENABLE_BLOG_AUTOMATION` | Feature flag for automated blog posting | Set to `'true'` to enable pipeline |
 | `BLOG_AUTOMATION_TOKEN` | Shared secret token | Bearer auth for blog pipeline & push notifications |
