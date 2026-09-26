@@ -75,7 +75,7 @@ export default async function Home() {
       <TestimonialsSection variant="homepage" />
 
       {/* Selected Work & Case Studies Preview */}
-      <section className="px-6 md:px-10 py-16">
+      {/* <section className="px-6 md:px-10 py-16">
         <div className="max-w-6xl mx-auto">
           <div className="flex justify-between items-end mb-10">
             <div>
@@ -111,7 +111,7 @@ export default async function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Recent Writings */}
       <section className="px-6 md:px-10 py-16 border-t border-border-primary">
