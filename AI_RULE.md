@@ -11,16 +11,32 @@
 > Before proposing a technical plan, writing code, creating files, or editing existing files, you **MUST ALWAYS view and load the relevant skill file(s) in `agents/skills/` using `view_file`**.
 
 ### Discipline Routing Checklist:
+Load **every** skill whose task area the change touches — they compose, and each declares what it does *not* own.
+
 - [ ] **UI & Visual Design:** [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md)  
-  *Activates for:* Spacing, visual hierarchy, dark/light contrast, typography, interactive widgets, responsive layouts, accessibility.
+  *Activates for:* Spacing, visual hierarchy, dark/light contrast, typography, interactive widgets, responsive layouts, design tokens.
+- [ ] **Accessibility & WCAG Conformance:** [`agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/accessibility-engineer/SKILL.md)  
+  *Activates for:* Keyboard operability, focus management and visible focus, semantic structure, accessible names, live regions, form error announcement, contrast, `prefers-reduced-motion`, modal/drawer behavior, icon-only controls.
 - [ ] **Frontend & App Router Architecture:** [`agents/skills/frontend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer/SKILL.md)  
   *Activates for:* React 19 / Next.js 16 components, Server vs. Client boundaries, SSR-free boundaries, state management, form handling, error states.
+- [ ] **Backend, APIs & Server Logic:** [`agents/skills/backend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/backend-engineer/SKILL.md)  
+  *Activates for:* `app/api/**` route handlers, request validation, status codes and error shapes, authz boundaries, pagination, idempotency, cache invalidation, non-fatal side effects.
+- [ ] **Database & Data Modeling:** [`agents/skills/database-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/database-engineer/SKILL.md)  
+  *Activates for:* Drizzle schema changes, migrations, indexes, query plans, pgvector/vector storage, constraints and data integrity, `content_chunks` reindexing.
+- [ ] **AI, RAG & LLM Systems:** [`agents/skills/ai-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ai-engineer/SKILL.md)  
+  *Activates for:* System prompts, chunking, embeddings, retrieval thresholds and grounding, tool calling, model/provider routing, AI output quality and evals, token cost and latency, the `scripts/blog/` pipeline.
+- [ ] **Security & Abuse Prevention:** [`agents/skills/security-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/security-engineer/SKILL.md)  
+  *Activates for:* Authn/authz correctness and ownership checks, secrets handling, untrusted input bounds, XSS, SSRF, injection, rate limiting, upload safety, model-supplied tool arguments, disclosure handling.
+- [ ] **DevOps, CI/CD & Environments:** [`agents/skills/devops-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/devops-engineer/SKILL.md)  
+  *Activates for:* GitHub Actions workflows, Vercel/build configuration, environment variable and secret provisioning, scheduled jobs, caching/CDN and service worker updates, releases and rollback.
+- [ ] **Performance & Latency Optimization:** [`agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md)  
+  *Activates for:* Core Web Vitals, SSR/ISR caching (`revalidate = 3600`, `unstable_cache`), Cloudinary URL optimization, pgvector search latency, bundle size, load/capacity testing, performance target-setting.
 - [ ] **Technical SEO, AEO/GEO & Schema:** [`agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md)  
   *Activates for:* JSON-LD Schema.org markup, dynamic OpenGraph generation (`opengraph-image.tsx`), XML sitemaps, robots.txt, AI engine citations.
 - [ ] **Keyword Strategy & Content Depth:** [`agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md)  
   *Activates for:* Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, internal links, avoiding keyword cannibalization.
-- [ ] **Performance & Latency Optimization:** [`agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md)  
-  *Activates for:* Core Web Vitals, SSR/ISR caching (`revalidate = 3600`, `unstable_cache`), Cloudinary URL optimization, pgvector search latency, bundle size.
+- [ ] **Professional Profile Optimization:** [`agents/skills/personal-seo-profile-optimizer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/personal-seo-profile-optimizer/SKILL.md)  
+  *Activates for:* LinkedIn/GitHub keyword research, recruiter-facing positioning, bio and resume optimization, professional profile audits.
 
 ---
 
@@ -52,7 +68,7 @@
 
 ### Database & Drizzle ORM
 - Connects to Neon Serverless PostgreSQL with `pgvector` (3072 dimensions).
-- Schema defined in [`lib/schema.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/schema.ts) (12 tables).
+- Schema defined in [`lib/schema.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/schema.ts) (14 tables).
 - `admin_users` table is defined but unused. Credentials auth matches `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars in [`lib/auth.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/auth.ts).
 - Blog comments are append-only JSONB arrays (`[{ name, comment, createdAt }]`).
 - Migrations managed via Drizzle Kit (`pnpm drizzle-kit`).
@@ -91,4 +107,5 @@
 7. **Breadcrumb Standard:** Use `Breadcrumbs.tsx` exclusively for breadcrumb trails.
 8. **Sanitized Output:** Never render un-sanitized raw user or LLM HTML.
 9. **Dual Auth Awareness:** Respect `isAuthorized()` on automated endpoints; never weaken session-only routes.
-10. **Explain Your Work:** Clearly cite which skill was applied and why architectural decisions were made.
+10. **New Route = New Review:** Any new or changed `app/api/**` route is jointly owned by `backend-engineer` (contract) and `security-engineer` (exposure) before it is considered done.
+11. **Explain Your Work:** Clearly cite which skill was applied and why architectural decisions were made.

@@ -20,7 +20,7 @@ Personal portfolio, technical blog, commercial services showcase, and interactiv
 ## Project Structure
 ```
 app/                            # Next.js App Router
-├── api/                        # 16 API route groups (29 route.ts files)
+├── api/                        # 17 API route groups (31 route.ts files)
 │   ├── about/                 # GET, PUT
 │   ├── auth/[...nextauth]/    # NextAuth route handler
 │   ├── blogs/                 # GET (all published), POST (dual-auth admin/token)
@@ -28,6 +28,9 @@ app/                            # Next.js App Router
 │   │   │   ├── comment/       # POST (append comment JSONB)
 │   │   │   └── star/          # POST (increment stars)
 │   │   └── slug/[slug]/       # GET (single blog lookup)
+│   ├── certificates/          # GET (published), POST (admin create)
+│   │   ├── all/               # GET (admin: published + drafts)
+│   │   └── [id]/              # GET, PATCH, DELETE (admin)
 │   ├── chat/                  # POST (streaming AI, RAG grounding, contact-inquiry tool, follow-up chips, rate limiting)
 │   ├── contact/               # POST (public submit + dual email dispatch), GET (admin list)
 │   │   ├── [id]/              # DELETE, PATCH (mark seen)
@@ -57,6 +60,9 @@ app/                            # Next.js App Router
 │   ├── blogs/                 # BlogForm + searchable list + publish toggle
 │   │   ├── new/               # Create blog post
 │   │   └── [id]/edit/         # Edit blog post
+│   ├── certificates/          # CertificateForm + list + publish toggle
+│   │   ├── new/               # Create certificate
+│   │   └── [id]/edit/         # Edit certificate
 │   ├── contact/               # Contact message viewer + email reply modal
 │   ├── experience/            # Experience accordion CRUD with reordering
 │   ├── media/                 # Cloudinary image grid + upload modal
@@ -74,6 +80,7 @@ app/                            # Next.js App Router
 ├── blogs/                     # Public blog archive (searchable grid, CollectionPage schema)
 │   └── [slug]/                # Blog detail page (ContentWithToc, BlogInteractions, BlogShareButtons)
 │       └── opengraph-image.tsx# Dynamic OpenGraph card generation (1200x630)
+├── certificates/              # Published certificates grid (CertificatesClient + CertificateCard)
 ├── contact/                   # Server page + ContactForm (WhatsApp direct link, API submit, email triggers) + ProfessionalService schema
 ├── faq/                       # Searchable category-filtered FAQ page (FAQClient + FAQPage JSON-LD)
 ├── login/                     # Admin login (GitHub OAuth + credentials)
@@ -99,9 +106,10 @@ app/                            # Next.js App Router
 └── sw.ts                      # Serwist service worker + push event listeners
 components/
 ├── about/                     # ExperienceTimeline (server), FAQ (accordion + JSON-LD)
-├── admin/                     # AdminDashboard, BlogForm, ProjectForm, TipTapEditor, MediaLibraryModal, DatePicker, DeleteLogButton
+├── admin/                     # AdminDashboard, BlogForm, ProjectForm, TipTapEditor, MediaLibraryModal, CertificateForm, DatePicker, DeleteLogButton
 ├── analytics/                 # GoogleAnalytics (loads gtag when NEXT_PUBLIC_GA_ID is set) + AnalyticsEvents (ScrollDepthTracker)
 ├── blogs/                     # BlogList, BlogInteractions, BlogShareButtons, BlogStarInteraction
+├── certificates/              # CertificatesClient (category filter + search grid), CertificateCard
 ├── faq/                       # FAQClient (category filter + live search accordion), FAQAccordionItem
 ├── home/                      # Hero (GitHub stats bento grid, server component)
 ├── layout/                    # Breadcrumbs (with BreadcrumbList JSON-LD), CloudTransition, ConditionalFooter, Footer, Navbar, PageHeader
@@ -136,7 +144,7 @@ lib/
 ├── fonts.ts                   # Geist Sans, Geist Mono, and Playfair Display font loaders
 ├── github.ts                  # GitHub GraphQL user stats + REST public event fetcher (10m-1h cache)
 ├── rag.ts                     # Document chunking, Gemini embedding generation, and pgvector upsert/delete
-├── schema.ts                  # 13 Drizzle ORM table definitions
+├── schema.ts                  # 14 Drizzle ORM table definitions
 ├── site-config.ts             # Centralized site constants (APP_URL, SITE_NAME, AUTHOR_*, TWITTER_HANDLE)
 ├── utils.ts                   # cn() clsx + tailwind-merge helper
 ├── chat/
@@ -171,7 +179,7 @@ public/
 ├── Filled_Logo.png            # Solid logo for OpenGraph and metadata icons
 └── sw.js                      # Serwist service worker bundle
 agents/
-└── skills/                    # 6 specialized engineering skills (frontend, performance, personal-seo, seo, keywords, ui-ux)
+└── skills/                    # 12 specialized engineering skills (ui-ux, accessibility, frontend, backend, database, ai, security, devops, performance, seo, keywords, personal-seo)
 AGENTS.md                      # Universal AI coding agent directives & standards
 AI_RULE.md                     # Strict AI rules, engineering guardrails & checklist
 context.md                     # Deep technical context & environment specifications
@@ -180,7 +188,7 @@ portfolio-theme.md             # Color & theme reference (design tokens, light/d
 opencode.jsonc                 # OpenCode assistant configuration & skills declaration
 ```
 
-## Database Schema (13 tables)
+## Database Schema (14 tables)
 
 | Table | Key Details |
 |---|---|
@@ -197,6 +205,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 | `content_chunks` | `id` (UUID), `source_id` (UUID), `source_type` ('about' \| 'experience' \| 'blog' \| 'project'), `chunk_text`, `embedding` (vector 3072d), `created_at` |
 | `push_subscriptions` | `id` (UUID), `endpoint` (unique), `subscription_json` (jsonb), `topic` ('all' \| 'blogs'), `created_at` |
 | `sent_notifications` | `id` (UUID), `title`, `body`, `url`, `image_url`, `target_topic`, `success_count` (int), `created_at` |
+| `certificates` | `id` (UUID), `title`, `issuer`, `description`, `credential_url`, `image_url`, `category`, `is_published` (bool), `display_order` (int), `created_at`, `updated_at` |
 
 ## Common Patterns & Conventions
 
@@ -265,7 +274,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 - **Follow-Up Suggestions (`lib/chat/followups.ts`):** After each answer, `generateObject` produces 2–3 structured follow-up chips (topic-detected, deduped, with fallbacks) streamed as `data-followUps` UI message parts. Disable with `ENABLE_CHAT_FOLLOWUPS=false`.
 
 ### Automated Blog Generation Pipeline
-- **Workflow:** `.github/workflows/auto-blog.yml` runs every 3 days (plus manual trigger) executing `scripts/blog/generate-blog.mjs`.
+- **Workflow:** intended to run every 3 days via a GitHub Actions workflow (`.github/workflows/auto-blog.yml`) executing `scripts/blog/generate-blog.mjs`. **Note: `.github/` does not currently exist in this repository, so the pipeline is not actually scheduled — it runs only when `pnpm run generate-blog` is invoked manually.** Creating the workflow is outstanding work.
 - **Modular Pipeline:**
   - `topics.mjs`: Topic pillars with target keywords, search intent, cluster relationships, and outlines.
   - `generate.mjs`: Provider/model (`AI_CHAT_PROVIDER`/`AI_CHAT_MODEL`) generates post grounded in the technical core of `public/llms.txt` (client-process/pricing/legal sections stripped), existing titles, and SEO/AEO guidance — distilled `SEO_DIRECTIVES` by default, full skill files when `BLOG_FULL_SKILL_REFS=true`. Includes a pre-flight token guard (`BLOG_PROMPT_BUDGET`, default 6000) that falls back full refs → distilled and fails fast before the API call if still over budget.

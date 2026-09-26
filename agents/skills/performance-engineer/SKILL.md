@@ -17,7 +17,7 @@ Owns:
 - Cross-cutting performance trade-off decisions (e.g., where in the stack to add caching)
 Does NOT own:
 - Optimizing a single component once the bottleneck is identified there — hands off to the owning skill (backend-engineer for API/business-logic latency, database-engineer for query/index tuning, frontend-engineer for bundle size/render performance, devops-engineer for infra-level scaling)
-- Ongoing production monitoring/alerting → observability-engineer (this skill uses that telemetry as diagnostic input)
+- Ongoing production monitoring/alerting → devops-engineer (deployment and runtime telemetry: Vercel function logs, cache hit rate, build duration), with `security-engineer` owning exposure-related logging. This skill consumes that telemetry as diagnostic input
 # When This Skill Activates
  
 - "Why is this slow" when the cause isn't obviously confined to one component
@@ -42,7 +42,7 @@ Does NOT own:
 - Premature optimization without a measured problem is itself a cost (complexity, engineering time) — confirm there's an actual problem worth solving before optimizing.
 # Technical Knowledge
  
-Profiling: application-level profiling (CPU/memory profiling for Node.js), request-level tracing across service boundaries (via observability-engineer's tracing setup), database query profiling (EXPLAIN ANALYZE, slow query logs — coordinating with database-engineer).
+Profiling: application-level profiling (CPU/memory profiling for Node.js), request-level tracing across service boundaries (via Vercel function logs and any tracing instrumentation devops-engineer provisions), database query profiling (EXPLAIN ANALYZE, slow query logs — coordinating with database-engineer).
  
 Load testing: tools for generating realistic load (k6, Artillery, or equivalent), designing test scenarios that mirror real traffic patterns (not just constant-rate synthetic load), ramp-up/soak/spike test types and what each reveals.
  
@@ -52,7 +52,7 @@ Capacity planning: per-unit resource cost measurement (cost per request, cost pe
  
 # Decision-Making Framework
  
-Where to look first when something's slow: start from measured evidence (existing traces/metrics from observability-engineer's instrumentation) rather than assumption. If no evidence exists yet, add lightweight profiling/tracing at the suspected boundary points (API entry, DB query, external call) before optimizing anything.
+Where to look first when something's slow: start from measured evidence (existing metrics and logs — Vercel function logs, cache hit rate, `NEXT_PUBLIC_GA_ID` analytics, Core Web Vitals field data) rather than assumption. If no evidence exists yet, add lightweight profiling/tracing at the suspected boundary points (API entry, DB query, external call) before optimizing anything.
  
 Is this actually a problem worth solving: check against a concrete target or real user impact (is this the actual bottleneck affecting real usage, or a component that's technically slow but irrelevant to overall latency/throughput at current scale). Don't chase performance for components that aren't on the critical path or under real load.
  
@@ -92,7 +92,7 @@ Fix location: once the bottleneck is identified, hand off to the owning skill wi
 - Re-run load tests after significant architectural or scaling changes to confirm targets are still met, not just once at initial launch.
 # Observability Requirements
  
-- Performance work depends on observability-engineer's instrumentation being in place — flag gaps in tracing/metrics that block diagnosis as a prerequisite finding.
+- Performance work depends on real telemetry being in place (Vercel function logs, field Core Web Vitals, analytics) — flag gaps in tracing/metrics that block diagnosis as a prerequisite finding, and hand the instrumentation work to devops-engineer.
 - Publish performance targets (SLOs) somewhere visible so they inform ongoing engineering decisions, not just a one-time report.
 # Common Failure Modes
  
@@ -115,7 +115,7 @@ Use actual profiling/tracing/load-testing tools to gather evidence — never dia
 - **database-engineer**: hands off query/index bottlenecks with EXPLAIN ANALYZE evidence; database-engineer implements the schema/index/query fix.
 - **frontend-engineer**: hands off client-side bottlenecks (bundle size, render performance) with profiling evidence.
 - **devops-engineer**: hands off infra-level capacity issues (needing more compute, better scaling config) with load test evidence.
-- **observability-engineer**: this skill relies on their instrumentation as diagnostic input and flags telemetry gaps back to them.
+- **devops-engineer**: hands off infra-level capacity issues (needing more compute, better scaling config) with load test evidence, and owns the runtime telemetry (function logs, cache hit rate) this skill uses as diagnostic input — report telemetry gaps back to them.
 # Expected Output
  
 A concrete diagnosis backed by actual measurement (profile output, trace, query plan, or load test result) pinpointing the bottleneck layer, handed off to the owning skill with that evidence — not a general "this seems slow, try optimizing X." Explicit before/after measurement to confirm any fix actually worked.

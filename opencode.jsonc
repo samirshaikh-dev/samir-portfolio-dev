@@ -12,8 +12,9 @@
   // protocol (load agents/skills before any code change) is in effect.
   "instructions": ["context.md", "AI_RULE.md"],
 
-  // Register the 5 specialized engineering skills (ui-ux, frontend, seo,
-  // keyword-research, performance) as native opencode skills. Each lives in
+  // Register the 12 specialized engineering skills (ui-ux, accessibility,
+  // frontend, backend, database, ai, security, devops, performance, seo,
+  // keyword-research, personal-seo) as native opencode skills. Each lives in
   // agents/skills/<name>/SKILL.md and is scanned recursively.
   "skills": {
     "paths": ["agents/skills"]

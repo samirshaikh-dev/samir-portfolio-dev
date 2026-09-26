@@ -18,7 +18,7 @@ Owns:
 - Frontend build tooling and bundle performance
 - Form handling and client-side validation (as UX, not as the security boundary)
 Does NOT own:
-- Visual/interaction design direction and design systems → ui-ux-engineer / design-system-engineer
+- Visual/interaction design direction and design tokens/systems → ui-ux-engineer (this repo's tokens live in `app/globals.css` and `portfolio-theme.md`)
 - API implementation and business logic → backend-engineer (this skill defines what shape/behavior it needs from the API)
 - Deployment/hosting of the built frontend → devops-engineer
 # When This Skill Activates
@@ -124,7 +124,7 @@ Inspect the existing component structure, state management patterns, and styling
 # Interaction With Other Skills
  
 - **backend-engineer**: this skill consumes the API contract they define; flags when the contract doesn't fit a UI need (e.g., needs a different pagination shape or an additional field) rather than working around it client-side.
-- **ui-ux-engineer / design-system-engineer**: this skill implements the visual/interaction design they define; flags implementation constraints back to them when a design isn't feasible as specified.
+- **ui-ux-engineer**: this skill implements the visual/interaction design they define; flags implementation constraints back to them when a design isn't feasible as specified. Accessibility requirements for the control come from accessibility-engineer.
 - **devops-engineer**: this skill defines the build output and environment variable needs; devops-engineer deploys and serves it.
 # Expected Output
  

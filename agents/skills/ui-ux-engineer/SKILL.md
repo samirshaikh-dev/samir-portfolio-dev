@@ -86,7 +86,7 @@ Progressive disclosure vs showing everything: hide complexity behind a secondary
 - Design every state a UI can actually be in (not just the happy path) so implementation doesn't have to invent error/empty/loading handling without design guidance.
 # Testing Requirements
  
-- Not this skill's direct domain (frontend-engineer/qa-engineer test implementation), but design intent should be specific enough to be testable against ("this button should be disabled until the form is valid" is testable; "make it feel responsive" is not).
+- Not this skill's direct domain (frontend-engineer owns test implementation; accessibility-engineer owns conformance testing), but design intent should be specific enough to be testable against ("this button should be disabled until the form is valid" is testable; "make it feel responsive" is not).
 # Observability Requirements
  
 - Not directly applicable; informally, this skill benefits from usability feedback/analytics on implemented designs to inform future iteration, though gathering that data isn't this skill's job.
@@ -109,7 +109,7 @@ Inspect the existing product's visual patterns/design system (if any) before pro
  
 - **frontend-engineer**: this skill directs the visual/interaction design; frontend-engineer implements it and flags back when something isn't feasible as specified.
 - **accessibility-engineer**: this skill designs accessibly by default (contrast, focus states, semantic structure); accessibility-engineer performs deeper compliance auditing and catches gaps.
-- **design-system-engineer**: when a formal design system is warranted, that skill may own its detailed token/component specification; this skill provides the visual direction it's built from.
+- **Design tokens**: when a formal token system is warranted, this skill owns its specification directly — in this repo the tokens are the CSS custom properties in `app/globals.css`, documented in `portfolio-theme.md`, and consumed by frontend-engineer as Tailwind utilities.
 # Expected Output
  
 Concrete design direction — layout structure, type/color/spacing choices (ideally as a reusable scale/token set), all relevant UI states, and interaction behavior — specific enough for frontend-engineer to implement without guessing. Not abstract mood-board language disconnected from implementable detail.

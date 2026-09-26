@@ -22,16 +22,25 @@
 
 ### Discipline Routing Matrix
 
+Load **every** skill whose Task Area the change touches — they compose, and each explicitly declares what it does *not* own.
+
 | Task Area | Required Skill File | Core Focus |
 | :--- | :--- | :--- |
-| **UI & Visual Design** | [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) | Visual hierarchy, spacing, typography, theme contrast, interactive widgets, WCAG accessibility |
+| **UI & Visual Design** | [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) | Visual hierarchy, spacing, typography, theme contrast, interactive widgets, design tokens |
+| **Accessibility & WCAG** | [`agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/accessibility-engineer/SKILL.md) | Keyboard operability, focus management, accessible names, live regions, contrast, `prefers-reduced-motion` |
 | **Frontend & Components** | [`agents/skills/frontend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer/SKILL.md) | React 19 / Next.js 16 patterns, Server vs Client boundaries, zero CLS, form handling, error states |
-| **Technical SEO & AEO/GEO** | [`agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md) | Schema.org JSON-LD integrity, dynamic OpenGraph, XML sitemaps, robots.txt, AI citation readability |
-| **Keywords & Content** | [`agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md) | Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, anti-cannibalization, content depth |
+| **Backend, APIs & Server Logic** | [`agents/skills/backend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/backend-engineer/SKILL.md) | Route handlers, validation, error/status contracts, authz boundaries, pagination, idempotency, cache invalidation |
+| **Database & Data Modeling** | [`agents/skills/database-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/database-engineer/SKILL.md) | Drizzle schema, indexes, migrations, query plans, pgvector/vector storage, data integrity |
+| **AI, RAG & LLM Systems** | [`agents/skills/ai-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ai-engineer/SKILL.md) | Prompts, chunking, embeddings, retrieval thresholds, grounding, evals, model routing, token cost |
+| **Security & Abuse** | [`agents/skills/security-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/security-engineer/SKILL.md) | Authn/authz, secrets, input trust boundaries, XSS/SSRF/injection, rate limiting, upload safety |
+| **DevOps, CI/CD & Environments** | [`agents/skills/devops-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/devops-engineer/SKILL.md) | GitHub Actions, Vercel/build config, env var & secret provisioning, caching/CDN, rollback |
 | **Performance & Latency** | [`agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md) | Core Web Vitals, SSR/ISR caching, Cloudinary optimization, pgvector search latency, bundle size |
+| **Technical SEO & AEO/GEO** | [`agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md) | Schema.org JSON-LD integrity, dynamic OpenGraph, XML sitemaps, robots.txt, AI citation readability |
+| **Keywords & Content Strategy** | [`agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md) | Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, anti-cannibalization, content depth |
+| **Professional Profile Optimization** | [`agents/skills/personal-seo-profile-optimizer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/personal-seo-profile-optimizer/SKILL.md) | LinkedIn/GitHub/resume/bio keyword research, recruiter-facing positioning, profile audits |
 
 ### Required Step-by-Step Workflow for AI Agents:
-1. **Identify:** Determine which of the 5 skills above govern the requested change.
+1. **Identify:** Determine which of the 12 skills above govern the requested change.
 2. **Read:** Explicitly view/read the applicable skill file (`agents/skills/<skill-name>/SKILL.md`) before planning or editing.
 3. **Verify:** Check your proposed solution against the non-negotiable rules and engineering principles of that skill.
 4. **Implement:** Write code that strictly adheres to the skill guidelines, citing the relevant principle in your explanation.
@@ -67,7 +76,7 @@
 
 ### Database & Drizzle ORM
 - Connects to Neon Serverless PostgreSQL with `pgvector`.
-- Schema defined in `lib/schema.ts` (12 tables: `admin_users`, `projects`, `blogs`, `about`, `resume`, `contact`, `socials`, `push_subscriptions`, `sent_notifications`, `experiences`, `media`, `content_chunks`).
+- Schema defined in `lib/schema.ts` (14 tables: `admin_users`, `projects`, `blogs`, `about`, `resume`, `contact`, `socials`, `push_subscriptions`, `sent_notifications`, `experiences`, `media`, `content_chunks`, `testimonials`, `certificates`).
 - The `admin_users` table is defined but unused — admin credentials authenticate directly against `ADMIN_USERNAME` and `ADMIN_PASSWORD` env vars in `lib/auth.ts`.
 - Blog comments are stored as append-only JSONB arrays (`[{ name, comment, createdAt }]`).
 - Migrations managed via Drizzle Kit (`drizzle.config.ts`, `docs/tech/drizzle-command.md`).
@@ -153,7 +162,7 @@ samir-portfolio-dev/
 │   ├── chat/                   # System prompt, retrieval, and security/rate-limiting
 │   └── seo/                    # Metadata & JSON-LD structured data generators
 ├── agents/
-│   └── skills/                 # The 5 specialized engineering skills (MUST READ FIRST)
+│   └── skills/                 # The 12 specialized engineering skills (MUST READ FIRST)
 ├── scripts/
 │   └── blog/                   # Modular automated blog generation pipeline
 ├── public/
@@ -182,4 +191,5 @@ samir-portfolio-dev/
 7. **Breadcrumb Standard:** Always use `Breadcrumbs.tsx` for consistent navigation and JSON-LD.
 8. **Sanitized Output:** Never render raw, un-sanitized user or LLM HTML.
 9. **Dual Auth Awareness:** Respect `isAuthorized()` on automated endpoints; do not weaken session-only routes.
-10. **Explain Work:** Clearly state which skills were referenced, what changed, and why.
+10. **New Route = New Review:** Any new or changed `app/api/**` route is jointly owned by `backend-engineer` (contract) and `security-engineer` (exposure) before it is considered done.
+11. **Explain Work:** Clearly state which skills were referenced, what changed, and why.
