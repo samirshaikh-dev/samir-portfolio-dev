@@ -3,24 +3,26 @@
 ## Project Overview
 Personal portfolio, technical blog, commercial services showcase, and interactive AI showcase for **Samir Shaikh** — AI-Enabled Full Stack Developer (backend-first), AI Backend Engineer, AI SDE, and Agentic AI Engineer exploring Forward Deployed Engineer (FDE) roles.
 - **Production URL:** `https://samir-portfolio-dev.vercel.app` (configured in `lib/site-config.ts` with fallback via `NEXTAUTH_URL`).
-- **Key Features:** Admin panel, RAG-powered AI chatbot with GitHub activity grounding, inline contact-inquiry tool and follow-up suggestions, client testimonials & social proof, searchable FAQ (`/faq`), technical skills & architecture index (`/technical-skills`), commercial services catalog (`/services`), legal compliance pages (`/privacy-policy`, `/terms-of-service`), dual-tier LLM knowledge graph (`llms.txt`, `llms-full.txt`), automated transactional email system with Nodemailer templates (confirmations, admin alerts, threaded replies), Web Push notifications, PWA (Serwist), blog with comments & star interactions, dynamic RSS feed, automated SEO/AEO/GEO structured data, dynamic OpenGraph cards, and an unattended AI-driven blog generation pipeline.
+- **Key Features:** Admin panel, RAG-powered AI chatbot with GitHub activity grounding, inline contact-inquiry tool and follow-up suggestions, client testimonials & social proof, searchable FAQ (`/faq`, 73 Q&A across 10 categories), technical skills & architecture index (`/technical-skills`), commercial services catalog (`/services`), certificates & credentials showcase (`/certificates`), project archive with tech badges (`/projects`), legal compliance pages (`/privacy-policy`, `/terms-of-service`), dual-tier LLM knowledge graph (`llms.txt`, `llms-full.txt`), automated transactional email system with Nodemailer templates (confirmations, admin alerts, threaded replies), Web Push notifications, PWA (Serwist), blog with comments & star interactions, dynamic RSS feed, automated SEO/AEO/GEO structured data, dynamic OpenGraph cards, and a scheduled AI-driven blog generation pipeline (GitHub Actions, every 3 days).
 
 ## Tech Stack
-- **Framework:** Next.js 16 (App Router, webpack build), React 19, TypeScript 5
+- **Framework:** Next.js 16.2.6 (App Router, webpack build via `next build --webpack`), React 19, TypeScript 5
 - **Styling:** Tailwind CSS v4 (`@tailwindcss/postcss`, `@tailwindcss/typography`), dark/light mode via `next-themes`
 - **Database:** Neon (serverless PostgreSQL) + Drizzle ORM + pgvector (3072-dimensional vector store)
 - **Auth:** NextAuth v5 (`5.0.0-beta.31`, GitHub OAuth + Credentials) + Dual-mode Bearer token auth (`BLOG_AUTOMATION_TOKEN`) via `lib/api-auth.ts`
 - **AI/ML:** Vercel AI SDK (`ai` v6, `@ai-sdk/google` for embeddings via `gemini-embedding-2`, `@ai-sdk/groq` for chat via `llama-3.3-70b-versatile`), RAG with cosine distance search
-- **Media:** Cloudinary (image hosting + `optimizeCloudinaryUrl` helper), Sharp (server-side image optimization)
+- **Media:** Cloudinary (image hosting + `optimizeCloudinaryUrl` helper in `lib/cloudinary-utils.ts`), Sharp (server-side image optimization)
+- **Content & Parsing:** Cheerio (HTML → plain text for RAG chunking), `html-react-parser` (stored HTML → React with `next/image` optimization), `react-markdown` + `remark-gfm` (chat output rendering), `unified`/`remark`/`rehype` + `rehype-sanitize` (blog pipeline Markdown → sanitized HTML), `date-fns` (admin media/date formatting)
 - **PWA & Notifications:** Serwist (`@serwist/next`, service worker `app/sw.ts`), Web Push (`web-push`)
 - **Email:** Nodemailer (SMTP transport with modular branded HTML & plain-text templates for contact form confirmations, admin alerts, and threaded admin replies via `lib/email/`)
 - **Analytics & Security:** Google Analytics (`@/components/analytics/GoogleAnalytics`), FingerprintJS (`@fingerprintjs/fingerprintjs`) for rate limiting visitor identification, IPinfo for VPN/proxy privacy checks
-- **Package Manager:** pnpm (v10)
+- **CI/CD:** GitHub Actions (`.github/workflows/auto-blog.yml` — cron `0 9 */3 * *` plus manual `workflow_dispatch`; installs pipeline deps ad hoc with `npm install --no-save` and runs `node scripts/blog/generate-blog.mjs`)
+- **Package Manager:** pnpm (v10) — note: `pnpm run dev` is **not** `next dev`; it runs `next build --webpack && next start` (production build + serve)
 
 ## Project Structure
 ```
 app/                            # Next.js App Router
-├── api/                        # 17 API route groups (31 route.ts files)
+├── api/                        # 17 API route groups (32 route.ts files)
 │   ├── about/                 # GET, PUT
 │   ├── auth/[...nextauth]/    # NextAuth route handler
 │   ├── blogs/                 # GET (all published), POST (dual-auth admin/token)
@@ -54,7 +56,7 @@ app/                            # Next.js App Router
 │   │   ├── all/               # GET (admin: published + drafts)
 │   │   └── [id]/              # GET, PATCH, DELETE (admin)
 │   └── upload/                # POST (sharp resize + Cloudinary upload)
-├── about/                     # Server page (ISR 3600), ExperienceTimeline, FAQ, Speakable JSON-LD
+├── about/                     # Server page (ISR 3600) + loading.tsx, ExperienceTimeline, FAQ, Speakable JSON-LD
 ├── admin/                     # Protected admin dashboard layout + pages
 │   ├── about/                 # TipTap editor for description, present, future
 │   ├── blogs/                 # BlogForm + searchable list + publish toggle
@@ -77,22 +79,22 @@ app/                            # Next.js App Router
 │   └── testimonials/          # Testimonial CRUD + publish toggle
 │       ├── new/               # Create testimonial
 │       └── [id]/edit/         # Edit testimonial
-├── blogs/                     # Public blog archive (searchable grid, CollectionPage schema)
-│   └── [slug]/                # Blog detail page (ContentWithToc, BlogInteractions, BlogShareButtons)
+├── blogs/                     # Public blog archive (searchable grid, CollectionPage schema) + loading.tsx
+│   └── [slug]/                # Blog detail page (ContentWithToc, BlogInteractions, BlogShareButtons) + loading.tsx
 │       └── opengraph-image.tsx# Dynamic OpenGraph card generation (1200x630)
 ├── certificates/              # Published certificates grid (CertificatesClient + CertificateCard)
 ├── contact/                   # Server page + ContactForm (WhatsApp direct link, API submit, email triggers) + ProfessionalService schema
 ├── faq/                       # Searchable category-filtered FAQ page (FAQClient + FAQPage JSON-LD)
-├── login/                     # Admin login (GitHub OAuth + credentials)
+├── login/                     # Admin login (GitHub OAuth + credentials) + auth-only layout.tsx
 ├── privacy-policy/            # Legal privacy disclosures, GA/contact data processing, WebPage schema
-├── projects/                  # Public project archive (searchable grid, CollectionPage schema)
-│   └── [slug]/                # Project detail page (HtmlParser, tech badges)
+├── projects/                  # Public project archive (searchable grid, CollectionPage schema) + loading.tsx
+│   └── [slug]/                # Project detail page (HtmlParser, tech badges) + loading.tsx
 │       └── opengraph-image.tsx# Dynamic OpenGraph card generation (1200x630)
 ├── resume/                    # ResumeViewer (react-pdf) + download button
 ├── schema/                    # Raw database schema SQL definition (schema.sql)
 ├── services/                  # Commercial services showcase (12 offerings across 4 pillars, deliverables, tech badges, Service & Offer schemas)
 ├── sitemap/                   # Visual HTML sitemap page with directory of all links
-├── technical-skills/          # Technical skills & architecture index (15 categories, system design concepts, FAQ Client)
+├── technical-skills/          # Technical skills & architecture index (12 skill category sections, 7 system-design + 10 software-engineering concepts, 17-item FAQ across 15 categories)
 ├── terms-of-service/          # Website terms, IP ownership, liability disclaimers, WebPage schema
 ├── error.tsx                  # Root error boundary
 ├── not-found.tsx              # Root 404 page with interactive animated flip card illustration
@@ -135,7 +137,8 @@ lib/
 ├── api-auth.ts                # Timing-safe comparison for BLOG_AUTOMATION_TOKEN or admin session
 ├── auth.ts                    # NextAuth v5 config (GitHub OAuth whitelist + credentials)
 ├── cache.ts                   # unstable_cache wrappers for footer projects, blogs, and socials
-├── cloudinary.ts              # Cloudinary v2 SDK configuration + optimizeCloudinaryUrl() helper
+├── cloudinary.ts              # Cloudinary v2 SDK configuration; re-exports optimizeCloudinaryUrl
+├── cloudinary-utils.ts        # Zero-dependency optimizeCloudinaryUrl() (f_auto,q_auto[,w_]) — safe in server + client code
 ├── db.ts                      # Neon serverless PostgreSQL connection + Drizzle ORM client
 ├── email/                     # Transactional email pipeline with Nodemailer
 │   ├── index.ts               # Transporter setup & dispatch functions (sendContactConfirmationEmail, sendAdminContactNotification, sendContactReplyEmail)
@@ -169,8 +172,13 @@ scripts/
 docs/                          # Documentation
 ├── design.md                  # Design system & aesthetic guidelines
 ├── prd.md                     # Product Requirements Document
+├── project-redesign-plan.md   # Portfolio redesign scope & rollout plan
 ├── seo/                       # SEO, AEO, GEO, and FDE strategy documentation & audit reports
+│   ├── nextjs-portfolio-seo-report.md
+│   └── Seo-aeo-geo-fde-strategy.md
 └── tech/                      # Drizzle commands and database operation references
+drizzle/                       # Generated SQL migrations 0000-0003 + drizzle-kit meta/snapshots
+.github/workflows/auto-blog.yml# Scheduled (every 3 days) + manual automated blog generation
 public/
 ├── .well-known/security.txt   # Security contact disclosure
 ├── llms.txt                   # LLM-readable summary of Samir's skills, background, and blog grounding
@@ -180,15 +188,31 @@ public/
 └── sw.js                      # Serwist service worker bundle
 agents/
 └── skills/                    # 12 specialized engineering skills (ui-ux, accessibility, frontend, backend, database, ai, security, devops, performance, seo, keywords, personal-seo)
-AGENTS.md                      # Universal AI coding agent directives & standards
+│                              # personal-seo-profile-optimizer ships an extra references/ folder (4 playbooks)
+next.config.ts                 # Serwist wrapper, security headers, image remotePatterns, webpack fallbacks
+drizzle.config.ts              # drizzle-kit config (schema ./lib/schema.ts, out ./drizzle, postgresql)
+eslint.config.mjs              # Flat ESLint config
+postcss.config.mjs             # @tailwindcss/postcss
+tsconfig.json                  # TypeScript config (path alias @/* -> ./*)
+AGENTS.md                      # Universal AI agent directives & standards
 AI_RULE.md                     # Strict AI rules, engineering guardrails & checklist
+ai-developer.md                # Gemini CLI agent definition
+CLAUDE.md                      # Claude Code operating guide
+README.md                      # Project setup & usage documentation
 context.md                     # Deep technical context & environment specifications
 gemini.md                      # Gemini context, routing protocol & directives
 portfolio-theme.md             # Color & theme reference (design tokens, light/dark palette, accents)
 opencode.jsonc                 # OpenCode assistant configuration & skills declaration
+chat-bot-plan.md               # Chatbot feature plan / notes
+portfolio_client_audit.md      # UX & content audit notes
+report.md                      # Standalone project report / analysis
 ```
 
+> **Stale-artifact note:** `.kilo/worktrees/puzzle-piranha/` is a full copy of an older snapshot of this repo checked into the tree. It is not part of the running application — ignore it when auditing files, and never edit it as if it were source.
+
 ## Database Schema (14 tables)
+
+Schema is defined in `lib/schema.ts`; four generated migrations are applied (`drizzle/0000`–`0003`) and a human-readable reference copy lives at `app/schema/schema.sql`. Manage future changes with `pnpm drizzle-kit generate` / `pnpm drizzle-kit migrate` (`drizzle-kit` is a dependency, not an npm script).
 
 | Table | Key Details |
 |---|---|
@@ -221,7 +245,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
   2. **Backend & Distributed Architecture:** Production Backend APIs & System Design, Event-Driven Systems & Background Processing, Cloud, DevOps & Observability.
   3. **Web Development & Search Growth:** Custom Website Development & Landing Pages, SEO Services & Search Engine Optimization, Website Redesign & Speed Optimization, Full-Stack Web Application Development.
   4. **AI-Accelerated Engineering:** AI-Accelerated Engineering delivery.
-- Contains interactive deliverables breakdowns, tech stack tags, starting rates, process steps + engagement models, structured consultation CTAs, FAQ accordion, and embedded `HowIWork` + `TestimonialsSection` blocks. Client testimonials also render on the homepage.
+- Contains interactive deliverables breakdowns, tech stack tags, starting rates, 6 process steps + 4 engagement models, structured consultation CTAs, a 15-item service FAQ accordion, and embedded `HowIWork` + `TestimonialsSection` blocks. Client testimonials also render on the homepage.
 
 ### Email Notification & Reply Workflow (`lib/email/`)
 - **Contact Submission (`POST /api/contact`):**
@@ -236,9 +260,10 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
   4. Automatically marks the inquiry as resolved/read (`seen = true`).
 
 ### Caching Strategy
-- **`unstable_cache` (`lib/cache.ts`):** Used for lightweight repetitive queries such as footer projects, blogs, and social links (`revalidate: 3600` with tags `["projects"]`, `["blogs"]`, `["socials"]`).
+- **`unstable_cache` (`lib/cache.ts`):** Used for lightweight repetitive queries such as footer projects, blogs, and social links (`revalidate: 3600` with tags `["projects"]`, `["blogs"]`, `["socials"]`; tags exist but `revalidateTag` is not yet called — on-demand revalidation is still outstanding work).
 - **External Caches:** GitHub user stats cached for 1 hour; GitHub public events cached for 10 minutes in memory.
 - **RSS Feed & Sitemaps:** Marked with `export const dynamic = 'force-dynamic'` to always serve up-to-date content while utilizing HTTP caching headers.
+- **Route Loading:** `app/about`, `app/blogs`, `app/blogs/[slug]`, `app/projects`, and `app/projects/[slug]` each ship a `loading.tsx` skeleton; there is no root-level `app/loading.tsx`.
 
 ### CSS & Design System
 - **Tailwind CSS v4:** `@import "tailwindcss"` in `globals.css` with PostCSS configuration.
@@ -251,7 +276,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 - **Breadcrumbs:** `components/layout/Breadcrumbs.tsx` renders accessible breadcrumbs with embedded `BreadcrumbList` schema.
 - **JSON-LD Schema (`lib/seo/structured-data.ts`):** Emits rich entities including `Person`, `WebSite`, `Organization`, `ProfessionalService`, `Service` / `Offer`, `CollectionPage`, `BreadcrumbList`, `FAQPage`, and `SpeakableSpecification`.
 - **Dynamic OpenGraph:** Dedicated `opengraph-image.tsx` routes under `/blogs/[slug]` and `/projects/[slug]` generate branded 1200x630 social preview images using `@vercel/og`.
-- **AI Crawler Directives (`app/robots.ts`):** Explicit configuration granting 15+ AI crawler user-agents (`GPTBot`, `ChatGPT-User`, `OAI-SearchBot`, `ClaudeBot`, `Claude-Web`, `Anthropic-AI`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`, `Meta-ExternalAgent`, `cohere-ai`, `YouBot`, etc.) crawl access to `/`, `/llms.txt`, `/llms-full.txt`, legal pages, and the RSS feed, while strictly disallowing `/admin/`, `/api/`, and `/login/`.
+- **AI Crawler Directives (`app/robots.ts`):** Explicit configuration granting 15 named AI crawler user-agents (`GPTBot`, `ChatGPT-User`, `OAI-SearchBot`, `ClaudeBot`, `Claude-Web`, `Anthropic-AI`, `PerplexityBot`, `Google-Extended`, `Applebot-Extended`, `Meta-ExternalAgent`, `cohere-ai`, `YouBot`, `DuckAssistBot`, `Bytespider`, `facebookexternalhit`) crawl access to `/`, `/services`, `/about`, `/projects`, `/blogs`, `/contact`, `/resume`, `/faq`, `/technical-skills`, `/llms.txt`, `/llms-full.txt`, `/api/feed`, legal pages, and `/.well-known/`, while strictly disallowing `/admin/`, `/api/`, and `/login/`.
 - **Dual-Tier LLM Context Files:**
   - `public/llms.txt`: Machine-readable summary for fast inference and automated blog grounding.
   - `public/llms-full.txt`: Exhaustive 400+ line knowledge graph, technical specifications, benchmarks, and background for in-depth AI answer engines.
@@ -266,7 +291,9 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 
 ### AI & RAG Pipeline
 - **Embeddings:** Google Gemini `gemini-embedding-2` generating 3072-dimensional vectors.
-- **Vector Search:** `cosineDistance` search via pgvector on `content_chunks` filtered with distance `<= 0.5`.
+- **Vector Search:** `cosineDistance` search via pgvector on `content_chunks` filtered with distance `<= 0.5` (`MAX_DISTANCE` in `lib/chat/retrieval.ts`).
+- **Text Extraction:** Cheerio converts stored HTML to plain text before chunking/embedding (`lib/rag.ts`, `app/api/rag/seed/route.ts`).
+- **Answer Rendering:** Chat output is streamed as Markdown and rendered with `react-markdown` + `remark-gfm` (`components/Chatbot.tsx`) — never as raw HTML.
 - **Chat System Prompt (`lib/chat/prompt.ts`):** Strict brevity, no meta-talk about "the context", enforces markdown links using exact URLs from context blocks, treats context purely as reference data, and enforces scoped domain knowledge.
 - **Intent-Based Retrieval:** GitHub event activity is selectively attached to context when the user asks about recent work, commits, or coding activity.
 - **Grounding Sources (`data-sources`):** Retrieved context chunks are streamed to the client as citeable source references alongside the answer.
@@ -274,7 +301,7 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 - **Follow-Up Suggestions (`lib/chat/followups.ts`):** After each answer, `generateObject` produces 2–3 structured follow-up chips (topic-detected, deduped, with fallbacks) streamed as `data-followUps` UI message parts. Disable with `ENABLE_CHAT_FOLLOWUPS=false`.
 
 ### Automated Blog Generation Pipeline
-- **Workflow:** intended to run every 3 days via a GitHub Actions workflow (`.github/workflows/auto-blog.yml`) executing `scripts/blog/generate-blog.mjs`. **Note: `.github/` does not currently exist in this repository, so the pipeline is not actually scheduled — it runs only when `pnpm run generate-blog` is invoked manually.** Creating the workflow is outstanding work.
+- **Workflow:** `.github/workflows/auto-blog.yml` runs `scripts/blog/generate-blog.mjs` on a `0 9 */3 * *` cron plus manual `workflow_dispatch` (with `auto_publish` and `blog_ai_provider` inputs). CI installs only the script's runtime deps via `npm install --no-save @ai-sdk/groq @ai-sdk/google ai unified remark-parse remark-gfm remark-rehype rehype-sanitize rehype-stringify`, then runs `node scripts/blog/generate-blog.mjs` with secrets `GROQ_API_KEY`, `GOOGLE_GENERATIVE_AI_API_KEY`, `NEXTAUTH_URL` (used as the site URL), and `BLOG_AUTOMATION_TOKEN`. Locally, `pnpm run generate-blog` uses `node --env-file=.env`, so all values come from `.env`.
 - **Modular Pipeline:**
   - `topics.mjs`: Topic pillars with target keywords, search intent, cluster relationships, and outlines.
   - `generate.mjs`: Provider/model (`AI_CHAT_PROVIDER`/`AI_CHAT_MODEL`) generates post grounded in the technical core of `public/llms.txt` (client-process/pricing/legal sections stripped), existing titles, and SEO/AEO guidance — distilled `SEO_DIRECTIVES` by default, full skill files when `BLOG_FULL_SKILL_REFS=true`. Includes a pre-flight token guard (`BLOG_PROMPT_BUDGET`, default 6000) that falls back full refs → distilled and fails fast before the API call if still over budget.
@@ -321,6 +348,10 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 | `BLOG_PROMPT_BUDGET` | Max assembled prompt size for generation | Defaults to 6000 (estimated tokens); fails fast when exceeded |
 | `UPSTASH_REDIS_REST_URL` / `_TOKEN` | Redis credentials | Listed in `.env.example` for planned persistent rate limiting |
 
+> **`.env.example` coverage is incomplete.** It omits `SITE_URL`, `AUTO_PUBLISH`, `MIN_WORD_COUNT`, `ENABLE_CHAT_FOLLOWUPS`, `ENABLE_BLOG_AUTOMATION`, and `BLOG_AUTOMATION_TOKEN` — all of which the blog pipeline and dual-auth endpoints require, and `BLOG_AUTOMATION_TOKEN` is additionally a required GitHub Actions secret. Add them when extending the example file.
+>
+> **Implicit reads:** `GROQ_API_KEY`, `GOOGLE_GENERATIVE_AI_API_KEY`, and `CLOUDINARY_URL` are never read via `process.env` in this codebase — the Vercel AI SDK providers and the Cloudinary SDK read them internally. `NEXTAUTH_SECRET` is likewise resolved by NextAuth v5 itself (`lib/auth.ts` sets no explicit `secret`).
+
 ## Critical Rules & Gotchas
 1. **Strict AI Directives Compliance:** All AI models and tools must adhere strictly to [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) and [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md). Never bypass the pre-implementation skill loading protocol.
 2. **Always Load and Follow `agents/skills/` Before Any Implementation:** Mandatory pre-requisite. Before proposing or implementing any changes (frontend, UI/UX, SEO, performance, or backend), the AI MUST explicitly view and evaluate against the relevant skill(s) in `agents/skills/` via `view_file` (`frontend-engineer/SKILL.md`, `performance-engineer/SKILL.md`, `personal-seo-profile-optimizer/SKILL.md`, `seo-engineer/SKILL.md`, `seo-keyword-research-implementation/SKILL.md`, `ui-ux-engineer/SKILL.md`).
@@ -330,9 +361,15 @@ opencode.jsonc                 # OpenCode assistant configuration & skills decla
 6. **`admin_users` table is unused** — credentials authentication compares `ADMIN_USERNAME`/`ADMIN_PASSWORD` env vars directly.
 7. **Dual-mode API authentication** — `isAuthorized()` in `lib/api-auth.ts` allows both user session cookies and `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`. Do not use this helper on user-only routes.
 8. **Chat rate limiting is currently in-memory** — rate limits reset across serverless cold starts. Redis integration via Upstash is prepared in `.env.example` as a future enhancement.
-9. **Cloudinary transformations** — use `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` when rendering Cloudinary assets to guarantee modern formats (`f_auto`) and quality compression (`q_auto`).
+9. **Cloudinary transformations** — use `optimizeCloudinaryUrl()` from `lib/cloudinary-utils.ts` (re-exported by `lib/cloudinary.ts`) when rendering Cloudinary assets to guarantee modern formats (`f_auto`) and quality compression (`q_auto`).
 10. **Breadcrumb consistency** — use `components/layout/Breadcrumbs.tsx` rather than manual breadcrumb links to ensure synchronized visual navigation and `BreadcrumbList` JSON-LD.
 11. **RAG indexing trigger** — creating, updating, or deleting blogs/projects automatically indexes or deletes content chunks in pgvector. No secondary seed call is needed during routine blog publishing.
 12. **Rich text HTML format** — blog and project contents are stored as sanitized HTML, rendered on the client via `HtmlParser.tsx` or `ContentWithToc.tsx`.
 13. **Non-fatal email dispatch** — contact submissions and inquiries are always committed to PostgreSQL first. If Nodemailer transport fails or SMTP is unconfigured, the user flow still succeeds gracefully.
 14. **Dual-tier LLM discovery and AI crawler access** — `llms.txt` and `llms-full.txt` serve as structured knowledge roots for AI bots and answer engines. Robots.txt explicitly permits all major AI crawlers access to public routes and LLM files while securing admin and API endpoints.
+15. **`pnpm run dev` is not a dev server** — the script is `next build --webpack && next start`. Run `pnpm dlx next dev` (or `next dev` directly) when you need HMR; expect a full production build whenever you use `pnpm run dev`.
+16. **Chat output is Markdown, not HTML** — `components/Chatbot.tsx` renders LLM text through `react-markdown`; passing raw HTML would bypass sanitization rules and is forbidden.
+17. **Image allowlist is wide open** — `next.config.ts` allows `hostname: "**"` alongside `res.cloudinary.com`. Tighten it deliberately if you introduce user-supplied remote images; do not assume `next/image` is a trust boundary.
+18. **`.kilo/worktrees/puzzle-piranha/` is a stale duplicate** of an older snapshot committed into the tree. It is not part of the app; never edit or trust it as source of truth.
+19. **Dead dependency** — `bcryptjs` is installed but no longer imported anywhere; admin credentials are compared in plaintext against env vars in `lib/auth.ts`.
+20. **Migrations** — four Drizzle migrations (`drizzle/0000`–`0003`) are applied. `drizzle-kit` is a regular dependency, so use `pnpm drizzle-kit generate|migrate` (there is no npm script alias).
