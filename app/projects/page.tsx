@@ -11,7 +11,7 @@ import { getCollectionPageJsonLd } from "@/lib/seo/structured-data";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Projects | Samir Shaikh",
+  title: "Selected Work & Case Studies | Samir Shaikh",
   description: "Explore Samir Shaikh's AI, agentic AI, and backend engineering projects — including a RAG-powered portfolio chatbot with pgvector semantic search, a microservice-based AI ticket triage system, a WhatsApp campaign platform, and a full-stack event management platform built with Node.js, NestJS, GraphQL, PostgreSQL, Redis, BullMQ, Docker, and Apache Kafka.",
   keywords: [
     "Samir Shaikh projects",
@@ -31,14 +31,14 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/projects`,
   },
   openGraph: {
-    title: "Projects | Samir Shaikh",
+    title: "Selected Work & Case Studies | Samir Shaikh",
     description: "AI, agentic AI, and backend engineering projects by Samir Shaikh: RAG chatbot, microservice AI ticket triage, WhatsApp campaign platform, and more.",
     url: `${APP_URL}/projects`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Projects | Samir Shaikh",
+    title: "Selected Work & Case Studies | Samir Shaikh",
     description: "AI, agentic AI, and backend engineering projects by Samir Shaikh: RAG chatbot, microservice AI ticket triage, WhatsApp campaigns, and more.",
   },
 };
@@ -77,7 +77,7 @@ export default async function ProjectsPage() {
   const projects = await getProjects();
 
   const collectionJsonLd = getCollectionPageJsonLd({
-    name: "Projects | Samir Shaikh",
+    name: "Selected Work & Case Studies | Samir Shaikh",
     description:
       "AI, agentic AI, and backend engineering projects by Samir Shaikh: RAG chatbot, microservice AI ticket triage, WhatsApp campaign platform, and more.",
     path: "/projects",
@@ -99,7 +99,10 @@ export default async function ProjectsPage() {
             ]}
           />
         </div>
-        <PageHeader title="Projects" subtitle="A collection of things I've built." />
+        <PageHeader
+          title="Selected Work & Case Studies"
+          subtitle="Production-grade AI systems, high-throughput backends, and full-stack applications engineered for reliability."
+        />
         {projects.length === 0 ? (
           <p className="text-gray-400">No projects yet.</p>
         ) : (
