@@ -13,6 +13,7 @@ export function PushSettings() {
 
   useEffect(() => {
     const dismissed = localStorage.getItem("push-prompt-dismissed");
+    let timer: NodeJS.Timeout | undefined;
     
     if ("serviceWorker" in navigator && "PushManager" in window) {
       setIsSupported(true);
@@ -20,11 +21,16 @@ export function PushSettings() {
         reg.pushManager.getSubscription().then((sub) => {
           setSubscription(sub);
           if (!sub && !dismissed) {
-             setTimeout(() => setIsVisible(true), 1500);
+             // 25-second delay to ensure clients can browse without immediate popups
+             timer = setTimeout(() => setIsVisible(true), 25000);
           }
         });
       });
     }
+
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
   }, []);
 
   const urlBase64ToUint8Array = (base64String: string) => {
