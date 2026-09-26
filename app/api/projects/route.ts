@@ -33,7 +33,10 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json();
-    const { title, slug, excerpt, content, cover_image_url, is_published, technologies, github_link, demo_link } = body;
+    const { 
+      title, slug, excerpt, content, cover_image_url, is_published, technologies, github_link, demo_link,
+      is_case_study, badge, category, metrics, display_order
+    } = body;
 
     if (!title || !slug || !content) {
       return NextResponse.json(
@@ -49,6 +52,11 @@ export async function POST(req: NextRequest) {
       content,
       coverImageUrl: cover_image_url || null,
       isPublished: is_published ?? false,
+      isCaseStudy: is_case_study ?? false,
+      badge: badge || "Personal Project",
+      category: category || "AI",
+      metrics: metrics || [],
+      displayOrder: display_order ?? 0,
       publishedAt: is_published ? new Date() : null,
       technologies: technologies || [],
       githubLink: github_link || null,

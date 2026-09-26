@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { projects as projectsSchema } from "@/lib/schema";
-import { eq, desc } from "drizzle-orm";
+import { eq, desc, asc } from "drizzle-orm";
 import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
-import ProjectList from "@/components/projects/ProjectList";
+import ProjectList, { Project } from "@/components/projects/ProjectList";
 import { APP_URL } from "@/lib/site-config";
 import { getCollectionPageJsonLd } from "@/lib/seo/structured-data";
 
@@ -12,9 +12,12 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Selected Work & Case Studies | Samir Shaikh",
-  description: "Explore Samir Shaikh's AI, agentic AI, and backend engineering projects — including a RAG-powered portfolio chatbot with pgvector semantic search, a microservice-based AI ticket triage system, a WhatsApp campaign platform, and a full-stack event management platform built with Node.js, NestJS, GraphQL, PostgreSQL, Redis, BullMQ, Docker, and Apache Kafka.",
+  description:
+    "Explore production-grade AI systems, high-throughput backends, and full-stack applications engineered by Samir Shaikh — including autonomous AI ticket triage, WhatsApp campaign platform, and custom RAG pipelines.",
   keywords: [
     "Samir Shaikh projects",
+    "Selected Work Samir Shaikh",
+    "AI engineering case studies",
     "backend engineering projects",
     "AI projects portfolio",
     "RAG chatbot project",
@@ -32,41 +35,40 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Selected Work & Case Studies | Samir Shaikh",
-    description: "AI, agentic AI, and backend engineering projects by Samir Shaikh: RAG chatbot, microservice AI ticket triage, WhatsApp campaign platform, and more.",
+    description:
+      "Production-grade AI systems, high-throughput backends, and full-stack applications engineered for reliability by Samir Shaikh.",
     url: `${APP_URL}/projects`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Selected Work & Case Studies | Samir Shaikh",
-    description: "AI, agentic AI, and backend engineering projects by Samir Shaikh: RAG chatbot, microservice AI ticket triage, WhatsApp campaigns, and more.",
+    description:
+      "Production-grade AI systems, high-throughput backends, and full-stack applications engineered for reliability by Samir Shaikh.",
   },
 };
 
-
-interface Project {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string | null;
-  cover_image_url: string | null;
-  technologies: string[] | null;
-  github_link: string | null;
-  demo_link: string | null;
-}
-
 async function getProjects(): Promise<Project[]> {
   try {
-    const result = await db.select({
-      id: projectsSchema.id,
-      title: projectsSchema.title,
-      slug: projectsSchema.slug,
-      excerpt: projectsSchema.excerpt,
-      cover_image_url: projectsSchema.coverImageUrl,
-      technologies: projectsSchema.technologies,
-      github_link: projectsSchema.githubLink,
-      demo_link: projectsSchema.demoLink,
-    }).from(projectsSchema).where(eq(projectsSchema.isPublished, true)).orderBy(desc(projectsSchema.publishedAt));
+    const result = await db
+      .select({
+        id: projectsSchema.id,
+        title: projectsSchema.title,
+        slug: projectsSchema.slug,
+        excerpt: projectsSchema.excerpt,
+        cover_image_url: projectsSchema.coverImageUrl,
+        technologies: projectsSchema.technologies,
+        github_link: projectsSchema.githubLink,
+        demo_link: projectsSchema.demoLink,
+        is_case_study: projectsSchema.isCaseStudy,
+        badge: projectsSchema.badge,
+        category: projectsSchema.category,
+        metrics: projectsSchema.metrics,
+        display_order: projectsSchema.displayOrder,
+      })
+      .from(projectsSchema)
+      .where(eq(projectsSchema.isPublished, true))
+      .orderBy(asc(projectsSchema.displayOrder), desc(projectsSchema.publishedAt));
     return result as unknown as Project[];
   } catch {
     return [];
@@ -79,7 +81,7 @@ export default async function ProjectsPage() {
   const collectionJsonLd = getCollectionPageJsonLd({
     name: "Selected Work & Case Studies | Samir Shaikh",
     description:
-      "AI, agentic AI, and backend engineering projects by Samir Shaikh: RAG chatbot, microservice AI ticket triage, WhatsApp campaign platform, and more.",
+      "Production-grade AI systems, high-throughput backends, and full-stack applications engineered for reliability by Samir Shaikh.",
     path: "/projects",
     items: projects.map((p) => ({ name: p.title, path: `/projects/${p.slug}` })),
   });

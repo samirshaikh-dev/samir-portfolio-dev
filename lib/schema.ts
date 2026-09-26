@@ -18,10 +18,18 @@ export const projects = pgTable('projects', {
     demoLink: text('demo_link'),
     coverImageUrl: text('cover_image_url'),
     isPublished: boolean('is_published').default(false),
+    isCaseStudy: boolean('is_case_study').default(false),
+    badge: text('badge').default('Personal Project'),
+    category: text('category').default('AI'),
+    metrics: text('metrics').array(),
+    displayOrder: integer('display_order').default(0),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
     updatedAt: timestamp('updated_at', { withTimezone: true }).defaultNow(),
     publishedAt: timestamp('published_at', { withTimezone: true }),
 });
+
+export type Project = typeof projects.$inferSelect;
+export type NewProject = typeof projects.$inferInsert;
 
 export const blogs = pgTable('blogs', {
     id: uuid('id').defaultRandom().primaryKey(),

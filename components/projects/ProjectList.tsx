@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-interface Project {
+export interface Project {
   id: string;
   title: string;
   slug: string;
@@ -13,6 +13,11 @@ interface Project {
   technologies: string[] | null;
   github_link: string | null;
   demo_link: string | null;
+  is_case_study?: boolean | null;
+  badge?: string | null;
+  category?: string | null;
+  metrics?: string[] | null;
+  display_order?: number | null;
 }
 
 interface ProjectListProps {
@@ -20,22 +25,64 @@ interface ProjectListProps {
   hideSearch?: boolean;
 }
 
+const FILTER_TABS = [
+  { label: "All", value: "all" },
+  { label: "Case Studies", value: "case-studies" },
+  { label: "Projects", value: "projects" },
+  { label: "AI", value: "AI" },
+  { label: "Automation", value: "Automation" },
+  { label: "Full Stack", value: "Full Stack" },
+];
+
 export default function ProjectList({ initialProjects, hideSearch = false }: ProjectListProps) {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState("all");
 
-  const filteredProjects = initialProjects.filter((project) => {
-    const query = searchQuery.toLowerCase();
-    const titleMatch = project.title.toLowerCase().includes(query);
-    const excerptMatch = project.excerpt?.toLowerCase().includes(query) || false;
-    const techMatch = project.technologies?.some(tech => tech.toLowerCase().includes(query)) || false;
-    
-    return titleMatch || excerptMatch || techMatch;
-  });
+  const filteredProjects = useMemo(() => {
+    return initialProjects.filter((project) => {
+      // 1. Search Query Filter
+      const query = searchQuery.toLowerCase().trim();
+      if (query) {
+        const titleMatch = project.title.toLowerCase().includes(query);
+        const excerptMatch = project.excerpt?.toLowerCase().includes(query) || false;
+        const techMatch = project.technologies?.some((tech) => tech.toLowerCase().includes(query)) || false;
+        const metricMatch = project.metrics?.some((m) => m.toLowerCase().includes(query)) || false;
+        const categoryMatch = project.category?.toLowerCase().includes(query) || false;
+        const badgeMatch = project.badge?.toLowerCase().includes(query) || false;
+
+        if (!titleMatch && !excerptMatch && !techMatch && !metricMatch && !categoryMatch && !badgeMatch) {
+          return false;
+        }
+      }
+
+      // 2. Tab Filter
+      if (activeFilter === "all") return true;
+      if (activeFilter === "case-studies") return Boolean(project.is_case_study);
+      if (activeFilter === "projects") return !project.is_case_study;
+      if (activeFilter === "AI") return project.category === "AI" || project.technologies?.some(t => t.toLowerCase().includes("ai") || t.toLowerCase().includes("llm"));
+      if (activeFilter === "Automation") return project.category === "Automation" || project.technologies?.some(t => t.toLowerCase().includes("automation") || t.toLowerCase().includes("bullmq") || t.toLowerCase().includes("queue"));
+      if (activeFilter === "Full Stack") return project.category === "Full Stack" || project.category === "Backend";
+
+      return true;
+    });
+  }, [initialProjects, searchQuery, activeFilter]);
+
+  // Split into Featured Case Studies and More Projects
+  const caseStudies = useMemo(() => {
+    return filteredProjects.filter((p) => p.is_case_study);
+  }, [filteredProjects]);
+
+  const regularProjects = useMemo(() => {
+    return filteredProjects.filter((p) => !p.is_case_study);
+  }, [filteredProjects]);
+
+  const showTwoTierView = activeFilter === "all" && !searchQuery;
 
   return (
-    <>
-      {!hideSearch && (
-        <div className="mb-10">
+    <div className="space-y-10">
+      {/* Search & Filter Bar */}
+      <div className="space-y-5">
+        {!hideSearch && (
           <div className="relative w-full group">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
               <svg className="h-5 w-5 text-text-muted group-focus-within:text-foreground transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,125 +91,413 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
             </div>
             <input
               type="text"
-              className="block w-full pl-12 pr-4 py-4 text-base text-foreground bg-hover-bg border border-border-primary rounded-2xl focus:bg-background focus:ring-4 focus:ring-border-primary focus:border-text-muted focus:outline-none transition-all placeholder-text-muted"
-              placeholder="Search projects by name, description, or technology..."
+              className="block w-full pl-12 pr-4 py-3.5 text-sm sm:text-base text-foreground bg-hover-bg border border-border-primary rounded-2xl focus:bg-background focus:ring-4 focus:ring-border-primary focus:border-text-muted focus:outline-none transition-all placeholder-text-muted"
+              placeholder="Search by system, tech stack (Redis, BullMQ, pgvector), or outcome..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
+        )}
+
+        {/* Filter Pills */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
+          {FILTER_TABS.map((tab) => {
+            const isActive = activeFilter === tab.value;
+            return (
+              <button
+                key={tab.value}
+                onClick={() => setActiveFilter(tab.value)}
+                className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap border ${
+                  isActive
+                    ? "bg-foreground text-background border-foreground shadow-sm"
+                    : "bg-background text-text-secondary border-border-primary hover:border-text-muted hover:text-foreground"
+                }`}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Empty State */}
+      {filteredProjects.length === 0 && (
+        <div className="text-center py-16 bg-footer-bg rounded-2xl border border-border-primary">
+          <p className="text-text-muted text-base sm:text-lg">No matching projects found.</p>
+          <button 
+            onClick={() => {
+              setSearchQuery("");
+              setActiveFilter("all");
+            }}
+            className="mt-4 text-sm font-medium text-foreground underline hover:text-text-secondary"
+          >
+            Reset all filters
+          </button>
         </div>
       )}
 
-      {filteredProjects.length === 0 ? (
-        <div className="text-center py-12 bg-footer-bg rounded-2xl border border-border-primary">
-          <p className="text-text-muted text-lg">No projects found matching "{searchQuery}"</p>
-          <button 
-            onClick={() => setSearchQuery("")}
-            className="mt-4 text-sm text-foreground underline hover:text-text-secondary"
-          >
-            Clear search
-          </button>
+      {/* TWO-TIER VIEW: DEFAULT "ALL" EXPERIENCE */}
+      {showTwoTierView && filteredProjects.length > 0 && (
+        <div className="space-y-16">
+          {/* SECTION 1: FEATURED CASE STUDIES */}
+          {caseStudies.length > 0 && (
+            <section aria-labelledby="featured-case-studies-heading" className="space-y-6">
+              <div className="flex items-baseline justify-between border-b border-border-primary pb-3">
+                <div>
+                  <h2 id="featured-case-studies-heading" className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+                    Featured Case Studies
+                  </h2>
+                  <p className="text-xs sm:text-sm text-text-muted mt-0.5">
+                    Flagship engineering breakdowns, architectural trade-offs, and production metrics.
+                  </p>
+                </div>
+                <span className="text-xs font-mono text-text-muted hidden sm:inline-block">
+                  {caseStudies.length} {caseStudies.length === 1 ? "Study" : "Studies"}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {caseStudies.map((project, index) => (
+                  <article
+                    key={project.id}
+                    className="group relative flex flex-col bg-background border border-border-primary hover:border-text-muted rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
+                  >
+                    {/* Media / Cover */}
+                    <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/9] w-full bg-hover-bg overflow-hidden border-b border-border-primary">
+                      {project.cover_image_url ? (
+                        <Image
+                          src={project.cover_image_url}
+                          alt={`${project.title} case study architecture`}
+                          fill
+                          priority={index === 0}
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-border-primary">
+                          <span className="text-5xl font-medium" style={{ fontFamily: "var(--font-playfair)" }}>
+                            {project.title.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                      
+                      {/* Top Badges Overlay */}
+                      <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-background/90 backdrop-blur-md border border-green-500/40 text-green-700 dark:text-green-400 shadow-sm">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                          {project.badge || "Case Study"}
+                        </span>
+                        {project.category && (
+                          <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-background/90 backdrop-blur-md border border-border-primary text-text-secondary shadow-sm">
+                            {project.category}
+                          </span>
+                        )}
+                      </div>
+                    </Link>
+
+                    {/* Content */}
+                    <div className="flex flex-col flex-1 p-6">
+                      <Link href={`/projects/${project.slug}`} className="block group-hover:text-text-secondary transition-colors">
+                        <h3 className="text-2xl font-bold text-foreground mb-2.5 leading-snug">
+                          {project.title}
+                        </h3>
+                      </Link>
+
+                      {project.excerpt && (
+                        <p className="text-sm text-text-muted leading-relaxed mb-5 line-clamp-3">
+                          {project.excerpt}
+                        </p>
+                      )}
+
+                      {/* Outcome Metrics Strip */}
+                      {project.metrics && project.metrics.length > 0 && (
+                        <div className="mb-5 p-3 rounded-xl bg-footer-bg border border-border-primary space-y-1.5">
+                          <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted block">
+                            Key Outcomes & Benchmarks:
+                          </span>
+                          <div className="flex flex-wrap gap-2">
+                            {project.metrics.map((metric, mIdx) => (
+                              <span
+                                key={mIdx}
+                                className="inline-flex items-center text-xs font-medium text-foreground bg-background px-2.5 py-1 rounded-lg border border-border-primary/80"
+                              >
+                                ✓ {metric}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Tech Stack */}
+                      <div className="flex flex-wrap gap-1.5 mb-6 mt-auto">
+                        {project.technologies?.map((tech, i) => (
+                          <span
+                            key={i}
+                            className="text-[11px] font-mono tracking-tight text-text-secondary bg-hover-bg px-2.5 py-1 rounded-md"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Action Links */}
+                      <div className="pt-4 border-t border-border-primary flex items-center justify-between">
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          className="inline-flex items-center gap-2 text-sm font-semibold text-foreground group-hover:text-text-secondary transition-colors"
+                        >
+                          Read Case Study
+                          <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </Link>
+
+                        <div className="flex items-center gap-3">
+                          {project.demo_link && (
+                            <a
+                              href={project.demo_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs font-medium text-text-muted hover:text-foreground transition-colors"
+                            >
+                              Live Demo ↗
+                            </a>
+                          )}
+                          {project.github_link && (
+                            <a
+                              href={project.github_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-xs font-medium text-text-muted hover:text-foreground transition-colors"
+                            >
+                              GitHub ↗
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* SECTION 2: MORE PROJECTS & BUILDS */}
+          {regularProjects.length > 0 && (
+            <section aria-labelledby="more-projects-heading" className="space-y-6 pt-4">
+              <div className="flex items-baseline justify-between border-b border-border-primary pb-3">
+                <div>
+                  <h2 id="more-projects-heading" className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
+                    More Projects & Builds
+                  </h2>
+                  <p className="text-xs sm:text-sm text-text-muted mt-0.5">
+                    Independent full-stack applications, experiments, and proofs-of-concept.
+                  </p>
+                </div>
+                <span className="text-xs font-mono text-text-muted hidden sm:inline-block">
+                  {regularProjects.length} {regularProjects.length === 1 ? "Build" : "Builds"}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {regularProjects.map((project) => (
+                  <article
+                    key={project.id}
+                    className="group flex flex-col bg-background border border-border-primary hover:border-text-muted rounded-2xl overflow-hidden shadow-sm transition-colors"
+                  >
+                    <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary">
+                      {project.cover_image_url ? (
+                        <Image
+                          src={project.cover_image_url}
+                          alt={`${project.title} screenshot`}
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex items-center justify-center text-border-primary">
+                          <span className="text-4xl font-medium" style={{ fontFamily: "var(--font-playfair)" }}>
+                            {project.title.charAt(0)}
+                          </span>
+                        </div>
+                      )}
+                      <div className="absolute top-2.5 left-2.5">
+                        <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-background/90 backdrop-blur-md border border-border-primary text-text-secondary">
+                          {project.badge || "Personal Project"}
+                        </span>
+                      </div>
+                    </Link>
+
+                    <div className="flex flex-col flex-1 p-5">
+                      <div className="flex flex-wrap gap-1.5 mb-2.5">
+                        {project.technologies?.slice(0, 3).map((tech, i) => (
+                          <span
+                            key={i}
+                            className="text-[10px] font-mono uppercase text-text-secondary bg-hover-bg px-2 py-0.5 rounded"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+
+                      <Link href={`/projects/${project.slug}`} className="block group-hover:text-text-secondary transition-colors">
+                        <h3 className="text-lg font-semibold text-foreground mb-1.5 leading-snug">
+                          {project.title}
+                        </h3>
+                      </Link>
+
+                      {project.excerpt && (
+                        <p className="text-xs text-text-muted line-clamp-2 mb-4 flex-1">
+                          {project.excerpt}
+                        </p>
+                      )}
+
+                      <div className="flex items-center justify-between pt-3 border-t border-border-primary mt-auto text-xs font-medium">
+                        <div className="flex items-center gap-3">
+                          {project.demo_link && (
+                            <a
+                              href={project.demo_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-text-secondary hover:text-foreground transition-colors"
+                            >
+                              Live Demo ↗
+                            </a>
+                          )}
+                          {project.github_link && (
+                            <a
+                              href={project.github_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-text-secondary hover:text-foreground transition-colors"
+                            >
+                              GitHub ↗
+                            </a>
+                          )}
+                        </div>
+                        <Link
+                          href={`/projects/${project.slug}`}
+                          className="text-text-muted hover:text-foreground transition-colors"
+                        >
+                          Overview →
+                        </Link>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className="group flex flex-col bg-background border border-border-primary rounded-2xl overflow-hidden hover:border-text-muted transition-colors"
+      )}
+
+      {/* FILTERED VIEW: UNIFIED GRID WHEN A SPECIFIC FILTER IS SELECTED OR USER SEARCHES */}
+      {!showTwoTierView && filteredProjects.length > 0 && (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between text-xs text-text-muted border-b border-border-primary pb-2">
+            <span>
+              Showing {filteredProjects.length} {filteredProjects.length === 1 ? "result" : "results"}
+            </span>
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setActiveFilter("all");
+              }}
+              className="text-foreground hover:underline"
             >
-              <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden">
-                {project.cover_image_url ? (
-                  <Image
-                    src={project.cover_image_url}
-                    alt={`Screenshot of ${project.title} project`}
-                    fill
-                    priority={index === 0}
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center text-border-primary">
-                    <span className="text-5xl font-medium" style={{ fontFamily: "var(--font-playfair)" }}>
-                      {project.title.charAt(0)}
+              Reset to All
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project) => (
+              <article
+                key={project.id}
+                className="group flex flex-col bg-background border border-border-primary hover:border-text-muted rounded-2xl overflow-hidden shadow-sm transition-colors"
+              >
+                <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary">
+                  {project.cover_image_url ? (
+                    <Image
+                      src={project.cover_image_url}
+                      alt={`${project.title} cover`}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center text-border-primary">
+                      <span className="text-4xl font-medium" style={{ fontFamily: "var(--font-playfair)" }}>
+                        {project.title.charAt(0)}
+                      </span>
+                    </div>
+                  )}
+                  <div className="absolute top-2.5 left-2.5 flex gap-1.5">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-background/90 backdrop-blur-md border border-border-primary text-text-secondary">
+                      {project.badge || (project.is_case_study ? "Case Study" : "Personal Project")}
                     </span>
                   </div>
-                )}
-              </Link>
+                </Link>
 
-              <div className="flex flex-col flex-1 p-5">
-                <div className="flex flex-wrap gap-2 mb-3 min-h-[24px]">
-                  {project.technologies && project.technologies.length > 0 ? (
-                    project.technologies.map((tech, i) => (
+                <div className="flex flex-col flex-1 p-5">
+                  <div className="flex flex-wrap gap-1.5 mb-2.5">
+                    {project.technologies?.slice(0, 3).map((tech, i) => (
                       <span
                         key={i}
-                        className="text-[10px] font-semibold tracking-wide uppercase text-text-secondary bg-hover-bg px-2 py-0.5 rounded-sm"
+                        className="text-[10px] font-mono uppercase text-text-secondary bg-hover-bg px-2 py-0.5 rounded"
                       >
                         {tech}
                       </span>
-                    ))
-                  ) : (
-                    <span className="text-[10px] font-semibold tracking-wide uppercase text-text-muted bg-footer-bg px-2 py-0.5 rounded-sm">
-                      Project
-                    </span>
-                  )}
-                </div>
+                    ))}
+                  </div>
 
-                <Link href={`/projects/${project.slug}`} className="block group-hover:text-text-secondary transition-colors">
-                  <h3 className="text-xl font-semibold text-foreground mb-2 leading-tight">
-                    {project.title}
-                  </h3>
-                </Link>
-                
-                {project.excerpt && (
-                  <p className="text-sm text-text-muted line-clamp-2 mb-4 flex-1">
-                    {project.excerpt}
-                  </p>
-                )}
+                  <Link href={`/projects/${project.slug}`} className="block group-hover:text-text-secondary transition-colors">
+                    <h3 className="text-lg font-semibold text-foreground mb-1.5 leading-snug">
+                      {project.title}
+                    </h3>
+                  </Link>
 
-                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-border-primary">
-                  {project.github_link && (
-                    <a
-                      href={project.github_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-medium text-text-secondary hover:text-foreground transition-colors flex items-center gap-1.5"
-                    >
-                      <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-                      </svg>
-                      Source
-                    </a>
+                  {project.excerpt && (
+                    <p className="text-xs text-text-muted line-clamp-2 mb-4 flex-1">
+                      {project.excerpt}
+                    </p>
                   )}
-                  {project.demo_link && (
-                    <a
-                      href={project.demo_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-medium text-text-secondary hover:text-foreground transition-colors flex items-center gap-1.5"
-                    >
-                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                      Live Demo
-                    </a>
-                  )}
-                  {!project.github_link && !project.demo_link && (
+
+                  <div className="flex items-center justify-between pt-3 border-t border-border-primary mt-auto text-xs font-medium">
+                    <div className="flex items-center gap-3">
+                      {project.demo_link && (
+                        <a
+                          href={project.demo_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-foreground transition-colors"
+                        >
+                          Demo ↗
+                        </a>
+                      )}
+                      {project.github_link && (
+                        <a
+                          href={project.github_link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-text-secondary hover:text-foreground transition-colors"
+                        >
+                          GitHub ↗
+                        </a>
+                      )}
+                    </div>
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="text-xs font-medium text-text-secondary hover:text-foreground transition-colors flex items-center gap-1.5"
+                      className="text-foreground hover:text-text-secondary transition-colors"
                     >
-                      View Project
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
+                      {project.is_case_study ? "Case Study →" : "Details →"}
                     </Link>
-                  )}
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
       )}
-    </>
+    </div>
   );
 }

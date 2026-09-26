@@ -61,11 +61,27 @@ export async function PATCH(
     }
 
     // Otherwise it's a full update
-    const { title, slug, excerpt, content, cover_image_url, technologies, github_link, demo_link } = body;
+    const { 
+      title, slug, excerpt, content, cover_image_url, technologies, github_link, demo_link,
+      is_case_study, badge, category, metrics, display_order
+    } = body;
 
     await db.update(projectsSchema)
       .set({ 
-        title, slug, excerpt, content, coverImageUrl: cover_image_url, technologies: technologies || [], githubLink: github_link, demoLink: demo_link, updatedAt: new Date()
+        title, 
+        slug, 
+        excerpt, 
+        content, 
+        coverImageUrl: cover_image_url, 
+        technologies: technologies || [], 
+        githubLink: github_link, 
+        demoLink: demo_link, 
+        isCaseStudy: is_case_study ?? false,
+        badge: badge || "Personal Project",
+        category: category || "AI",
+        metrics: metrics || [],
+        displayOrder: display_order ?? 0,
+        updatedAt: new Date()
       })
       .where(eq(projectsSchema.id, id));
 

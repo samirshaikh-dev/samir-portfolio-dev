@@ -13,6 +13,11 @@ interface ProjectData {
   content: string;
   cover_image_url: string;
   is_published: boolean;
+  is_case_study?: boolean;
+  badge?: string;
+  category?: string;
+  metrics?: string[];
+  display_order?: number;
   technologies: string[];
   github_link: string;
   demo_link: string;
@@ -43,12 +48,18 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
     content: initialData?.content || "",
     cover_image_url: initialData?.cover_image_url || "",
     is_published: initialData?.is_published ?? false,
+    is_case_study: initialData?.is_case_study ?? false,
+    badge: initialData?.badge || "Personal Project",
+    category: initialData?.category || "AI",
+    metrics: initialData?.metrics || [],
+    display_order: initialData?.display_order ?? 0,
     technologies: initialData?.technologies || [],
     github_link: initialData?.github_link || "",
     demo_link: initialData?.demo_link || "",
   });
 
   const [techString, setTechString] = useState(initialData?.technologies?.join(", ") || "");
+  const [metricsString, setMetricsString] = useState(initialData?.metrics?.join(", ") || "");
 
   const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -148,6 +159,88 @@ export default function ProjectForm({ initialData, projectId }: ProjectFormProps
         <div>
           <label htmlFor="demo_link" className={labelClass}>Demo Link</label>
           <input id="demo_link" type="url" value={form.demo_link} onChange={(e) => setForm((p) => ({ ...p, demo_link: e.target.value }))} className={inputClass} placeholder="https://..." />
+        </div>
+      </div>
+
+      {/* Case Study & Category Configuration */}
+      <div className="p-4 mb-4 rounded-xl border border-border-primary bg-footer-bg space-y-4">
+        <h4 className="text-sm font-semibold text-foreground">Case Study & Taxonomy Settings</h4>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label htmlFor="badge" className={labelClass}>Badge Label</label>
+            <select
+              id="badge"
+              value={form.badge}
+              onChange={(e) => setForm((p) => ({ ...p, badge: e.target.value }))}
+              className={inputClass}
+            >
+              <option value="Case Study">Case Study</option>
+              <option value="Personal Project">Personal Project</option>
+              <option value="Client Work">Client Work</option>
+              <option value="Open Source">Open Source</option>
+              <option value="Experiment">Experiment</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="category" className={labelClass}>Category</label>
+            <select
+              id="category"
+              value={form.category}
+              onChange={(e) => setForm((p) => ({ ...p, category: e.target.value }))}
+              className={inputClass}
+            >
+              <option value="AI">AI</option>
+              <option value="Automation">Automation</option>
+              <option value="Full Stack">Full Stack</option>
+              <option value="Backend">Backend</option>
+            </select>
+          </div>
+
+          <div>
+            <label htmlFor="display_order" className={labelClass}>Display Order</label>
+            <input
+              id="display_order"
+              type="number"
+              value={form.display_order}
+              onChange={(e) => setForm((p) => ({ ...p, display_order: parseInt(e.target.value) || 0 }))}
+              className={inputClass}
+              placeholder="0"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="metrics" className={labelClass}>Key Outcome Metrics (comma-separated)</label>
+          <input
+            id="metrics"
+            type="text"
+            value={metricsString}
+            onChange={(e) => {
+              const val = e.target.value;
+              setMetricsString(val);
+              setForm((p) => ({
+                ...p,
+                metrics: val.split(",").map((s) => s.trim()).filter(Boolean),
+              }));
+            }}
+            className={inputClass}
+            placeholder="Sub-200ms latency, 99.2% accuracy, Multi-model routing"
+          />
+        </div>
+
+        <div className="flex items-center gap-3 pt-1">
+          <input
+            id="is_case_study"
+            type="checkbox"
+            checked={form.is_case_study}
+            onChange={(e) => setForm((p) => ({ ...p, is_case_study: e.target.checked }))}
+            className="h-4 w-4 rounded border-border-primary text-foreground focus:ring-border-primary"
+          />
+          <label htmlFor="is_case_study" className="text-sm font-medium text-foreground cursor-pointer">
+            Feature prominently as flagship Case Study (Large hero card & homepage priority)
+          </label>
         </div>
       </div>
 
