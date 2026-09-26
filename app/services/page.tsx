@@ -125,13 +125,13 @@ export default function ServicesPage() {
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="max-w-2xl">
               <span className="font-mono text-xs uppercase tracking-wider text-green-600 dark:text-green-400 font-semibold bg-green-500/10 border border-green-500/30 px-2.5 py-1 rounded-full inline-block mb-3">
-                ● Available for Freelance Projects, Contracts & Forward Deployed Roles
+                ● Available for Freelance Projects, Contracts & Sprints
               </span>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-3">
-                Ship production-grade software that drives real business results.
+                Ship reliable AI agents, custom RAG systems, and robust backend software.
               </h2>
               <p className="service-desc text-text-muted text-base leading-relaxed">
-                I help startups, business owners, and engineering teams build and ship custom business websites, comprehensive SEO services, and production-grade AI features — custom knowledge bases, AI chatbots for websites and SaaS, AI agents, and workflow automation — alongside high-performance Node.js/TypeScript backend systems and web speed optimization. Available as a freelance developer, SEO consultant, or Forward Deployed Engineer.
+                I help startups, founders, and engineering teams build and ship production-grade AI solutions — custom knowledge bases, autonomous agents, and RAG pipelines — powered by scalable Node.js/TypeScript backend architectures. Also available for full-stack web delivery, contract sprints, and forward-deployed engineering engagements.
               </p>
             </div>
             <div className="flex-shrink-0 flex flex-col sm:flex-row gap-3">

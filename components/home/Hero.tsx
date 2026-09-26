@@ -58,10 +58,10 @@ export default async function Hero() {
             className="text-4xl sm:text-5xl font-medium text-foreground tracking-tight mb-3"
             style={{ fontFamily: "var(--font-playfair)" }}
           >
-            Samir Shaikh &mdash; AI-Enabled Full Stack Developer (Backend-First)
+            Samir Shaikh &mdash; AI Developer (Backend-First)
           </h1>
           <p className="hero-intro text-base md:text-lg text-text-muted max-w-2xl leading-relaxed">
-            Helping startups, founders, and engineering teams build reliable AI agents, RAG knowledge bases, and scalable full-stack web applications &mdash; delivered with clean system architecture and zero fluff.
+            Helping startups, founders, and engineering teams build reliable AI agents, custom RAG systems, and robust backend architectures. Available for freelance projects &mdash; shipping end-to-end full stack web applications with zero fluff.
           </p>
 
           {/* Hero CTA buttons */}

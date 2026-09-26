@@ -1,0 +1,162 @@
+Put both items in the **Projects** area, but separate them visually into two categories:
+
+## Recommended navigation
+
+Keep your current navbar simple:
+
+```text
+Home   Projects   Blogs   Services   About   Certificates   Contact   Resume
+```
+
+Do not add both “Projects” and “Case Studies” to the navbar unless you expect to publish many case studies. The screenshot already has several navigation items, so adding another top-level link could make it feel crowded.
+
+## Projects page layout
+
+Create one `/projects` page with two sections:
+
+```text
+Projects
+My independent builds, experiments, and engineering work.
+
+[All] [Projects] [Case Studies]
+```
+
+Then display:
+
+### Selected Projects
+
+Use this for smaller or medium-sized work:
+
+- UI experiments.
+- Frontend applications.
+- Open-source contributions.
+- Small automation tools.
+- Design experiments.
+- Proof-of-concept builds.
+- Projects without extensive documentation.
+
+Card format:
+
+```text
+Project title
+Short description
+Personal project
+React · Node.js · PostgreSQL
+
+[Live Demo] [GitHub]
+```
+
+### Selected Case Studies
+
+Use this for your strongest and most technically detailed projects:
+
+- Eventify.
+- WhatsApp Campaign Automation Platform.
+- AI Customer Ticket Triage.
+
+Card format:
+
+```text
+AI Customer Ticket Triage
+LLM-powered support-ticket classification system
+Personal project · Case study
+
+AI Agents · Microservices · Redis · BullMQ
+
+[Read Case Study]
+```
+
+## Best page structure
+
+```text
+/projects
+
+Hero
+  Projects & Case Studies
+  A collection of independent products, technical experiments,
+  and detailed engineering breakdowns.
+
+Featured Case Studies
+  2–3 large cards
+
+More Projects
+  Grid of smaller project cards
+```
+
+This lets visitors see your most valuable work first while still allowing you to include other projects.
+
+## Optional filtering
+
+A filter bar would work well:
+
+```text
+All    Projects    Case Studies    AI    Automation    Full Stack
+```
+
+When the user selects **Case Studies**, show only your detailed project breakdowns. When they select **Projects**, show the regular project cards.
+
+Avoid making “Projects” and “Case Studies” separate unrelated pages if the content overlaps. A filter or clearly separated sections gives visitors one predictable place to explore your work.
+
+## Suggested homepage section
+
+On the homepage, show only a preview:
+
+```text
+Selected Work
+
+[Featured case study card]
+[Featured case study card]
+[Regular project card]
+
+View all projects →
+```
+
+Use a small badge on each card:
+
+- `Personal Project`
+- `Case Study`
+- `Open Source`
+- `Experiment`
+
+## Recommended URL structure
+
+Use:
+
+```text
+/projects
+/projects/eventify
+/projects/whatsapp-campaign-platform
+/projects/ai-ticket-triage
+```
+
+You do not need a separate `/case-studies` route initially. The detailed pages can still be identified as case studies through their labels and content.
+
+If you later have five or more detailed breakdowns, add:
+
+```text
+/case-studies
+```
+
+At that point, your navbar could become:
+
+```text
+Home   Projects   Case Studies   Blogs   Services   About   Contact
+```
+
+## My recommendation for your site
+
+For the current portfolio:
+
+- Keep **Projects** in the navbar.
+- Create a combined `/projects` page.
+- Put **Selected Case Studies** at the top.
+- Put **More Projects** below it.
+- Add `Case Study` or `Personal Project` badges.
+- Link every detailed case study to its own project page.
+
+A suitable page heading would be:
+
+> **Projects & Case Studies**  
+> Independent builds, technical experiments, and deep dives into the systems I’ve designed.
+
+This is the cleanest solution for your current navbar and avoids forcing visitors to choose between two overlapping sections.

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { db } from "@/lib/db";
 import { about } from "@/lib/schema";
 import PageHeader from "@/components/layout/PageHeader";
@@ -12,17 +13,19 @@ import { getSpeakableJsonLd } from "@/lib/seo/structured-data";
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "About | Samir Shaikh",
-  description: "Learn more about Samir Shaikh — an AI-enabled full stack developer (backend-first) from Gujarat, India, building production Node.js/TypeScript applications, RAG pipelines, and LLM-powered features with an agent-assisted workflow. B.Tech in IT from Uka Tarsadia University.",
+  title: "About | Samir Shaikh — AI Developer (Backend-First)",
+  description: "Learn more about Samir Shaikh — an AI developer (backend-first) from Gujarat, India. Specializing in AI agents, RAG knowledge bases, and production Node.js/TypeScript backend systems. Available for freelance projects, contract sprints, and remote roles.",
   keywords: [
     "About Samir Shaikh",
     "Samir Shaikh biography",
-    "AI-Enabled Full Stack Developer",
-    "Full Stack Developer India",
+    "freelance AI developer",
+    "AI developer backend-first",
     "Node.js Backend Developer",
     "RAG pipeline developer",
+    "AI agent engineer",
     "LLM integration engineer",
     "microservices developer",
+    "Full Stack Developer India",
     "event-driven systems",
     "B.Tech Information Technology",
     "Uka Tarsadia University",
@@ -33,15 +36,15 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/about`,
   },
   openGraph: {
-    title: "About | Samir Shaikh",
-    description: "Learn more about Samir Shaikh — an AI-enabled full stack developer (backend-first) from Gujarat, India, building production Node.js/TypeScript apps, RAG pipelines, and LLM-powered features with an agent-assisted workflow.",
+    title: "About | Samir Shaikh — AI Developer (Backend-First)",
+    description: "Learn more about Samir Shaikh — an AI developer (backend-first) from Gujarat, India. Specializing in AI agents, RAG knowledge bases, and production Node.js/TypeScript backend systems. Available for freelance projects and contract sprints.",
     url: `${APP_URL}/about`,
     type: "profile",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About | Samir Shaikh",
-    description: "AI-enabled full stack developer (backend-first) from Gujarat, India. Experienced in Node.js, TypeScript, PostgreSQL, RAG pipelines, LLM integration, and microservices.",
+    title: "About | Samir Shaikh — AI Developer (Backend-First)",
+    description: "AI developer (backend-first) from Gujarat, India. Experienced in AI agents, RAG pipelines, Node.js, TypeScript, PostgreSQL, and scalable microservices. Available for freelance projects.",
   },
 };
 
@@ -149,7 +152,7 @@ export default async function AboutPage() {
           ]}
         />
       </div>
-      <PageHeader title="About" subtitle="AI-Enabled Full Stack Developer from Gujarat, India — backend-first, shipping with AI." />
+      <PageHeader title="About" subtitle="AI Developer (Backend-First) from Gujarat, India — available for freelance projects & contracts." />
       <div className="max-w-3xl mx-auto w-full">
         {hasAnySection ? (
           <>
@@ -160,7 +163,7 @@ export default async function AboutPage() {
 
             {/* Voice-search optimized intro (hidden but crawlable for AEO) */}
             <p className="sr-only">
-              Samir Shaikh is an AI-enabled full stack developer (backend-first) from Gujarat, India. He builds production Node.js/TypeScript applications, RAG pipelines, and LLM-powered features using an agent-assisted workflow with Cursor, GitHub Copilot, and Claude Code — owning critical logic, security, and testing by hand. Available for remote full-stack backend and AI engineering roles.
+              Samir Shaikh is an AI developer (backend-first) based in Gujarat, India. He builds production Node.js/TypeScript applications, RAG pipelines, and LLM-powered features using an agent-assisted workflow with Cursor, GitHub Copilot, and Claude Code — owning critical logic, security, and testing by hand. Available for freelance projects, contract sprints, and remote engineering roles.
             </p>
 
             {/* Git-log timeline */}
@@ -209,6 +212,23 @@ export default async function AboutPage() {
         )}
 
         <ExperienceTimeline />
+
+        {/* Verified Credentials Callout */}
+        <div className="mt-14 p-6 rounded-2xl border border-border-primary bg-background flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h3 className="text-base font-semibold text-foreground">Verified Certificates & Credentials</h3>
+            <p className="text-sm text-text-muted mt-1">
+              Accreditations in backend engineering, cloud platforms, and distributed systems.
+            </p>
+          </div>
+          <Link
+            href="/certificates"
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-border-primary px-4 py-2 text-sm font-medium text-foreground hover:bg-hover-bg transition-colors whitespace-nowrap self-start sm:self-auto"
+          >
+            View Certificates →
+          </Link>
+        </div>
+
         <FAQ />
 
         <script
