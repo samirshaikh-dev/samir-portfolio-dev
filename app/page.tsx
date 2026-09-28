@@ -1,6 +1,7 @@
 import Hero from "@/components/home/Hero";
 import HowIWork from "@/components/HowIWork";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import CallToAction from "@/components/home/CallToAction";
 import { getSpeakableJsonLd } from "@/lib/seo/structured-data";
 import { db } from "@/lib/db";
 import { projects as projectsSchema, blogs as blogsSchema } from "@/lib/schema";
@@ -41,15 +42,20 @@ async function getLatestProjects(): Promise<Project[]> {
 
 async function getLatestBlogs() {
   try {
-    const result = await db.select({
-      id: blogsSchema.id,
-      title: blogsSchema.title,
-      slug: blogsSchema.slug,
-      excerpt: blogsSchema.excerpt,
-      cover_image_url: blogsSchema.coverImageUrl,
-      published_at: blogsSchema.publishedAt,
-      stars: blogsSchema.stars,
-    }).from(blogsSchema).where(eq(blogsSchema.isPublished, true)).orderBy(desc(blogsSchema.publishedAt)).limit(3);
+    const result = await db
+      .select({
+        id: blogsSchema.id,
+        title: blogsSchema.title,
+        slug: blogsSchema.slug,
+        excerpt: blogsSchema.excerpt,
+        cover_image_url: blogsSchema.coverImageUrl,
+        published_at: blogsSchema.publishedAt,
+        stars: blogsSchema.stars,
+      })
+      .from(blogsSchema)
+      .where(eq(blogsSchema.isPublished, true))
+      .orderBy(desc(blogsSchema.publishedAt))
+      .limit(3);
     return result.map((b) => ({
       ...b,
       published_at: b.published_at ? b.published_at.toISOString() : "",
@@ -63,67 +69,88 @@ async function getLatestBlogs() {
 export default async function Home() {
   const [projects, blogs] = await Promise.all([
     getLatestProjects(),
-    getLatestBlogs()
+    getLatestBlogs(),
   ]);
 
   return (
     <main className="flex flex-col flex-1">
+      {/* 1. Hero & Verified Velocity Bento Telemetry */}
       <Hero />
 
+      {/* 2. Flagship Systems & Case Studies */}
+      {projects.length > 0 && (
+        <section
+          id="case-studies"
+          className="px-5 sm:px-8 md:px-10 py-16 md:py-24 border-t border-border-primary/80"
+          aria-label="Selected work and case studies"
+        >
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 pb-4 border-b border-border-primary/80 gap-4">
+              <div>
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3 shadow-2xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+                  FLAGSHIP SYSTEMS
+                </div>
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground">
+                  Selected Work &amp; Case Studies
+                </h2>
+                <p className="text-text-muted text-sm sm:text-base max-w-xl mt-2 leading-relaxed">
+                  Production-grade AI systems, high-throughput backends, and full-stack applications.
+                </p>
+              </div>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-text-secondary transition-colors group flex-shrink-0"
+              >
+                View all work
+                <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+
+            <ProjectList initialProjects={projects} hideSearch />
+
+            <div className="mt-8 flex justify-center sm:hidden">
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-2 text-sm font-bold text-foreground px-5 py-2.5 border border-border-primary rounded-full bg-background shadow-xs hover:bg-hover-bg transition-colors"
+              >
+                View all work &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 3. Engineering Workflow (Process) */}
       <HowIWork variant="compact" />
 
+      {/* 4. Client & Peer Endorsements (Social Proof) */}
       <TestimonialsSection variant="homepage" />
 
-      {/* Selected Work & Case Studies Preview */}
-      {/* <section className="px-6 md:px-10 py-16">
+      {/* 5. Recent Writings (Thought Leadership) */}
+      <section
+        className="px-5 sm:px-8 md:px-10 py-16 md:py-24 border-t border-border-primary/80"
+        aria-label="Recent engineering writings"
+      >
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-end mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 pb-4 border-b border-border-primary/80 gap-4">
             <div>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Selected Work & Case Studies</h2>
-              <p className="text-text-muted">Production-grade AI systems, high-throughput backends, and full-stack applications.</p>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+                TECHNICAL WRITINGS
+              </div>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground">
+                Recent Writings
+              </h2>
+              <p className="text-text-muted text-sm sm:text-base max-w-xl mt-2 leading-relaxed">
+                Thoughts on engineering, AI, and software development.
+              </p>
             </div>
-            <Link 
-              href="/projects" 
-              className="hidden md:flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground transition-colors group"
-            >
-              View all work
-              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-          
-          {projects.length > 0 ? (
-            <ProjectList initialProjects={projects} hideSearch />
-          ) : (
-            <p className="text-text-muted">No projects to show.</p>
-          )}
-          
-          <div className="mt-8 flex justify-center md:hidden">
-            <Link 
-              href="/projects" 
-              className="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground transition-colors px-5 py-2.5 border border-border-primary rounded-full bg-background shadow-sm"
-            >
-              View all work
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section> */}
-
-      {/* Recent Writings */}
-      <section className="px-6 md:px-10 py-16 border-t border-border-primary">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex justify-between items-end mb-10">
-            <div>
-              <h2 className="text-3xl font-bold tracking-tight text-foreground mb-2">Recent Writings</h2>
-              <p className="text-text-muted">Thoughts on engineering, AI, and software development.</p>
-            </div>
-            <Link 
-              href="/blogs" 
-              className="hidden md:flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground transition-colors group"
+            <Link
+              href="/blogs"
+              className="inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-text-secondary transition-colors group flex-shrink-0"
             >
               View all posts
               <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -131,26 +158,26 @@ export default async function Home() {
               </svg>
             </Link>
           </div>
-          
+
           {blogs.length > 0 ? (
             <BlogList initialBlogs={blogs} hideSearch />
           ) : (
             <p className="text-text-muted">No posts to show.</p>
           )}
-          
-          <div className="mt-8 flex justify-center md:hidden">
-            <Link 
-              href="/blogs" 
-              className="inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground transition-colors px-4 py-2 border border-border-primary rounded-full bg-background shadow-sm"
+
+          <div className="mt-8 flex justify-center sm:hidden">
+            <Link
+              href="/blogs"
+              className="inline-flex items-center gap-2 text-sm font-bold text-foreground px-5 py-2.5 border border-border-primary rounded-full bg-background shadow-xs hover:bg-hover-bg transition-colors"
             >
-              View all posts
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              View all posts &rarr;
             </Link>
           </div>
         </div>
       </section>
+
+      {/* 6. High-Impact Closing CTA Banner */}
+      <CallToAction />
 
       <script
         type="application/ld+json"

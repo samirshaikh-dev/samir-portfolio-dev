@@ -16,8 +16,7 @@ Personal portfolio, technical blog, commercial services showcase, and interactiv
 - **PWA & Notifications:** Serwist (`@serwist/next`, service worker `app/sw.ts`), Web Push (`web-push`)
 - **Email:** Nodemailer (SMTP transport with modular branded HTML & plain-text templates for contact form confirmations, admin alerts, and threaded admin replies via `lib/email/`)
 - **Analytics & Security:** Google Analytics (`@/components/analytics/GoogleAnalytics`), FingerprintJS (`@fingerprintjs/fingerprintjs`) for rate limiting visitor identification, IPinfo for VPN/proxy privacy checks
-- **CI/CD:** GitHub Actions (`.github/workflows/auto-blog.yml` — cron `0 9 */3 * *` plus manual `workflow_dispatch`; installs pipeline deps ad hoc with `npm install --no-save` and runs `node scripts/blog/generate-blog.mjs`)
-- **Package Manager:** pnpm (v10) — note: `pnpm run dev` is **not** `next dev`; it runs `next build --webpack && next start` (production build + serve)
+- **Package Manager:** pnpm (v10) — `pnpm run dev` runs `next dev --webpack` (development server with Fast Refresh / HMR); use `pnpm run dev:prod` to test local production build + serve.
 
 ## Project Structure
 ```
@@ -367,7 +366,7 @@ Schema is defined in `lib/schema.ts`; four generated migrations are applied (`dr
 12. **Rich text HTML format** — blog and project contents are stored as sanitized HTML, rendered on the client via `HtmlParser.tsx` or `ContentWithToc.tsx`.
 13. **Non-fatal email dispatch** — contact submissions and inquiries are always committed to PostgreSQL first. If Nodemailer transport fails or SMTP is unconfigured, the user flow still succeeds gracefully.
 14. **Dual-tier LLM discovery and AI crawler access** — `llms.txt` and `llms-full.txt` serve as structured knowledge roots for AI bots and answer engines. Robots.txt explicitly permits all major AI crawlers access to public routes and LLM files while securing admin and API endpoints.
-15. **`pnpm run dev` is not a dev server** — the script is `next build --webpack && next start`. Run `pnpm dlx next dev` (or `next dev` directly) when you need HMR; expect a full production build whenever you use `pnpm run dev`.
+15. **Development vs Production Server** — `pnpm run dev` runs `next dev --webpack` with Hot Module Replacement (Fast Refresh). If you need to test the production bundle locally with SSR/ISR caching, use `pnpm run dev:prod` or `pnpm build && pnpm start`.
 16. **Chat output is Markdown, not HTML** — `components/Chatbot.tsx` renders LLM text through `react-markdown`; passing raw HTML would bypass sanitization rules and is forbidden.
 17. **Image allowlist is wide open** — `next.config.ts` allows `hostname: "**"` alongside `res.cloudinary.com`. Tighten it deliberately if you introduce user-supplied remote images; do not assume `next/image` is a trust boundary.
 18. **`.kilo/worktrees/puzzle-piranha/` is a stale duplicate** of an older snapshot committed into the tree. It is not part of the app; never edit or trust it as source of truth.

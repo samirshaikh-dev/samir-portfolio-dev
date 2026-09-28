@@ -61,7 +61,7 @@ export default function BlogList({ initialBlogs, hideSearch = false }: BlogListP
 
       {filteredBlogs.length === 0 ? (
         <div className="text-center py-12 bg-footer-bg rounded-2xl border border-border-primary">
-          <p className="text-text-muted text-lg">No posts found matching "{searchQuery}"</p>
+          <p className="text-text-muted text-lg">No posts found matching &ldquo;{searchQuery}&rdquo;</p>
           <button 
             onClick={() => setSearchQuery("")}
             className="mt-4 text-sm text-foreground underline hover:text-text-secondary"
@@ -74,9 +74,9 @@ export default function BlogList({ initialBlogs, hideSearch = false }: BlogListP
           {filteredBlogs.map((blog, index) => (
             <div
               key={blog.id}
-              className="group flex flex-col bg-background border border-border-primary rounded-2xl overflow-hidden hover:border-text-muted transition-colors"
+              className="group flex flex-col bg-background dark:bg-card-bg border border-border-primary rounded-2xl overflow-hidden hover:border-foreground/30 hover:shadow-md transition-all"
             >
-              <Link href={`/blogs/${blog.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden">
+              <Link href={`/blogs/${blog.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary">
                 {blog.cover_image_url ? (
                   <Image
                     src={blog.cover_image_url}
@@ -95,13 +95,13 @@ export default function BlogList({ initialBlogs, hideSearch = false }: BlogListP
                 )}
               </Link>
 
-              <div className="flex flex-col flex-1 p-5">
+              <div className="flex flex-col flex-1 p-6">
                 <div className="flex flex-wrap gap-2 mb-3 min-h-[24px]">
-                  <span className="text-[10px] font-semibold tracking-wide uppercase text-text-secondary bg-hover-bg px-2 py-0.5 rounded-sm">
+                  <span className="text-[10px] font-semibold tracking-wide uppercase text-text-secondary bg-hover-bg/70 border border-border-primary/60 px-2 py-0.5 rounded-md">
                     {formatDate(blog.published_at)}
                   </span>
-                  <span className="text-[10px] font-semibold tracking-wide flex items-center gap-1 text-text-secondary bg-hover-bg px-2 py-0.5 rounded-sm">
-                    <svg className="w-3 h-3 text-yellow-500" viewBox="0 0 24 24" fill="currentColor">
+                  <span className="text-[10px] font-semibold tracking-wide flex items-center gap-1 text-text-secondary bg-hover-bg/70 border border-border-primary/60 px-2 py-0.5 rounded-md">
+                    <svg className="w-3 h-3 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                     </svg>
                     {blog.stars ?? 0}
@@ -109,13 +109,13 @@ export default function BlogList({ initialBlogs, hideSearch = false }: BlogListP
                 </div>
 
                 <Link href={`/blogs/${blog.slug}`} className="block group-hover:text-text-secondary transition-colors">
-                  <h3 className="text-xl font-semibold text-foreground mb-2 leading-tight">
+                  <h3 className="text-xl font-bold text-foreground mb-2 leading-tight">
                     {blog.title}
                   </h3>
                 </Link>
                 
                 {blog.excerpt && (
-                  <p className="text-sm text-text-muted line-clamp-2 mb-4 flex-1">
+                  <p className="text-sm text-text-muted line-clamp-2 mb-4 flex-1 leading-relaxed">
                     {blog.excerpt}
                   </p>
                 )}
@@ -123,10 +123,10 @@ export default function BlogList({ initialBlogs, hideSearch = false }: BlogListP
                 <div className="flex items-center gap-4 mt-auto pt-4 border-t border-border-primary">
                   <Link
                     href={`/blogs/${blog.slug}`}
-                    className="text-xs font-medium text-text-secondary hover:text-foreground transition-colors flex items-center gap-1.5"
+                    className="text-xs font-bold text-foreground hover:text-text-secondary transition-colors flex items-center gap-1.5 group/link"
                   >
                     Read Post
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="w-3 h-3 transition-transform group-hover/link:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>

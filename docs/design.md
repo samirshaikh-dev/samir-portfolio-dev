@@ -40,33 +40,35 @@ All colors are CSS custom properties defined in `app/globals.css` and mapped int
 ### 2.1 CSS Custom Properties
 
 ```css
-/* Light Theme (:root) */
---bg-primary:       #ffffff;          /* page background */
---text-primary:     #000000;          /* headings, strong text */
---text-secondary:   #374151;          /* gray-700 — body copy */
---text-muted:       #6b7280;          /* gray-500 — captions, labels */
---nav-bg:           rgba(255,255,255,0.8);  /* frosted glass nav */
---border-primary:   #e5e7eb;          /* gray-200 — card borders */
+/* Light Theme (:root) — Warm Off-White, Deep Black & Electric Lime */
+--bg-primary:       #F7F8F2;          /* warm off-white page background */
+--text-primary:     #0A0A0A;          /* deep black headings, strong text */
+--text-secondary:   #5F6368;          /* slate gray body copy */
+--text-muted:       #5F6368;          /* slate gray captions, labels */
+--nav-bg:           rgba(247,248,242,0.85); /* frosted glass nav */
+--border-primary:   #D9DDD2;          /* muted stone card borders */
 --nav-border:       transparent;
---footer-bg:        #f9fafb;          /* gray-50 */
---hover-bg:         #f3f4f6;          /* gray-100 — interactive hover bg */
---primary:          #000000;
---primary-foreground: #ffffff;
+--footer-bg:        #EFF1E8;          /* soft warm gray */
+--hover-bg:         #EAECE2;          /* interactive hover bg */
+--accent-lime:      #B8FF00;          /* electric lime accent */
+--primary:          #0A0A0A;
+--primary-foreground: #F7F8F2;
 
-/* Dark Theme (.dark) */
---bg-primary:       #000000;
---text-primary:     #ffffff;
---text-secondary:   #d1d5db;          /* gray-300 */
---text-muted:       #9ca3af;          /* gray-400 */
---nav-bg:           rgba(0,0,0,0.8);
---border-primary:   rgba(74,222,128,0.25);  /* green-400/25 — accent border */
---nav-border:       rgba(74,222,128,0.15);
---footer-bg:        #0a0a0a;
---hover-bg:         rgba(74,222,128,0.08);  /* green-400/8 — hover tint */
---accent-green:     #4ade80;          /* green-400 */
+/* Dark Theme (.dark) — Deep Black & Electric Lime */
+--bg-primary:       #0A0A0A;
+--text-primary:     #F7F8F2;
+--text-secondary:   #A8ADA0;          /* warm gray */
+--text-muted:       #75797E;          /* muted slate */
+--nav-bg:           rgba(10,10,10,0.85);
+--border-primary:   rgba(184,255,0,0.25);  /* electric lime hairline border */
+--nav-border:       rgba(184,255,0,0.15);
+--footer-bg:        #050505;
+--hover-bg:         rgba(184,255,0,0.08);  /* electric lime hover tint */
+--accent-lime:      #B8FF00;
+--accent-green:     #B8FF00;          /* electric lime */
 --accent-red:       #f87171;          /* red-400 */
---primary:          #ffffff;
---primary-foreground: #000000;
+--primary:          #B8FF00;
+--primary-foreground: #0A0A0A;
 ```
 
 ### 2.2 Tailwind Color Tokens
