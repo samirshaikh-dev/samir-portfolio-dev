@@ -21,8 +21,8 @@
 }
 
 :root {
-  --navbar-h: 96px;
-  /* mobile: h-24 */
+  --navbar-h: 76px;
+  /* mobile: h-[76px] */
 
   /* Light Theme Colors (Warm Off-White & Deep Black) */
   --bg-primary: #F7F8F2;
@@ -72,8 +72,8 @@
 
 @media (min-width: 768px) {
   :root {
-    --navbar-h: 132px;
-    /* md+: h-[132px] */
+    --navbar-h: 84px;
+    /* md+: h-[84px] */
   }
 }
 
