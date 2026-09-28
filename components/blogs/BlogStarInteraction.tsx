@@ -18,7 +18,6 @@ export default function BlogStarInteraction({ slug, initialStars }: BlogStarInte
       if (starred) {
         setHasStarred(true);
       } else {
-        // Show tooltip if not starred
         const showTimer = setTimeout(() => setShowTooltip(true), 2000);
         const hideTimer = setTimeout(() => setShowTooltip(false), 8000);
         return () => {
@@ -31,19 +30,19 @@ export default function BlogStarInteraction({ slug, initialStars }: BlogStarInte
 
   const handleStar = async () => {
     if (hasStarred) return;
-    
+
     // Optimistic UI update
-    setStars(prev => prev + 1);
+    setStars((prev) => prev + 1);
     setHasStarred(true);
     setShowTooltip(false);
     localStorage.setItem(`starred_${slug}`, 'true');
-    
+
     try {
       const res = await fetch(`/api/blogs/${slug}/star`, { method: 'POST' });
       if (!res.ok) throw new Error('Failed to star');
-    } catch (err) {
+    } catch {
       // Revert if failed
-      setStars(prev => prev - 1);
+      setStars((prev) => prev - 1);
       setHasStarred(false);
       localStorage.removeItem(`starred_${slug}`);
     }
@@ -52,29 +51,38 @@ export default function BlogStarInteraction({ slug, initialStars }: BlogStarInte
   return (
     <div className="relative flex items-center">
       {/* Tooltip */}
-      <div 
-        className={`absolute right-0 top-full mt-2 w-max bg-foreground text-background text-[10px] font-medium px-2.5 py-1.5 rounded shadow-lg transition-all duration-500 z-10 ${
-          showTooltip && !hasStarred ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1 pointer-events-none'
+      <div
+        role="status"
+        aria-live="polite"
+        className={`absolute right-0 top-full mt-2 w-max bg-foreground text-background text-[11px] font-semibold px-3 py-1.5 rounded-xl shadow-xl transition-all duration-300 z-20 ${
+          showTooltip && !hasStarred
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 -translate-y-1 pointer-events-none'
         }`}
       >
-        If you like this blog, do leave a star
-        <div className="absolute bottom-full right-3 border-[4px] border-transparent border-b-foreground"></div>
+        Leave a star if this was helpful
+        <div className="absolute bottom-full right-3 border-[4px] border-transparent border-b-foreground" />
       </div>
-      
-      <button 
+
+      <button
         onClick={handleStar}
         disabled={hasStarred}
-        className={`flex items-center gap-1.5 px-2 py-0.5 rounded-full transition-all duration-300 ${
-          hasStarred 
-            ? 'bg-yellow-50 dark:bg-yellow-900/20 text-yellow-600 dark:text-yellow-400 cursor-default' 
-            : 'bg-footer-bg text-text-muted hover:bg-yellow-50 dark:hover:bg-yellow-900/20 hover:text-yellow-500 dark:hover:text-yellow-400 cursor-pointer shadow-sm border border-border-primary hover:border-yellow-200 dark:hover:border-yellow-800'
+        className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border shadow-2xs transition-all text-xs font-semibold focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none ${
+          hasStarred
+            ? 'border-amber-400/40 bg-amber-400/10 text-amber-500 dark:text-amber-400 shadow-[0_0_12px_rgba(251,191,36,0.25)] cursor-default'
+            : 'border-border-primary bg-background dark:bg-card-bg text-text-secondary hover:text-amber-400 hover:border-amber-400/40 hover:bg-hover-bg cursor-pointer'
         }`}
-        title={hasStarred ? "You starred this post" : "Star this post"}
+        title={hasStarred ? 'You starred this article' : 'Star this article'}
+        aria-label={hasStarred ? `Starred! Total stars: ${stars}` : `Star this article, currently ${stars} stars`}
       >
-        <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+        <svg
+          className={`w-3.5 h-3.5 transition-transform ${hasStarred ? 'scale-110 text-amber-400 fill-current' : 'fill-current group-hover:scale-110'}`}
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
           <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
         </svg>
-        <span className="font-medium">{stars}</span>
+        <span className="font-mono font-medium">{stars}</span>
       </button>
     </div>
   );

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import HowIWork from "@/components/HowIWork";
 import TestimonialsSection from "@/components/TestimonialsSection";
@@ -10,6 +9,12 @@ import {
   getSpeakableJsonLd,
   LONGTAIL_KEYWORDS,
 } from "@/lib/seo/structured-data";
+import {
+  SERVICE_CATEGORIES,
+  PROCESS_STEPS,
+  ENGAGEMENT_MODELS,
+  SERVICES_FAQS,
+} from "@/lib/data/services";
 
 export const revalidate = 3600;
 
@@ -61,14 +66,6 @@ export const metadata: Metadata = {
   },
 };
 
-import {
-  SERVICE_CATEGORIES,
-  PROCESS_STEPS,
-  ENGAGEMENT_MODELS,
-  SERVICES_FAQS,
-} from "@/lib/data/services";
-
-
 export default function ServicesPage() {
   const serviceJsonLd = getServiceJsonLd();
 
@@ -86,7 +83,19 @@ export default function ServicesPage() {
   };
 
   return (
-    <main className="flex flex-col flex-1 px-6 pb-24 md:px-10">
+    <main className="relative flex flex-col flex-1 px-5 sm:px-8 md:px-10 pb-24 overflow-hidden">
+      {/* 5.1 Ambient Radiant Glow (Top-Right) */}
+      <div
+        aria-hidden="true"
+        className="absolute -top-32 right-0 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(184,255,0,0.18)_0%,transparent_65%)] dark:bg-[radial-gradient(circle,rgba(184,255,0,0.08)_0%,transparent_65%)] blur-3xl pointer-events-none -z-10"
+      />
+
+      {/* 5.2 Geometric Dot Matrix Texture (Canvas Overlay) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(#0A0A0A_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.035] dark:opacity-[0.07] pointer-events-none -z-10"
+      />
+
       {/* Schema.org JSON-LD */}
       <script
         type="application/ld+json"
@@ -103,47 +112,75 @@ export default function ServicesPage() {
         }}
       />
 
-      {/* Breadcrumbs */}
-      <div className="max-w-6xl mx-auto w-full pt-6 md:pt-10">
-        <Breadcrumbs
-          items={[
-            { name: "Home", href: "/" },
-            { name: "Services", href: "/services" },
-          ]}
-        />
-      </div>
-
-      {/* Header */}
       <div className="max-w-6xl mx-auto w-full">
-        <PageHeader
-          title="Freelance AI & Engineering Services"
-          subtitle="Production-grade AI chatbots, custom knowledge bases, backend architectures, and modern web apps — built for startups, founders, and product teams ready to ship."
-        />
+        {/* Breadcrumbs */}
+        <div className="pt-6 md:pt-10 mb-6">
+          <Breadcrumbs
+            items={[
+              { name: "Home", href: "/" },
+              { name: "Services", href: "/services" },
+            ]}
+          />
+        </div>
+
+        {/* Editorial Section Hero Header */}
+        <header className="mb-10 sm:mb-12 pb-8 border-b border-border-primary/80">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-4 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+            ENGINEERING SERVICES &amp; CONSULTING
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.12] text-foreground">
+            Freelance AI &amp; Engineering
+            <span
+              className="block sm:inline font-normal italic text-text-secondary sm:ml-3"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              — Services
+            </span>
+          </h1>
+
+          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-text-secondary max-w-2xl leading-relaxed">
+            Production-grade AI chatbots, custom knowledge bases, backend architectures, and modern web apps — built for startups, founders, and product teams ready to ship.
+          </p>
+        </header>
 
         {/* Hero Value Banner */}
-        <div className="relative overflow-hidden rounded-2xl border border-border-primary bg-card-bg p-6 md:p-10 mb-16 shadow-sm">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="relative overflow-hidden rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-10 mb-12 shadow-2xs hover:border-foreground/30 hover:shadow-md transition-all duration-300 group">
+          <span
+            aria-hidden="true"
+            className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-lime border border-foreground/30 shadow-[0_0_6px_rgba(184,255,0,0.7)]"
+          />
+
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="max-w-2xl">
-              <span className="font-mono text-xs uppercase tracking-wider text-green-600 dark:text-green-400 font-semibold bg-green-500/10 border border-green-500/30 px-2.5 py-1 rounded-full inline-block mb-3">
-                ● Available for Freelance Projects, Contracts & Sprints
+              <span className="inline-flex items-center gap-2 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-border-primary bg-hover-bg text-text-secondary mb-4 shadow-2xs">
+                <span className="w-2 h-2 rounded-full animate-pulse bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]" />
+                Available for Freelance Projects, Contracts &amp; Sprints
               </span>
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-3">
-                Ship reliable AI agents, custom RAG systems, and robust backend software.
+
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground mb-4 leading-tight">
+                Ship reliable AI agents, custom RAG systems, and robust software that{" "}
+                <span className="relative inline-block px-3 py-0.5 rounded-xl bg-accent-lime text-[#0A0A0A] font-black -rotate-1 shadow-xs border border-black/10">
+                  scales reliably
+                </span>
               </h2>
-              <p className="service-desc text-text-muted text-base leading-relaxed">
+
+              <p className="service-desc text-text-secondary text-sm sm:text-base leading-relaxed">
                 I help startups, founders, and engineering teams build and ship production-grade AI solutions — custom knowledge bases, autonomous agents, and RAG pipelines — powered by scalable Node.js/TypeScript backend architectures. Also available for full-stack web delivery, contract sprints, and forward-deployed engineering engagements.
               </p>
             </div>
-            <div className="flex-shrink-0 flex flex-col sm:flex-row gap-3">
+
+            <div className="flex-shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3.5">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-lime text-[#0A0A0A] text-sm font-extrabold px-7 py-3.5 shadow-xs hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all text-center"
               >
-                Discuss a Project
+                Discuss a Project →
               </Link>
               <a
                 href={`mailto:${AUTHOR_EMAIL}`}
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border-primary bg-background text-foreground font-medium text-sm hover:bg-hover-bg transition-colors"
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground text-sm font-bold px-7 py-3.5 hover:bg-hover-bg hover:border-foreground/30 shadow-2xs transition-all text-center"
               >
                 Email Directly
               </a>
@@ -152,43 +189,55 @@ export default function ServicesPage() {
         </div>
 
         {/* Pricing & Delivery Guarantee Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-16 p-4 rounded-xl border border-border-primary bg-card-bg/60 text-left">
-          <div className="flex items-center gap-3 px-3">
-            <span className="text-emerald-500 font-bold text-base">✓</span>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-20">
+          <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-border-primary bg-background dark:bg-card-bg shadow-2xs">
+            <span className="w-8 h-8 rounded-full bg-accent-lime/20 dark:bg-accent-lime/20 text-foreground dark:text-accent-lime flex items-center justify-center font-bold text-xs flex-shrink-0">
+              ✓
+            </span>
             <div>
-              <p className="text-xs font-semibold text-foreground">Transparent Starting Rates</p>
-              <p className="text-[11px] text-text-muted">Clear budget guidance with zero surprise scope bloat</p>
+              <p className="text-xs font-bold text-foreground">Transparent Starting Rates</p>
+              <p className="text-[11px] text-text-muted mt-0.5">Clear budget guidance with zero surprise scope bloat</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 px-3 border-t sm:border-t-0 sm:border-l border-border-primary/60 pt-3 sm:pt-0">
-            <span className="text-emerald-500 font-bold text-base">✓</span>
+
+          <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-border-primary bg-background dark:bg-card-bg shadow-2xs">
+            <span className="w-8 h-8 rounded-full bg-accent-lime/20 dark:bg-accent-lime/20 text-foreground dark:text-accent-lime flex items-center justify-center font-bold text-xs flex-shrink-0">
+              ✓
+            </span>
             <div>
-              <p className="text-xs font-semibold text-foreground">Fixed-Price Quotes in 48h</p>
-              <p className="text-[11px] text-text-muted">Detailed milestone scope after a free discovery call</p>
+              <p className="text-xs font-bold text-foreground">Fixed-Price Quotes in 48h</p>
+              <p className="text-[11px] text-text-muted mt-0.5">Detailed milestone scope after a free discovery call</p>
             </div>
           </div>
-          <div className="flex items-center gap-3 px-3 border-t sm:border-t-0 sm:border-l border-border-primary/60 pt-3 sm:pt-0">
-            <span className="text-emerald-500 font-bold text-base">✓</span>
+
+          <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-border-primary bg-background dark:bg-card-bg shadow-2xs">
+            <span className="w-8 h-8 rounded-full bg-accent-lime/20 dark:bg-accent-lime/20 text-foreground dark:text-accent-lime flex items-center justify-center font-bold text-xs flex-shrink-0">
+              ✓
+            </span>
             <div>
-              <p className="text-xs font-semibold text-foreground">100% Code & IP Ownership</p>
-              <p className="text-[11px] text-text-muted">Committed directly to your private repositories</p>
+              <p className="text-xs font-bold text-foreground">100% Code &amp; IP Ownership</p>
+              <p className="text-[11px] text-text-muted mt-0.5">Committed directly to your private repositories</p>
             </div>
           </div>
         </div>
 
-        {/* Categories Section */}
+        {/* Service Categories Section */}
         <div className="mb-20 space-y-20">
           {SERVICE_CATEGORIES.map((category, catIdx) => (
-            <div key={category.id} id={category.id}>
+            <section key={category.id} id={category.id} aria-labelledby={`category-heading-${category.id}`}>
               {/* Category Header */}
-              <div className="mb-8 pb-4 border-b border-border-primary">
-                <span className="font-mono text-xs text-text-muted uppercase tracking-wider">
+              <div className="mb-8 pb-4 border-b border-border-primary/80">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
                   CATEGORY {String(catIdx + 1).padStart(2, "0")}
-                </span>
-                <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1">
+                </div>
+                <h2
+                  id={`category-heading-${category.id}`}
+                  className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1"
+                >
                   {category.title}
                 </h2>
-                <p className="text-sm text-text-muted mt-1.5 max-w-2xl">
+                <p className="text-sm text-text-secondary mt-1.5 max-w-2xl leading-relaxed">
                   {category.subtitle}
                 </p>
               </div>
@@ -196,42 +245,48 @@ export default function ServicesPage() {
               {/* Service Cards Grid */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {category.services.map((service) => (
-                  <div
+                  <article
                     key={service.id}
                     id={service.id}
-                    className="group flex flex-col justify-between rounded-xl border border-border-primary bg-card-bg p-6 md:p-8 hover:border-border-secondary transition-all duration-200"
+                    className="group relative flex flex-col justify-between rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-8 hover:border-foreground/30 hover:shadow-md transition-all duration-300 shadow-2xs overflow-hidden"
                   >
+                    <span
+                      aria-hidden="true"
+                      className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-lime border border-foreground/30 shadow-[0_0_6px_rgba(184,255,0,0.7)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="font-mono text-[11px] font-semibold text-text-muted tracking-wider">
+                        <span className="font-mono text-[10px] sm:text-[11px] font-semibold text-text-muted tracking-wider uppercase">
                           {service.badge}
                         </span>
                         {service.startingPrice && (
-                          <span className="font-mono text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                          <span className="font-mono text-xs font-bold px-3 py-0.5 rounded-full bg-hover-bg text-foreground border border-border-primary dark:border-accent-lime/30 dark:text-accent-lime shadow-2xs">
                             {service.startingPrice}
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                      <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2 group-hover:text-text-secondary transition-colors">
                         {service.title}
                       </h3>
-                      <p className="text-xs font-mono text-text-secondary mb-4 italic">
+                      <p className="text-xs font-mono text-text-muted mb-4 italic">
                         {service.tagline}
                       </p>
-                      <p className="text-sm text-text-muted leading-relaxed mb-6">
+                      <p className="text-sm text-text-secondary leading-relaxed mb-6">
                         {service.description}
                       </p>
 
                       <div className="mb-6">
-                        <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground mb-2.5">
+                        <h4 className="text-xs font-mono uppercase tracking-wider font-semibold text-foreground mb-3 flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
                           Key Deliverables
                         </h4>
                         <ul className="space-y-2">
                           {service.deliverables.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2 text-xs text-text-muted">
-                              <span className="text-green-500 font-bold mt-0.5">✓</span>
-                              <span>{item}</span>
+                            <li key={idx} className="flex items-start gap-2.5 text-xs text-text-muted">
+                              <span className="text-foreground dark:text-accent-lime font-bold mt-0.5">✓</span>
+                              <span className="leading-relaxed">{item}</span>
                             </li>
                           ))}
                         </ul>
@@ -240,51 +295,52 @@ export default function ServicesPage() {
 
                     <div>
                       {/* Tech stack badges */}
-                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border-primary/60 mb-4">
+                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border-primary mb-5">
                         {service.techStack.map((tech) => (
                           <span
                             key={tech}
-                            className="font-mono text-[11px] px-2 py-0.5 rounded bg-background border border-border-primary text-text-muted"
+                            className="font-mono text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-md bg-hover-bg border border-border-primary/80 text-text-muted font-medium"
                           >
                             {tech}
                           </span>
                         ))}
                       </div>
 
-                      <div className="flex items-center justify-between gap-2 pt-1">
+                      <div className="flex items-center justify-between gap-3 pt-1">
                         {service.relatedLink && (
                           <Link
                             href={service.relatedLink.href}
-                            className="text-xs font-mono font-medium text-foreground hover:underline inline-flex items-center gap-1"
+                            className="text-xs font-mono font-bold text-foreground hover:text-text-secondary underline underline-offset-4 decoration-border-primary inline-flex items-center gap-1 transition-colors"
                           >
                             {service.relatedLink.label}
                           </Link>
                         )}
                         <Link
                           href={`/contact?service=${encodeURIComponent(service.id)}`}
-                          className="text-xs font-medium text-primary hover:underline inline-flex items-center gap-1 ml-auto"
+                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] text-xs font-extrabold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-2xs dark:shadow-[0_0_12px_rgba(184,255,0,0.35)] ml-auto"
                         >
-                          Request quote &rarr;
+                          Request quote →
                         </Link>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 ))}
               </div>
-            </div>
+            </section>
           ))}
         </div>
 
         {/* 4-Stage Delivery Process */}
-        <div className="mb-20">
+        <section aria-labelledby="process-heading" className="mb-20">
           <div className="mb-8">
-            <span className="font-mono text-xs text-text-muted uppercase tracking-wider">
-              HOW WE WORK TOGETHER
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+              STRUCTURED ENGAGEMENT
+            </div>
+            <h2 id="process-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1">
               Engineering Delivery Process
             </h2>
-            <p className="text-sm text-text-muted mt-2 max-w-2xl">
+            <p className="text-sm text-text-secondary mt-1.5 max-w-2xl leading-relaxed">
               A structured, low-friction engineering process designed to eliminate ambiguity and deliver dependable software.
             </p>
           </div>
@@ -293,10 +349,10 @@ export default function ServicesPage() {
             {PROCESS_STEPS.map((step) => (
               <div
                 key={step.step}
-                className="rounded-xl border border-border-primary bg-card-bg p-6 flex flex-col justify-between"
+                className="group relative rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 flex flex-col justify-between hover:border-foreground/30 hover:shadow-md transition-all duration-300 shadow-2xs"
               >
                 <div>
-                  <span className="font-mono text-2xl font-bold text-text-secondary/40 block mb-3">
+                  <span className="font-mono text-3xl font-black text-text-secondary/30 block mb-3 group-hover:text-foreground/40 transition-colors">
                     {step.step}
                   </span>
                   <h3 className="text-base font-bold text-foreground mb-2">
@@ -309,15 +365,16 @@ export default function ServicesPage() {
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Engagement Models */}
-        <div className="mb-20">
+        <section aria-labelledby="engagement-models-heading" className="mb-20">
           <div className="mb-8">
-            <span className="font-mono text-xs text-text-muted uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
               FLEXIBLE COLLABORATION
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1">
+            </div>
+            <h2 id="engagement-models-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1">
               Engagement Models
             </h2>
           </div>
@@ -326,30 +383,30 @@ export default function ServicesPage() {
             {ENGAGEMENT_MODELS.map((model) => (
               <div
                 key={model.title}
-                className="rounded-xl border border-border-primary bg-card-bg p-6 flex flex-col justify-between"
+                className="group relative rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-8 flex flex-col justify-between hover:border-foreground/30 hover:shadow-md transition-all duration-300 shadow-2xs"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="font-mono text-[11px] px-2 py-0.5 rounded border border-border-primary text-text-muted inline-block">
+                    <span className="font-mono text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-full border border-border-primary text-text-muted font-semibold uppercase tracking-wider inline-block">
                       {model.badge}
                     </span>
                     {model.startingPrice && (
-                      <span className="font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
+                      <span className="font-mono text-xs font-bold text-foreground dark:text-accent-lime">
                         {model.startingPrice}
                       </span>
                     )}
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-1">
+                  <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1">
                     {model.title}
                   </h3>
                   <p className="text-xs text-text-muted mb-6">
                     {model.subtitle}
                   </p>
 
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-2.5 mb-8">
                     {model.highlights.map((highlight, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-text-muted">
-                        <span className="text-foreground font-bold mt-0.5">▪</span>
+                      <li key={idx} className="flex items-start gap-2.5 text-xs text-text-secondary leading-relaxed">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent-lime mt-1.5 flex-shrink-0" />
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -358,68 +415,74 @@ export default function ServicesPage() {
 
                 <Link
                   href="/contact"
-                  className="w-full text-center py-2 px-4 rounded-lg border border-border-primary bg-background hover:bg-hover-bg text-xs font-mono font-medium text-foreground transition-colors"
+                  className="w-full text-center py-2.5 px-4 rounded-full border border-border-primary bg-background dark:bg-card-bg hover:bg-hover-bg hover:border-foreground/30 text-xs font-mono font-bold text-foreground transition-all shadow-2xs"
                 >
                   Inquire Now →
                 </Link>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* How I Work */}
+        {/* How I Work Section */}
         <div className="mb-20">
           <HowIWork variant="full" />
         </div>
 
-        {/* Testimonials */}
+        {/* Testimonials Section */}
         <div className="mb-20">
           <TestimonialsSection variant="services" />
         </div>
 
         {/* Services FAQ */}
-        <div className="mb-20">
+        <section aria-labelledby="faq-heading" className="mb-20">
           <div className="mb-8">
-            <span className="font-mono text-xs text-text-muted uppercase tracking-wider">
-              QUESTIONS & ANSWERS
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+              QUESTIONS &amp; ANSWERS
+            </div>
+            <h2 id="faq-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1">
               Frequently Asked Questions
             </h2>
           </div>
 
-          <div className="divide-y divide-border-primary border-y border-border-primary">
+          <div className="rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-8 divide-y divide-border-primary shadow-2xs">
             {SERVICES_FAQS.map((faq, idx) => (
-              <div key={idx} className="py-6">
-                <h3 className="text-base font-semibold text-foreground mb-2">
+              <div key={idx} className="py-6 first:pt-0 last:pb-0">
+                <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">
                   {faq.question}
                 </h3>
-                <p className="text-sm text-text-muted leading-relaxed">
+                <p className="text-sm text-text-secondary leading-relaxed">
                   {faq.answer}
                 </p>
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
-        {/* Final CTA Banner */}
-        <div className="rounded-2xl border border-border-primary bg-card-bg p-8 md:p-12 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight mb-3">
+        {/* Final High-Impact CTA Banner */}
+        <div className="relative overflow-hidden rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-8 sm:p-12 text-center shadow-2xs">
+          <span
+            aria-hidden="true"
+            className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-lime border border-foreground/30 shadow-[0_0_6px_rgba(184,255,0,0.7)]"
+          />
+
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground tracking-tight mb-3">
             Have a project or opportunity in mind?
           </h2>
-          <p className="text-text-muted text-sm max-w-xl mx-auto mb-8 leading-relaxed">
+          <p className="text-text-secondary text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
             Whether you need a production-grade AI chatbot for your website or SaaS, a custom knowledge base, scalable backend APIs, or full-stack web engineering, let&apos;s talk through your goals.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/contact"
-              className="w-full sm:w-auto px-8 py-3 rounded-lg bg-foreground text-background font-medium text-sm hover:opacity-90 transition-opacity"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-accent-lime text-[#0A0A0A] font-extrabold text-sm shadow-xs hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all"
             >
-              Get in Touch
+              Get in Touch →
             </Link>
             <Link
               href="/resume"
-              className="w-full sm:w-auto px-8 py-3 rounded-lg border border-border-primary bg-background text-foreground font-medium text-sm hover:bg-hover-bg transition-colors"
+              className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground font-bold text-sm hover:bg-hover-bg hover:border-foreground/30 shadow-2xs transition-all"
             >
               View Full Resume
             </Link>

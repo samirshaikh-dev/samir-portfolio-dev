@@ -137,6 +137,18 @@ export default function TableOfContents({
     return () => document.removeEventListener("mousedown", handleOutside);
   }, [mobileOpen]);
 
+  // Close mobile TOC on Escape key
+  useEffect(() => {
+    if (!mobileOpen) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setMobileOpen(false);
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [mobileOpen]);
+
   if (headings.length === 0) return null;
 
   const tocLinks = (
@@ -162,7 +174,10 @@ export default function TableOfContents({
       {/* ── Desktop: sticky sidebar ── */}
       <aside className="toc-desktop" aria-label="Table of contents">
         <div className="toc-sticky">
-          <p className="toc-title">On this page</p>
+          <p className="toc-title flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-text-muted uppercase mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+            TABLE OF CONTENTS
+          </p>
           {tocLinks}
         </div>
       </aside>
@@ -171,18 +186,19 @@ export default function TableOfContents({
       <div className="toc-mobile" ref={tocRef}>
         <button
           onClick={() => setMobileOpen((v) => !v)}
-          className="p-4 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-110 active:scale-95"
+          className="p-3.5 rounded-full bg-accent-lime text-[#0A0A0A] font-extrabold shadow-[0_0_16px_rgba(184,255,0,0.45)] hover:shadow-[0_0_24px_rgba(184,255,0,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 border border-black/10 focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none"
           aria-expanded={mobileOpen}
           aria-label="Toggle table of contents"
         >
           <svg
-            className="w-6 h-6"
+            className="w-5 h-5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
+            aria-hidden="true"
           >
             <line x1="3" y1="6" x2="21" y2="6" />
             <line x1="3" y1="12" x2="15" y2="12" />
@@ -192,7 +208,10 @@ export default function TableOfContents({
 
         {mobileOpen && (
           <div className="toc-mobile-dropdown">
-            <p className="toc-title">On this page</p>
+            <p className="toc-title flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-text-muted uppercase mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+              TABLE OF CONTENTS
+            </p>
             {tocLinks}
           </div>
         )}

@@ -49,6 +49,7 @@ async function getLatestBlogs() {
         slug: blogsSchema.slug,
         excerpt: blogsSchema.excerpt,
         cover_image_url: blogsSchema.coverImageUrl,
+        tags: blogsSchema.tags,
         published_at: blogsSchema.publishedAt,
         stars: blogsSchema.stars,
       })

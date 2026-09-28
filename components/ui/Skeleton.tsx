@@ -139,21 +139,32 @@ export function ProjectDetailSkeleton() {
 
 export function AboutSkeleton() {
   return (
-    <div className="max-w-3xl mx-auto w-full space-y-8">
-      <Skeleton className="h-3 w-32" />
-      <Skeleton className="h-8 w-24" />
-      <div className="space-y-6 pl-10">
+    <div className="max-w-4xl mx-auto w-full space-y-10 pt-6">
+      <Skeleton className="h-3 w-40" />
+      <div className="flex flex-col sm:flex-row justify-between gap-4 pb-8 border-b border-border-primary/80">
+        <div className="space-y-3">
+          <Skeleton className="h-5 w-48 rounded-full" />
+          <Skeleton className="h-12 w-80" />
+          <Skeleton className="h-4 w-96 max-w-full" />
+        </div>
+        <div className="flex gap-2">
+          <Skeleton className="h-11 w-32 rounded-full" />
+          <Skeleton className="h-11 w-32 rounded-full" />
+        </div>
+      </div>
+      <div className="space-y-6 pl-8">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="space-y-3">
-            <Skeleton className="h-4 w-40" />
-            <Skeleton className="h-5 w-32" />
-            <Skeleton className="h-3 w-full" />
-            <Skeleton className="h-3 w-5/6" />
+          <div key={i} className="rounded-2xl border border-border-primary p-6 space-y-3">
+            <Skeleton className="h-4 w-32 rounded-full" />
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-4/5" />
           </div>
         ))}
       </div>
     </div>
   );
 }
+
 
 export { Skeleton };
