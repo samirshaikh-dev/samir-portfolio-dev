@@ -1,0 +1,30 @@
+/* TEAM */
+Name: Samir Shaikh
+Role: AI Backend Engineer | Agentic AI Engineer | Full Stack SDE | Forward Deployed Engineer (FDE)
+Contact: shaikh.samir.work@gmail.com
+Website: https://samir-portfolio-dev.vercel.app
+Twitter: @samirshaikh_dev
+GitHub: https://github.com/samirshaikh-dev
+LinkedIn: https://linkedin.com/in/samirshaikh-dev
+Location: Gujarat, India
+
+/* SITE & ARCHITECTURE */
+Last Update: 2026/09/29
+Standards: HTML5, CSS3, ECMAScript 2024, RFC 9116, JSON-LD Schema.org
+Framework: Next.js 16 (App Router, Server Components)
+User Interface: React 19
+Language: TypeScript 5
+Design System & Styling: Tailwind CSS v4, Geist Font Family, Playfair Display
+Database: Neon Serverless PostgreSQL with pgvector (3072-dimensional cosine similarity)
+ORM: Drizzle ORM
+AI & LLM Systems: Vercel AI SDK, Google Gemini (gemini-embedding-2), Groq (llama-3.3-70b-versatile)
+PWA & Offline: Serwist Service Worker, Web Push Notifications
+Image Optimization: Cloudinary CDN (f_auto, q_auto)
+Content Architecture: TipTap v2 Headless Editor, Markdown, RSS 2.0 Feed
+Analytics & Monitoring: Google Analytics 4, Vercel Analytics
+
+/* AI & AGENTIC ENGINEERING TOOLS */
+Development Assistants: Antigravity IDE, Claude Code, Cursor, OpenCode
+
+/* THANKS */
+To the open-source engineering community, the Next.js and Vercel team, Neon PostgreSQL team, and all security researchers practicing responsible disclosure.

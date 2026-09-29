@@ -59,6 +59,7 @@ export default function RootLayout({
           title={`${AUTHOR_NAME} — Blog`}
           href="/api/feed"
         />
+        <link rel="author" href="/humans.txt" />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {/* Skip to Content Link for WCAG Keyboard Accessibility */}
