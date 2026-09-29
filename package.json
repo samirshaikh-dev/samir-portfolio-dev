@@ -4,8 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10",
   "scripts": {
-    "dev": "next dev --webpack",
-    "dev:prod": "next build --webpack && next start",
+    "dev": "next build --webpack && next start",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint",
