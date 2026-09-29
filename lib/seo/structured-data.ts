@@ -6,12 +6,14 @@ import {
   SITE_NAME,
   LINKEDIN_URL,
   GITHUB_URL,
+  TWITTER_URL,
 } from "@/lib/site-config";
 import { SERVICE_CATEGORIES } from "@/lib/data/services";
 
 export const SAME_AS = [
   LINKEDIN_URL,
   GITHUB_URL,
+  TWITTER_URL,
 ];
 
 /**
@@ -175,7 +177,6 @@ const SERVICE_OFFERS = SERVICES.map((service) => ({
   }),
   url: `${APP_URL}/services#${service.id}`,
   availability: "https://schema.org/InStock",
-  validFrom: "2025-01-01",
   itemOffered: {
     "@type": "Service",
     name: service.name,
@@ -515,7 +516,7 @@ export function getContactPageJsonLd() {
     name: `Contact ${AUTHOR_NAME}`,
     url: `${APP_URL}/contact`,
     description:
-      "Get in touch with Samir Shaikh for AI backend engineering, RAG development, and forward deployed engineering roles.",
+      "Get in touch with Samir Shaikh for freelance AI development, custom RAG systems, production AI agents, backend architecture, and remote engineering roles.",
     mainEntity: {
       "@type": "Person",
       name: AUTHOR_NAME,

@@ -34,11 +34,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
-  const staticRoutes = ['', '/about', '/projects', '/blogs', '/services', '/contact', '/resume', '/certificates', '/sitemap', '/faq', '/technical-skills'].map((route) => ({
+  const ROUTE_PRIORITIES: Record<string, number> = {
+    '': 1.0,
+    '/about': 0.9,
+    '/services': 0.9,
+    '/projects': 0.9,
+    '/blogs': 0.9,
+    '/contact': 0.9,
+    '/resume': 0.9,
+    '/technical-skills': 0.8,
+    '/certificates': 0.8,
+    '/faq': 0.8,
+    '/sitemap': 0.7,
+  };
+
+  const staticRoutes = [
+    '',
+    '/about',
+    '/projects',
+    '/blogs',
+    '/services',
+    '/contact',
+    '/resume',
+    '/certificates',
+    '/sitemap',
+    '/faq',
+    '/technical-skills',
+  ].map((route) => ({
     url: `${APP_URL}${route}`,
     lastModified: new Date(),
     changeFrequency: (route === '' ? 'weekly' : 'monthly') as 'weekly' | 'monthly',
-    priority: route === '' ? 1 : route === '/sitemap' ? 0.7 : route === '/faq' ? 0.8 : route === '/technical-skills' ? 0.8 : route === '/certificates' ? 0.8 : 0.9,
+    priority: ROUTE_PRIORITIES[route] ?? 0.8,
   }));
 
   const legalRoutes = ['/privacy-policy', '/terms-of-service'].map((route) => ({

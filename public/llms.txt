@@ -26,6 +26,7 @@ Phone: +91 8320927182
 - [RSS Feed](https://samir-portfolio-dev.vercel.app/api/feed): Syndicate updates and engineering articles
 - [Privacy Policy](https://samir-portfolio-dev.vercel.app/privacy-policy): Data collection, usage, cookies, and your rights
 - [Terms of Service](https://samir-portfolio-dev.vercel.app/terms-of-service): Terms governing use of this portfolio website
+- [Sitemap](https://samir-portfolio-dev.vercel.app/sitemap): Directory of all public pages, services, technical skills, and resources
 
 ## Professional Overview (Who is Samir Shaikh?)
 
