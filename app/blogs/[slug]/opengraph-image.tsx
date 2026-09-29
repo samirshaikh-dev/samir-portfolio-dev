@@ -43,12 +43,12 @@ export default async function Image({ params }: Props) {
           flexDirection: 'column',
           justifyContent: 'flex-end',
           padding: '64px',
-          background: 'linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #1a1a1a 100%)',
+          background: 'linear-gradient(135deg, #0A0A0A 0%, #111111 60%, #161616 100%)',
           position: 'relative',
           fontFamily: 'system-ui, sans-serif',
         }}
       >
-        {/* Subtle grid/noise texture via pseudo-lines */}
+        {/* Subtle Electric Lime glow */}
         <div
           style={{
             position: 'absolute',
@@ -56,7 +56,7 @@ export default async function Image({ params }: Props) {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'radial-gradient(ellipse at 20% 20%, rgba(120,80,255,0.12) 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, rgba(60,180,255,0.08) 0%, transparent 60%)',
+            background: 'radial-gradient(ellipse at 85% 15%, rgba(184,255,0,0.14) 0%, transparent 60%)',
           }}
         />
 
@@ -73,34 +73,39 @@ export default async function Image({ params }: Props) {
         >
           <div
             style={{
-              fontSize: '15px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '6px 14px',
+              borderRadius: '9999px',
+              border: '1px solid rgba(255,255,255,0.15)',
+              background: 'rgba(255,255,255,0.05)',
+              fontSize: '12px',
               fontWeight: '600',
-              color: 'rgba(255,255,255,0.5)',
+              color: '#F7F8F2',
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
             }}
           >
-            Samir Shaikh
-          </div>
-          <div style={{ color: 'rgba(255,255,255,0.2)', fontSize: '14px' }}>·</div>
-          <div
-            style={{
-              fontSize: '13px',
-              color: 'rgba(255,255,255,0.35)',
-              letterSpacing: '0.06em',
-            }}
-          >
-            Blog
+            <div
+              style={{
+                width: '6px',
+                height: '6px',
+                borderRadius: '9999px',
+                background: '#B8FF00',
+              }}
+            />
+            Samir Shaikh • Technical Journal
           </div>
         </div>
 
-        {/* Accent line */}
+        {/* Electric Lime Accent line */}
         <div
           style={{
-            width: '48px',
-            height: '3px',
+            width: '56px',
+            height: '4px',
             borderRadius: '2px',
-            background: 'linear-gradient(90deg, #7c4fff, #3bb4ff)',
+            background: '#B8FF00',
             marginBottom: '24px',
           }}
         />
@@ -109,11 +114,11 @@ export default async function Image({ params }: Props) {
         <div
           style={{
             fontSize: '52px',
-            fontWeight: '700',
-            color: '#ffffff',
+            fontWeight: '900',
+            color: '#F7F8F2',
             lineHeight: '1.15',
-            letterSpacing: '-0.02em',
-            maxWidth: '900px',
+            letterSpacing: '-0.03em',
+            maxWidth: '920px',
             marginBottom: '20px',
           }}
         >
@@ -125,9 +130,9 @@ export default async function Image({ params }: Props) {
           <div
             style={{
               fontSize: '22px',
-              color: 'rgba(255,255,255,0.55)',
+              color: '#A8ADA0',
               lineHeight: '1.5',
-              maxWidth: '800px',
+              maxWidth: '850px',
             }}
           >
             {excerpt.length > 120 ? excerpt.slice(0, 120) + '…' : excerpt}
@@ -141,8 +146,9 @@ export default async function Image({ params }: Props) {
             bottom: '48px',
             right: '64px',
             fontSize: '14px',
-            color: 'rgba(255,255,255,0.25)',
+            color: 'rgba(255,255,255,0.3)',
             letterSpacing: '0.04em',
+            fontFamily: 'monospace',
           }}
         >
           samir-portfolio-dev.vercel.app

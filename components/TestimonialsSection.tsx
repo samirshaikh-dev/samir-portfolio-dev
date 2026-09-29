@@ -71,11 +71,11 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
     .slice(0, 2);
 
   return (
-    <article className="flex flex-col justify-between rounded-xl border border-border-primary bg-card-bg p-6 hover:border-border-secondary transition-all duration-200 hover:shadow-sm">
+    <article className="flex flex-col justify-between rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 hover:border-foreground/30 transition-all duration-200 hover:shadow-md">
       {/* Quote mark + text */}
       <div>
         <svg
-          className="w-6 h-6 text-text-muted/40 mb-3"
+          className="w-6 h-6 text-accent-lime mb-3"
           fill="currentColor"
           viewBox="0 0 24 24"
           aria-hidden="true"
@@ -99,7 +99,7 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
               loading="lazy"
             />
           ) : (
-            <div className="w-9 h-9 rounded-full bg-foreground text-background flex items-center justify-center text-xs font-bold flex-shrink-0">
+            <div className="w-9 h-9 rounded-full bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] flex items-center justify-center text-xs font-bold flex-shrink-0">
               {initials}
             </div>
           )}
@@ -149,30 +149,31 @@ export default async function TestimonialsSection({
 
   return (
     <section
-      className={`px-6 md:px-10 py-16 ${isHomepage ? "border-t border-border-primary" : ""}`}
+      className={`px-5 sm:px-8 md:px-10 py-16 md:py-24 ${isHomepage ? "border-t border-border-primary/80" : ""}`}
       aria-label="Client testimonials"
     >
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 pb-4 border-b border-border-primary/80 gap-4">
           <div>
-            <span className="font-mono text-xs text-text-muted uppercase tracking-wider">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3 shadow-2xs">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
               SOCIAL PROOF
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground mt-1">
-              What Clients & Colleagues Say
+            </div>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-foreground">
+              What Clients &amp; Colleagues Say
             </h2>
-            <p className="text-text-muted text-sm mt-1.5 max-w-lg">
+            <p className="text-text-muted text-sm sm:text-base mt-2 max-w-xl leading-relaxed">
               Honest feedback from people I&apos;ve worked with — on delivery, communication, and outcomes.
             </p>
           </div>
           {isHomepage && (
             <Link
               href="/contact"
-              className="mt-4 sm:mt-0 inline-flex items-center gap-2 text-sm font-medium text-text-secondary hover:text-foreground transition-colors flex-shrink-0"
+              className="mt-4 sm:mt-0 inline-flex items-center gap-2 text-sm font-bold text-foreground hover:text-text-secondary transition-colors flex-shrink-0 group"
             >
               Work with me
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>

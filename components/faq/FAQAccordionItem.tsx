@@ -9,6 +9,7 @@ interface FAQAccordionItemProps {
   isOpen: boolean;
   onToggle: () => void;
   onTagClick?: (tag: string) => void;
+  index?: number;
 }
 
 export default function FAQAccordionItem({
@@ -16,6 +17,7 @@ export default function FAQAccordionItem({
   isOpen,
   onToggle,
   onTagClick,
+  index,
 }: FAQAccordionItemProps) {
   const [copied, setCopied] = useState(false);
   const contentId = `faq-content-${faq.id}`;
@@ -31,48 +33,84 @@ export default function FAQAccordionItem({
     }
   };
 
+  const formattedIndex = typeof index === "number" ? String(index + 1).padStart(2, "0") : null;
+
   return (
-    <div
+    <article
       id={faq.id}
-      className={`scroll-mt-24 border rounded-xl transition-all duration-200 overflow-hidden ${
+      className={`group relative scroll-mt-28 rounded-2xl border transition-all duration-300 overflow-hidden ${
         isOpen
-          ? "border-border-primary bg-background shadow-xs ring-1 ring-border-primary/50"
-          : "border-border-primary/80 bg-background/50 hover:bg-hover-bg/30 hover:border-border-primary"
+          ? "border-border-secondary bg-background dark:bg-card-bg shadow-sm ring-1 ring-border-primary/60 dark:shadow-[0_0_24px_rgba(184,255,0,0.06)]"
+          : "border-border-primary bg-background/80 dark:bg-card-bg/60 hover:bg-hover-bg/30 hover:border-border-secondary hover:shadow-2xs"
       }`}
     >
-      <div className="w-full flex items-center justify-between text-left p-5 md:p-6 gap-3 cursor-pointer group">
-        <button
-          id={headerId}
-          type="button"
-          aria-expanded={isOpen}
-          aria-controls={contentId}
-          onClick={onToggle}
-          className="flex-1 flex flex-col gap-1.5 text-left cursor-pointer focus:outline-hidden"
-        >
-          <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
-            {faq.category}
-          </span>
-          <span className="text-base md:text-lg font-medium text-foreground leading-snug group-hover:text-foreground/90 transition-colors">
-            {faq.question}
-          </span>
-        </button>
+      {/* Top Electric Lime accent indicator for open state */}
+      {isOpen && (
+        <span
+          aria-hidden="true"
+          className="absolute top-0 left-6 sm:left-8 w-12 sm:w-16 h-[2px] bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]"
+        />
+      )}
 
-        <div className="flex items-center gap-1 flex-shrink-0">
+      {/* Accordion Header Row */}
+      <div className="w-full flex items-start justify-between text-left p-5 sm:p-6 md:p-7 gap-4">
+        <h3 className="m-0 flex-1">
+          <button
+            id={headerId}
+            type="button"
+            aria-expanded={isOpen}
+            aria-controls={contentId}
+            onClick={onToggle}
+            className="w-full flex flex-col gap-2 text-left cursor-pointer rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:ring-offset-2"
+          >
+            {/* Meta indicator row */}
+            <div className="flex items-center gap-2 text-xs font-mono text-text-muted">
+              {formattedIndex && (
+                <span className="font-semibold text-text-muted/80">
+                  {formattedIndex}
+                </span>
+              )}
+              {formattedIndex && <span className="text-border-primary">•</span>}
+              <span className="uppercase tracking-wider font-semibold text-[11px] text-text-muted">
+                {faq.category}
+              </span>
+            </div>
+
+            {/* Question Text */}
+            <span
+              className={`text-base sm:text-lg md:text-xl font-bold tracking-tight leading-snug transition-colors ${
+                isOpen
+                  ? "text-foreground"
+                  : "text-foreground group-hover:text-foreground/90"
+              }`}
+            >
+              {faq.question}
+            </span>
+          </button>
+        </h3>
+
+        {/* Action Controls: Copy Link + Toggle Chevron */}
+        <div className="flex items-center gap-1.5 flex-shrink-0 pt-0.5">
           {/* Quick Copy Link button */}
           <button
             type="button"
             onClick={handleCopyLink}
-            aria-label={`Copy link to question: ${faq.question}`}
-            title={copied ? "Copied to clipboard!" : "Copy link to this question"}
-            className={`p-2 rounded-lg transition-colors cursor-pointer text-text-muted hover:text-foreground hover:bg-hover-bg ${
-              copied ? "text-green-500 hover:text-green-500" : ""
+            aria-label={`Copy direct link to question: "${faq.question}"`}
+            title={copied ? "Direct link copied!" : "Copy link to this question"}
+            className={`p-2 rounded-xl transition-all duration-200 cursor-pointer border border-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime ${
+              copied
+                ? "bg-accent-lime/10 text-foreground dark:text-accent-lime border-accent-lime/30 shadow-2xs"
+                : "text-text-muted hover:text-foreground hover:bg-hover-bg hover:border-border-primary/60"
             }`}
           >
             {copied ? (
-              <LuCheck className="w-4 h-4 text-green-500" />
+              <LuCheck className="w-4 h-4 text-foreground dark:text-accent-lime stroke-[2.5]" />
             ) : (
               <LuLink className="w-4 h-4" />
             )}
+            <span className="sr-only">
+              {copied ? "Link copied to clipboard" : "Copy link"}
+            </span>
           </button>
 
           {/* Toggle Chevron button */}
@@ -80,13 +118,15 @@ export default function FAQAccordionItem({
             type="button"
             onClick={onToggle}
             aria-label={isOpen ? "Collapse question" : "Expand question"}
-            className={`w-8 h-8 rounded-full flex items-center justify-center transition-colors duration-200 cursor-pointer ${
-              isOpen ? "bg-hover-bg text-foreground" : "text-text-muted hover:text-foreground"
+            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime ${
+              isOpen
+                ? "bg-foreground text-background border-foreground shadow-2xs dark:bg-accent-lime dark:text-[#0A0A0A] dark:border-accent-lime dark:shadow-[0_0_12px_rgba(184,255,0,0.45)]"
+                : "bg-background dark:bg-card-bg border-border-primary text-text-muted group-hover:text-foreground group-hover:border-foreground/30 hover:bg-hover-bg"
             }`}
           >
             <LuChevronDown
-              className={`w-4 h-4 transition-transform duration-300 ease-in-out ${
-                isOpen ? "rotate-180 text-foreground" : ""
+              className={`w-4 h-4 transition-transform duration-300 ease-in-out motion-reduce:transition-none stroke-[2.5] ${
+                isOpen ? "rotate-180" : ""
               }`}
               aria-hidden="true"
             />
@@ -94,28 +134,34 @@ export default function FAQAccordionItem({
         </div>
       </div>
 
+      {/* Accordion Content Panel */}
       <div
         id={contentId}
         role="region"
         aria-labelledby={headerId}
-        className={`grid transition-all duration-300 ease-in-out ${
+        className={`grid transition-all duration-300 ease-in-out motion-reduce:transition-none ${
           isOpen
-            ? "grid-rows-[1fr] opacity-100 pb-5 md:pb-6 px-5 md:px-6 pt-0"
-            : "grid-rows-[0fr] opacity-0 px-5 md:px-6 py-0"
+            ? "grid-rows-[1fr] opacity-100 pb-6 px-5 sm:px-6 md:px-7 pt-0"
+            : "grid-rows-[0fr] opacity-0 px-5 sm:px-6 md:px-7 py-0"
         }`}
       >
         <div className="overflow-hidden">
-          <div className="pt-2 border-t border-border-primary/50 text-sm md:text-base text-text-secondary leading-relaxed">
-            <p>{faq.answer}</p>
+          <div className="pt-4 border-t border-border-primary/50 text-sm sm:text-base text-text-secondary leading-relaxed font-normal">
+            <p className="whitespace-pre-line">{faq.answer}</p>
+
+            {/* Tag Pills */}
             {faq.tags && faq.tags.length > 0 && (
-              <div className="flex flex-wrap items-center gap-1.5 mt-4 pt-3 border-t border-border-primary/30">
-                <span className="text-[11px] text-text-muted mr-1 font-mono">Tags:</span>
+              <div className="flex flex-wrap items-center gap-1.5 mt-5 pt-3.5 border-t border-border-primary/40">
+                <span className="text-[11px] uppercase tracking-wider text-text-muted mr-1 font-mono font-semibold">
+                  Topics:
+                </span>
                 {faq.tags.map((tag) => (
                   <button
                     key={tag}
                     type="button"
                     onClick={() => onTagClick?.(tag)}
-                    className="inline-block px-2 py-0.5 text-xs rounded-md bg-hover-bg text-text-muted hover:text-foreground hover:bg-hover-bg/80 font-mono transition-colors cursor-pointer"
+                    aria-label={`Filter questions by topic: ${tag}`}
+                    className="inline-flex items-center px-2.5 py-1 text-xs rounded-full border border-border-primary/80 bg-background dark:bg-card-bg text-text-secondary hover:text-foreground hover:border-foreground/40 hover:bg-hover-bg font-mono transition-all duration-150 cursor-pointer shadow-2xs active:scale-[0.97]"
                   >
                     #{tag}
                   </button>
@@ -125,6 +171,6 @@ export default function FAQAccordionItem({
           </div>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

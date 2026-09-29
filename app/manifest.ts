@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "The personal portfolio and blog of Samir Shaikh — AI Backend Engineer, AI SDE, and Agentic AI Engineer — showcasing AI projects, backend engineering work, and developer journey.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#000000",
+    background_color: "#F7F8F2",
+    theme_color: "#0A0A0A",
     icons: [
       {
         src: "/Filled_Logo.png",

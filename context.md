@@ -15,9 +15,8 @@ Personal portfolio, technical blog, commercial services showcase, and interactiv
 - **Content & Parsing:** Cheerio (HTML → plain text for RAG chunking), `html-react-parser` (stored HTML → React with `next/image` optimization), `react-markdown` + `remark-gfm` (chat output rendering), `unified`/`remark`/`rehype` + `rehype-sanitize` (blog pipeline Markdown → sanitized HTML), `date-fns` (admin media/date formatting)
 - **PWA & Notifications:** Serwist (`@serwist/next`, service worker `app/sw.ts`), Web Push (`web-push`)
 - **Email:** Nodemailer (SMTP transport with modular branded HTML & plain-text templates for contact form confirmations, admin alerts, and threaded admin replies via `lib/email/`)
-- **Analytics & Security:** Google Analytics (`@/components/analytics/GoogleAnalytics`), FingerprintJS (`@fingerprintjs/fingerprintjs`) for rate limiting visitor identification, IPinfo for VPN/proxy privacy checks
-- **CI/CD:** GitHub Actions (`.github/workflows/auto-blog.yml` — cron `0 9 */3 * *` plus manual `workflow_dispatch`; installs pipeline deps ad hoc with `npm install --no-save` and runs `node scripts/blog/generate-blog.mjs`)
-- **Package Manager:** pnpm (v10) — note: `pnpm run dev` is **not** `next dev`; it runs `next build --webpack && next start` (production build + serve)
+- **Analytics & Security:** Google Analytics (`@/components/analytics/GoogleAnalytics`), Vercel Web Analytics + Speed Insights (`@/components/analytics/VercelAnalytics`, dashboard-enabled, no env var), a typed dual-dispatch event catalog (`lib/analytics/events.ts` + `lib/analytics/trackEvent.ts`), FingerprintJS (`@fingerprintjs/fingerprintjs`) for rate limiting visitor identification, IPinfo for VPN/proxy privacy checks
+- **Package Manager:** pnpm (v10) — `pnpm run dev` runs `next dev --webpack` (development server with Fast Refresh / HMR); use `pnpm run dev:prod` to test local production build + serve.
 
 ## Project Structure
 ```
@@ -109,7 +108,7 @@ app/                            # Next.js App Router
 components/
 ├── about/                     # ExperienceTimeline (server), FAQ (accordion + JSON-LD)
 ├── admin/                     # AdminDashboard, BlogForm, ProjectForm, TipTapEditor, MediaLibraryModal, CertificateForm, DatePicker, DeleteLogButton
-├── analytics/                 # GoogleAnalytics (loads gtag when NEXT_PUBLIC_GA_ID is set) + AnalyticsEvents (ScrollDepthTracker)
+├── analytics/                 # GoogleAnalytics (loads gtag when NEXT_PUBLIC_GA_ID is set) + VercelAnalytics (Vercel Web Analytics + Speed Insights) + AnalyticsEvents (ScrollDepthTracker)
 ├── blogs/                     # BlogList, BlogInteractions, BlogShareButtons, BlogStarInteraction
 ├── certificates/              # CertificatesClient (category filter + search grid), CertificateCard
 ├── faq/                       # FAQClient (category filter + live search accordion), FAQAccordionItem
@@ -335,6 +334,7 @@ Schema is defined in `lib/schema.ts`; four generated migrations are applied (`dr
 | `VAPID_PRIVATE_KEY` | Web Push VAPID private key | Server push signing |
 | `NEXT_PUBLIC_SITE_NAME`| Display site name | Used across layout, emails, and metadata |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics Measurement ID | Optional GA4 tracking |
+| `NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG` | Vercel Web Analytics/Speed Insights client config | **Never set manually** — injected by the Vercel build platform when Analytics is enabled for the project |
 | `AI_SECURITY` | Enable VPN checks & rate limiting | Set to `'true'` to activate |
 | `AI_LIMIT` | Maximum chat queries per day | Defaults to 5 if unset |
 | `ENABLE_CHAT_FOLLOWUPS` | Enable chat follow-up suggestion chips | Set to `'false'` to disable; on by default |
@@ -367,7 +367,7 @@ Schema is defined in `lib/schema.ts`; four generated migrations are applied (`dr
 12. **Rich text HTML format** — blog and project contents are stored as sanitized HTML, rendered on the client via `HtmlParser.tsx` or `ContentWithToc.tsx`.
 13. **Non-fatal email dispatch** — contact submissions and inquiries are always committed to PostgreSQL first. If Nodemailer transport fails or SMTP is unconfigured, the user flow still succeeds gracefully.
 14. **Dual-tier LLM discovery and AI crawler access** — `llms.txt` and `llms-full.txt` serve as structured knowledge roots for AI bots and answer engines. Robots.txt explicitly permits all major AI crawlers access to public routes and LLM files while securing admin and API endpoints.
-15. **`pnpm run dev` is not a dev server** — the script is `next build --webpack && next start`. Run `pnpm dlx next dev` (or `next dev` directly) when you need HMR; expect a full production build whenever you use `pnpm run dev`.
+15. **Development vs Production Server** — `pnpm run dev` runs `next dev --webpack` with Hot Module Replacement (Fast Refresh). If you need to test the production bundle locally with SSR/ISR caching, use `pnpm run dev:prod` or `pnpm build && pnpm start`.
 16. **Chat output is Markdown, not HTML** — `components/Chatbot.tsx` renders LLM text through `react-markdown`; passing raw HTML would bypass sanitization rules and is forbidden.
 17. **Image allowlist is wide open** — `next.config.ts` allows `hostname: "**"` alongside `res.cloudinary.com`. Tighten it deliberately if you introduce user-supplied remote images; do not assume `next/image` is a trust boundary.
 18. **`.kilo/worktrees/puzzle-piranha/` is a stale duplicate** of an older snapshot committed into the tree. It is not part of the app; never edit or trust it as source of truth.

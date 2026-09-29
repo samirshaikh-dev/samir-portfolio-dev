@@ -132,7 +132,7 @@ samir-portfolio-dev/
 ├── components/                 # UI Components
 │   ├── about/                  # ExperienceTimeline, FAQ
 │   ├── admin/                  # BlogForm, ProjectForm, TipTapEditor, MediaLibraryModal, etc.
-│   ├── analytics/              # GoogleAnalytics
+│   ├── analytics/              # GoogleAnalytics, VercelAnalytics, AnalyticsEvents (ScrollDepthTracker)
 │   ├── blogs/                  # BlogList, BlogInteractions, BlogShareButtons
 │   ├── home/                   # Hero bento
 │   ├── layout/                 # Breadcrumbs, Navbar, Footer, CloudTransition, PageHeader

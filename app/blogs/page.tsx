@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { blogs as blogsSchema } from "@/lib/schema";
 import { eq, desc } from "drizzle-orm";
-import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import BlogList from "@/components/blogs/BlogList";
 import { APP_URL } from "@/lib/site-config";
@@ -43,13 +42,13 @@ export const metadata: Metadata = {
   },
 };
 
-
 interface Blog {
   id: string;
   title: string;
   slug: string;
   excerpt: string | null;
   cover_image_url: string | null;
+  tags: string[] | null;
   published_at: string;
   stars: number;
 }
@@ -62,6 +61,7 @@ async function getBlogs(): Promise<Blog[]> {
       slug: blogsSchema.slug,
       excerpt: blogsSchema.excerpt,
       cover_image_url: blogsSchema.coverImageUrl,
+      tags: blogsSchema.tags,
       published_at: blogsSchema.publishedAt,
       stars: blogsSchema.stars,
     }).from(blogsSchema).where(eq(blogsSchema.isPublished, true)).orderBy(desc(blogsSchema.publishedAt));
@@ -83,13 +83,25 @@ export default async function BlogsPage() {
   });
 
   return (
-    <main className="flex-1 px-6 md:px-10 pb-16">
+    <main className="relative flex-1 px-5 sm:px-8 md:px-10 pb-20 overflow-hidden">
+      {/* 5.1 Ambient Radiant Glow (Top-Right) */}
+      <div
+        aria-hidden="true"
+        className="absolute -top-32 right-0 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(184,255,0,0.18)_0%,transparent_65%)] dark:bg-[radial-gradient(circle,rgba(184,255,0,0.08)_0%,transparent_65%)] blur-3xl pointer-events-none -z-10"
+      />
+
+      {/* 5.2 Geometric Dot Matrix Texture (Canvas Overlay) */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(#0A0A0A_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.035] dark:opacity-[0.07] pointer-events-none -z-10"
+      />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
       <div className="max-w-6xl mx-auto">
-        <div className="pt-6 md:pt-10">
+        <div className="pt-6 md:pt-10 mb-6">
           <Breadcrumbs
             items={[
               { name: "Home", href: "/" },
@@ -97,9 +109,33 @@ export default async function BlogsPage() {
             ]}
           />
         </div>
-        <PageHeader title="Blog" subtitle="Thoughts on engineering, AI, and things I'm learning." />
+
+        {/* Editorial Section Hero Header */}
+        <header className="mb-10 sm:mb-12 pb-8 border-b border-border-primary/80">
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-4 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+            ENGINEERING JOURNAL &amp; RESEARCH
+          </div>
+
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.12] text-foreground">
+            Engineering Insights
+            <span
+              className="block sm:inline font-normal italic text-text-secondary sm:ml-3"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              — Technical Logs
+            </span>
+          </h1>
+
+          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-text-secondary max-w-2xl leading-relaxed">
+            Deep-dives into AI backend systems, agentic architectures, RAG pipelines, and high-throughput production engineering.
+          </p>
+        </header>
+
         {blogs.length === 0 ? (
-          <p className="text-gray-400">No posts yet.</p>
+          <div className="text-center py-16 bg-footer-bg rounded-2xl border border-border-primary">
+            <p className="text-text-muted text-base sm:text-lg">No posts published yet.</p>
+          </div>
         ) : (
           <BlogList initialBlogs={blogs} />
         )}

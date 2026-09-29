@@ -107,10 +107,10 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
               <button
                 key={tab.value}
                 onClick={() => setActiveFilter(tab.value)}
-                className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all whitespace-nowrap border ${
+                className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap border ${
                   isActive
-                    ? "bg-foreground text-background border-foreground shadow-sm"
-                    : "bg-background text-text-secondary border-border-primary hover:border-text-muted hover:text-foreground"
+                    ? "bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] border-foreground dark:border-accent-lime shadow-xs"
+                    : "bg-background dark:bg-card-bg text-text-secondary border-border-primary hover:border-foreground/30 hover:text-foreground"
                 }`}
               >
                 {tab.label}
@@ -160,7 +160,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                 {caseStudies.map((project, index) => (
                   <article
                     key={project.id}
-                    className="group relative flex flex-col bg-background border border-border-primary hover:border-text-muted rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
+                    className="group relative flex flex-col bg-background dark:bg-card-bg border border-border-primary hover:border-foreground/30 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300"
                   >
                     {/* Media / Cover */}
                     <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/9] w-full bg-hover-bg overflow-hidden border-b border-border-primary">
@@ -183,12 +183,12 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                       
                       {/* Top Badges Overlay */}
                       <div className="absolute top-3 left-3 flex flex-wrap gap-2 z-10">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-background/90 backdrop-blur-md border border-green-500/40 text-green-700 dark:text-green-400 shadow-sm">
-                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-background/95 dark:bg-card-bg/95 backdrop-blur-md border border-border-primary text-foreground shadow-sm">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)] animate-pulse" />
                           {project.badge || "Case Study"}
                         </span>
                         {project.category && (
-                          <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-background/90 backdrop-blur-md border border-border-primary text-text-secondary shadow-sm">
+                          <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-background/90 dark:bg-card-bg/90 backdrop-blur-md border border-border-primary text-text-secondary shadow-sm">
                             {project.category}
                           </span>
                         )}
@@ -303,7 +303,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                 {regularProjects.map((project) => (
                   <article
                     key={project.id}
-                    className="group flex flex-col bg-background border border-border-primary hover:border-text-muted rounded-2xl overflow-hidden shadow-sm transition-colors"
+                    className="group flex flex-col bg-background dark:bg-card-bg border border-border-primary hover:border-foreground/30 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all"
                   >
                     <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary">
                       {project.cover_image_url ? (
@@ -413,7 +413,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
             {filteredProjects.map((project) => (
               <article
                 key={project.id}
-                className="group flex flex-col bg-background border border-border-primary hover:border-text-muted rounded-2xl overflow-hidden shadow-sm transition-colors"
+                className="group flex flex-col bg-background dark:bg-card-bg border border-border-primary hover:border-foreground/30 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all"
               >
                 <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary">
                   {project.cover_image_url ? (

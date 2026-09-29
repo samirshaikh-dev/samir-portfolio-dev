@@ -3,6 +3,23 @@
 import { useState, useRef } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { AUTHOR_PHONE } from "@/lib/site-config";
+import { analyticsEvents } from "@/lib/analytics/events";
+import { trackEvent } from "@/lib/analytics/trackEvent";
+
+const FOCUS_RING =
+  "focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+const INPUT_BASE =
+  "w-full rounded-xl bg-background dark:bg-card-bg border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none transition-all duration-200 disabled:opacity-50 focus:border-foreground/40 dark:focus:border-accent-lime/50 focus:ring-1 focus:ring-foreground/20 dark:focus:ring-accent-lime/20";
+
+const INQUIRY_TYPES = [
+  "AI / RAG Pipeline",
+  "Backend API / Microservices",
+  "Full-Stack Product",
+  "Website / Landing Page",
+  "Technical Consultation",
+  "Other",
+];
 
 export default function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null);
@@ -10,6 +27,7 @@ export default function ContactForm() {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [selectedType, setSelectedType] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -20,7 +38,7 @@ export default function ContactForm() {
     const data = {
       name: String(formData.get("name") || "").trim(),
       email: String(formData.get("email") || "").trim(),
-      subject: String(formData.get("subject") || "").trim(),
+      subject: String(formData.get("subject") || selectedType || "").trim(),
       message: String(formData.get("message") || "").trim(),
     };
 
@@ -33,14 +51,7 @@ export default function ContactForm() {
     setSuccessMessage(null);
 
     const cleanPhone = AUTHOR_PHONE.replace(/[^0-9]/g, "");
-    const whatsappText = `*New Inquiry via Portfolio*
-
-*Name:* ${data.name}
-*Email:* ${data.email}
-*Subject:* ${data.subject}
-
-*Message:*
-${data.message}`;
+    const whatsappText = `*New Inquiry via Portfolio*\n\n*Type:* ${selectedType || "General"}\n*Name:* ${data.name}\n*Email:* ${data.email}\n*Subject:* ${data.subject}\n\n*Message:*\n${data.message}`;
 
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(whatsappText)}`;
     setWhatsappLink(whatsappUrl);
@@ -72,8 +83,18 @@ ${data.message}`;
         );
       }
 
+      // Boolean only — never the submitted name/email/subject/message.
+      trackEvent(analyticsEvents.contactSubmitSuccess, {
+        email_sent: Boolean(resData.emailSent),
+        inquiry_type: selectedType || "general",
+      });
+
       formRef.current?.reset();
+      setSelectedType(null);
     } catch {
+      trackEvent(analyticsEvents.contactSubmitFallback, {
+        inquiry_type: selectedType || "general",
+      });
       setSuccessMessage(
         "Your message was prepared for WhatsApp! If the tab did not open automatically, click the button below to message Samir directly."
       );
@@ -87,108 +108,162 @@ ${data.message}`;
   }
 
   return (
-    <form ref={formRef} className="flex flex-col gap-6" onSubmit={handleSubmit}>
+    <form ref={formRef} className="flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
+      {/* Success Banner */}
       {successMessage && (
         <div
           role="status"
           aria-live="polite"
-          className="rounded-lg bg-green-50 dark:bg-green-900/20 p-4 text-sm text-green-800 dark:text-green-400 border border-green-200 dark:border-green-800 flex flex-col gap-3"
+          className="rounded-2xl border border-accent-lime/30 bg-accent-lime/5 dark:bg-accent-lime/10 p-4 text-sm text-foreground flex flex-col gap-3"
         >
-          <p>{successMessage}</p>
+          <div className="flex items-start gap-2.5">
+            <span className="mt-0.5 w-4 h-4 rounded-full bg-accent-lime text-[#0A0A0A] flex items-center justify-center text-[10px] font-black flex-shrink-0">
+              ✓
+            </span>
+            <p className="text-sm text-text-secondary leading-snug">{successMessage}</p>
+          </div>
           {whatsappLink && (
-            <div>
-              <a
-                href={whatsappLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-[#25D366] hover:bg-[#20ba59] text-neutral-950 font-semibold px-4 py-2 text-xs transition-colors shadow-sm"
-              >
-                <FaWhatsapp className="text-base flex-shrink-0" aria-hidden="true" />
-                <span>Open in WhatsApp</span>
-              </a>
-            </div>
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`self-start inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-neutral-950 font-bold px-4 py-2 text-xs transition-colors shadow-sm ${FOCUS_RING}`}
+            >
+              <FaWhatsapp className="text-sm flex-shrink-0" aria-hidden="true" />
+              <span>Open in WhatsApp</span>
+            </a>
           )}
         </div>
       )}
+
+      {/* Error Banner */}
       {error && (
         <div
           role="alert"
-          className="rounded-lg bg-red-50 dark:bg-red-900/20 p-4 text-sm text-red-800 dark:text-red-400 border border-red-200 dark:border-red-800"
+          className="rounded-2xl border border-red-500/30 bg-red-50 dark:bg-red-900/10 p-4 text-sm text-red-700 dark:text-red-400"
         >
           {error}
         </div>
       )}
 
-      <div className="flex flex-col sm:flex-row gap-6">
-        <div className="flex-1">
-          <label htmlFor="name" className="block text-sm font-medium text-foreground mb-1.5">
-            Name
+      {/* Inquiry Type Pills */}
+      <div>
+        <p className="text-xs font-semibold text-text-secondary mb-2.5" id="inquiry-type-label">
+          What are you looking for?
+          <span className="text-text-muted font-normal ml-1">(optional)</span>
+        </p>
+        <div
+          className="flex flex-wrap gap-2"
+          role="group"
+          aria-labelledby="inquiry-type-label"
+        >
+          {INQUIRY_TYPES.map((type) => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setSelectedType(selectedType === type ? null : type)}
+              aria-pressed={selectedType === type}
+              className={`text-xs font-semibold px-3 py-1.5 rounded-full border transition-all duration-200 cursor-pointer ${FOCUS_RING} ${
+                selectedType === type
+                  ? "bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] border-foreground dark:border-accent-lime shadow-[0_0_10px_rgba(184,255,0,0.35)]"
+                  : "bg-background dark:bg-card-bg border-border-primary text-text-secondary hover:border-foreground/30 hover:text-foreground hover:bg-hover-bg"
+              }`}
+            >
+              {type}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Name + Email Row */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="contact-name" className="block text-xs font-semibold text-text-secondary mb-1.5">
+            Full Name <span className="text-accent-lime" aria-hidden="true">*</span>
           </label>
           <input
             type="text"
-            id="name"
+            id="contact-name"
             name="name"
             required
-            className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all disabled:opacity-50"
-            placeholder="John Doe"
+            autoComplete="name"
+            className={INPUT_BASE}
+            placeholder="Jane Smith"
             disabled={loading}
           />
         </div>
-        <div className="flex-1">
-          <label htmlFor="email" className="block text-sm font-medium text-foreground mb-1.5">
-            Email
+        <div>
+          <label htmlFor="contact-email" className="block text-xs font-semibold text-text-secondary mb-1.5">
+            Work Email <span className="text-accent-lime" aria-hidden="true">*</span>
           </label>
           <input
             type="email"
-            id="email"
+            id="contact-email"
             name="email"
             required
-            className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all disabled:opacity-50"
-            placeholder="john@example.com"
+            autoComplete="email"
+            className={INPUT_BASE}
+            placeholder="jane@company.com"
             disabled={loading}
           />
         </div>
       </div>
 
+      {/* Subject */}
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-1.5">
-          Subject
+        <label htmlFor="contact-subject" className="block text-xs font-semibold text-text-secondary mb-1.5">
+          Subject <span className="text-accent-lime" aria-hidden="true">*</span>
         </label>
         <input
           type="text"
-          id="subject"
+          id="contact-subject"
           name="subject"
           required
-          className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all disabled:opacity-50"
-          placeholder="What is this regarding?"
+          className={INPUT_BASE}
+          placeholder={selectedType ? `Re: ${selectedType}` : "What is this regarding?"}
           disabled={loading}
+          defaultValue={selectedType ?? ""}
+          key={selectedType}
         />
       </div>
 
+      {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-foreground mb-1.5">
-          Message
+        <label htmlFor="contact-message" className="block text-xs font-semibold text-text-secondary mb-1.5">
+          Message <span className="text-accent-lime" aria-hidden="true">*</span>
         </label>
         <textarea
-          id="message"
+          id="contact-message"
           name="message"
-          rows={6}
+          rows={5}
           required
-          className="w-full rounded-lg bg-background border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none focus:border-text-muted focus:ring-1 focus:ring-border-primary transition-all resize-y min-h-[120px] disabled:opacity-50"
-          placeholder="Your message here..."
+          className={`${INPUT_BASE} resize-y min-h-[120px]`}
+          placeholder="Describe your project, stack, timeline, or anything relevant…"
           disabled={loading}
         />
       </div>
 
-      <button
-        type="submit"
-        disabled={loading}
-        aria-label="Send inquiry via WhatsApp"
-        className="inline-flex items-center justify-center gap-2 rounded-lg bg-foreground text-background font-medium px-6 py-3 text-sm hover:opacity-90 transition-opacity disabled:opacity-50 w-full sm:w-auto self-start mt-2 cursor-pointer"
-      >
-        <FaWhatsapp className="text-lg flex-shrink-0" aria-hidden="true" />
-        <span>{loading ? "Sending..." : "Send via WhatsApp"}</span>
-      </button>
+      {/* Privacy note + CTA */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-1">
+        <p className="text-[11px] text-text-muted leading-snug max-w-xs">
+          Your details are never sold or shared. By submitting you agree to a free discovery discussion.
+        </p>
+
+        <button
+          type="submit"
+          disabled={loading}
+          aria-label="Send inquiry via WhatsApp"
+          className={`inline-flex items-center justify-center gap-2.5 rounded-full bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] font-extrabold px-6 py-3 text-sm hover:shadow-[0_0_16px_rgba(184,255,0,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none shadow-xs cursor-pointer whitespace-nowrap shrink-0 ${FOCUS_RING}`}
+        >
+          <FaWhatsapp className="text-base flex-shrink-0" aria-hidden="true" />
+          <span>{loading ? "Sending…" : "Send via WhatsApp"}</span>
+          {!loading && (
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          )}
+        </button>
+      </div>
     </form>
   );
 }

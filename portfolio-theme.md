@@ -3,19 +3,33 @@
 > Single source of reference for the site's color system and visual theme. Companion to `docs/design.md` (component & layout conventions) and `AGENTS.md` (universal agent standards).
 >
 > **Sources of truth:** `app/globals.css` (design tokens), `lib/fonts.ts` (typography), `docs/design.md` (design language), `lib/seo/metadata.ts` + `app/manifest.ts` (PWA/browser chrome), `app/blogs/[slug]/opengraph-image.tsx` + `app/projects/[slug]/opengraph-image.tsx` (social cards).
-> **Governing skill:** `agents/skills/ui-ux-engineer/SKILL.md` — intentional design, a consistent visual language, and token-based scales rather than ad-hoc per-screen choices.
+> **Governing skills:** [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) (intentional design tokens, visual hierarchy) & [`agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/accessibility-engineer/SKILL.md) (WCAG 2.2 AA contrast compliance).
 
 ---
 
-## 1. Theme Identity
+## 1. Theme Identity & Brand Palette
 
-**Minimal · High-contrast · Content-first.**
+**Editorial · High-contrast · Agentic AI aesthetic.**
 
-- **Light mode** is clean white with black text — editorial, newspaper-like. It is the neutral baseline with no accent decoration.
-- **Dark mode** introduces a subtle green accent palette — the developer/terminal feel. Dark scanlines of green are applied to borders, hovers, and active states rather than as surface fills.
-- Decoration is functional: color communicates state (hover, active navigation, live commit activity) instead of existing purely for effect.
-- A bento-card layout surfaces real data (GitHub stats) over stock imagery, reinforcing the "terminal dashboard" reading.
-- Contrast is maximized: pure black text on pure white (light) and pure white on pure black (dark) — WCAG AA+.
+The portfolio adheres to a strict four-color brand system:
+
+| Role | Color Value | Description & Intent |
+|---|---|---|
+| **Background** | `#F7F8F2` | **Warm Off-White:** Clean, tactile, editorial baseline surface. Soft on the eyes while preserving high contrast. |
+| **Primary Text & Outlines** | `#0A0A0A` | **Deep Black:** Razor-sharp typography, structural borders, headings, and high-impact actions. |
+| **Primary Accent** | `#B8FF00` | **Electric Lime:** High-tech vibrancy for state markers, badges, hover glow, and active highlights. |
+| **Secondary Text** | `#5F6368` | **Slate Gray:** Subtle supporting body copy, captions, and secondary UI metadata. |
+| **Borders** | `#D9DDD2` | **Muted Stone:** Crisp, subtle structural card and section dividers in light mode. |
+
+> [!IMPORTANT]
+> **Core Principle:** *"The lime should be an accent, not the whole background. That's what keeps it looking premium rather than flashy."*
+
+### 1.1 Contrast & WCAG 2.2 AA Conformance
+- **Deep Black (`#0A0A0A`) on Warm Off-White (`#F7F8F2`):** **17.6:1** (Exceeds WCAG AAA requirement of 7:1).
+- **Slate Gray (`#5F6368`) on Warm Off-White (`#F7F8F2`):** **5.1:1** (Exceeds WCAG AA requirement of 4.5:1 for normal text).
+- **Warm Off-White (`#F7F8F2`) on Deep Black (`#0A0A0A`):** **17.6:1** (Exceeds WCAG AAA).
+- **Deep Black (`#0A0A0A`) on Electric Lime (`#B8FF00`):** **15.6:1** (Exceeds WCAG AAA).
+- **Accessibility Rule:** Electric Lime (`#B8FF00`) must **never** be used as raw body text on `#F7F8F2` (contrast ratio ~1.13:1). Lime is strictly an accent: badges with dark text, border glows in dark mode, indicator pings, and dark mode interactive states.
 
 ---
 
@@ -25,17 +39,18 @@ All color decisions funnel through CSS custom properties defined in `app/globals
 
 ```css
 @theme {
-  --color-background:      var(--bg-primary);
-  --color-foreground:      var(--text-primary);
-  --color-text-secondary:  var(--text-secondary);
-  --color-text-muted:      var(--text-muted);
-  --color-nav-bg:          var(--nav-bg);
-  --color-border-primary:  var(--border-primary);
-  --color-nav-border:      var(--nav-border);
-  --color-footer-bg:       var(--footer-bg);
-  --color-hover-bg:        var(--hover-bg);
-  --color-primary:         var(--primary);
+  --color-background:         var(--bg-primary);
+  --color-foreground:         var(--text-primary);
+  --color-text-secondary:     var(--text-secondary);
+  --color-text-muted:         var(--text-muted);
+  --color-nav-bg:             var(--nav-bg);
+  --color-border-primary:     var(--border-primary);
+  --color-nav-border:         var(--nav-border);
+  --color-footer-bg:          var(--footer-bg);
+  --color-hover-bg:           var(--hover-bg);
+  --color-primary:            var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-accent-lime:        var(--accent-lime);
 }
 ```
 
@@ -51,9 +66,10 @@ All color decisions funnel through CSS custom properties defined in `app/globals
 | `border-nav-border` | `--nav-border` | Navbar bottom border |
 | `bg-footer-bg` | `--footer-bg` | Footer / page-transition panels |
 | `bg-hover-bg` | `--hover-bg` | Interactive hover background |
-| `bg-primary` / `text-primary-foreground` | `--primary` / `--primary-foreground` | Inverting FAB / buttons |
+| `bg-primary` / `text-primary-foreground` | `--primary` / `--primary-foreground` | Inverting FAB / action buttons |
+| `bg-accent-lime` / `border-accent-lime` | `--accent-lime` | Brand accent pills, tags, highlights |
 
-Two-layer strategy: the **semantic layer** (Tailwind tokens) sits above the **palette layer** (CSS vars), and both swap wholesale when `.dark` is applied. Components never reference raw hex.
+**Two-layer strategy:** The **semantic layer** (Tailwind tokens) sits above the **palette layer** (CSS variables), and both swap wholesale when `.dark` is applied. Components never reference hardcoded hex codes.
 
 ---
 
@@ -63,56 +79,53 @@ Two-layer strategy: the **semantic layer** (Tailwind tokens) sits above the **pa
 
 | Variable | Value | Tailwind equivalent | Role |
 |---|---|---|---|
-| `--bg-primary` | `#ffffff` | white | Page background |
-| `--text-primary` | `#000000` | black | Headings, strong text |
-| `--text-secondary` | `#374151` | gray-700 | Body copy |
-| `--text-muted` | `#6b7280` | gray-500 | Captions, labels, inactive links |
-| `--nav-bg` | `rgba(255,255,255,0.8)` | white/80 | Frosted-glass navbar |
-| `--border-primary` | `#e5e7eb` | gray-200 | Card borders |
-| `--nav-border` | `transparent` | — | Navbar bottom border (none) |
-| `--footer-bg` | `#f9fafb` | gray-50 | Footer background |
-| `--hover-bg` | `#f3f4f6` | gray-100 | Interactive hover background |
-| `--primary` | `#000000` | black | Button / FAB surface |
-| `--primary-foreground` | `#ffffff` | white | Text on `--primary` |
+| `--bg-primary` | `#F7F8F2` | warm off-white | Base page background |
+| `--text-primary` | `#0A0A0A` | deep black | Headings, strong text, primary elements |
+| `--text-secondary` | `#5F6368` | slate gray | Body copy, secondary descriptions |
+| `--text-muted` | `#5F6368` | slate gray | Captions, labels, inactive links |
+| `--nav-bg` | `rgba(247, 248, 242, 0.85)` | warm off-white/85 | Frosted-glass navbar |
+| `--border-primary` | `#D9DDD2` | muted stone | Structural card & section borders |
+| `--nav-border` | `transparent` | — | Navbar bottom border |
+| `--footer-bg` | `#EFF1E8` | soft warm gray | Footer background & transitions |
+| `--hover-bg` | `#EAECE2` | light stone | Interactive hover background |
+| `--accent-lime` | `#B8FF00` | electric lime | Primary brand accent |
+| `--primary` | `#0A0A0A` | deep black | Primary button / FAB surface |
+| `--primary-foreground` | `#F7F8F2` | warm off-white | Text on `--primary` |
 
 ### 3.2 Dark Theme (`.dark`)
 
 | Variable | Value | Tailwind equivalent | Role |
 |---|---|---|---|
-| `--bg-primary` | `#000000` | black | Page background |
-| `--text-primary` | `#ffffff` | white | Headings, strong text |
-| `--text-secondary` | `#d1d5db` | gray-300 | Body copy |
-| `--text-muted` | `#9ca3af` | gray-400 | Captions, labels, inactive links |
-| `--nav-bg` | `rgba(0,0,0,0.8)` | black/80 | Frosted-glass navbar |
-| `--border-primary` | `rgba(74,222,128,0.25)` | green-400/25 | Card borders — subtle green glow |
-| `--nav-border` | `rgba(74,222,128,0.15)` | green-400/15 | Navbar bottom border |
-| `--footer-bg` | `#0a0a0a` | — | Footer background |
-| `--hover-bg` | `rgba(74,222,128,0.08)` | green-400/8 | Interactive hover background tint |
-| `--primary` | `#ffffff` | white | Button / FAB surface |
-| `--primary-foreground` | `#000000` | black | Text on `--primary` |
-
-### 3.3 Accents (Dark Mode Only)
-
-| Variable | Value | Equivalent | Role |
-|---|---|---|---|
-| `--accent-green` | `#4ade80` | green-400 | Links hover, active ToC border, live commit bars, prose accents |
+| `--bg-primary` | `#0A0A0A` | deep black | Base page background |
+| `--text-primary` | `#F7F8F2` | warm off-white | Headings, strong text |
+| `--text-secondary` | `#A8ADA0` | warm gray | Body copy |
+| `--text-muted` | `#75797E` | muted slate | Captions, labels, inactive links |
+| `--nav-bg` | `rgba(10, 10, 10, 0.85)` | deep black/85 | Frosted-glass navbar |
+| `--border-primary` | `rgba(184, 255, 0, 0.25)` | lime/25 | Card borders — subtle Electric Lime glow |
+| `--nav-border` | `rgba(184, 255, 0, 0.15)` | lime/15 | Navbar bottom border |
+| `--footer-bg` | `#050505` | obsidian black | Footer background |
+| `--hover-bg` | `rgba(184, 255, 0, 0.08)` | lime/8 | Interactive hover background tint |
+| `--accent-lime` | `#B8FF00` | electric lime | Primary brand accent |
+| `--accent-green` | `#B8FF00` | electric lime | Active ToC border, links hover, commit bars |
 | `--accent-red` | `#f87171` | red-400 | Blog "view all" hover, destructive emphasis |
+| `--primary` | `#B8FF00` | electric lime | High-impact button / FAB surface |
+| `--primary-foreground` | `#0A0A0A` | deep black | Text on `--primary` |
 
 ---
 
-## 4. Accent Usage in Dark Mode
+## 4. Accent Usage & Design Guidelines
 
-The green accent is applied **structurally** — it never paints large surface areas, only edges, traces, and state markers:
+The Electric Lime (`#B8FF00`) accent is applied **deliberately and structurally**:
 
-| Surface | Value | Effect |
-|---|---|---|
-| Card border | `rgba(74,222,128,0.25)` | Hairline green on every card border |
-| Navbar border | `rgba(74,222,128,0.15)` | Faint green line under the fixed nav |
-| Hover background | `rgba(74,222,128,0.08)` | Green-tinted hover, e.g. list rows |
-| Active ToC item | `border-left-color: var(--accent-green)` | Marks current heading in the sidebar |
-| Prose link hover | `color` / `text-decoration-color: var(--accent-green)` | Link feedback in articles |
-| Hero commit bars | `dark:bg-[var(--accent-green)]` on hover | Live activity in the bento chart |
-| Blog "view all" hover | `--accent-red` | Red counterpoint reserved for blog links |
+| Surface | Light Mode | Dark Mode | Effect |
+|---|---|---|---|
+| **Card border** | `#D9DDD2` | `rgba(184, 255, 0, 0.25)` | Clean stone divider (light) / Hairline lime glow (dark) |
+| **Navbar border** | `transparent` | `rgba(184, 255, 0, 0.15)` | Faint lime separation under fixed nav |
+| **Hover background** | `#EAECE2` | `rgba(184, 255, 0, 0.08)` | Subtle warm tint (light) / Lime sheen (dark) |
+| **Active ToC item** | `border-left-color: #0A0A0A` | `border-left-color: #B8FF00` | Razor-sharp indicator bar |
+| **Prose link hover** | `text-primary` (`#0A0A0A`) | `color: #B8FF00` | Clean underline (light) / Lime illumination (dark) |
+| **Hero commit bars** | `group-hover:bg-[#0A0A0A]` | `dark:group-hover:bg-[#B8FF00]` | Dynamic activity feedback in bento chart |
+| **Primary Buttons** | `bg-[#0A0A0A] text-[#F7F8F2]` | `bg-[#B8FF00] text-[#0A0A0A]` | Inverting high-contrast CTA |
 
 ---
 
@@ -124,12 +137,12 @@ Both `opengraph-image.tsx` files use a fixed dark editorial palette independent 
 
 - **Background:** `linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #1a1a1a 100%)` — echoes `--footer-bg` (`#0a0a0a`).
 - **Branding bar:** white labels at stepped opacities (`rgba(255,255,255,0.5/0.35/0.2/0.25)`).
-- **Texture:** purple and blue radial glows at low opacity (`rgba(120,80,255,0.12)`, `rgba(60,180,255,0.08)`).
+- **Texture:** lime, purple, and blue radial glows at low opacity.
 
 | Card type | Accent line gradient |
 |---|---|
-| Blog | `linear-gradient(90deg, #7c4fff, #3bb4ff)` — violet → cyan |
-| Project | `linear-gradient(90deg, #50c878, #7c4fff)` — emerald → violet |
+| Blog | `linear-gradient(90deg, #B8FF00, #3bb4ff)` — electric lime → cyan |
+| Project | `linear-gradient(90deg, #B8FF00, #7c4fff)` — electric lime → violet |
 
 ### 5.2 Sponsor Button
 
@@ -166,15 +179,15 @@ Fonts load via `next/font/google` in `lib/fonts.ts` and are exposed as CSS varia
 
 - **Mechanism:** `next-themes` with `class` strategy — `.dark` is applied to `<html>`; all tokens switch via the `.dark {}` block in `globals.css`.
 - **Logo:** `dark:invert` flips the black SVG → white.
-- **Page transitions:** `CloudTransition` panels use `bg-footer-bg`, adapting from `#f9fafb` (light) to `#0a0a0a` (dark).
-- **Browser chrome:** `theme_color: "#000000"` in both `lib/seo/metadata.ts` and `app/manifest.ts`; `background_color: "#ffffff"` in the manifest.
+- **Page transitions:** `CloudTransition` panels use `bg-footer-bg`, adapting from `#EFF1E8` (light) to `#050505` (dark).
+- **Browser chrome:** `theme_color: "#0A0A0A"` in both `lib/seo/metadata.ts` and `app/manifest.ts`; `background_color: "#F7F8F2"` in the manifest.
 
 ---
 
 ## 8. Usage Conventions
 
-1. **Tokens only:** use `bg-background`, `text-foreground`, `bg-hover-bg`, etc. Never `bg-white` / `bg-black` directly — the component should adapt to both themes.
-2. **Borders:** all cards use `border border-border-primary` (auto-swaps to the green hairline in dark).
+1. **Tokens only:** use `bg-background`, `text-foreground`, `bg-hover-bg`, `border-border-primary`, etc. Never `bg-white` / `bg-black` directly — components must adapt automatically across themes.
+2. **Borders:** all cards use `border border-border-primary` (renders as `#D9DDD2` in light, Electric Lime hairline glow in dark).
 3. **Secondary text:** `text-text-muted` for captions/labels; reserve `text-foreground` for primary content.
 4. **Cards on hover:** `transition-shadow hover:shadow-md` — elevation, not scale/transform.
 5. **Exceptions:** one-off Tailwind color classes are acceptable for state colors (`bg-blue-50 dark:bg-blue-900/20`) and the pink sponsor button; everything else flows through tokens.
@@ -187,15 +200,16 @@ Fonts load via `next/font/google` in `lib/fonts.ts` and are exposed as CSS varia
 | File | Theme role |
 |---|---|
 | `app/globals.css` | All CSS custom properties + `@theme {}` + prose/TOC styles |
+| `portfolio-theme.md` | Single source of truth for color specifications and tokens |
 | `lib/fonts.ts` | Font variables `--font-geist-sans`, `--font-geist-mono`, `--font-playfair` |
 | `docs/design.md` | Full design language: spacing, motion, components, breakpoints |
-| `lib/seo/metadata.ts` | `themeColor: "#000000"` |
-| `app/manifest.ts` | PWA `theme_color` / `background_color` |
-| `app/blogs/[slug]/opengraph-image.tsx` | Blog social card palette (violet → cyan) |
-| `app/projects/[slug]/opengraph-image.tsx` | Project social card palette (emerald → violet) |
+| `lib/seo/metadata.ts` | `themeColor: "#0A0A0A"` |
+| `app/manifest.ts` | PWA `theme_color` (`#0A0A0A`) / `background_color` (`#F7F8F2`) |
+| `app/blogs/[slug]/opengraph-image.tsx` | Blog social card palette (lime → cyan) |
+| `app/projects/[slug]/opengraph-image.tsx` | Project social card palette (lime → violet) |
 | `components/layout/CloudTransition.tsx` | Uses `bg-footer-bg` for mask panels |
 | `app/[routes]` + `components/` | Token consumption via Tailwind classes |
 
 ---
 
-*Conventions referenced from `agents/skills/ui-ux-engineer/SKILL.md`: deliberate choices over templated defaults, a coherent token-based visual language across every screen, and high-contrast accessibility designed in from the start.*
+*Conventions referenced from [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) and [`agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/accessibility-engineer/SKILL.md): deliberate choices over templated defaults, a coherent token-based visual language across every screen, and high-contrast accessibility designed in from the start.*

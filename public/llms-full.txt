@@ -540,21 +540,24 @@ Forward Deployed Engineering is the deliberate union of software engineering dep
 This portfolio website collects minimal personal data limited to:
 - **Contact form submissions**: Name, email address, and message content — used solely to respond to enquiries. Not sold, shared, or used for marketing.
 - **Google Analytics 4**: Anonymised, aggregate usage data (pages visited, time on page, referral source, browser/device type). No personally identifiable information is linked to analytics data. Opt-out available via [Google Analytics Opt-out Add-on](https://tools.google.com/dlpage/gaoptout).
+- **Vercel Web Analytics and Speed Insights**: Aggregate page views and real-user Core Web Vitals (LCP, INP, CLS). Cookie-free, no persistent cross-site identifiers, no cross-site tracking, and no behavioural profiling. Custom events are limited to the route visited, 75% scroll depth, contact form submission, and AI assistant open. Message content, name, email address, and device fingerprint are never sent to either service. Governed by the [Vercel Privacy Policy](https://vercel.com/legal/privacy-policy); opt out by blocking the measurement script with a content blocker.
 - **Server logs (Vercel)**: Standard HTTP request data (IP, path, user agent, timestamp) retained and managed by Vercel for security and reliability purposes.
 
-**Cookies set**: `_ga`, `_ga_*` (Google Analytics, 2-year / 24-hour expiry). Theme preference stored in localStorage (no personal data).
+**Cookies set on public pages**: `_ga`, `_ga_*` (Google Analytics, 2-year / 24-hour expiry). Theme preference stored in localStorage (no personal data). Vercel Web Analytics and Speed Insights set no cookies. No advertising or cross-site tracking cookies are set anywhere on this site.
+
+**Private admin area**: `/admin` sets a strictly necessary authentication session cookie (`authjs.session-token`, or its `__Secure-` variant) for administrators only. It is not used for visitor tracking and is not shared with third parties.
 
 **Third-party data processors**:
-- Vercel — hosting and edge infrastructure
+- Vercel — hosting and edge infrastructure, plus Web Analytics and Speed Insights measurement
 - Neon (Serverless PostgreSQL) — contact form database storage
 - Google Analytics — anonymised usage analytics
 - Cloudinary — image and media hosting
 
-**Data retention**: Contact form submissions retained until the enquiry is resolved. GA data retained for 14 months (Google's default).
+**Data retention**: Contact form submissions retained until the enquiry is resolved. GA data retained for 14 months (Google's default). Vercel Analytics and Speed Insights data retained in aggregate form on a rolling 90-day window, never against an individual visitor.
 
 **User rights**: Right to access, correct, or delete personal data submitted through this site. Contact: shaikh.samir.work@gmail.com with subject "Data Request". Response within 30 days.
 
-**Last updated**: September 2026
+**Last updated**: 29 September 2026
 
 ### Terms of Service
 **URL**: https://samir-portfolio-dev.vercel.app/terms-of-service

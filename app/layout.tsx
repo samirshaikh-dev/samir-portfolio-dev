@@ -7,6 +7,7 @@ import { getRootJsonLd } from "@/lib/seo/structured-data";
 import { AUTHOR_NAME } from "@/lib/site-config";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { VercelAnalytics } from "@/components/analytics/VercelAnalytics";
 import { ScrollDepthTracker } from "@/components/analytics/AnalyticsEvents";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -60,6 +61,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        {/* Skip to Content Link for WCAG Keyboard Accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-foreground focus:text-background focus:rounded-full focus:font-bold focus:shadow-xl focus:ring-2 focus:ring-accent-lime focus:outline-none"
+        >
+          Skip to content
+        </a>
+
         <Script
           id="json-ld-person"
           type="application/ld+json"
@@ -69,6 +78,7 @@ export default function RootLayout({
         <AppProviders>
           <Navbar />
           <div
+            id="main-content"
             className="flex-1 flex flex-col"
             style={{ minHeight: "calc(100svh - var(--navbar-h))" }}
           >
@@ -81,6 +91,7 @@ export default function RootLayout({
           </ConditionalFooter>
           <LazyClientComponents />
           <GoogleAnalytics />
+          <VercelAnalytics />
           <ScrollDepthTracker />
         </AppProviders>
       </body>

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { getCachedProjects, getCachedBlogs, getCachedSocials } from "@/lib/cache";
+import { AUTHOR_NAME } from "@/lib/site-config";
 import { SocialIcon } from "@/components/SocialIcons";
 
 const pageLinks = [
@@ -14,7 +16,53 @@ const pageLinks = [
   { label: "Resume", href: "/resume" },
 ];
 
+const legalLinks = [
+  { label: "Sitemap", href: "/sitemap" },
+  { label: "Privacy Policy", href: "/privacy-policy" },
+  { label: "Terms", href: "/terms-of-service" },
+];
+
 const MAX_ITEMS = 5;
+
+const FOCUS_RING =
+  "focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-background";
+
+const MICRO_LABEL =
+  "font-mono text-[10px] font-semibold uppercase tracking-wider text-text-muted sm:text-[11px]";
+
+function FooterLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className={`group inline-flex max-w-full items-start gap-1 rounded-sm text-sm leading-relaxed text-text-secondary transition-colors duration-200 hover:text-foreground motion-reduce:transition-none ${FOCUS_RING}`}
+    >
+      <span className="line-clamp-2 break-words">{children}</span>
+      <span
+        aria-hidden="true"
+        className="mt-0.5 shrink-0 text-xs leading-none text-foreground opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100 group-focus-visible:opacity-100 dark:text-accent-lime motion-reduce:transform-none motion-reduce:transition-none"
+      >
+        ›
+      </span>
+    </Link>
+  );
+}
+
+function ArrowLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className={`group mt-1 inline-flex items-center gap-1.5 text-xs font-bold text-foreground transition-colors duration-200 hover:text-foreground dark:text-accent-lime motion-reduce:transition-none ${FOCUS_RING}`}
+    >
+      {children}
+      <span
+        aria-hidden="true"
+        className="transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transform-none motion-reduce:transition-none"
+      >
+        →
+      </span>
+    </Link>
+  );
+}
 
 export default async function Footer() {
   const [projects, blogs, socials] = await Promise.all([
@@ -30,102 +78,108 @@ export default async function Footer() {
   const hasMoreBlogs = blogs.length > MAX_ITEMS;
 
   return (
-    <footer className="w-full bg-footer-bg border-t border-border-primary">
-      <div className="mx-auto max-w-7xl px-6 md:px-10 py-12 md:py-16">
+    <footer className="relative isolate w-full overflow-hidden border-t border-border-primary bg-footer-bg">
+      {/* Atmospheric depth: ambient lime glow + geometric dot matrix */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-40 right-0 -z-10 h-[420px] w-[420px] bg-[radial-gradient(circle,rgba(184,255,0,0.16)_0%,transparent_65%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(184,255,0,0.08)_0%,transparent_65%)] sm:h-[550px] sm:w-[550px]"
+      />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(#0A0A0A_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.03] dark:opacity-[0.07]"
+      />
 
-        {/* Top section: Logo + columns */}
-        <div className="flex flex-col gap-12 lg:flex-row lg:gap-16">
-
+      <div className="mx-auto w-full max-w-6xl px-6 py-14 md:px-10 md:py-20">
+        {/* ── Brand + Navigation Bento ─────────────────────────────────── */}
+        <div className="grid overflow-hidden rounded-3xl border border-border-primary bg-background lg:grid-cols-12 dark:bg-card-bg">
           {/* Brand */}
-          <div className="flex-shrink-0 flex flex-col items-start gap-4">
-            <Link href="/">
-              <div className="relative h-16 w-16 md:h-20 md:w-20">
+          <div className="flex flex-col items-start gap-5 p-6 sm:p-8 lg:col-span-5 lg:border-r lg:border-border-primary">
+            <Link
+              href="/"
+              className={`inline-flex rounded-2xl ${FOCUS_RING}`}
+              aria-label="Samir Shaikh — back to homepage"
+            >
+              <span className="relative block h-14 w-14 overflow-hidden rounded-2xl border border-border-primary bg-background p-1 dark:bg-card-bg">
                 <Image
                   src="/Logo.svg"
-                  alt="Logo"
+                  alt=""
                   fill
-                  className="rounded-full object-cover dark:invert transition-all duration-300"
-                  priority
-                  sizes="(max-width: 768px) 64px, 80px"
+                  className="object-contain transition-transform duration-300 hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none dark:invert"
+                  sizes="56px"
                 />
-              </div>
+              </span>
             </Link>
-            <p className="text-sm text-text-muted max-w-[200px] leading-relaxed">
-              Lost among the stars, I found myself.
+
+            <div>
+              <p className="text-2xl font-black leading-tight tracking-tight text-foreground sm:text-3xl">
+                {AUTHOR_NAME}
+              </p>
+              <span
+                aria-hidden="true"
+                className="mt-2.5 block h-px w-12 bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.5)]"
+              />
+            </div>
+
+            <p className="max-w-xs text-sm leading-relaxed text-text-muted">
+              Lost among{" "}
+              <span className="-rotate-1 rounded-xl border border-black/10 bg-accent-lime px-2 py-0.5 font-black text-[#0A0A0A] shadow-xs">
+                the stars
+              </span>
+              , I found myself.
             </p>
+
             {socials.length > 0 && (
-              <div className="flex flex-wrap gap-3 mt-1">
+              <ul className="flex flex-wrap gap-2.5">
                 {socials.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-lg border border-border-primary bg-background text-text-muted hover:text-foreground hover:border-foreground hover:shadow-sm transition-all duration-200 flex items-center justify-center"
-                    title={social.name}
-                  >
-                    <SocialIcon name={social.name} className="w-4 h-4" />
-                  </a>
+                  <li key={social.name}>
+                    <a
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={social.name}
+                      aria-label={`${social.name} (opens in a new tab)`}
+                      className={`inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border-primary bg-background text-text-muted transition-all duration-200 hover:-translate-y-0.5 hover:border-foreground/30 hover:bg-hover-bg hover:text-foreground hover:shadow-sm dark:bg-card-bg motion-reduce:transform-none motion-reduce:transition-none ${FOCUS_RING}`}
+                    >
+                      <SocialIcon name={social.name} className="h-4 w-4" />
+                    </a>
+                  </li>
                 ))}
-              </div>
+              </ul>
             )}
           </div>
 
           {/* Link columns */}
-          <div className="flex flex-col sm:flex-row gap-10 sm:gap-16 lg:ml-auto">
-
+          <nav
+            aria-label="Footer"
+            className="grid grid-cols-2 gap-x-6 gap-y-10 p-6 sm:grid-cols-3 sm:p-8 lg:col-span-7"
+          >
             {/* Pages */}
-            <div className="min-w-[120px]">
-              <p className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-5">
-                Pages
-              </p>
+            <div className="min-w-0">
+              <h2 className={`${MICRO_LABEL} mb-4`}>Pages</h2>
               <ul className="flex flex-col gap-2.5">
                 {pageLinks.map(({ label, href }) => (
                   <li key={href}>
-                    <Link
-                      href={href}
-                      className="text-sm text-text-secondary hover:text-foreground transition-colors duration-200 flex items-center gap-0.5 group"
-                    >
-                      {label}
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-xs leading-none">
-                        ›
-                      </span>
-                    </Link>
+                    <FooterLink href={href}>{label}</FooterLink>
                   </li>
                 ))}
               </ul>
             </div>
 
             {/* Projects */}
-            <div className="min-w-[140px]">
-              <p className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-5">
-                Projects
-              </p>
+            <div className="min-w-0">
+              <h2 className={`${MICRO_LABEL} mb-4`}>Projects</h2>
               {visibleProjects.length === 0 ? (
-                <p className="text-sm text-text-muted italic">No projects yet</p>
+                <p className="text-sm italic text-text-muted">No projects yet</p>
               ) : (
                 <ul className="flex flex-col gap-2.5">
                   {visibleProjects.map((project) => (
                     <li key={project.slug}>
-                      <Link
-                        href={`/projects/${project.slug}`}
-                        className="text-sm text-text-secondary hover:text-foreground transition-colors duration-200 flex items-center gap-0.5 group"
-                      >
-                        {project.title}
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-xs leading-none">
-                          ›
-                        </span>
-                      </Link>
+                      <FooterLink href={`/projects/${project.slug}`}>{project.title}</FooterLink>
                     </li>
                   ))}
                   {hasMoreProjects && (
-                    <li className="mt-1">
-                      <Link
-                        href="/projects"
-                        className="text-sm font-medium text-text-muted hover:text-foreground transition-colors duration-200 flex items-center gap-1"
-                      >
-                        More <span className="text-xs">→</span>
-                      </Link>
+                    <li>
+                      <ArrowLink href="/projects">More</ArrowLink>
                     </li>
                   )}
                 </ul>
@@ -133,67 +187,46 @@ export default async function Footer() {
             </div>
 
             {/* Blog */}
-            <div className="min-w-[140px]">
-              <p className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-5">
-                Blog
-              </p>
+            <div className="min-w-0">
+              <h2 className={`${MICRO_LABEL} mb-4`}>Blog</h2>
               {visibleBlogs.length === 0 ? (
-                <p className="text-sm text-text-muted italic">No posts yet</p>
+                <p className="text-sm italic text-text-muted">No posts yet</p>
               ) : (
                 <ul className="flex flex-col gap-2.5">
                   {visibleBlogs.map((blog) => (
                     <li key={blog.slug}>
-                      <Link
-                        href={`/blogs/${blog.slug}`}
-                        className="text-sm text-text-secondary hover:text-foreground transition-colors duration-200 flex items-center gap-0.5 group"
-                      >
-                        {blog.title}
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-150 text-xs leading-none">
-                          ›
-                        </span>
-                      </Link>
+                      <FooterLink href={`/blogs/${blog.slug}`}>{blog.title}</FooterLink>
                     </li>
                   ))}
                   {hasMoreBlogs && (
-                    <li className="mt-1">
-                      <Link
-                        href="/blogs"
-                        className="text-sm font-medium text-text-muted hover:text-foreground transition-colors duration-200 flex items-center gap-1"
-                      >
-                        More <span className="text-xs">→</span>
-                      </Link>
+                    <li>
+                      <ArrowLink href="/blogs">More</ArrowLink>
                     </li>
                   )}
                 </ul>
               )}
             </div>
-
-          </div>
+          </nav>
         </div>
 
-        {/* Divider */}
-        <div className="mt-12 border-t border-border-primary" />
-
-        {/* Bottom Section */}
-        <div className="mt-6 flex flex-col sm:flex-row items-center justify-between text-sm text-text-muted">
-          <p>
+        {/* ── Bottom bar ───────────────────────────────────────────────── */}
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border-primary pt-6 sm:flex-row">
+          <p className={`${MICRO_LABEL} text-center sm:text-left`}>
             © {new Date().getFullYear()} All rights reserved.
           </p>
-          <div className="mt-4 sm:mt-0 flex items-center gap-4">
-            <Link href="/sitemap" className="hover:text-foreground transition-colors">
-              Sitemap
-            </Link>
-            <span aria-hidden="true" className="opacity-30">·</span>
-            <Link href="/privacy-policy" className="hover:text-foreground transition-colors">
-              Privacy Policy
-            </Link>
-            <span aria-hidden="true" className="opacity-30">·</span>
-            <Link href="/terms-of-service" className="hover:text-foreground transition-colors">
-              Terms
-            </Link>
-          </div>
+          <ul className="flex flex-wrap items-center justify-center gap-2">
+            {legalLinks.map(({ label, href }) => (
+              <li key={href}>
+                <Link
+                  href={href}
+                  className={`inline-flex items-center rounded-full border border-border-primary px-3 py-1.5 font-mono text-[10px] uppercase tracking-wider text-text-secondary transition-colors duration-200 hover:border-foreground/30 hover:bg-hover-bg hover:text-foreground motion-reduce:transition-none sm:text-[11px] ${FOCUS_RING}`}
+                >
+                  {label}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
-
       </div>
     </footer>
   );
