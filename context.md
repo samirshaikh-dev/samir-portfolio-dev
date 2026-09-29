@@ -15,7 +15,7 @@ Personal portfolio, technical blog, commercial services showcase, and interactiv
 - **Content & Parsing:** Cheerio (HTML → plain text for RAG chunking), `html-react-parser` (stored HTML → React with `next/image` optimization), `react-markdown` + `remark-gfm` (chat output rendering), `unified`/`remark`/`rehype` + `rehype-sanitize` (blog pipeline Markdown → sanitized HTML), `date-fns` (admin media/date formatting)
 - **PWA & Notifications:** Serwist (`@serwist/next`, service worker `app/sw.ts`), Web Push (`web-push`)
 - **Email:** Nodemailer (SMTP transport with modular branded HTML & plain-text templates for contact form confirmations, admin alerts, and threaded admin replies via `lib/email/`)
-- **Analytics & Security:** Google Analytics (`@/components/analytics/GoogleAnalytics`), FingerprintJS (`@fingerprintjs/fingerprintjs`) for rate limiting visitor identification, IPinfo for VPN/proxy privacy checks
+- **Analytics & Security:** Google Analytics (`@/components/analytics/GoogleAnalytics`), Vercel Web Analytics + Speed Insights (`@/components/analytics/VercelAnalytics`, dashboard-enabled, no env var), a typed dual-dispatch event catalog (`lib/analytics/events.ts` + `lib/analytics/trackEvent.ts`), FingerprintJS (`@fingerprintjs/fingerprintjs`) for rate limiting visitor identification, IPinfo for VPN/proxy privacy checks
 - **Package Manager:** pnpm (v10) — `pnpm run dev` runs `next dev --webpack` (development server with Fast Refresh / HMR); use `pnpm run dev:prod` to test local production build + serve.
 
 ## Project Structure
@@ -108,7 +108,7 @@ app/                            # Next.js App Router
 components/
 ├── about/                     # ExperienceTimeline (server), FAQ (accordion + JSON-LD)
 ├── admin/                     # AdminDashboard, BlogForm, ProjectForm, TipTapEditor, MediaLibraryModal, CertificateForm, DatePicker, DeleteLogButton
-├── analytics/                 # GoogleAnalytics (loads gtag when NEXT_PUBLIC_GA_ID is set) + AnalyticsEvents (ScrollDepthTracker)
+├── analytics/                 # GoogleAnalytics (loads gtag when NEXT_PUBLIC_GA_ID is set) + VercelAnalytics (Vercel Web Analytics + Speed Insights) + AnalyticsEvents (ScrollDepthTracker)
 ├── blogs/                     # BlogList, BlogInteractions, BlogShareButtons, BlogStarInteraction
 ├── certificates/              # CertificatesClient (category filter + search grid), CertificateCard
 ├── faq/                       # FAQClient (category filter + live search accordion), FAQAccordionItem
@@ -334,6 +334,7 @@ Schema is defined in `lib/schema.ts`; four generated migrations are applied (`dr
 | `VAPID_PRIVATE_KEY` | Web Push VAPID private key | Server push signing |
 | `NEXT_PUBLIC_SITE_NAME`| Display site name | Used across layout, emails, and metadata |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics Measurement ID | Optional GA4 tracking |
+| `NEXT_PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG` | Vercel Web Analytics/Speed Insights client config | **Never set manually** — injected by the Vercel build platform when Analytics is enabled for the project |
 | `AI_SECURITY` | Enable VPN checks & rate limiting | Set to `'true'` to activate |
 | `AI_LIMIT` | Maximum chat queries per day | Defaults to 5 if unset |
 | `ENABLE_CHAT_FOLLOWUPS` | Enable chat follow-up suggestion chips | Set to `'false'` to disable; on by default |

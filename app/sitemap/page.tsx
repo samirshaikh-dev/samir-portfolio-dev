@@ -213,7 +213,8 @@ export default async function SitemapPage() {
       href: "/privacy-policy",
       label: "Privacy Policy",
       route: "/privacy-policy",
-      description: "Data handling, zero-tracking commitments, and privacy assurances.",
+      description:
+        "Data handling, transparent analytics disclosures, and privacy assurances — no advertising or cross-site tracking.",
       isExternal: false,
       tag: "Compliance",
       icon: LuLayers,

@@ -54,7 +54,7 @@ const jsonLd = {
     name: AUTHOR_NAME,
     url: APP_URL,
   },
-  dateModified: "2026-09-18",
+  dateModified: "2026-09-29",
   inLanguage: "en-US",
 };
 
@@ -78,7 +78,7 @@ export default function PrivacyPolicyPage() {
       <div className="max-w-3xl mx-auto w-full">
         {/* Last updated */}
         <p className="text-xs text-text-muted font-mono mb-10">
-          Last updated: 18 September 2026
+          Last updated: 29 September 2026
         </p>
 
         <div className="prose prose-sm prose-gray dark:prose-invert max-w-none text-text-muted prose-headings:text-foreground prose-strong:text-foreground prose-a:text-foreground hover:prose-a:text-text-secondary prose-h2:font-serif prose-h2:italic prose-h2:font-semibold prose-h2:text-xl prose-h3:text-base prose-h3:font-semibold prose-hr:border-border-primary space-y-6">
@@ -155,7 +155,48 @@ export default function PrivacyPolicyPage() {
               .
             </p>
 
-            <h3>2.3 Server Logs</h3>
+            <h3>2.3 Vercel Web Analytics and Speed Insights</h3>
+            <p>
+              This site also uses <strong>Vercel Web Analytics</strong> and{" "}
+              <strong>Vercel Speed Insights</strong>, provided by the hosting
+              platform, to measure aggregate page views and real-user Core Web
+              Vitals (LCP, INP, CLS).
+            </p>
+            <p>
+              These services are designed to be privacy-preserving: they set{" "}
+              <strong>no cookies</strong>, create{" "}
+              <strong>no persistent cross-site identifiers</strong>, and perform{" "}
+              <strong>no cross-site tracking</strong>. They do not build a
+              behavioural profile of you, and I do not use them to identify
+              individual visitors.
+            </p>
+            <p>
+              The custom events I record through these services are limited to
+              the route you are on and whether you scrolled past 75% of the
+              page, submitted the contact form, or opened the AI assistant.{" "}
+              <strong>
+                The content of your messages, your name, your email address, and
+                any device fingerprint are never sent to either analytics
+                service.
+              </strong>
+            </p>
+            <p>
+              Vercel processes this data under its own{" "}
+              <a
+                href="https://vercel.com/legal/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Privacy Policy
+              </a>
+              . Because no cookies or persistent identifiers are involved, there
+              is nothing to opt out of via a browser add-on — instead, an
+              installed content blocker will prevent the measurement script from
+              loading, at the cost of the site appearing without traffic
+              reporting.
+            </p>
+
+            <h3>2.4 Server Logs</h3>
             <p>
               The hosting infrastructure (Vercel) automatically logs standard
               HTTP request data — IP address, request path, user agent, and
@@ -187,6 +228,12 @@ export default function PrivacyPolicyPage() {
                 <strong>Analytics data</strong> — used to understand site
                 traffic in aggregate. No individual profiling.
               </li>
+              <li>
+                <strong>Performance measurements</strong> — Core Web Vitals
+                data from real visitor sessions is used to find and fix
+                slow-loading pages. It is never joined to contact form
+                submissions or used to identify you.
+              </li>
             </ul>
           </section>
 
@@ -196,7 +243,8 @@ export default function PrivacyPolicyPage() {
           <section aria-labelledby="cookies">
             <h2 id="cookies">4. Cookies</h2>
             <p>
-              This site sets the following cookies:
+              This site sets the following cookies on <strong>public</strong>{" "}
+              pages:
             </p>
             <ul>
               <li>
@@ -210,8 +258,23 @@ export default function PrivacyPolicyPage() {
               </li>
             </ul>
             <p>
-              No session, authentication, advertising, or tracking cookies are
-              set beyond the above.
+              <strong>
+                Vercel Web Analytics and Speed Insights set no cookies at all
+              </strong>{" "}
+              — they rely on an aggregate, cookie-free measurement model (see
+              Section 2.3).
+            </p>
+            <p>
+              No advertising or cross-site tracking cookies are set on any page
+              of this site.
+            </p>
+            <p>
+              A separate note on the private <strong>/admin</strong> area: it
+              uses a strictly necessary authentication session cookie
+              (<code>authjs.session-token</code> or its secure
+              <code>__Secure-</code> variant) to keep an administrator signed
+              in. It is set only for administrators, is not used to track
+              visitors, and is not shared with any third party.
             </p>
           </section>
 
@@ -223,7 +286,9 @@ export default function PrivacyPolicyPage() {
             <p>The following third-party services process data on behalf of this site:</p>
             <ul>
               <li>
-                <strong>Vercel</strong> — hosting and edge infrastructure (
+                <strong>Vercel</strong> — hosting and edge infrastructure, and
+                additionally the provider of Web Analytics and Speed Insights
+                measurement ({" "}
                 <a
                   href="https://vercel.com/legal/privacy-policy"
                   target="_blank"
@@ -290,6 +355,13 @@ export default function PrivacyPolicyPage() {
             <p>
               Google Analytics data is retained for 14 months per Google&apos;s
               default retention settings.
+            </p>
+            <p>
+              Vercel Web Analytics and Speed Insights data are retained by
+              Vercel in aggregate form on a rolling 90-day window and are not
+              stored against an individual visitor. Contact form submissions
+              are the only personal data retained by this site, and they are
+              deleted on request as described in Section 7.
             </p>
           </section>
 
