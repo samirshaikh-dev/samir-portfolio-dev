@@ -3,6 +3,8 @@
 import { useState, useRef } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { AUTHOR_PHONE } from "@/lib/site-config";
+import { analyticsEvents } from "@/lib/analytics/events";
+import { trackEvent } from "@/lib/analytics/trackEvent";
 
 const FOCUS_RING =
   "focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-background";
@@ -81,9 +83,18 @@ export default function ContactForm() {
         );
       }
 
+      // Boolean only — never the submitted name/email/subject/message.
+      trackEvent(analyticsEvents.contactSubmitSuccess, {
+        email_sent: Boolean(resData.emailSent),
+        inquiry_type: selectedType || "general",
+      });
+
       formRef.current?.reset();
       setSelectedType(null);
     } catch {
+      trackEvent(analyticsEvents.contactSubmitFallback, {
+        inquiry_type: selectedType || "general",
+      });
       setSuccessMessage(
         "Your message was prepared for WhatsApp! If the tab did not open automatically, click the button below to message Samir directly."
       );

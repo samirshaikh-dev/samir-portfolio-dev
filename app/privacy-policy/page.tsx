@@ -9,7 +9,7 @@ export const revalidate = 3600;
 export const metadata: Metadata = {
   title: "Privacy Policy | Samir Shaikh",
   description:
-    "Privacy Policy for samir-portfolio-dev.vercel.app — explains what data is collected through the contact form and Google Analytics, how it is used, and your rights.",
+    "Privacy Policy for samir-portfolio-dev.vercel.app — explains what data is collected through the contact form, Google Analytics, and Vercel Analytics, how it is used, and your rights.",
   keywords: [
     "Samir Shaikh Privacy Policy",
     "portfolio privacy policy",

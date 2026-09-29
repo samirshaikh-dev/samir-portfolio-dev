@@ -26,6 +26,8 @@
     "@tiptap/react": "3.27.3",
     "@tiptap/starter-kit": "3.27.3",
     "@types/web-push": "3.6.4",
+    "@vercel/analytics": "2.0.1",
+    "@vercel/speed-insights": "2.0.0",
     "ai": "6.0.197",
     "bcryptjs": "3.0.3",
     "cheerio": "1.2.0",

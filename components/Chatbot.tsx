@@ -20,6 +20,8 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import type { GroundingSource } from '@/lib/chat/retrieval';
+import { analyticsEvents } from '@/lib/analytics/events';
+import { trackEvent } from '@/lib/analytics/trackEvent';
 
 interface FriendlyError {
   title: string;
@@ -227,12 +229,23 @@ export default function Chatbot() {
     }
   }, [isOpen]);
 
+  // Analytics: fire once per drawer open. Keyed on the `isOpen` edge rather
+  // than on individual call sites, so the FAB, the `open-ai-chat` custom
+  // event, and the Cmd/Ctrl+K shortcut are all covered by this one effect.
+  // No message text or visitorId is ever sent.
+  useEffect(() => {
+    if (isOpen) {
+      trackEvent(analyticsEvents.chatOpen);
+    }
+  }, [isOpen]);
+
   const isLoading = status === 'submitted' || status === 'streaming';
 
   const sendWithHeaders = useCallback(
     (text: string) => {
       const clean = text.trim();
       if (!clean || isLoading) return;
+      trackEvent(analyticsEvents.chatMessageSent);
       sendMessage({ text: clean }, { headers: visitorId ? { 'x-visitor-id': visitorId } : {} });
     },
     [isLoading, sendMessage, visitorId]

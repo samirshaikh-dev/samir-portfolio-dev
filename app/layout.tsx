@@ -7,6 +7,7 @@ import { getRootJsonLd } from "@/lib/seo/structured-data";
 import { AUTHOR_NAME } from "@/lib/site-config";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { GoogleAnalytics } from "@/components/analytics/GoogleAnalytics";
+import { VercelAnalytics } from "@/components/analytics/VercelAnalytics";
 import { ScrollDepthTracker } from "@/components/analytics/AnalyticsEvents";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -90,6 +91,7 @@ export default function RootLayout({
           </ConditionalFooter>
           <LazyClientComponents />
           <GoogleAnalytics />
+          <VercelAnalytics />
           <ScrollDepthTracker />
         </AppProviders>
       </body>
