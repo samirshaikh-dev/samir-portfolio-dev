@@ -15,3 +15,4 @@ export const AUTOMATION_TOKEN = requireEnv("BLOG_AUTOMATION_TOKEN");
 export const AUTO_PUBLISH = (process.env.AUTO_PUBLISH ?? "true").toLowerCase() !== "false";
 export const ENABLE_BLOG_AUTOMATION = process.env.ENABLE_BLOG_AUTOMATION === "true";
 export const MIN_WORD_COUNT = Number(process.env.MIN_WORD_COUNT ?? 350);
+export const BLOG_PROMPT_BUDGET = Number(process.env.BLOG_PROMPT_BUDGET ?? 12000);

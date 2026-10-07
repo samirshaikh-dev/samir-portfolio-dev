@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { createGroq } from "@ai-sdk/groq";
 import { createGoogleGenerativeAI } from "@ai-sdk/google";
 import { generateText } from "ai";
-import { GOOGLE_API_KEY, GROQ_API_KEY, AI_PROVIDER, AI_MODEL } from "./config.mjs";
+import { GOOGLE_API_KEY, GROQ_API_KEY, AI_PROVIDER, AI_MODEL, BLOG_PROMPT_BUDGET } from "./config.mjs";
 import { TOPIC_PILLARS } from "./topics.mjs";
 import { slugify } from "./utils.mjs";
 import { SEO_DIRECTIVES, getSeoGuidance } from "./skills.mjs";
@@ -17,7 +17,7 @@ const GROUNDING_SKIP_SECTIONS = new Set([
   "## Legal",
 ]);
 
-const DEFAULT_PROMPT_BUDGET = 6000;
+const DEFAULT_PROMPT_BUDGET = BLOG_PROMPT_BUDGET || 12000;
 
 /**
  * Estimates token count from character length (rough, conservative).
