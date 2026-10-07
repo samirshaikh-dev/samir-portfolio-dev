@@ -1,4 +1,3 @@
-import Script from "next/script";
 import { Suspense } from "react";
 import "./globals.css";
 import { geistSans, geistMono, playfair } from "@/lib/fonts";
@@ -51,8 +50,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <head>
-        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -70,11 +70,10 @@ export default function RootLayout({
           Skip to content
         </a>
 
-        <Script
+        <script
           id="json-ld-person"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-          strategy="beforeInteractive"
         />
         <AppProviders>
           <Navbar />

@@ -1,7 +1,7 @@
-import { db } from "@/lib/db";
-import { testimonials as testimonialsSchema } from "@/lib/schema";
-import { eq, asc } from "drizzle-orm";
+import { getCachedTestimonials } from "@/lib/cache";
 import Link from "next/link";
+import Image from "next/image";
+import { optimizeCloudinaryUrl } from "@/lib/cloudinary-utils";
 
 export interface Testimonial {
   id: string;
@@ -24,18 +24,6 @@ interface TestimonialsSectionProps {
   variant?: "homepage" | "services" | "contact";
   /** Override the fetched testimonials (useful if parent already fetched them) */
   testimonials?: Testimonial[];
-}
-
-async function getPublishedTestimonials(): Promise<Testimonial[]> {
-  try {
-    return await db
-      .select()
-      .from(testimonialsSchema)
-      .where(eq(testimonialsSchema.isPublished, true))
-      .orderBy(asc(testimonialsSchema.displayOrder));
-  } catch {
-    return [];
-  }
 }
 
 function StarRating({ rating }: { rating: number }) {
@@ -92,11 +80,12 @@ function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
         <div className="flex items-center gap-3 min-w-0">
           {/* Avatar */}
           {testimonial.avatarUrl ? (
-            <img
-              src={testimonial.avatarUrl}
+            <Image
+              src={optimizeCloudinaryUrl(testimonial.avatarUrl, { width: 72, quality: 85 })}
               alt={`${testimonial.name} photo`}
+              width={36}
+              height={36}
               className="w-9 h-9 rounded-full object-cover border border-border-primary flex-shrink-0"
-              loading="lazy"
             />
           ) : (
             <div className="w-9 h-9 rounded-full bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] flex items-center justify-center text-xs font-bold flex-shrink-0">
@@ -140,7 +129,7 @@ export default async function TestimonialsSection({
   variant = "homepage",
   testimonials: propTestimonials,
 }: TestimonialsSectionProps) {
-  const testimonials = propTestimonials ?? (await getPublishedTestimonials());
+  const testimonials = propTestimonials ?? ((await getCachedTestimonials()) as Testimonial[]);
 
   // Don't render the section at all if there are no published testimonials
   if (testimonials.length === 0) return null;

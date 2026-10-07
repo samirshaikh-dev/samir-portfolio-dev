@@ -10,13 +10,34 @@ export function optimizeCloudinaryUrl(
   url: string,
   options?: { width?: number; quality?: number }
 ): string {
-  if (!url || !url.includes("cloudinary.com")) return url;
+  if (!url || typeof url !== "string" || !url.includes("cloudinary.com")) return url;
 
-  const params = new URLSearchParams();
-  params.set("f_auto", "auto");
-  params.set("q_auto", "auto");
-  if (options?.width) params.set("w", String(options.width));
+  // Clean any legacy invalid query parameters
+  const cleanedUrl = url
+    .replace(/([?&])f_auto=[^&]*(&|$)/g, "$1")
+    .replace(/([?&])q_auto=[^&]*(&|$)/g, "$1")
+    .replace(/([?&])w=\d+(&|$)/g, "$1")
+    .replace(/[?&]$/, "");
 
-  const separator = url.includes("?") ? "&" : "?";
-  return `${url}${separator}${params.toString()}`;
+  if (cleanedUrl.includes("/image/upload/")) {
+    const transforms: string[] = ["f_auto"];
+    if (options?.quality) {
+      transforms.push(`q_${options.quality}`);
+    } else {
+      transforms.push("q_auto");
+    }
+    if (options?.width) {
+      transforms.push(`w_${options.width}`);
+    }
+    const transformStr = transforms.join(",");
+
+    if (cleanedUrl.includes(`/image/upload/${transformStr}/`)) {
+      return cleanedUrl;
+    }
+
+    const existingTransformRegex = /\/image\/upload\/(f_auto[^/]*\/)?/;
+    return cleanedUrl.replace(existingTransformRegex, `/image/upload/${transformStr}/`);
+  }
+
+  return cleanedUrl;
 }

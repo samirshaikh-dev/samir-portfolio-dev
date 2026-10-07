@@ -1,7 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { db } from "@/lib/db";
-import { projects as projectsSchema, blogs as blogsSchema, socials as socialsSchema } from "@/lib/schema";
-import { eq, desc } from "drizzle-orm";
+import { projects as projectsSchema, blogs as blogsSchema, socials as socialsSchema, testimonials as testimonialsSchema } from "@/lib/schema";
+import { eq, desc, asc } from "drizzle-orm";
 
 interface SlimItem {
   title: string;
@@ -60,4 +60,95 @@ export const getCachedSocials = unstable_cache(
   },
   ["footer-socials"],
   { revalidate: 3600, tags: ["socials"] }
+);
+
+/**
+ * Cached fetch of the top 3 featured projects for the homepage.
+ * Revalidated hourly via unstable_cache, with tag-based on-demand invalidation.
+ */
+export const getCachedHomepageProjects = unstable_cache(
+  async () => {
+    try {
+      const result = await db
+        .select({
+          id: projectsSchema.id,
+          title: projectsSchema.title,
+          slug: projectsSchema.slug,
+          excerpt: projectsSchema.excerpt,
+          cover_image_url: projectsSchema.coverImageUrl,
+          technologies: projectsSchema.technologies,
+          github_link: projectsSchema.githubLink,
+          demo_link: projectsSchema.demoLink,
+          is_case_study: projectsSchema.isCaseStudy,
+          badge: projectsSchema.badge,
+          category: projectsSchema.category,
+          metrics: projectsSchema.metrics,
+          display_order: projectsSchema.displayOrder,
+        })
+        .from(projectsSchema)
+        .where(eq(projectsSchema.isPublished, true))
+        .orderBy(asc(projectsSchema.displayOrder), desc(projectsSchema.publishedAt))
+        .limit(3);
+      return result;
+    } catch {
+      return [];
+    }
+  },
+  ["homepage-projects"],
+  { revalidate: 3600, tags: ["projects"] }
+);
+
+/**
+ * Cached fetch of the 3 latest blogs for the homepage.
+ * Revalidated hourly via unstable_cache.
+ */
+export const getCachedHomepageBlogs = unstable_cache(
+  async () => {
+    try {
+      const result = await db
+        .select({
+          id: blogsSchema.id,
+          title: blogsSchema.title,
+          slug: blogsSchema.slug,
+          excerpt: blogsSchema.excerpt,
+          cover_image_url: blogsSchema.coverImageUrl,
+          tags: blogsSchema.tags,
+          published_at: blogsSchema.publishedAt,
+          stars: blogsSchema.stars,
+        })
+        .from(blogsSchema)
+        .where(eq(blogsSchema.isPublished, true))
+        .orderBy(desc(blogsSchema.publishedAt))
+        .limit(3);
+      return result.map((b) => ({
+        ...b,
+        published_at: b.published_at ? b.published_at.toISOString() : "",
+        stars: b.stars ?? 0,
+      }));
+    } catch {
+      return [];
+    }
+  },
+  ["homepage-blogs"],
+  { revalidate: 3600, tags: ["blogs"] }
+);
+
+/**
+ * Cached fetch of published testimonials.
+ * Revalidated hourly via unstable_cache.
+ */
+export const getCachedTestimonials = unstable_cache(
+  async () => {
+    try {
+      return await db
+        .select()
+        .from(testimonialsSchema)
+        .where(eq(testimonialsSchema.isPublished, true))
+        .orderBy(asc(testimonialsSchema.displayOrder));
+    } catch {
+      return [];
+    }
+  },
+  ["homepage-testimonials"],
+  { revalidate: 3600, tags: ["testimonials"] }
 );

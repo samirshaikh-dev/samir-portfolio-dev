@@ -3,74 +3,17 @@ import HowIWork from "@/components/HowIWork";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import CallToAction from "@/components/home/CallToAction";
 import { getSpeakableJsonLd } from "@/lib/seo/structured-data";
-import { db } from "@/lib/db";
-import { projects as projectsSchema, blogs as blogsSchema } from "@/lib/schema";
-import { eq, desc, asc } from "drizzle-orm";
 import Link from "next/link";
 import ProjectList, { Project } from "@/components/projects/ProjectList";
 import BlogList from "@/components/blogs/BlogList";
+import { getCachedHomepageProjects, getCachedHomepageBlogs } from "@/lib/cache";
 
 export const revalidate = 3600;
 
-async function getLatestProjects(): Promise<Project[]> {
-  try {
-    const result = await db
-      .select({
-        id: projectsSchema.id,
-        title: projectsSchema.title,
-        slug: projectsSchema.slug,
-        excerpt: projectsSchema.excerpt,
-        cover_image_url: projectsSchema.coverImageUrl,
-        technologies: projectsSchema.technologies,
-        github_link: projectsSchema.githubLink,
-        demo_link: projectsSchema.demoLink,
-        is_case_study: projectsSchema.isCaseStudy,
-        badge: projectsSchema.badge,
-        category: projectsSchema.category,
-        metrics: projectsSchema.metrics,
-        display_order: projectsSchema.displayOrder,
-      })
-      .from(projectsSchema)
-      .where(eq(projectsSchema.isPublished, true))
-      .orderBy(asc(projectsSchema.displayOrder), desc(projectsSchema.publishedAt))
-      .limit(3);
-    return result as unknown as Project[];
-  } catch {
-    return [];
-  }
-}
-
-async function getLatestBlogs() {
-  try {
-    const result = await db
-      .select({
-        id: blogsSchema.id,
-        title: blogsSchema.title,
-        slug: blogsSchema.slug,
-        excerpt: blogsSchema.excerpt,
-        cover_image_url: blogsSchema.coverImageUrl,
-        tags: blogsSchema.tags,
-        published_at: blogsSchema.publishedAt,
-        stars: blogsSchema.stars,
-      })
-      .from(blogsSchema)
-      .where(eq(blogsSchema.isPublished, true))
-      .orderBy(desc(blogsSchema.publishedAt))
-      .limit(3);
-    return result.map((b) => ({
-      ...b,
-      published_at: b.published_at ? b.published_at.toISOString() : "",
-      stars: b.stars ?? 0,
-    }));
-  } catch {
-    return [];
-  }
-}
-
 export default async function Home() {
   const [projects, blogs] = await Promise.all([
-    getLatestProjects(),
-    getLatestBlogs(),
+    getCachedHomepageProjects() as Promise<Project[]>,
+    getCachedHomepageBlogs(),
   ]);
 
   return (
