@@ -17,6 +17,11 @@ interface ContactMessage {
   email: string;
   subject: string;
   message: string;
+  company?: string;
+  projectType?: string;
+  priority?: string;
+  budget?: string;
+  timeline?: string;
   seen: boolean;
   createdAt?: string | Date;
   created_at?: string | Date;
@@ -251,15 +256,30 @@ export default function ContactAdminPage() {
                         {getInitials(msg.name)}
                       </div>
 
-                      {/* Sender Name */}
-                      <span
-                        className={`w-36 truncate shrink-0 text-foreground ${
-                          isUnread ? "font-semibold" : "font-medium"
-                        }`}
-                        title={msg.name}
-                      >
-                        {msg.name}
-                      </span>
+                      {/* Sender Name & Priority */}
+                      <div className="w-44 flex items-center gap-1.5 shrink-0">
+                        <span
+                          className={`truncate text-foreground ${
+                            isUnread ? "font-semibold" : "font-medium"
+                          }`}
+                          title={msg.name}
+                        >
+                          {msg.name}
+                        </span>
+                        {msg.priority && (
+                          <span
+                            className={`text-[9px] font-semibold px-1.5 py-0.5 rounded-full shrink-0 ${
+                              msg.priority.toLowerCase().includes("urgent")
+                                ? "bg-red-500/10 text-red-500 border border-red-500/20"
+                                : msg.priority.toLowerCase().includes("high")
+                                ? "bg-amber-500/10 text-amber-500 border border-amber-500/20"
+                                : "bg-lime-500/10 text-lime-600 dark:text-lime-400 border border-lime-500/20"
+                            }`}
+                          >
+                            {msg.priority.split(" ")[0]}
+                          </span>
+                        )}
+                      </div>
 
                       {/* Separator */}
                       <span className="text-border-primary select-none shrink-0">|</span>
@@ -431,10 +451,74 @@ export default function ContactAdminPage() {
                 </div>
               </div>
 
+              {/* Project Metadata Details */}
+              {(viewingMessage.company || viewingMessage.projectType || viewingMessage.priority || viewingMessage.budget || viewingMessage.timeline) && (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 p-3 rounded-lg bg-footer-bg border border-border-primary text-xs">
+                  {viewingMessage.company && (
+                    <div>
+                      <span className="text-[10px] uppercase tracking-wider text-text-muted font-medium block">
+                        Company
+                      </span>
+                      <span className="font-semibold text-foreground">
+                        {viewingMessage.company}
+                      </span>
+                    </div>
+                  )}
+                  {viewingMessage.projectType && (
+                    <div>
+                      <span className="text-[10px] uppercase tracking-wider text-text-muted font-medium block">
+                        Project Type
+                      </span>
+                      <span className="font-semibold text-foreground">
+                        {viewingMessage.projectType}
+                      </span>
+                    </div>
+                  )}
+                  {viewingMessage.priority && (
+                    <div>
+                      <span className="text-[10px] uppercase tracking-wider text-text-muted font-medium block">
+                        Priority
+                      </span>
+                      <span
+                        className={`font-semibold ${
+                          viewingMessage.priority.toLowerCase().includes("urgent")
+                            ? "text-red-500"
+                            : viewingMessage.priority.toLowerCase().includes("high")
+                            ? "text-amber-500"
+                            : "text-lime-500"
+                        }`}
+                      >
+                        {viewingMessage.priority}
+                      </span>
+                    </div>
+                  )}
+                  {viewingMessage.budget && (
+                    <div>
+                      <span className="text-[10px] uppercase tracking-wider text-text-muted font-medium block">
+                        Budget Range
+                      </span>
+                      <span className="font-semibold text-emerald-400">
+                        {viewingMessage.budget}
+                      </span>
+                    </div>
+                  )}
+                  {viewingMessage.timeline && (
+                    <div>
+                      <span className="text-[10px] uppercase tracking-wider text-text-muted font-medium block">
+                        Timeline
+                      </span>
+                      <span className="font-semibold text-foreground">
+                        {viewingMessage.timeline}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+
               {/* Full Message Body */}
               <div className="flex flex-col gap-1.5">
                 <span className="text-[11px] uppercase tracking-wider text-text-muted font-medium">
-                  Message Content
+                  Project Description
                 </span>
                 <div className="p-4 rounded-xl bg-footer-bg/60 border border-border-primary text-sm text-foreground whitespace-pre-wrap leading-relaxed max-h-[40vh] overflow-y-auto">
                   {viewingMessage.message}

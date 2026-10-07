@@ -29,6 +29,13 @@
       "when": 1790401684901,
       "tag": "0003_mean_songbird",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791347683910,
+      "tag": "0004_aromatic_sumo",
+      "breakpoints": true
     }
   ]
 }

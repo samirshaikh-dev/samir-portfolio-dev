@@ -1,11 +1,16 @@
 import { AUTHOR_NAME, APP_URL } from "@/lib/site-config";
-import { renderEmailLayout, renderCtaButton, renderOutlineButton, EmailAccent } from "./layout";
+import { renderEmailLayout, renderDualButtons, EmailAccent } from "./layout";
 
 export interface AdminNotificationEmailProps {
   name: string;
   email: string;
   subject: string;
   message: string;
+  company?: string;
+  projectType?: string;
+  priority?: string;
+  budget?: string;
+  timeline?: string;
   receivedAt?: Date;
 }
 
@@ -16,9 +21,14 @@ export function renderAdminNotificationEmail({
   email,
   subject,
   message,
+  company,
+  projectType,
+  priority = "Medium Priority",
+  budget,
+  timeline,
   receivedAt = new Date(),
 }: AdminNotificationEmailProps): { html: string; text: string; emailSubject: string } {
-  const emailSubject = `[Portfolio Lead] New inquiry from ${name}: "${subject}"`;
+  const emailSubject = `[Portfolio Lead] ${priority.toUpperCase()}: ${name} (${projectType || subject})`;
   const formattedTime = receivedAt.toLocaleString("en-US", {
     dateStyle: "medium",
     timeStyle: "short",
@@ -35,85 +45,152 @@ export function renderAdminNotificationEmail({
   const safeName = escaped(name);
   const safeSubject = escaped(subject);
   const safeMessage = escaped(message);
+  const safeCompany = company ? escaped(company) : null;
+  const safeProjectType = projectType ? escaped(projectType) : null;
+  const safePriority = priority ? escaped(priority) : "Medium Priority";
+  const safeBudget = budget ? escaped(budget) : null;
+  const safeTimeline = timeline ? escaped(timeline) : null;
 
-  const replyMailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(`Re: ${subject}`)}`;
+  const isUrgent =
+    safePriority.toLowerCase().includes("urgent") ||
+    safePriority.toLowerCase().includes("high");
+
+  const replyMailto = `mailto:${encodeURIComponent(email)}?subject=${encodeURIComponent(
+    `Re: ${safeProjectType || safeSubject} - Samir Shaikh`
+  )}&body=${encodeURIComponent(
+    `Hi ${name},\n\nThank you for reaching out regarding ${safeProjectType || "your project"}.\n\n`
+  )}`;
 
   const body = `
-    <p class="paragraph">
-      A new inquiry just landed on your portfolio. Review the details below and respond within <strong style="color: #fafafa;">24 business hours</strong> to keep the lead warm.
-    </p>
+    <div style="background-color: ${isUrgent ? "rgba(248, 113, 113, 0.12)" : "rgba(167, 139, 250, 0.12)"}; border: 1px solid ${isUrgent ? "rgba(248, 113, 113, 0.35)" : "rgba(167, 139, 250, 0.35)"}; border-radius: 10px; padding: 12px 16px; margin-bottom: 22px;">
+      <span style="font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.2px; color: ${isUrgent ? "#f87171" : "#a78bfa"}; display: block; margin-bottom: 2px;">
+        ${safePriority} &bull; New Lead
+      </span>
+      <p style="margin: 0; font-size: 13px; color: #e4e4e7; line-height: 1.5;">
+        Respond within <strong style="color: #ffffff;">24 business hours</strong> to maximize lead conversion and keep momentum high.
+      </p>
+    </div>
 
-    <table role="presentation" width="100%" style="background-color: #17171b; border: 1px solid #1f1f23; border-radius: 10px; padding: 6px 18px; margin: 22px 0;">
+    <!-- Client Brief Table -->
+    <table role="presentation" width="100%" style="background-color: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 6px 20px; margin: 18px 0;">
       <tr>
-        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #1f1f23;" width="110">
-          <span style="color: #71717a; font-weight: 500;">From:</span>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Client:</span>
         </td>
-        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #1f1f23;">
-          <strong style="color: #fafafa;">${safeName}</strong>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;">
+          <strong style="color: #ffffff;">${safeName}</strong>
         </td>
       </tr>
       <tr>
-        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #1f1f23;" width="110">
-          <span style="color: #71717a; font-weight: 500;">Email:</span>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Email:</span>
         </td>
-        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #1f1f23;">
-          <a href="mailto:${email}" style="color: #a78bfa; text-decoration: none;">${email}</a>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;">
+          <a href="mailto:${email}" style="color: #a78bfa; text-decoration: none; font-weight: 600;">${email}</a>
+        </td>
+      </tr>
+      ${safeCompany ? `
+      <tr>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Company:</span>
+        </td>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;">
+          <strong style="color: #ffffff;">${safeCompany}</strong>
+        </td>
+      </tr>` : ""}
+      ${safeProjectType ? `
+      <tr>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Project Type:</span>
+        </td>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;">
+          <span style="color: #ffffff; font-weight: 700;">${safeProjectType}</span>
+        </td>
+      </tr>` : ""}
+      ${safeBudget ? `
+      <tr>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Budget Tier:</span>
+        </td>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;">
+          <strong style="color: #34d399; font-size: 14px;">${safeBudget}</strong>
+        </td>
+      </tr>` : ""}
+      ${safeTimeline ? `
+      <tr>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Timeline:</span>
+        </td>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;">
+          <span style="color: #d4d4d8;">${safeTimeline}</span>
+        </td>
+      </tr>` : ""}
+      <tr>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Subject:</span>
+        </td>
+        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #27272a;">
+          <span style="color: #e4e4e7;">${safeSubject}</span>
         </td>
       </tr>
       <tr>
-        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #1f1f23;" width="110">
-          <span style="color: #71717a; font-weight: 500;">Subject:</span>
-        </td>
-        <td style="padding: 12px 0; font-size: 13px; border-bottom: 1px solid #1f1f23;">
-          <strong style="color: #fafafa;">${safeSubject}</strong>
-        </td>
-      </tr>
-      <tr>
-        <td style="padding: 12px 0; font-size: 13px;" width="110">
-          <span style="color: #71717a; font-weight: 500;">Time:</span>
+        <td style="padding: 12px 0; font-size: 13px;" width="120">
+          <span style="color: #71717a; font-weight: 600;">Received:</span>
         </td>
         <td style="padding: 12px 0; font-size: 13px;">
-          <span style="color: #d4d4d8;">${formattedTime} (IST)</span>
+          <span style="color: #a1a1aa;">${formattedTime} (IST)</span>
         </td>
       </tr>
     </table>
 
+    <!-- Project Description Box -->
     <div class="card">
-      <div class="card-title">Message content</div>
-      <div style="font-size: 14px; line-height: 1.6; color: #e4e4e7;">
+      <div class="card-title">Project Description</div>
+      <div style="font-size: 14px; line-height: 1.7; color: #e4e4e7;">
         ${safeMessage}
       </div>
     </div>
 
-    ${renderCtaButton({ href: replyMailto, label: "Reply via Email", accent: ACCENT })}
-    ${renderOutlineButton({ href: `${APP_URL}/admin/contacts`, label: "Open Admin Dashboard" })}
+    <!-- Quick Action Buttons -->
+    ${renderDualButtons({
+      primary: {
+        href: replyMailto,
+        label: "Reply to Lead",
+        accent: ACCENT,
+      },
+      secondary: {
+        href: `${APP_URL}/admin/contact`,
+        label: "Open in Admin CMS",
+      },
+    })}
   `;
 
   const html = renderEmailLayout({
-    badge: "New Contact Inquiry",
-    headline: "You received a new portfolio message",
-    subhead: "A fresh lead is waiting — respond within 24 business hours.",
+    badge: "Portfolio Lead",
+    headline: "New project inquiry received",
+    subhead: `Inquiry from ${name} (${safeProjectType || "General"}).`,
     accent: ACCENT,
     body,
-    reason: `Notification generated automatically by ${AUTHOR_NAME}'s Portfolio System.`,
+    reason: `Notification generated automatically by ${AUTHOR_NAME}'s Portfolio Engine.`,
     documentTitle: emailSubject,
   });
 
-  const text = `[New Portfolio Inquiry]
-
-A new inquiry just landed on your portfolio — respond within 24 business hours to keep the lead warm.
+  const text = `[New Portfolio Lead]
 
 From: ${name}
 Email: ${email}
+${company ? `Company: ${company}\n` : ""}${projectType ? `Project Type: ${projectType}\n` : ""}Priority: ${priority}
+Budget Tier: ${budget || "Not Specified"}
+Timeline: ${timeline || "Not Specified"}
 Subject: ${subject}
 Received: ${formattedTime} (IST)
 
---- Message ---
+--- Project Description ---
 ${message}
----------------
+---------------------------
 
-Reply directly to: ${email}
-Admin dashboard: ${APP_URL}/admin/contacts
+Reply via Email: ${email}
+Admin CMS: ${APP_URL}/admin/contact
 `;
 
   return { html, text, emailSubject };

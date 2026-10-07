@@ -86,7 +86,7 @@ export async function sendAdminContactNotification(
       return { success: false, error: "SMTP credentials not configured" };
     }
 
-    const adminRecipient = process.env.SMTP_EMAIL || AUTHOR_EMAIL;
+    const adminRecipient = AUTHOR_EMAIL;
     const { html, text, emailSubject } = renderAdminNotificationEmail(props);
 
     const info = await transporter.sendMail({

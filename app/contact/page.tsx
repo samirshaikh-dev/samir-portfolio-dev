@@ -200,7 +200,7 @@ export default function ContactPage() {
                     Send an Inquiry
                   </h2>
                   <p className="text-xs text-text-muted mt-1">
-                    All fields are required. Your details are never sold or shared.
+                    Fields marked with * are required. Your details are never sold or shared.
                   </p>
                 </div>
 

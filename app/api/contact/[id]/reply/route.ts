@@ -29,6 +29,7 @@ export async function POST(
         name: contactSchema.name,
         email: contactSchema.email,
         subject: contactSchema.subject,
+        message: contactSchema.message,
       })
       .from(contactSchema)
       .where(eq(contactSchema.id, id));
@@ -37,7 +38,7 @@ export async function POST(
       return NextResponse.json({ error: "Contact not found" }, { status: 404 });
     }
 
-    const { name, email, subject } = result[0];
+    const { name, email, subject, message } = result[0];
 
     if (!email) {
       return NextResponse.json({ error: "Contact has no email address" }, { status: 400 });
@@ -47,6 +48,7 @@ export async function POST(
       name: name || "there",
       replyText,
       originalSubject: subject || undefined,
+      originalMessage: message || undefined,
     });
 
     if (!sendResult.success) {

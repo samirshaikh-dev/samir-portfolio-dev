@@ -63,9 +63,17 @@ export const contact = pgTable('contact', {
     email: text('email'),
     subject: text('subject'),
     message: text('message'),
+    company: text('company'),
+    projectType: text('project_type'),
+    priority: text('priority').default('Medium Priority'),
+    budget: text('budget'),
+    timeline: text('timeline'),
     seen: boolean('seen').default(false),
     createdAt: timestamp('created_at', { withTimezone: true }).defaultNow(),
 });
+
+export type Contact = typeof contact.$inferSelect;
+export type NewContact = typeof contact.$inferInsert;
 
 export const socials = pgTable('socials', {
     name: text('name'),
