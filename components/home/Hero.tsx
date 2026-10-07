@@ -1,7 +1,7 @@
 import { getGithubStats } from "@/lib/github";
 import { AVAILABILITY_STATUS, AVAILABILITY_LABEL } from "@/lib/site-config";
 import Link from "next/link";
-import { FaGithub, FaStar, FaCodeBranch, FaUsers, FaFileCode } from "react-icons/fa6";
+import { FaGithub, FaStar, FaCodeBranch, FaUsers } from "react-icons/fa6";
 import { FiGitCommit, FiArrowRight, FiArrowDown } from "react-icons/fi";
 
 type GithubStats = Awaited<ReturnType<typeof getGithubStats>>;

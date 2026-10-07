@@ -66,7 +66,7 @@ export async function getGithubStats(token: string, username: string) {
       query,
       variables: { username },
     }),
-    cache: "no-store",
+    next: { revalidate: 1800, tags: ["github-stats"] },
   });
 
   if (!response.ok) {

@@ -7,7 +7,7 @@ import {
   tool,
   jsonSchema,
 } from 'ai';
-import { getChatModel } from '@/lib/ai-config';
+import { getChatModel, getFollowUpModel } from '@/lib/ai-config';
 import { runSecurityChecks } from '@/lib/chat/security';
 import { getRelevantContextWithSources } from '@/lib/chat/retrieval';
 import { getSystemPrompt } from '@/lib/chat/prompt';
@@ -66,6 +66,7 @@ export async function POST(req: Request) {
           model: getChatModel(),
           system: systemPrompt,
           messages: await convertToModelMessages(messages),
+          maxOutputTokens: 1024,
           tools: {
             sendContactInquiry: tool({
               description:
@@ -103,7 +104,18 @@ export async function POST(req: Request) {
                       subject: cleanSubject,
                       message: cleanMessage,
                     }),
-                  ]).catch((e) => console.error('[Chat] Email notification error:', e));
+                  ])
+                    .then((results) => {
+                      results.forEach((r, idx) => {
+                        if (r.status === 'rejected') {
+                          console.error(
+                            `[Chat] Email notification ${idx === 0 ? 'confirmation' : 'admin alert'} failed:`,
+                            r.reason
+                          );
+                        }
+                      });
+                    })
+                    .catch((e) => console.error('[Chat] Email notification error:', e));
 
                   return {
                     success: true,
@@ -133,7 +145,7 @@ export async function POST(req: Request) {
           const detectedTopic = detectFollowUpTopic(latestUserQuery);
 
           const { object } = await generateObject({
-            model: getChatModel(),
+            model: getFollowUpModel(),
             schema: followUpsSchema,
             prompt: getFollowUpPrompt({ detectedTopic, recentMessages, answer, contextText }),
           });

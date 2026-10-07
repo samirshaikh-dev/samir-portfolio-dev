@@ -2,8 +2,9 @@ import { embed } from 'ai';
 import { google } from '@ai-sdk/google';
 import { db } from '@/lib/db';
 import { contentChunks, blogs, projects, certificates } from '@/lib/schema';
-import { cosineDistance, inArray, eq, asc } from 'drizzle-orm';
+import { cosineDistance, inArray, eq, asc, lte } from 'drizzle-orm';
 import { getRecentGithubEvents } from '@/lib/github';
+import { GITHUB_USERNAME, GITHUB_URL } from '@/lib/site-config';
 import { FAQS } from '@/lib/data/faqs';
 import {
   SERVICE_CATEGORIES,
@@ -15,7 +16,12 @@ import {
   SYSTEM_DESIGN_CONCEPTS,
 } from '@/lib/data/technical-skills';
 
-const MAX_DISTANCE = 0.5;
+/**
+ * Strict threshold for cosine similarity retrieval: distance <= 0.5 corresponds
+ * to >= 0.5 similarity in 3072-dimensional vector space.
+ */
+export const MAX_COSINE_DISTANCE = 0.5;
+export const VECTOR_TOP_K = 4;
 
 export interface GroundingSource {
   title: string;
@@ -348,7 +354,7 @@ async function getGithubEventsCached(): Promise<string | null> {
   }
   const result = await getRecentGithubEvents(
     process.env.GITHUB_TOKEN || '',
-    'samirshaikh-dev'
+    GITHUB_USERNAME
   );
   if (result.ok) {
     githubEventsCache = result;
@@ -425,10 +431,21 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
         distance: cosineDistance(contentChunks.embedding, embedding),
       })
       .from(contentChunks)
+      .where(lte(cosineDistance(contentChunks.embedding, embedding), MAX_COSINE_DISTANCE))
       .orderBy(cosineDistance(contentChunks.embedding, embedding))
-      .limit(4);
+      .limit(VECTOR_TOP_K);
 
-    const filteredChunks = relevantChunks.filter((c) => (c.distance as number) <= MAX_DISTANCE);
+    const filteredChunks = relevantChunks.filter((c) => (c.distance as number) <= MAX_COSINE_DISTANCE);
+
+    if (process.env.NODE_ENV !== 'production' || process.env.CHAT_DEBUG === 'true') {
+      console.log(
+        `[RAG] Retrieved ${filteredChunks.length} chunk(s) (threshold <= ${MAX_COSINE_DISTANCE}):`,
+        filteredChunks.map((c) => ({
+          type: c.sourceType,
+          dist: typeof c.distance === 'number' ? Number(c.distance.toFixed(3)) : c.distance,
+        }))
+      );
+    }
 
     // Fetch metadata for blogs and projects
     const blogIds = filteredChunks
@@ -485,12 +502,16 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
         }
 
         if (chunk.sourceType === 'about') {
-          if (!exactTitle) header += `\nExact Title: About Samir`;
-          sources.push({ title: 'About Samir', type: 'about', url: '/about' });
+          if (!exactTitle) {
+            header += `\nExact Title: About Samir`;
+            sources.push({ title: 'About Samir', type: 'about', url: '/about' });
+          }
         }
         if (chunk.sourceType === 'experience') {
-          if (!exactTitle) header += `\nExact Title: Work Experience`;
-          sources.push({ title: 'Work Experience', type: 'experience', url: '/about#experience' });
+          if (!exactTitle) {
+            header += `\nExact Title: Work Experience`;
+            sources.push({ title: 'Work Experience', type: 'experience', url: '/about#experience' });
+          }
         }
 
         return `${header}\n${chunk.text}`;
@@ -505,7 +526,7 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
         sources.push({
           title: 'Recent GitHub Activity',
           type: 'github',
-          url: 'https://github.com/samirshaikh-dev',
+          url: GITHUB_URL,
         });
       }
     }

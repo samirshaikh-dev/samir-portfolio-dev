@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { optimizeCloudinaryUrl } from "@/lib/cloudinary-utils";
 
 export interface Project {
   id: string;
@@ -166,7 +167,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                     <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/9] w-full bg-hover-bg overflow-hidden border-b border-border-primary">
                       {project.cover_image_url ? (
                         <Image
-                          src={project.cover_image_url}
+                          src={optimizeCloudinaryUrl(project.cover_image_url, { width: 1000 })}
                           alt={`${project.title} case study architecture`}
                           fill
                           priority={index === 0}
@@ -308,7 +309,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                     <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary">
                       {project.cover_image_url ? (
                         <Image
-                          src={project.cover_image_url}
+                          src={optimizeCloudinaryUrl(project.cover_image_url, { width: 700 })}
                           alt={`${project.title} screenshot`}
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -418,7 +419,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                 <Link href={`/projects/${project.slug}`} className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary">
                   {project.cover_image_url ? (
                     <Image
-                      src={project.cover_image_url}
+                      src={optimizeCloudinaryUrl(project.cover_image_url, { width: 700 })}
                       alt={`${project.title} cover`}
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"

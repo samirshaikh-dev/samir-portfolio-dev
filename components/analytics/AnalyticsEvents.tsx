@@ -22,20 +22,37 @@ export function ScrollDepthTracker() {
 
   useEffect(() => {
     let fired = false;
+    let cleanupListener: (() => void) | undefined;
 
-    function handleScroll() {
-      if (fired) return;
-      const scrolled = window.scrollY + window.innerHeight;
-      const total = document.documentElement.scrollHeight;
-      if (total > 0 && scrolled / total >= 0.75) {
-        fired = true;
-        trackEvent(analyticsEvents.scrollDepth75, { page: pathname ?? "" });
-        window.removeEventListener("scroll", handleScroll);
+    function registerListener() {
+      function handleScroll() {
+        if (fired) return;
+        const scrolled = window.scrollY + window.innerHeight;
+        const total = document.documentElement.scrollHeight;
+        if (total > 0 && scrolled / total >= 0.75) {
+          fired = true;
+          trackEvent(analyticsEvents.scrollDepth75, { page: pathname ?? "" });
+          window.removeEventListener("scroll", handleScroll);
+        }
       }
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      cleanupListener = () => window.removeEventListener("scroll", handleScroll);
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const idleId =
+      typeof window !== "undefined" && typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback(registerListener, { timeout: 2000 })
+        : setTimeout(registerListener, 1000);
+
+    return () => {
+      if (typeof window !== "undefined" && typeof window.cancelIdleCallback === "function" && typeof idleId === "number") {
+        window.cancelIdleCallback(idleId);
+      } else {
+        clearTimeout(idleId as NodeJS.Timeout);
+      }
+      cleanupListener?.();
+    };
   }, [pathname]);
 
   return null;
