@@ -120,12 +120,8 @@ export default async function Footer() {
               />
             </div>
 
-            <p className="max-w-xs text-sm leading-relaxed text-text-muted">
-              Lost among{" "}
-              <span className="-rotate-1 rounded-xl border border-black/10 bg-accent-lime px-2 py-0.5 font-black text-[#0A0A0A] shadow-xs">
-                the stars
-              </span>
-              , I found myself.
+            <p className="max-w-xs text-xs sm:text-sm leading-relaxed text-text-muted">
+              AI Backend Engineer &amp; Full Stack Developer building production AI agents, custom RAG systems, and scalable backends.
             </p>
 
             {socials.length > 0 && (
