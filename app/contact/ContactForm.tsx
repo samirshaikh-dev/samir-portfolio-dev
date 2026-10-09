@@ -13,10 +13,11 @@ const INPUT_BASE =
   "w-full rounded-xl bg-background dark:bg-card-bg border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none transition-all duration-200 disabled:opacity-50 focus:border-foreground/40 dark:focus:border-accent-lime/50 focus:ring-1 focus:ring-foreground/20 dark:focus:ring-accent-lime/20";
 
 const PROJECT_TYPES = [
-  "AI / RAG Pipeline",
+  "Full-Time / Remote Role (AI Backend / Full Stack)",
+  "AI / RAG Pipeline (SaaS Augmentation)",
+  "Codebase Audit / Migration / Optimization",
   "Backend API / Microservices",
-  "Full-Stack Product",
-  "Website / Landing Page",
+  "Full-Stack Web App / Local Business Platform",
   "Technical Consultation",
   "Other",
 ];
@@ -29,6 +30,7 @@ const PRIORITY_LEVELS = [
 ];
 
 const BUDGET_RANGES = [
+  "Competitive Salary / Full-Time Role",
   "< $1,000",
   "$1,000 – $3,000",
   "$3,000 – $5,000",

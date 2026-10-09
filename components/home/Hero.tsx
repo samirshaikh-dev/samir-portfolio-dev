@@ -43,25 +43,20 @@ export default async function Hero() {
 
       <div className="w-full max-w-6xl flex flex-col">
         {/* ── TOP UTILITY & TRUST ROW ─────────────────────────────────────── */}
-        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-          {/* Left Callout: Open to AI & Backend Roles + LET'S TALK */}
-          {/* <div className="inline-flex items-center gap-3 bg-background/90 dark:bg-card-bg/90 backdrop-blur-md border border-border-primary rounded-2xl p-2 sm:px-3.5 sm:py-2 shadow-2xs w-fit">
-            <div className="w-1 sm:w-1.5 h-8 bg-foreground dark:bg-accent-lime rounded-full flex-shrink-0" />
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-wider text-text-muted leading-tight font-mono">
-                Open to
-              </span>
-              <span className="text-xs sm:text-sm font-bold text-foreground leading-tight">
-                AI &amp; Backend Roles
-              </span>
-            </div>
-            <Link
-              href="/contact"
-              className="ml-2 inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-accent-lime text-[#0A0A0A] font-extrabold text-[11px] sm:text-xs tracking-wider uppercase shadow-xs hover:shadow-[0_0_18px_rgba(184,255,0,0.5)] hover:scale-[1.03] active:scale-[0.98] transition-all"
-            >
-              LET&apos;S TALK <FiArrowRight className="text-xs stroke-[2.5]" />
-            </Link>
-          </div> */}
+        <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+          {/* Recruiter Callout: Open to Full-Time / Remote Roles */}
+          <Link
+            href="/resume"
+            className="inline-flex items-center gap-2 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-border-primary bg-background/90 dark:bg-card-bg/90 hover:bg-hover-bg hover:border-foreground/30 backdrop-blur-xs shadow-2xs transition-all w-fit group"
+          >
+            <span className="w-2 h-2 rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]" />
+            <span className="text-foreground font-bold">Actively Seeking Full-Time Roles & </span>
+            <span className="text-text-muted">&middot;</span>
+            <span className="text-text-secondary font-mono text-[11px] group-hover:text-foreground transition-colors">
+              AI Backend &bull; Full Stack
+            </span>
+            <FiArrowRight className="text-xs text-text-muted group-hover:text-foreground group-hover:translate-x-0.5 transition-all ml-0.5" />
+          </Link>
 
           {/* Right Trust Badges: Live Availability */}
           <div className="flex items-center">
@@ -111,7 +106,7 @@ export default async function Hero() {
           </h1>
 
           <p className="hero-intro text-base sm:text-lg md:text-xl text-text-secondary dark:text-text-secondary max-w-3xl leading-relaxed mb-8">
-            Helping startups, founders, and engineering teams build reliable AI agents, custom RAG systems, and robust backend architectures. Available for freelance projects &mdash; shipping end-to-end full stack web applications with zero fluff.
+            Helping startups, founders, and engineering teams build reliable AI agents, custom RAG systems, and robust backend architectures. Open to full-time remote roles (AI Backend / FDE) and available for freelance contracts &mdash; shipping production code with zero fluff.
           </p>
 
           {/* Action CTAs */}
@@ -124,10 +119,16 @@ export default async function Hero() {
               <FiArrowRight className="w-4 h-4 stroke-[2.5]" />
             </Link>
             <Link
-              href="/contact"
+              href="/resume"
               className="inline-flex items-center justify-center gap-2 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground text-sm font-bold px-7 py-3.5 hover:bg-hover-bg hover:border-foreground/30 shadow-2xs transition-all"
             >
-              Book a Free Call
+              View Resume
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-border-primary bg-background dark:bg-card-bg text-text-secondary hover:text-foreground text-sm font-bold px-6 py-3.5 hover:bg-hover-bg hover:border-foreground/30 shadow-2xs transition-all"
+            >
+              Book a Call
             </Link>
             <a
               href="#case-studies"
