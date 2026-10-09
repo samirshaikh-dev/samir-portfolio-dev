@@ -19,50 +19,51 @@ import {
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Freelance AI Developer, Website Developer & SEO Services | Samir Shaikh",
+  title: "Freelance AI Developer, Backend Engineer & Codebase Rescue | Samir Shaikh",
   description:
-    "Hire Samir Shaikh — freelance AI developer, website developer & SEO specialist. Custom business websites, SEO optimization services, website speed optimization, production AI chatbots, and backend architectures for businesses, startups, and product teams.",
+    "Hire Samir Shaikh — freelance AI developer, backend engineer & Forward Deployed Engineer. Codebase audits, emergency rescue sprints, SaaS AI augmentation, performance optimization, and custom Next.js web applications.",
   keywords: [
     ...LONGTAIL_KEYWORDS.slice(0, 15),
+    "codebase audit service",
+    "fix broken MVP developer",
+    "codebase rescue developer",
+    "add AI to existing SaaS",
+    "freelance backend developer retainer",
+    "slow database query optimization",
+    "WhatsApp API integration developer",
     "freelance AI developer",
     "freelance AI engineer",
     "freelance website developer",
     "website developer for business",
     "custom website development",
     "SEO optimization services",
-    "freelance SEO specialist",
     "website speed optimization",
     "AI chatbot for website",
     "AI chatbot for SaaS",
     "custom knowledge base AI",
-    "custom knowledge base",
     "production-grade AI chatbot",
-    "production-grade AI systems",
-    "stop chatbot from hallucinating",
     "Forward Deployed Engineer",
     "hire freelance AI developer",
-    "hire website developer",
-    "AI workflow automation for startups",
     "AI agent development services",
     "backend API development services",
     "full-stack web development services",
-    "technical SEO engineer",
+    "local business website developer",
   ],
   alternates: {
     canonical: `${APP_URL}/services`,
   },
   openGraph: {
-    title: "Freelance AI Developer, Website Developer & SEO Services | Samir Shaikh",
+    title: "Freelance AI Developer, Backend Engineer & Codebase Rescue | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI developer, website developer & SEO specialist. Custom business websites, SEO optimization services, website speed optimization, production AI chatbots, and backend architectures.",
+      "Hire Samir Shaikh — freelance AI developer, backend engineer & Forward Deployed Engineer. Codebase audits, emergency rescue sprints, SaaS AI augmentation, performance optimization, and custom Next.js web applications.",
     url: `${APP_URL}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelance AI Developer, Website Developer & SEO Services | Samir Shaikh",
+    title: "Freelance AI Developer, Backend Engineer & Codebase Rescue | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI developer, website developer & SEO specialist. Custom business websites, SEO optimization services, website speed optimization, production AI chatbots, and backend architectures.",
+      "Hire Samir Shaikh — freelance AI developer, backend engineer & Forward Deployed Engineer. Codebase audits, emergency rescue sprints, SaaS AI augmentation, performance optimization, and custom Next.js web applications.",
   },
 };
 
@@ -141,7 +142,7 @@ export default function ServicesPage() {
           </h1>
 
           <p className="mt-3 sm:mt-4 text-base sm:text-lg text-text-secondary max-w-2xl leading-relaxed">
-            Production-grade AI chatbots, custom knowledge bases, backend architectures, and modern web apps — built for startups, founders, and product teams ready to ship.
+            Add AI to existing products, rescue broken MVPs, audit inherited codebases, tune slow backends, and scale with dedicated retainers.
           </p>
         </header>
 
@@ -156,18 +157,18 @@ export default function ServicesPage() {
             <div className="max-w-2xl">
               <span className="inline-flex items-center gap-2 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-border-primary bg-hover-bg text-text-secondary mb-4 shadow-2xs">
                 <span className="w-2 h-2 rounded-full animate-pulse bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]" />
-                Available for Freelance Projects, Contracts &amp; Sprints
+                Available for Audits, Rescue Sprints, Feature Builds &amp; Retainers
               </span>
 
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground mb-4 leading-tight">
-                Ship reliable AI agents, custom RAG systems, and robust software that{" "}
+                Audit, rescue, scale, or augment your software with{" "}
                 <span className="relative inline-block px-3 py-0.5 rounded-xl bg-accent-lime text-[#0A0A0A] font-black -rotate-1 shadow-xs border border-black/10">
-                  scales reliably
+                  production-grade AI
                 </span>
               </h2>
 
               <p className="service-desc text-text-secondary text-sm sm:text-base leading-relaxed">
-                I help startups, founders, and engineering teams build and ship production-grade AI solutions — custom knowledge bases, autonomous agents, and RAG pipelines — powered by scalable Node.js/TypeScript backend architectures. Also available for full-stack web delivery, contract sprints, and forward-deployed engineering engagements.
+                Whether you need to add an AI chatbot or smart search to an existing SaaS, rescue an MVP after a developer disappeared, audit an inherited codebase, optimize slow API queries, or hire an embedded backend engineer on retainer — I deliver clean, tested TypeScript code committed directly to your repository.
               </p>
             </div>
 
@@ -195,8 +196,8 @@ export default function ServicesPage() {
               ✓
             </span>
             <div>
-              <p className="text-xs font-bold text-foreground">Transparent Starting Rates</p>
-              <p className="text-[11px] text-text-muted mt-0.5">Clear budget guidance with zero surprise scope bloat</p>
+              <p className="text-xs font-bold text-foreground">3–5 Day Codebase Audit</p>
+              <p className="text-[11px] text-text-muted mt-0.5">Low-risk fixed-price assessment before committing to larger work</p>
             </div>
           </div>
 
@@ -205,8 +206,8 @@ export default function ServicesPage() {
               ✓
             </span>
             <div>
-              <p className="text-xs font-bold text-foreground">Fixed-Price Quotes in 48h</p>
-              <p className="text-[11px] text-text-muted mt-0.5">Detailed milestone scope after a free discovery call</p>
+              <p className="text-xs font-bold text-foreground">48h Scope &amp; Rapid Triage</p>
+              <p className="text-[11px] text-text-muted mt-0.5">Clear milestone proposals or immediate emergency fix-it responses</p>
             </div>
           </div>
 
@@ -216,7 +217,7 @@ export default function ServicesPage() {
             </span>
             <div>
               <p className="text-xs font-bold text-foreground">100% Code &amp; IP Ownership</p>
-              <p className="text-[11px] text-text-muted mt-0.5">Committed directly to your private repositories</p>
+              <p className="text-[11px] text-text-muted mt-0.5">Committed directly to your private GitHub or GitLab repos</p>
             </div>
           </div>
         </div>
@@ -471,7 +472,7 @@ export default function ServicesPage() {
             Have a project or opportunity in mind?
           </h2>
           <p className="text-text-secondary text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
-            Whether you need a production-grade AI chatbot for your website or SaaS, a custom knowledge base, scalable backend APIs, or full-stack web engineering, let&apos;s talk through your goals.
+            Whether you need a 3–5 day codebase audit, emergency bug rescue, AI chatbot for your SaaS, or a dedicated backend engineer on retainer, let&apos;s talk through your goals.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

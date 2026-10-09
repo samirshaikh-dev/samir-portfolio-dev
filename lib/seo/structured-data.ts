@@ -91,7 +91,18 @@ export const LONGTAIL_KEYWORDS = [
   "hire freelance Next.js developer",
   "hire freelance backend engineer",
   "AI chatbot development company",
+  "codebase audit service",
+  "codebase audit and roadmap",
+  "fix broken MVP developer",
+  "codebase rescue developer",
+  "freelance backend developer retainer",
+  "add AI to existing SaaS",
+  "hire developer to fix slow APIs",
+  "WhatsApp API integration developer",
+  "Next.js App Router migration service",
+  "technical architecture advisory session",
 ];
+
 
 /**
  * Voice-search / conversational questions (AEO), framed around the problems
