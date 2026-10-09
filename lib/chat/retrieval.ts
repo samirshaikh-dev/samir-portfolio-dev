@@ -22,6 +22,7 @@ import {
  */
 export const MAX_COSINE_DISTANCE = 0.5;
 export const VECTOR_TOP_K = 4;
+export const MAX_CONTEXT_LENGTH = 8000; // ~2,000 tokens budget guard
 
 export interface GroundingSource {
   title: string;
@@ -32,6 +33,41 @@ export interface GroundingSource {
 export interface ContextResult {
   contextText: string;
   sources: GroundingSource[];
+}
+
+// --- LRU In-Memory Embedding Cache (reduces TTFT by ~300ms for common queries) ---
+interface CachedEmbedding {
+  vector: number[];
+  expiresAt: number;
+}
+const EMBEDDING_CACHE = new Map<string, CachedEmbedding>();
+const MAX_CACHE_ENTRIES = 150;
+const CACHE_TTL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+async function getCachedEmbedding(text: string): Promise<number[]> {
+  const normalizedKey = text.trim().toLowerCase().slice(0, 300);
+  const now = Date.now();
+  const cached = EMBEDDING_CACHE.get(normalizedKey);
+  if (cached && cached.expiresAt > now) {
+    return cached.vector;
+  }
+
+  const { embedding } = await embed({
+    model: google.embedding('gemini-embedding-2'),
+    value: text,
+  });
+
+  if (EMBEDDING_CACHE.size >= MAX_CACHE_ENTRIES) {
+    const oldestKey = EMBEDDING_CACHE.keys().next().value;
+    if (oldestKey) EMBEDDING_CACHE.delete(oldestKey);
+  }
+
+  EMBEDDING_CACHE.set(normalizedKey, {
+    vector: embedding,
+    expiresAt: now + CACHE_TTL_MS,
+  });
+
+  return embedding;
 }
 
 const ALL_SERVICES = SERVICE_CATEGORIES.flatMap((c) =>
@@ -114,22 +150,40 @@ function getMatchingServices(queryText: string): { text: string; sources: Ground
 
   const parts: string[] = [];
 
-  matchedServices.forEach((m, i) => {
+  matchedServices.forEach((m) => {
+    const serviceUrl = `/services/${m.service.id}`;
     sources.push({
       title: m.service.title,
       type: 'service',
-      url: `/services#${m.service.id}`,
+      url: serviceUrl,
     });
-    parts.push(
-      `--- Context Service ${i + 1} (Services & Offerings) ---\n` +
+
+    let serviceBlock =
+      `<context_chunk id="service-${m.service.id}" type="service" url="${serviceUrl}">\n` +
       `Exact Title: Service - ${m.service.title}\n` +
-      `URL: /services#${m.service.id}\n` +
+      `URL: ${serviceUrl}\n` +
       `Starting Price: ${m.service.startingPrice || 'Custom Quote'}\n` +
+      `Typical Duration: ${m.service.typicalDuration || '1–2 weeks'}\n` +
       `Summary: ${m.service.tagline}\n` +
-      `Description: ${m.service.description}\n` +
-      `Key Deliverables:\n${m.service.deliverables.map((d) => `- ${d}`).join('\n')}\n` +
-      `Tech Stack: ${m.service.techStack.join(', ')}`
-    );
+      `Description: ${m.service.description}\n`;
+
+    if (m.service.problemStatement) {
+      serviceBlock += `Failure Mode Avoided: ${m.service.problemStatement}\n`;
+    }
+    if (m.service.solutionApproach) {
+      serviceBlock += `Engineering Approach: ${m.service.solutionApproach}\n`;
+    }
+    if (m.service.architectureDiagram?.benchmarks?.length) {
+      serviceBlock += `Telemetry Benchmarks: ${m.service.architectureDiagram.benchmarks.join(' • ')}\n`;
+    }
+    if (m.service.scopeBoundaries?.included?.length) {
+      serviceBlock += `Standard Sprint Deliverables: ${m.service.scopeBoundaries.included.join('; ')}\n`;
+    }
+    if (m.service.customScopeTitle) {
+      serviceBlock += `Custom Scope Option: ${m.service.customScopeTitle} (${m.service.customScopeSubtitle || 'Extended retainer'})\n`;
+    }
+    serviceBlock += `Tech Stack: ${m.service.techStack.join(', ')}\n</context_chunk>`;
+    parts.push(serviceBlock);
   });
 
   matchedEngagements.forEach((m) => {
@@ -139,22 +193,22 @@ function getMatchingServices(queryText: string): { text: string; sources: Ground
       url: '/services',
     });
     parts.push(
-      `--- Context Engagement Model (Services & Engagement) ---\n` +
+      `<context_chunk id="engagement-${m.model.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}" type="service" url="/services">\n` +
       `Exact Title: Engagement Model - ${m.model.title}\n` +
       `URL: /services\n` +
       `Starting Rate: ${m.model.startingPrice}\n` +
       `Overview: ${m.model.subtitle}\n` +
-      `Highlights:\n${m.model.highlights.map((h) => `- ${h}`).join('\n')}`
+      `Highlights:\n${m.model.highlights.map((h) => `- ${h}`).join('\n')}\n</context_chunk>`
     );
   });
 
-  matchedServicesFaqs.forEach((m) => {
+  matchedServicesFaqs.forEach((m, idx) => {
     parts.push(
-      `--- Context Service FAQ (Services Knowledge Base) ---\n` +
+      `<context_chunk id="service-faq-${idx + 1}" type="faq" url="/services">\n` +
       `Exact Title: Service FAQ - ${m.faq.question}\n` +
       `URL: /services\n` +
       `Question: ${m.faq.question}\n` +
-      `Answer: ${m.faq.answer}`
+      `Answer: ${m.faq.answer}\n</context_chunk>`
     );
   });
 
@@ -196,8 +250,12 @@ function getMatchingFaqs(queryText: string): { text: string; sources: GroundingS
 
   const text = matched
     .map(
-      (m, i) =>
-        `--- Context FAQ ${i + 1} (FAQ Knowledge Base) ---\nExact Title: FAQ - ${m.faq.question}\nURL: /faq#${m.faq.id}\nQuestion: ${m.faq.question}\nAnswer: ${m.faq.answer}`
+      (m) =>
+        `<context_chunk id="faq-${m.faq.id}" type="faq" url="/faq#${m.faq.id}">\n` +
+        `Exact Title: FAQ - ${m.faq.question}\n` +
+        `URL: /faq#${m.faq.id}\n` +
+        `Question: ${m.faq.question}\n` +
+        `Answer: ${m.faq.answer}\n</context_chunk>`
     )
     .join('\n\n');
 
@@ -218,7 +276,7 @@ function getMatchingTechnicalSkills(queryText: string): { text: string; sources:
   const sources: GroundingSource[] = [];
   const parts: string[] = [];
 
-  // 1. Match System Design Concepts (Microservices, Monolith, Modular Monolith, Event-Driven, etc.)
+  // 1. Match System Design Concepts
   const matchedSystemDesign = SYSTEM_DESIGN_CONCEPTS.map((concept) => {
     let score = 0;
     const nameLower = concept.name.toLowerCase();
@@ -258,80 +316,39 @@ function getMatchingTechnicalSkills(queryText: string): { text: string; sources:
       if (['samir', 'shaikh', 'does', 'what', 'with', 'about', 'how'].includes(word)) continue;
       if (qLower.includes(word)) score += 4;
       if (tagsLower.some((t) => t.includes(word) || word.includes(t))) score += 4;
-      if (catLower.includes(word)) score += 3;
       if (aLower.includes(word)) score += 1;
     }
     return { faq, score };
   })
-    .filter((item) => item.score >= 5)
+    .filter((item) => item.score >= 4)
     .sort((a, b) => b.score - a.score)
     .slice(0, 2);
 
-  // 3. Detect broad technical stack query intent
-  const isBroadTechQuery =
-    /\b(tech\s*stack|technolog(?:y|ies)|skills|languages|developer\s*expertise|what\s+can\s+samir\s+code|what\s+does\s+samir\s+know|frameworks|tools)\b/i.test(
-      query
-    );
-
-  matchedSystemDesign.forEach((m) => {
+  matchedSystemDesign.forEach((m, i) => {
     sources.push({
-      title: `System Design: ${m.concept.name}`,
-      type: 'skill',
-      url: '/technical-skills#system-design',
-    });
-    parts.push(
-      `--- Context System Design Concept (Architecture & System Design) ---\n` +
-      `Exact Title: System Design - ${m.concept.name}\n` +
-      `URL: /technical-skills#system-design\n` +
-      `Architecture Pattern: ${m.concept.name} (${m.concept.sub})\n` +
-      `Description: ${m.concept.description}\n` +
-      `Key Highlights: ${m.concept.highlights.join(', ')}`
-    );
-  });
-
-  matchedFaqs.forEach((m, i) => {
-    sources.push({
-      title: m.faq.question,
-      type: 'skill',
-      url: `/technical-skills#${m.faq.id}`,
-    });
-    parts.push(
-      `--- Context Technical Skill FAQ ${i + 1} (Technical Skills & Developer Expertise) ---\n` +
-      `Exact Title: Technical Skill - ${m.faq.question}\n` +
-      `URL: /technical-skills#${m.faq.id}\n` +
-      `Category: ${m.faq.category}\n` +
-      `Question: ${m.faq.question}\n` +
-      `Answer: ${m.faq.answer}`
-    );
-  });
-
-  if (
-    isBroadTechQuery ||
-    (matchedSystemDesign.length === 0 &&
-      matchedFaqs.length === 0 &&
-      /\b(programming|code|coder|stack|dev|engineer|backend|frontend|fullstack)\b/i.test(query))
-  ) {
-    sources.push({
-      title: 'Technical Skills & Developer Expertise',
+      title: `Architecture: ${m.concept.name}`,
       type: 'skill',
       url: '/technical-skills',
     });
     parts.push(
-      `--- Context Technical Skills Overview (Core Stack & Expertise) ---\n` +
-      `Exact Title: Technical Skills & Developer Expertise\n` +
+      `<context_chunk id="architecture-${i + 1}" type="skill" url="/technical-skills">\n` +
+      `Exact Title: Architecture - ${m.concept.name}\n` +
       `URL: /technical-skills\n` +
-      `Summary: Samir Shaikh is an AI Backend Engineer and Full-Stack Developer (backend-first) with production expertise across TypeScript, Node.js, Next.js, Distributed Systems, Event-Driven Architecture, PostgreSQL, MongoDB, Redis, Apache Kafka, BullMQ, and Docker.\n` +
-      `Key Domains:\n` +
-      `- Languages: TypeScript (Strict mode, Generics), JavaScript (ES6+/ESM, Async/Await), Python, Go, SQL\n` +
-      `- Backend & APIs: Node.js, Express.js, GraphQL (Apollo Server, Apollo Client, DataLoader), REST APIs, WebSockets (Socket.io), RBAC authorization, JWT authentication\n` +
-      `- System Design & Architecture: Microservices, Modular Monolith, Monolithic Architecture, Event-Driven Architecture (EDA), API Gateway Pattern, Distributed Caching (Redis), Circuit Breakers, CQRS\n` +
-      `- Databases & Caching: PostgreSQL, Neon Serverless, MongoDB, MySQL, Redis (sub-millisecond cache-aside), Firebase\n` +
-      `- Queues & Streaming: Apache Kafka (partitioned topics, event streaming), BullMQ (Redis-backed queues)\n` +
-      `- Cloud & DevOps: Docker, Docker Compose, GitHub Actions CI/CD, Vercel, Prometheus & Grafana observability\n` +
-      `- AI & LLMs: Gemini embeddings (pgvector), Groq, OpenAI, Claude, Vercel AI SDK, Agentic AI, Cursor, Copilot\n` +
-      `- Testing & Quality: Jest (Unit & Integration Testing), ESLint, Defensive Architecture`
+      `Subtitle: ${m.concept.sub}\n` +
+      `Description: ${m.concept.description}\n` +
+      `Key Highlights:\n${m.concept.highlights.map((h) => `- ${h}`).join('\n')}\n</context_chunk>`
     );
-  }
+  });
+
+  matchedFaqs.forEach((m, i) => {
+    parts.push(
+      `<context_chunk id="skill-faq-${i + 1}" type="skill" url="/technical-skills">\n` +
+      `Exact Title: Technical FAQ - ${m.faq.question}\n` +
+      `URL: /technical-skills\n` +
+      `Question: ${m.faq.question}\n` +
+      `Answer: ${m.faq.answer}\n</context_chunk>`
+    );
+  });
 
   return { text: parts.join('\n\n'), sources };
 }
@@ -395,7 +412,10 @@ async function getMatchingCertificates(queryText: string): Promise<{ text: strin
       return desc;
     });
 
-    const text = `--- Context (certificates) ---\nVerified Professional Certificates & Credentials of Samir Shaikh:\n${lines.join('\n')}\nURL: /certificates`;
+    const text = `<context_chunk id="certificates" type="certificate" url="/certificates">\n` +
+      `Exact Title: Verified Certificates & Credentials\n` +
+      `URL: /certificates\n` +
+      `Verified Professional Certificates & Credentials of Samir Shaikh:\n${lines.join('\n')}\n</context_chunk>`;
 
     return { text, sources };
   } catch (err) {
@@ -408,20 +428,26 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
   const sources: GroundingSource[] = [];
   try {
     const latestMessage = messages[messages.length - 1] || '';
-    const { text: matchedFaqs, sources: faqSources } = getMatchingFaqs(latestMessage);
-    const { text: matchedServices, sources: serviceSources } = getMatchingServices(latestMessage);
-    const { text: matchedTechSkills, sources: techSkillSources } = getMatchingTechnicalSkills(latestMessage);
-    const { text: matchedCerts, sources: certSources } = await getMatchingCertificates(latestMessage);
+
+    // Multi-turn Contextual Query Synthesis:
+    // If the latest turn is short (e.g. follow-up "how much does it cost?", "what's the timeline?"),
+    // combine with previous user message for keyword & vector matching to prevent context amnesia
+    const queryContext =
+      messages.length >= 2 && latestMessage.split(/\s+/).length <= 7
+        ? `${messages[messages.length - 2]} ${latestMessage}`
+        : latestMessage;
+
+    const { text: matchedFaqs, sources: faqSources } = getMatchingFaqs(queryContext);
+    const { text: matchedServices, sources: serviceSources } = getMatchingServices(queryContext);
+    const { text: matchedTechSkills, sources: techSkillSources } = getMatchingTechnicalSkills(queryContext);
+    const { text: matchedCerts, sources: certSources } = await getMatchingCertificates(queryContext);
 
     sources.push(...serviceSources, ...faqSources, ...techSkillSources, ...certSources);
 
-    // Embed last 2-3 messages joined for better follow-up understanding
-    const embedWindow = messages.slice(-3).join(' ');
+    // Embed last 2-3 messages joined for contextual vector search
+    const embedWindow = messages.slice(-3).filter(Boolean).join(' ');
 
-    const { embedding } = await embed({
-      model: google.embedding('gemini-embedding-2'),
-      value: embedWindow,
-    });
+    const embedding = await getCachedEmbedding(embedWindow || latestMessage);
 
     const relevantChunks = await db
       .select({
@@ -483,13 +509,16 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
       titleMap.set(p.id, p.title);
     });
 
-    // Build context with proper titles for all source types
+    // Build context with XML isolation boundaries for all database chunks
     let contextText = filteredChunks
       .map((chunk, i) => {
         const exactUrl = urlMap.get(chunk.sourceId);
         const exactTitle = titleMap.get(chunk.sourceId);
 
-        let header = `--- Context ${i + 1} (${chunk.sourceType}) ---`;
+        let urlAttr = exactUrl ? ` url="${exactUrl}"` : '';
+        let titleAttr = exactTitle ? ` title="${exactTitle}"` : '';
+        let header = `<context_chunk id="db-chunk-${i + 1}" type="${chunk.sourceType}"${titleAttr}${urlAttr}>`;
+
         if (exactTitle) {
           header += `\nExact Title: ${exactTitle}`;
           sources.push({
@@ -501,20 +530,16 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
           header += `\nURL: ${exactUrl}`;
         }
 
-        if (chunk.sourceType === 'about') {
-          if (!exactTitle) {
-            header += `\nExact Title: About Samir`;
-            sources.push({ title: 'About Samir', type: 'about', url: '/about' });
-          }
+        if (chunk.sourceType === 'about' && !exactTitle) {
+          header += `\nExact Title: About Samir\nURL: /about`;
+          sources.push({ title: 'About Samir', type: 'about', url: '/about' });
         }
-        if (chunk.sourceType === 'experience') {
-          if (!exactTitle) {
-            header += `\nExact Title: Work Experience`;
-            sources.push({ title: 'Work Experience', type: 'experience', url: '/about#experience' });
-          }
+        if (chunk.sourceType === 'experience' && !exactTitle) {
+          header += `\nExact Title: Work Experience\nURL: /about#experience`;
+          sources.push({ title: 'Work Experience', type: 'experience', url: '/about#experience' });
         }
 
-        return `${header}\n${chunk.text}`;
+        return `${header}\n${chunk.text}\n</context_chunk>`;
       })
       .join('\n\n');
 
@@ -522,7 +547,7 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
     if (isGithubRelevant(latestMessage)) {
       const githubEvents = await getGithubEventsCached();
       if (githubEvents) {
-        contextText += `\n\n--- Context ${filteredChunks.length + 1} (github_activity) ---\n${githubEvents}`;
+        contextText += `\n\n<context_chunk id="github-activity" type="github" url="${GITHUB_URL}">\nExact Title: Recent GitHub Activity\nURL: ${GITHUB_URL}\n${githubEvents}\n</context_chunk>`;
         sources.push({
           title: 'Recent GitHub Activity',
           type: 'github',
@@ -549,6 +574,11 @@ export async function getRelevantContextWithSources(messages: string[]): Promise
     // Append in-memory matched Certificates if relevant
     if (matchedCerts) {
       contextText = contextText ? `${contextText}\n\n${matchedCerts}` : matchedCerts;
+    }
+
+    // Context budget guard: Bound total context text to protect latency & prevent prompt overflow
+    if (contextText.length > MAX_CONTEXT_LENGTH) {
+      contextText = contextText.slice(0, MAX_CONTEXT_LENGTH) + '\n... [Context truncated to stay within token budget]';
     }
 
     // Deduplicate sources

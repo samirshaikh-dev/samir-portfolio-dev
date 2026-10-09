@@ -19,19 +19,28 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
   services: [
     'service',
     'offer',
-    'web development',
-    'web design',
-    'seo',
-    'digital marketing',
-    'whatsapp automation',
-    'automation',
-    'hire',
-    'freelance',
+    'sprint',
+    'retainer',
     'pricing',
     'cost',
     'quote',
     'deliverable',
-    'package',
+    'audit',
+    'codebase audit',
+    'ai agent',
+    'rag pipeline',
+    'vector search',
+    'voice ai',
+    'backend api',
+    'database optimization',
+    'full stack web',
+    'cms migration',
+    'cloud migration',
+    'devops',
+    'system rescue',
+    'hire',
+    'freelance',
+    'contract',
   ],
   projects: [
     'project',
@@ -41,6 +50,9 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
     'application',
     'app',
     'chit-pit',
+    'eventify',
+    'whatsapp campaigner',
+    'ticket triage',
     'case study',
   ],
   skills: [
@@ -61,7 +73,12 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
     'drizzle',
     'rag',
     'vector',
-    'agent',
+    'pgvector',
+    'kafka',
+    'bullmq',
+    'redis',
+    'microservice',
+    'system design',
   ],
   experience: [
     'experience',
@@ -75,6 +92,8 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
     'history',
     'fde',
     'engineer',
+    'logicwind',
+    'xira',
   ],
   education: [
     'education',
@@ -83,6 +102,7 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
     'university',
     'college',
     'school',
+    'b.tech',
     'course',
   ],
   contact: [
@@ -94,12 +114,15 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
     'connect',
     'get in touch',
     'message',
+    'whatsapp',
+    'schedule',
   ],
   resume: [
     'resume',
     'cv',
     'download',
     'pdf',
+    'qualifications',
   ],
   certificates: [
     'certificate',
@@ -115,43 +138,43 @@ const TOPIC_KEYWORDS: Record<FollowUpTopic, string[]> = {
 
 const TOPIC_FALLBACKS: Record<FollowUpTopic, FollowUp[]> = {
   services: [
-    { label: 'Web Development Services', question: 'What website development services does Samir offer?' },
-    { label: 'SEO & Marketing Solutions', question: 'Does Samir provide SEO and digital marketing services?' },
-    { label: 'Recent Projects', question: 'Can I see some of his recent featured projects?' },
+    { label: 'Codebase Audit ($450)', question: 'What is included in the 3–5 day Codebase Audit and Technical Roadmap?' },
+    { label: 'Production RAG Pipelines', question: 'How does Samir implement sub-300ms vector search with pgvector and zero hallucinations?' },
+    { label: 'Autonomous AI Agents', question: 'What is included in the $900 Autonomous AI Agents sprint?' },
   ],
   projects: [
-    { label: 'Featured Projects', question: 'What are Samir\'s most complex full-stack or AI projects?' },
-    { label: 'Tech Stack Used', question: 'What technologies does he typically build projects with?' },
-    { label: 'Explore Services', question: 'What engineering services does Samir provide?' },
+    { label: 'Featured Projects', question: 'What are Samir\'s most complex production AI and backend projects?' },
+    { label: 'RAG Pipeline Case Study', question: 'Can you walk through his vector search architecture and benchmarks?' },
+    { label: 'Explore Services', question: 'What dedicated engineering services does Samir offer?' },
   ],
   skills: [
-    { label: 'AI & RAG Skills', question: 'What experience does Samir have with AI agents and RAG pipelines?' },
-    { label: 'Backend Architecture', question: 'How does he design scalable backends and APIs?' },
-    { label: 'Work Experience', question: 'Where has Samir worked and what were his roles?' },
+    { label: 'AI & RAG Architecture', question: 'What experience does Samir have with AI agents and pgvector RAG pipelines?' },
+    { label: 'Backend Scaling & DB', question: 'How does he design high-throughput Node.js microservices and PostgreSQL indexes?' },
+    { label: 'Work Experience', question: 'Where has Samir worked as an AI backend engineer and FDE?' },
   ],
   experience: [
     { label: 'Engineering Roles', question: 'What engineering positions and clients has Samir worked with?' },
-    { label: 'Notable Achievements', question: 'What were some of his key technical accomplishments?' },
-    { label: 'Hire or Collaborate', question: 'How can I contact Samir to discuss an engineering opportunity?' },
+    { label: 'Notable Achievements', question: 'What were some of his key technical accomplishments at LOGICWIND and Xira Infotech?' },
+    { label: 'Hire or Collaborate', question: 'How can I contact Samir to discuss an engineering opportunity or sprint?' },
   ],
   education: [
     { label: 'Academic Background', question: 'What degree and technical education did Samir pursue?' },
-    { label: 'Technical Stack', question: 'What core technologies did he master?' },
-    { label: 'View Resume', question: 'How can I view or download Samir\'s resume?' },
+    { label: 'Technical Stack', question: 'What core technologies did he master during his B.Tech in IT?' },
+    { label: 'View Resume', question: 'How can I view or download Samir\'s official resume PDF?' },
   ],
   contact: [
-    { label: 'Contact Details', question: 'What is the best way to contact Samir directly?' },
-    { label: 'Engineering Offerings', question: 'What services or freelance consulting does he accept?' },
+    { label: 'Contact Details', question: 'What is the fastest way to contact Samir directly?' },
+    { label: 'Engineering Services', question: 'What sprint packages or freelance retainers does he accept?' },
     { label: 'Download Resume', question: 'Where can I find and download his resume?' },
   ],
   resume: [
     { label: 'Download Resume', question: 'How can I download Samir\'s official resume PDF?' },
     { label: 'Top Projects', question: 'What are his standout portfolio projects?' },
-    { label: 'Get in Touch', question: 'How can I schedule a call or message Samir?' },
+    { label: 'Get in Touch', question: 'How can I schedule a discovery call or message Samir?' },
   ],
   certificates: [
     { label: 'Verified Certificates', question: 'What professional certifications and credentials has Samir earned?' },
-    { label: 'Technical Stack', question: 'What core technologies are covered in his certifications?' },
+    { label: 'Technical Stack', question: 'What core technologies are verified by his credentials?' },
     { label: 'View Portfolio Projects', question: 'How do his certifications translate into real-world projects?' },
   ],
 };
@@ -230,7 +253,7 @@ export function getFollowUpPrompt({
   const latestQuery = recentMessages[recentMessages.length - 1] || '';
   const conversationSummary = recentMessages.slice(-4).join('\n---\n');
 
-  return `You are generating 2 to 3 contextual follow-up question suggestions for Samir's portfolio AI assistant.
+  return `You are generating 2 to 3 contextual follow-up question suggestions for Samir Shaikh's portfolio AI assistant.
 A user just had this exchange with the assistant:
 
 <CONVERSATION>
@@ -253,13 +276,13 @@ RULES FOR GENERATING SUGGESTIONS:
 1. DETECTED TOPIC: ${detectedTopic ? `"${detectedTopic.toUpperCase()}"` : 'None specifically detected'}.
 2. TOPIC ANCHORING: ${
     detectedTopic
-      ? `Because a strong topic was detected, at least 2 of the 3 suggestions MUST be directly focused on ${detectedTopic}. The remaining 1 suggestion may explore a complementary topic (e.g. projects, experience, services, contact).`
-      : 'Generate 2 to 3 natural, highly engaging follow-up questions directly related to the discussion or Samir\'s portfolio.'
+      ? `Because a strong topic was detected, at least 2 of the 3 suggestions MUST be directly focused on ${detectedTopic} (especially specific services like Codebase Audit, RAG Pipelines, AI Agents, or engineering architecture). The remaining 1 suggestion may explore a complementary topic (projects, experience, services, contact).`
+      : 'Generate 2 to 3 natural, highly engaging follow-up questions directly related to the discussion or Samir\'s engineering portfolio.'
   }
 3. NO REDUNDANCY: Never re-ask the exact question the user just asked (${latestQuery}).
 4. GROUNDED: Only suggest questions that Samir\'s portfolio context can actually answer (services, projects, tech stack, experience, resume, contact).
 5. FORMAT:
-   - "label": Short, punchy, clickable button text (<= 6 words). Example: "View Web Services", "Explore AI Projects".
+   - "label": Short, punchy, clickable button text (<= 6 words). Example: "Codebase Audit Scope", "Vector Search Details".
    - "question": The complete natural question sent to the chat when clicked.
 6. Provide exactly 2 or 3 items.`;
 }

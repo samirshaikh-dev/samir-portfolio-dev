@@ -8,7 +8,7 @@ import {
   jsonSchema,
 } from 'ai';
 import { getChatModel, getFollowUpModel } from '@/lib/ai-config';
-import { runSecurityChecks } from '@/lib/chat/security';
+import { runSecurityChecks, validateIncomingMessages } from '@/lib/chat/security';
 import { getRelevantContextWithSources } from '@/lib/chat/retrieval';
 import { getSystemPrompt } from '@/lib/chat/prompt';
 import {
@@ -39,7 +39,12 @@ export async function POST(req: Request) {
   try {
     const { errorResponse } = await runSecurityChecks(req);
     if (errorResponse) return errorResponse;
-    const { messages } = await req.clone().json();
+
+    const body = await req.json().catch(() => ({}));
+    const messages = body?.messages;
+    const payloadValidation = validateIncomingMessages(messages);
+    if (payloadValidation.errorResponse) return payloadValidation.errorResponse;
+
     type MessagePart = { text?: string };
     type ChatInputMessage = { content?: string; parts?: MessagePart[] };
     const recentMessages = (messages || [])
