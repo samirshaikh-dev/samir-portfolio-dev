@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { FaWhatsapp } from "react-icons/fa";
 import { AUTHOR_PHONE } from "@/lib/site-config";
 import { analyticsEvents } from "@/lib/analytics/events";
@@ -14,10 +15,20 @@ const INPUT_BASE =
 
 const PROJECT_TYPES = [
   "Full-Time / Remote Role (AI Backend / Full Stack)",
+  "Autonomous AI Agents & Workflows",
+  "Production RAG & Vector Search",
+  "Voice AI & Realtime Agents",
+  "Codebase Audit & Architecture Review ($450 Fixed)",
+  "Cloud & Database Migration",
+  "High-Throughput Backend APIs",
+  "Database Architecture & Query Optimization",
+  "Full-Stack Web Application Sprint",
+  "High-Converting Business Web Platform",
+  "Headless CMS Architecture & Migration",
+  "DevOps & CI/CD Pipeline Modernization",
+  "Security Hardening & Penetration Testing",
+  "Emergency System Rescue & Stabilization",
   "AI / RAG Pipeline (SaaS Augmentation)",
-  "Codebase Audit / Migration / Optimization",
-  "Backend API / Microservices",
-  "Full-Stack Web App / Local Business Platform",
   "Technical Consultation",
   "Other",
 ];
@@ -47,13 +58,140 @@ const TIMELINES = [
   "Flexible Timeline",
 ];
 
-export default function ContactForm() {
+const SERVICE_ID_TO_DETAILS: Record<
+  string,
+  { title: string; projectType: string; defaultBudget: string; defaultTimeline: string }
+> = {
+  "ai-agents": {
+    title: "Autonomous AI Agents & Workflows",
+    projectType: "Autonomous AI Agents & Workflows",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "rag-pipelines": {
+    title: "Production RAG & Vector Search",
+    projectType: "Production RAG & Vector Search",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "voice-ai": {
+    title: "Voice AI & Realtime Agents",
+    projectType: "Voice AI & Realtime Agents",
+    defaultBudget: "$3,000 – $5,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "codebase-audit": {
+    title: "Codebase Audit & Architecture Review",
+    projectType: "Codebase Audit & Architecture Review ($450 Fixed)",
+    defaultBudget: "< $1,000",
+    defaultTimeline: "ASAP (Rush Project)",
+  },
+  "cloud-migration": {
+    title: "Cloud & Database Migration",
+    projectType: "Cloud & Database Migration",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "backend-api": {
+    title: "High-Throughput Backend APIs",
+    projectType: "High-Throughput Backend APIs",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "database-optimization": {
+    title: "Database Architecture & Query Optimization",
+    projectType: "Database Architecture & Query Optimization",
+    defaultBudget: "< $1,000",
+    defaultTimeline: "ASAP (Rush Project)",
+  },
+  "full-stack-web": {
+    title: "Full-Stack Web Application Sprint",
+    projectType: "Full-Stack Web Application Sprint",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "business-growth-web": {
+    title: "High-Converting Business Web Platform",
+    projectType: "High-Converting Business Web Platform",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "cms-migration": {
+    title: "Headless CMS Architecture & Migration",
+    projectType: "Headless CMS Architecture & Migration",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "1-2 Months",
+  },
+  "devops-ci-cd": {
+    title: "DevOps & CI/CD Pipeline Modernization",
+    projectType: "DevOps & CI/CD Pipeline Modernization",
+    defaultBudget: "< $1,000",
+    defaultTimeline: "ASAP (Rush Project)",
+  },
+  "security-audit": {
+    title: "Security Hardening & Penetration Testing",
+    projectType: "Security Hardening & Penetration Testing",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "ASAP (Rush Project)",
+  },
+  "system-rescue": {
+    title: "Emergency System Rescue & Stabilization",
+    projectType: "Emergency System Rescue & Stabilization",
+    defaultBudget: "$1,000 – $3,000",
+    defaultTimeline: "ASAP (Rush Project)",
+  },
+};
+
+function ContactFormInner() {
   const formRef = useRef<HTMLFormElement>(null);
+  const searchParams = useSearchParams();
+
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [whatsappLink, setWhatsappLink] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  const [projectType, setProjectType] = useState<string>("");
   const [priority, setPriority] = useState<string>("Medium Priority");
+  const [budget, setBudget] = useState<string>("");
+  const [timeline, setTimeline] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [configuredServiceTitle, setConfiguredServiceTitle] = useState<string | null>(null);
+  const [configuredScopeTier, setConfiguredScopeTier] = useState<string | null>(null);
+
+  useEffect(() => {
+    const serviceParam = searchParams.get("service");
+    const scopeParam = searchParams.get("scope");
+
+    if (serviceParam && SERVICE_ID_TO_DETAILS[serviceParam]) {
+      const info = SERVICE_ID_TO_DETAILS[serviceParam];
+      const isCustom = scopeParam === "custom";
+
+      setConfiguredServiceTitle(info.title);
+      setConfiguredScopeTier(isCustom ? "Custom Scope / Retainer" : "Standard Sprint");
+      setProjectType(info.projectType);
+      setPriority(serviceParam === "system-rescue" ? "Urgent" : "Medium Priority");
+      setBudget(isCustom ? "$5,000 – $10,000" : info.defaultBudget);
+      setTimeline(isCustom ? "1-2 Months" : info.defaultTimeline);
+
+      setMessage(
+        `Hi Samir, I would like to discuss the ${info.title} (${isCustom ? "Custom Scope / Retainer" : "Standard Sprint"}).\n\n` +
+        `• Current Tech Stack: [e.g. Next.js, Node.js, PostgreSQL]\n` +
+        `• Target Launch Timeline: [e.g. 2-3 weeks]\n` +
+        `• Key Objectives / Bottlenecks: [Briefly outline what you need built, audited, or rescued]`
+      );
+    }
+  }, [searchParams]);
+
+  function handleResetPreConfig() {
+    setConfiguredServiceTitle(null);
+    setConfiguredScopeTier(null);
+    setProjectType("");
+    setPriority("Medium Priority");
+    setBudget("");
+    setTimeline("");
+    setMessage("");
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -105,7 +243,7 @@ export default function ContactForm() {
     setWhatsappLink(whatsappUrl);
 
     // Open WhatsApp immediately inside direct user gesture to bypass browser popup blockers
-    const whatsappTab = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 
     try {
       const res = await fetch("/api/contact", {
@@ -136,7 +274,7 @@ export default function ContactForm() {
       });
 
       formRef.current?.reset();
-      setPriority("Medium Priority");
+      handleResetPreConfig();
     } catch {
       trackEvent(analyticsEvents.contactSubmitFallback, {
         inquiry_type: data.projectType,
@@ -170,6 +308,25 @@ export default function ContactForm() {
 
   return (
     <form ref={formRef} className="flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
+      {/* Service Pre-configuration Banner */}
+      {configuredServiceTitle && (
+        <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl border border-accent-lime/40 bg-accent-lime/10 text-xs text-foreground shadow-2xs">
+          <div className="flex items-center gap-2.5 min-w-0">
+            <span className="w-2 h-2 rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)] animate-pulse shrink-0" />
+            <span className="truncate">
+              Pre-filled for: <strong className="font-bold">{configuredServiceTitle}</strong> ({configuredScopeTier})
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={handleResetPreConfig}
+            className="text-[11px] font-mono text-text-muted hover:text-foreground underline transition-colors cursor-pointer shrink-0"
+          >
+            Clear
+          </button>
+        </div>
+      )}
+
       {/* Success Banner */}
       {successMessage && (
         <div
@@ -266,7 +423,8 @@ export default function ContactForm() {
               id="contact-project-type"
               name="projectType"
               required
-              defaultValue=""
+              value={projectType}
+              onChange={(e) => setProjectType(e.target.value)}
               disabled={loading}
               className={`${INPUT_BASE} appearance-none pr-10 cursor-pointer`}
             >
@@ -318,7 +476,8 @@ export default function ContactForm() {
               id="contact-budget"
               name="budget"
               required
-              defaultValue=""
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
               disabled={loading}
               className={`${INPUT_BASE} appearance-none pr-10 cursor-pointer`}
             >
@@ -346,7 +505,8 @@ export default function ContactForm() {
             id="contact-timeline"
             name="timeline"
             required
-            defaultValue=""
+            value={timeline}
+            onChange={(e) => setTimeline(e.target.value)}
             disabled={loading}
             className={`${INPUT_BASE} appearance-none pr-10 cursor-pointer`}
           >
@@ -373,6 +533,8 @@ export default function ContactForm() {
           name="message"
           rows={5}
           required
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
           className={`${INPUT_BASE} resize-y min-h-[120px]`}
           placeholder="Describe your project goals, technical requirements, stack, or any specific constraints…"
           disabled={loading}
@@ -408,5 +570,26 @@ export default function ContactForm() {
         </button>
       </div>
     </form>
+  );
+}
+
+function ContactFormFallback() {
+  return (
+    <div className="flex flex-col gap-4 animate-pulse">
+      <div className="h-10 rounded-xl bg-hover-bg border border-border-primary/50" />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="h-10 rounded-xl bg-hover-bg border border-border-primary/50" />
+        <div className="h-10 rounded-xl bg-hover-bg border border-border-primary/50" />
+      </div>
+      <div className="h-28 rounded-xl bg-hover-bg border border-border-primary/50" />
+    </div>
+  );
+}
+
+export default function ContactForm() {
+  return (
+    <Suspense fallback={<ContactFormFallback />}>
+      <ContactFormInner />
+    </Suspense>
   );
 }

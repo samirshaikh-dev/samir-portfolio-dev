@@ -4,6 +4,7 @@ import { projects as projectsSchema, blogs as blogsSchema } from "@/lib/schema";
 import { eq, desc } from "drizzle-orm";
 
 import { APP_URL } from "@/lib/site-config";
+import { getAllServices } from "@/lib/data/services";
 
 export const dynamic = 'force-dynamic';
 
@@ -34,6 +35,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }));
 
+  const serviceUrls = getAllServices().map((service) => ({
+    url: `${APP_URL}/services/${service.id}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.85,
+  }));
+
   const ROUTE_PRIORITIES: Record<string, number> = {
     '': 1.0,
     '/about': 0.9,
@@ -41,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/projects': 0.9,
     '/blogs': 0.9,
     '/contact': 0.9,
-    '/resume': 0.9,
+    '/hire': 0.9,
     '/technical-skills': 0.8,
     '/certificates': 0.8,
     '/faq': 0.8,
@@ -54,6 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/projects',
     '/blogs',
     '/services',
+    '/hire',
     '/contact',
     '/resume',
     '/certificates',
@@ -74,5 +83,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.3,
   }));
 
-  return [...staticRoutes, ...legalRoutes, ...projectUrls, ...blogUrls];
+  return [...staticRoutes, ...serviceUrls, ...legalRoutes, ...projectUrls, ...blogUrls];
 }

@@ -5,6 +5,7 @@ import { projects as projectsSchema, blogs as blogsSchema } from "@/lib/schema";
 import { eq, desc } from "drizzle-orm";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { APP_URL } from "@/lib/site-config";
+import { getAllServices } from "@/lib/data/services";
 import {
   LuCompass,
   LuFolderGit2,
@@ -239,8 +240,10 @@ export default async function SitemapPage() {
     },
   ];
 
+  const services = getAllServices();
+
   const totalIndexedUrls =
-    corePages.length + projects.length + blogs.length + machineFeeds.length;
+    corePages.length + services.length + projects.length + blogs.length + machineFeeds.length;
 
   return (
     <main className="relative flex flex-col flex-1 px-5 sm:px-8 md:px-10 pb-20 overflow-hidden">
@@ -447,6 +450,76 @@ export default async function SitemapPage() {
                 <div className="mt-5 pt-3 border-t border-border-primary/50 flex items-center justify-between text-xs font-bold text-foreground">
                   <span>Visit Page</span>
                   <LuArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ── SECTION: SPECIALIZED ENGINEERING SERVICES ───────────────────────── */}
+        <section className="mb-20" aria-label="Specialized Engineering Services">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-8 pb-4 border-b border-border-primary/80">
+            <div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3 shadow-2xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+                SERVICE CATALOGUE &bull; {services.length} OFFERINGS
+              </div>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground">
+                Dedicated Service Deep Dives
+              </h2>
+              <p className="text-text-muted text-sm sm:text-base mt-1.5 max-w-xl leading-relaxed">
+                Dedicated architectural landing pages, scope boundaries, ASCII flow diagrams, and milestone contracts.
+              </p>
+            </div>
+
+            <Link
+              href="/services"
+              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-foreground hover:text-accent-lime transition-colors underline-offset-4 hover:underline self-start sm:self-auto whitespace-nowrap"
+            >
+              <span>View full services overview</span>
+              <LuArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {services.map((service) => (
+              <Link
+                key={service.id}
+                href={`/services/${service.id}`}
+                className="group relative rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-5 sm:p-6 shadow-2xs hover:shadow-md hover:border-foreground/30 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute top-0 left-6 sm:left-8 w-12 sm:w-16 h-[2px] bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                />
+                <div>
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="font-mono text-xs text-text-muted group-hover:text-accent-lime transition-colors truncate max-w-[180px]">
+                      /services/{service.id}
+                    </span>
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded-full border border-border-primary bg-hover-bg/60 text-foreground font-semibold">
+                      {service.startingPrice || "Custom Quote"}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-bold text-foreground group-hover:text-foreground/90 transition-colors mb-1.5 line-clamp-2">
+                    {service.title}
+                  </h3>
+
+                  <p className="text-xs text-text-muted font-mono mb-3 line-clamp-1 italic">
+                    {service.tagline}
+                  </p>
+
+                  <p className="text-xs sm:text-sm text-text-secondary leading-relaxed line-clamp-2">
+                    {service.description}
+                  </p>
+                </div>
+
+                <div className="mt-4 pt-3 border-t border-border-primary/60 flex items-center justify-between text-xs font-mono text-text-muted">
+                  <span>{service.typicalDuration || "1–2 weeks"}</span>
+                  <span className="group-hover:text-foreground font-semibold inline-flex items-center gap-1 transition-colors">
+                    Explore Scope <LuArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                  </span>
                 </div>
               </Link>
             ))}

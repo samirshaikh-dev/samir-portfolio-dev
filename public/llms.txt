@@ -58,7 +58,20 @@ KnowledgeGraphTriples:
 - [Projects](https://samir-portfolio-dev.vercel.app/projects): Production systems, benchmarks, architecture breakdowns, and live demos
 - [Technical Skills](https://samir-portfolio-dev.vercel.app/technical-skills): Comprehensive index of 14 skill categories, architectural patterns (Microservices, Modular Monolith, EDA, CQRS, Circuit Breakers), databases, testing, and observability
 - [Certificates](https://samir-portfolio-dev.vercel.app/certificates): Verified accreditations, system architecture certifications, and technical credentials
-- [Services](https://samir-portfolio-dev.vercel.app/services): Freelance AI developer & engineering services (production-grade AI chatbots, custom knowledge bases, RAG systems, backend APIs, Next.js web apps, technical SEO)
+- [Services](https://samir-portfolio-dev.vercel.app/services): Freelance AI developer & engineering services overview
+  - [Autonomous AI Agents](https://samir-portfolio-dev.vercel.app/services/ai-agents): Multi-agent deterministic workflows, tool calling, and human-in-the-loop oversight
+  - [Production RAG & Vector Search](https://samir-portfolio-dev.vercel.app/services/rag-pipelines): Sub-300ms vector search, PostgreSQL pgvector (3072d Gemini embeddings), reranking
+  - [Voice AI & Realtime Agents](https://samir-portfolio-dev.vercel.app/services/voice-ai): Ultra-low-latency voice interfaces (<500ms TTFB) with LiveKit and WebRTC
+  - [Codebase Audit & Roadmap](https://samir-portfolio-dev.vercel.app/services/codebase-audit): 3–5 day deep architectural audit ($450 fixed) with 100% money-back guarantee
+  - [High-Throughput Backend APIs](https://samir-portfolio-dev.vercel.app/services/backend-api): Node.js, TypeScript, Express, NestJS, and event-driven microservices
+  - [Database & Query Optimization](https://samir-portfolio-dev.vercel.app/services/database-optimization): PostgreSQL indexing, EXPLAIN ANALYZE, connection pooling, and pgvector tuning
+  - [Full-Stack Web App Sprint](https://samir-portfolio-dev.vercel.app/services/full-stack-web): Next.js 16 App Router, React 19, Tailwind CSS v4, and Drizzle ORM
+  - [High-Converting Business Web](https://samir-portfolio-dev.vercel.app/services/business-growth-web): Local business platform with SEO, 100 Lighthouse performance, and booking funnels
+  - [Headless CMS Migration](https://samir-portfolio-dev.vercel.app/services/cms-migration): Decouple legacy WordPress/Drupal to modern Next.js + Headless CMS
+  - [Cloud & Database Migration](https://samir-portfolio-dev.vercel.app/services/cloud-migration): Zero-downtime database and container migrations to AWS, Neon, and Vercel
+  - [DevOps & CI/CD Modernization](https://samir-portfolio-dev.vercel.app/services/devops-ci-cd): Docker containerization, GitHub Actions, automated smoke tests, preview deploys
+  - [Security Hardening & Review](https://samir-portfolio-dev.vercel.app/services/security-audit): Penetration testing, OWASP Top 10 mitigation, auth hardening, secret scrubbing
+  - [Emergency System Rescue](https://samir-portfolio-dev.vercel.app/services/system-rescue): 24–48h emergency debugging, memory leak fixes, and crash triage
 - [FAQ](https://samir-portfolio-dev.vercel.app/faq): 73+ searchable FAQs across AI systems, RAG architecture, backend design, engineering roles, and commercial services
 - [Blog](https://samir-portfolio-dev.vercel.app/blogs): Technical deep dives into RAG, vector search, and backend design
 - [About](https://samir-portfolio-dev.vercel.app/about): Background, timeline, and engineering principles

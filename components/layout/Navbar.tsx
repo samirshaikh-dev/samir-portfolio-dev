@@ -100,11 +100,16 @@ export default function Navbar() {
 
           {/* Right Action Cluster */}
           <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Live Availability Status Pill */}
-            <span className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-semibold text-text-muted shadow-2xs">
+            {/* Live Availability Status Pill -> Links to /hire */}
+            <Link
+              href="/hire"
+              title="View Samir's hiring fast-track & availability"
+              className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-semibold text-text-muted hover:text-foreground hover:border-accent-lime/70 transition-all shadow-2xs group cursor-pointer"
+            >
               <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-              Available for Work
-            </span>
+              <span>Available for Work</span>
+              <span className="text-accent-lime opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200">→</span>
+            </Link>
 
             {/* Quick Contact CTA */}
             <Link
@@ -214,8 +219,16 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Mobile Contact Quick CTA */}
-        <div className="w-full max-w-xs px-6 pt-2">
+        {/* Mobile Fast-Track & Contact CTAs */}
+        <div className="w-full max-w-xs px-6 pt-2 space-y-2">
+          <Link
+            href="/hire"
+            onClick={() => setMenuOpen(false)}
+            className="flex items-center justify-center gap-2 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground text-xs font-mono font-bold py-2.5 px-5 shadow-2xs hover:bg-hover-bg hover:border-foreground/30 transition-all text-center w-full"
+          >
+            <span className="w-2 h-2 rounded-full bg-accent-lime animate-pulse" />
+            <span>Hire Fast-Track &bull; Available</span>
+          </Link>
           <Link
             href="/contact"
             onClick={() => setMenuOpen(false)}

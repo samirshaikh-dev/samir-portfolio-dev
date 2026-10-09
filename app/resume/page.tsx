@@ -3,6 +3,7 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { resume } from "@/lib/schema";
 import ResumeViewer from "@/components/resume/ResumeViewer";
+import RecruiterCheatSheet from "@/components/resume/RecruiterCheatSheet";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import { APP_URL } from "@/lib/site-config";
 import {
@@ -212,6 +213,11 @@ export default async function ResumePage() {
             </div>
             <div className="text-[11px] text-text-muted mt-0.5">2022 – 2026 &bull; 8.44 CGPA</div>
           </div>
+        </div>
+
+        {/* ── RECRUITER FAST-TRACK CHEAT SHEET ─────────────────────────────────── */}
+        <div className="mb-10">
+          <RecruiterCheatSheet />
         </div>
 
         {/* ── INTERACTIVE RESUME VIEWER ────────────────────────────────────────── */}

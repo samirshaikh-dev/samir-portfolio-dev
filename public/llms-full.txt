@@ -14,6 +14,19 @@
 - **Twitter / X**: https://x.com/samirshaikh-dev
 - **Resume**: https://samir-portfolio-dev.vercel.app/resume
 - **Services Catalog**: https://samir-portfolio-dev.vercel.app/services
+  - **Autonomous AI Agents**: https://samir-portfolio-dev.vercel.app/services/ai-agents
+  - **Production RAG & Vector Search**: https://samir-portfolio-dev.vercel.app/services/rag-pipelines
+  - **Voice AI & Realtime Agents**: https://samir-portfolio-dev.vercel.app/services/voice-ai
+  - **Codebase Audit & Technical Roadmap**: https://samir-portfolio-dev.vercel.app/services/codebase-audit
+  - **High-Throughput Backend APIs**: https://samir-portfolio-dev.vercel.app/services/backend-api
+  - **Database & Query Optimization**: https://samir-portfolio-dev.vercel.app/services/database-optimization
+  - **Full-Stack Web App Sprint**: https://samir-portfolio-dev.vercel.app/services/full-stack-web
+  - **High-Converting Business Web**: https://samir-portfolio-dev.vercel.app/services/business-growth-web
+  - **Headless CMS Migration**: https://samir-portfolio-dev.vercel.app/services/cms-migration
+  - **Cloud & Database Migration**: https://samir-portfolio-dev.vercel.app/services/cloud-migration
+  - **DevOps & CI/CD Modernization**: https://samir-portfolio-dev.vercel.app/services/devops-ci-cd
+  - **Security Hardening & Review**: https://samir-portfolio-dev.vercel.app/services/security-audit
+  - **Emergency System Rescue**: https://samir-portfolio-dev.vercel.app/services/system-rescue
 - **Certificates & Credentials**: https://samir-portfolio-dev.vercel.app/certificates
 - **FAQ Knowledge Base**: https://samir-portfolio-dev.vercel.app/faq
 - **Blog Archive**: https://samir-portfolio-dev.vercel.app/blogs

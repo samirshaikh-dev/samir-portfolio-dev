@@ -269,7 +269,12 @@ export default function ServicesPage() {
                       </div>
 
                       <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2 group-hover:text-text-secondary transition-colors">
-                        {service.title}
+                        <Link
+                          href={`/services/${service.id}`}
+                          className="hover:text-foreground dark:hover:text-accent-lime transition-colors"
+                        >
+                          {service.title}
+                        </Link>
                       </h3>
                       <p className="text-xs font-mono text-text-muted mb-4 italic">
                         {service.tagline}
@@ -307,17 +312,15 @@ export default function ServicesPage() {
                         ))}
                       </div>
 
-                      <div className="flex items-center justify-between gap-3 pt-1">
-                        {service.relatedLink && (
-                          <Link
-                            href={service.relatedLink.href}
-                            className="text-xs font-mono font-bold text-foreground hover:text-text-secondary underline underline-offset-4 decoration-border-primary inline-flex items-center gap-1 transition-colors"
-                          >
-                            {service.relatedLink.label}
-                          </Link>
-                        )}
+                      <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
                         <Link
-                          href={`/contact?service=${encodeURIComponent(service.id)}`}
+                          href={`/services/${service.id}`}
+                          className="text-xs font-mono font-bold text-foreground hover:text-text-secondary dark:hover:text-accent-lime underline underline-offset-4 decoration-border-primary inline-flex items-center gap-1 transition-colors"
+                        >
+                          View Scope & Architecture →
+                        </Link>
+                        <Link
+                          href={`/contact?service=${encodeURIComponent(service.id)}&scope=standard`}
                           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] text-xs font-extrabold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-2xs dark:shadow-[0_0_12px_rgba(184,255,0,0.35)] ml-auto"
                         >
                           Request quote →
