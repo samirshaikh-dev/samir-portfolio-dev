@@ -35,7 +35,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
   try {
     const { id } = await params;
     const body = await req.json();
-    const { title, slug, excerpt, content, cover_image_url, is_published } = body;
+    const { title, slug, excerpt, content, cover_image_url, tags, is_published } = body;
 
     if (!title || !slug || !content) {
       return NextResponse.json(
@@ -60,6 +60,7 @@ export async function PUT(req: NextRequest, { params }: Params) {
     const result = await db.update(blogsSchema)
       .set({
         title, slug, excerpt: excerpt || null, content, coverImageUrl: cover_image_url || null,
+        tags: tags || null,
         isPublished: is_published ?? false, publishedAt, updatedAt: new Date()
       })
       .where(eq(blogsSchema.id, id))

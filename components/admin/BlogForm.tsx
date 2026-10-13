@@ -12,6 +12,7 @@ interface BlogData {
   excerpt: string;
   content: string;
   cover_image_url: string;
+  tags?: string[];
   is_published: boolean;
 }
 
@@ -39,9 +40,11 @@ export default function BlogForm({ initialData, blogId }: BlogFormProps) {
     excerpt: initialData?.excerpt || "",
     content: initialData?.content || "",
     cover_image_url: initialData?.cover_image_url || "",
+    tags: initialData?.tags || [],
     is_published: initialData?.is_published ?? false,
   });
 
+  const [tagsString, setTagsString] = useState(initialData?.tags?.join(", ") || "");
   const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -57,6 +60,13 @@ export default function BlogForm({ initialData, blogId }: BlogFormProps) {
 
   function handleSlugChange(e: React.ChangeEvent<HTMLInputElement>) {
     setForm((prev) => ({ ...prev, slug: slugify(e.target.value) }));
+  }
+
+  function handleTagsChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const val = e.target.value;
+    setTagsString(val);
+    const tags = val.split(",").map((t) => t.trim()).filter(Boolean);
+    setForm((prev) => ({ ...prev, tags }));
   }
 
 
@@ -138,6 +148,20 @@ export default function BlogForm({ initialData, blogId }: BlogFormProps) {
           rows={3}
           className={`${inputClass} resize-y`}
           placeholder="Short summary shown in blog cards..."
+        />
+      </div>
+
+      <div className="mb-4">
+        <label htmlFor="tags" className={labelClass}>
+          Tags (comma separated)
+        </label>
+        <input
+          id="tags"
+          type="text"
+          value={tagsString}
+          onChange={handleTagsChange}
+          className={inputClass}
+          placeholder="AI, RAG, Node.js, Local SEO"
         />
       </div>
 

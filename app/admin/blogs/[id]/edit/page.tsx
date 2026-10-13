@@ -39,6 +39,7 @@ export default async function EditBlogPage({ params }: EditPageProps) {
             excerpt: blog.excerpt || "",
             content: blog.content,
             cover_image_url: blog.coverImageUrl || "",
+            tags: blog.tags || [],
             is_published: blog.isPublished ?? false,
           }}
         />
