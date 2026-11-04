@@ -4,9 +4,8 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import { blogs as blogsSchema } from "@/lib/schema";
 import { eq, and, ne, desc } from "drizzle-orm";
-import ContentWithToc from "@/components/ContentWithToc";
+import BlogContentContainer from "@/components/blogs/BlogContentContainer";
 import BlogInteractions from "@/components/blogs/BlogInteractions";
-import BlogStarInteraction from "@/components/blogs/BlogStarInteraction";
 import BlogShareButtons from "@/components/blogs/BlogShareButtons";
 import BlogCoverImage from "@/components/blogs/BlogCoverImage";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
@@ -190,8 +189,8 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <main className="flex flex-col flex-1 px-5 sm:px-8 md:px-10 pb-20 pt-6 sm:pt-10">
-      <div className="max-w-4xl mx-auto w-full space-y-8">
-        {/* Navigation Row */}
+      <div className="max-w-6xl mx-auto w-full space-y-10">
+        {/* ── BREADCRUMBS & NAVIGATION ROW ──────────────────────────────────── */}
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Breadcrumbs
             items={[
@@ -210,12 +209,12 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         {/* ── ARTICLE HEADER ────────────────────────────────────────────────── */}
-        <header className="border-b border-border-primary/80 pb-8 sm:pb-10">
-          {/* Topic Badge */}
+        <header className="border-b border-border-primary/80 pb-8 sm:pb-10 max-w-4xl">
+          {/* Topic Badge & Metadata */}
           <div className="flex flex-wrap items-center gap-2 mb-4">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border-primary/80 bg-hover-bg/70 text-[10px] font-mono font-medium tracking-wider text-foreground uppercase">
               <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-              {blog.tags?.[0] || "TECHNICAL LOG"}
+              {blog.tags?.[0] || "TECHNICAL ESSAY"}
             </span>
             <div className="flex items-center gap-3 text-xs font-mono text-text-muted ml-auto">
               <span className="flex items-center gap-1">
@@ -242,7 +241,7 @@ export default async function BlogPostPage({ params }: Props) {
             </p>
           )}
 
-          {/* Author & Telemetry Byline */}
+          {/* Author Byline */}
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between py-4 mt-8 border-t border-border-primary/60 gap-4">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-hover-bg border border-border-primary flex items-center justify-center font-bold text-foreground text-sm font-mono shadow-2xs">
@@ -251,21 +250,20 @@ export default async function BlogPostPage({ params }: Props) {
               <div>
                 <div className="text-sm font-bold text-foreground">Samir Shaikh</div>
                 <div className="text-xs text-text-muted font-mono">
-                  AI Backend Engineer &bull; Agentic AI &amp; Distributed Systems
+                  AI Backend Engineer &bull; Agentic Systems &amp; Distributed Systems
                 </div>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
               <BlogShareButtons title={blog.title} slug={blog.slug} compact />
-              <BlogStarInteraction slug={blog.slug} initialStars={blog.stars ?? 0} />
             </div>
           </div>
         </header>
 
-        {/* ── COVER IMAGE WITH FALLBACK CARD ────────────────────────────────── */}
+        {/* ── HERO COVER IMAGE WITH FALLBACK CARD ───────────────────────────── */}
         {blog.cover_image_url && (
-          <figure className="overflow-hidden rounded-2xl sm:rounded-3xl border border-border-primary/80">
+          <figure className="overflow-hidden rounded-2xl sm:rounded-3xl border border-border-primary/80 max-w-5xl">
             <BlogCoverImage
               coverImageUrl={blog.cover_image_url}
               title={blog.title}
@@ -276,85 +274,88 @@ export default async function BlogPostPage({ params }: Props) {
           </figure>
         )}
 
-        {/* ── RICH CONTENT WITH TABLE OF CONTENTS ───────────────────────────── */}
-        <div className="pt-2">
-          <ContentWithToc
-            html={blog.content}
-            className="prose prose-base sm:prose-lg prose-gray dark:prose-invert max-w-none text-text-secondary leading-relaxed prose-headings:text-foreground prose-headings:font-black prose-headings:tracking-tight prose-strong:text-foreground prose-a:text-foreground hover:prose-a:text-accent-lime prose-code:font-mono prose-code:text-foreground prose-code:bg-hover-bg prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-pre:border prose-pre:border-border-primary prose-pre:bg-card-bg"
+        {/* ── READING LAYOUT: PROSE ARTICLE + STICKY SIDEBAR ────────────────── */}
+        <BlogContentContainer
+          content={blog.content}
+          title={blog.title}
+          slug={blog.slug}
+          initialStars={blog.stars ?? 0}
+        />
+
+        {/* ── POST-READING SECTION: TAGS, AUTHOR BIO & COMMENTS ─────────────── */}
+        <div className="max-w-4xl space-y-12 pt-6">
+          {/* Article Tags */}
+          {blog.tags && blog.tags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 pt-6 border-t border-border-primary/80">
+              <span className="text-xs font-mono text-text-muted uppercase tracking-wider mr-1">
+                Topics:
+              </span>
+              {blog.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="text-xs font-mono font-medium px-3 py-1 rounded-full bg-hover-bg/70 border border-border-primary/60 text-text-secondary"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {/* Social Share Buttons (Full Mode) */}
+          <div className="pt-2">
+            <BlogShareButtons title={blog.title} slug={blog.slug} />
+          </div>
+
+          {/* Author Bio Card (Psychology & Proof Framing) */}
+          <section
+            aria-label="Author biography"
+            className="p-6 sm:p-8 rounded-3xl bg-background dark:bg-card-bg border border-border-primary/80 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-6"
+          >
+            <div className="w-16 h-16 rounded-2xl bg-hover-bg border border-border-primary/80 flex items-center justify-center font-black text-xl text-foreground font-mono flex-shrink-0 shadow-2xs">
+              SS
+            </div>
+            <div className="flex-1 text-center sm:text-left space-y-2">
+              <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-border-primary/80 bg-hover-bg/60 text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+                AUTHOR &amp; SYSTEMS ARCHITECT
+              </div>
+              <h2 className="text-xl font-black text-foreground tracking-tight">Samir Shaikh</h2>
+              <p className="text-xs text-text-muted font-mono">
+                AI Backend Engineer &bull; Agentic AI &bull; Production RAG Systems
+              </p>
+              <p className="text-sm text-text-secondary leading-relaxed pt-1">
+                Building autonomous AI workflows, high-throughput microservices, and production vector search architectures. Focused on engineering reliability and customer-embedded problem solving.
+              </p>
+              <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-3">
+                <Link
+                  href="/about"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors"
+                >
+                  <span>Career &amp; Engineering Philosophy</span>
+                  <FiArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+                <span className="text-border-primary">&bull;</span>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors"
+                >
+                  <span>Discuss System Architecture</span>
+                  <FiArrowUpRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Blog Interactions (Comments & Community Feedback) */}
+          <BlogInteractions
+            slug={blog.slug}
+            initialComments={blog.comments ?? []}
           />
         </div>
 
-        {/* ── ARTICLE TAGS ──────────────────────────────────────────────────── */}
-        {blog.tags && blog.tags.length > 0 && (
-          <div className="flex flex-wrap items-center gap-2 pt-8 border-t border-border-primary/80">
-            <span className="text-xs font-mono text-text-muted uppercase tracking-wider mr-1">
-              Topics:
-            </span>
-            {blog.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs font-mono font-medium px-3 py-1 rounded-full bg-hover-bg/70 border border-border-primary/60 text-text-secondary"
-              >
-                #{tag}
-              </span>
-            ))}
-          </div>
-        )}
-
-        {/* Share Section (Full Mode) */}
-        <div className="pt-4">
-          <BlogShareButtons title={blog.title} slug={blog.slug} />
-        </div>
-
-        {/* ── AUTHOR BIO CARD (PSYCHOLOGY & PROOF FRAMING) ──────────────────── */}
-        <section
-          aria-label="Author biography"
-          className="my-10 p-6 sm:p-8 rounded-3xl bg-background dark:bg-card-bg border border-border-primary/80 shadow-2xs flex flex-col sm:flex-row items-center sm:items-start gap-6"
-        >
-          <div className="w-16 h-16 rounded-2xl bg-hover-bg border border-border-primary/80 flex items-center justify-center font-black text-xl text-foreground font-mono flex-shrink-0 shadow-2xs">
-            SS
-          </div>
-          <div className="flex-1 text-center sm:text-left space-y-2">
-            <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full border border-border-primary/80 bg-hover-bg/60 text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-              AUTHOR &amp; SYSTEMS ENGINEER
-            </div>
-            <h2 className="text-xl font-black text-foreground tracking-tight">Samir Shaikh</h2>
-            <p className="text-xs text-text-muted font-mono">
-              AI Backend Engineer &bull; Agentic AI &bull; Production RAG Systems
-            </p>
-            <p className="text-sm text-text-secondary leading-relaxed pt-1">
-              Building autonomous AI workflows, high-throughput microservices, and production vector search architectures. Focused on engineering reliability and customer-embedded problem solving.
-            </p>
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-3">
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors"
-              >
-                <span>Career &amp; Engineering Philosophy</span>
-                <FiArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-              <span className="text-border-primary">&bull;</span>
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors"
-              >
-                <span>Discuss System Architecture</span>
-                <FiArrowUpRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ── BLOG INTERACTIONS (COMMENTS & FEEDBACK) ───────────────────────── */}
-        <BlogInteractions
-          slug={blog.slug}
-          initialComments={blog.comments ?? []}
-        />
-
-        {/* ── RELATED POSTS (FURTHER READING) ───────────────────────────────── */}
+        {/* ── RELATED ARCHITECTURAL POSTS ───────────────────────────────────── */}
         {relatedBlogs.length > 0 && (
-          <section className="mt-16 pt-12 border-t border-border-primary/80 space-y-8">
+          <section className="pt-16 border-t border-border-primary/80 space-y-8">
             <div className="flex items-baseline justify-between">
               <div>
                 <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-1">
@@ -413,7 +414,7 @@ export default async function BlogPostPage({ params }: Props) {
           </section>
         )}
 
-        {/* ── SCHEMA.ORG STRUCTURED DATA ────────────────────────────────────── */}
+        {/* ── SCHEMA.ORG JSON-LD STRUCTURED DATA ────────────────────────────── */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
