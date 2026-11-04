@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 import { db } from "@/lib/db";
-import { projects as projectsSchema, blogs as blogsSchema, socials as socialsSchema, testimonials as testimonialsSchema } from "@/lib/schema";
+import { projects as projectsSchema, blogs as blogsSchema, socials as socialsSchema, testimonials as testimonialsSchema, experiences as experiencesSchema } from "@/lib/schema";
 import { eq, desc, asc } from "drizzle-orm";
 
 interface SlimItem {
@@ -151,4 +151,24 @@ export const getCachedTestimonials = unstable_cache(
   },
   ["homepage-testimonials"],
   { revalidate: 3600, tags: ["testimonials"] }
+);
+
+
+/**
+ * Cached fetch of professional work experiences for homepage and about.
+ * Revalidated hourly via unstable_cache.
+ */
+export const getCachedExperiences = unstable_cache(
+  async () => {
+    try {
+      return await db
+        .select()
+        .from(experiencesSchema)
+        .orderBy(asc(experiencesSchema.displayOrder));
+    } catch {
+      return [];
+    }
+  },
+  ["homepage-experiences"],
+  { revalidate: 3600, tags: ["experiences"] }
 );

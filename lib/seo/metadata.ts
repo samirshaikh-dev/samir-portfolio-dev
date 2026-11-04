@@ -8,11 +8,11 @@ import {
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
   title: {
-    default: "Samir Shaikh — Freelance AI Developer (Backend-First)",
+    default: "Samir Shaikh — Full-Stack Software Engineer | Backend & AI Systems",
     template: "%s | Samir Shaikh",
   },
   description:
-    "Helping startups, founders, and engineering teams build reliable AI agents, custom RAG systems, and robust backend architectures. Freelance AI developer (backend-first) available for projects, contract sprints, and remote roles.",
+    "Full-Stack Software Engineer focused on backend architecture, scalable applications, and AI-powered systems. I care about understanding the problem, choosing the right approach, and building software that works beyond the demo.",
   keywords: [
     "Samir Shaikh",
     "freelance AI developer",
