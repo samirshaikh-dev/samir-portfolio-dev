@@ -5,14 +5,58 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LuArrowRight, LuMail } from "react-icons/lu";
+import { FaWhatsapp, FaLinkedin, FaGithub } from "react-icons/fa";
+import { AUTHOR_EMAIL, AUTHOR_PHONE, LINKEDIN_URL, GITHUB_URL } from "@/lib/site-config";
 
-const links = [
-  { label: "Home", href: "/" },
+const desktopNavLinks = [
   { label: "Projects", href: "/projects" },
-  { label: "Blogs", href: "/blogs" },
   { label: "Services", href: "/services" },
+  { label: "Hire", href: "/hire" },
+  { label: "Skills", href: "/technical-skills" },
   { label: "About", href: "/about" },
+  { label: "Blog", href: "/blogs" },
   { label: "Resume", href: "/resume" },
+];
+
+const mobileNavLinks = [
+  {
+    label: "Home",
+    href: "/",
+  },
+  {
+    label: "Projects",
+    href: "/projects",
+  },
+  {
+    label: "Capabilities & Services",
+    href: "/services",
+    
+  },
+  {
+    label: "Hire Samir",
+    href: "/hire",
+    badge: "0d Notice",
+  },
+  {
+    label: "Technical Skills",
+    href: "/technical-skills",
+
+  },
+  {
+    label: "About Samir",
+    href: "/about",
+
+  },
+  {
+    label: "Articles & Blog",
+    href: "/blogs",
+
+  },
+  {
+    label: "Resume & CV",
+    href: "/resume",
+  },
 ];
 
 const FOCUS_RING =
@@ -23,7 +67,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [prevPathname, setPrevPathname] = useState(pathname);
 
-  // Close mobile menu on route change without effect cascading renders
+  // Close mobile menu on route change
   if (prevPathname !== pathname) {
     setPrevPathname(pathname);
     setMenuOpen(false);
@@ -54,15 +98,15 @@ export default function Navbar() {
           {/* Logo & Identity */}
           <Link
             href="/"
-            aria-label="Samir Shaikh — back to homepage"
-            className={`group flex items-center gap-3 shrink-0 rounded-2xl ${FOCUS_RING}`}
+            aria-label="Samir Shaikh — Homepage"
+            className={`group flex items-center gap-3 shrink-0 rounded-xl ${FOCUS_RING}`}
           >
-            <span className="relative block h-10 w-10 sm:h-11 sm:w-11 overflow-hidden rounded-xl border border-border-primary bg-background p-1 transition-all duration-300 group-hover:border-foreground/30 dark:bg-card-bg shadow-2xs">
+            <span className="relative block h-10 w-10 sm:h-11 sm:w-11 overflow-hidden rounded-xl border border-border-primary bg-background p-1 transition-colors group-hover:border-foreground/30 dark:bg-card-bg">
               <Image
                 src="/Logo.svg"
                 alt=""
                 fill
-                className="object-contain transition-transform duration-300 group-hover:scale-105 motion-reduce:transform-none dark:invert"
+                className="object-contain transition-transform duration-200 group-hover:scale-105 motion-reduce:transform-none dark:invert"
                 priority
                 sizes="44px"
               />
@@ -77,19 +121,19 @@ export default function Navbar() {
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-1.5 p-1 rounded-full bg-hover-bg/40 border border-border-primary/60 backdrop-blur-xs">
-            {links.map(({ label, href }) => {
+          {/* Desktop Navigation Links (Clean Segmented Bar) */}
+          <div className="hidden lg:flex items-center gap-0.5 p-1 rounded-xl bg-hover-bg/50 border border-border-primary">
+            {desktopNavLinks.map(({ label, href }) => {
               const active = pathname === href;
               return (
                 <Link
                   key={href}
                   href={href}
                   aria-current={active ? "page" : undefined}
-                  className={`whitespace-nowrap rounded-full px-3 py-1.5 text-xs xl:text-sm transition-all duration-200 motion-reduce:transition-none ${FOCUS_RING} ${
+                  className={`whitespace-nowrap rounded-lg px-3 py-1.5 text-xs xl:text-sm font-medium transition-colors ${FOCUS_RING} ${
                     active
-                      ? "border-foreground bg-foreground font-bold text-background shadow-xs dark:border-accent-lime dark:bg-accent-lime dark:text-[#0A0A0A] dark:shadow-[0_0_12px_rgba(184,255,0,0.4)]"
-                      : "font-semibold text-text-secondary hover:text-foreground hover:bg-hover-bg"
+                      ? "bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] font-bold"
+                      : "text-text-secondary hover:text-foreground hover:bg-hover-bg"
                   }`}
                 >
                   {label}
@@ -99,51 +143,51 @@ export default function Navbar() {
           </div>
 
           {/* Right Action Cluster */}
-          <div className="flex items-center gap-2.5 sm:gap-3">
-            {/* Live Availability Status Pill -> Links to /hire */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Live Availability Status Indicator -> Links to /hire */}
             <Link
               href="/hire"
-              title="View Samir's hiring fast-track & availability"
-              className="hidden xl:inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-semibold text-text-muted hover:text-foreground hover:border-accent-lime/70 transition-all shadow-2xs group cursor-pointer"
+              title="View Samir's availability status and notice period"
+              className="hidden xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border border-border-primary bg-background dark:bg-card-bg text-xs font-mono text-text-secondary hover:text-foreground hover:border-foreground/30 transition-colors"
             >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-              <span>Available for Work</span>
-              <span className="text-accent-lime opacity-0 -ml-1 group-hover:opacity-100 group-hover:ml-0 transition-all duration-200">→</span>
+              <span className="w-2 h-2 rounded-full bg-accent-lime shrink-0" aria-hidden="true" />
+              <span>Available (0d Notice)</span>
             </Link>
 
             {/* Quick Contact CTA */}
             <Link
               href="/contact"
-              className="hidden sm:inline-flex items-center gap-1.5 rounded-full bg-accent-lime text-[#0A0A0A] text-xs font-extrabold px-4 py-2 hover:shadow-[0_0_16px_rgba(184,255,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all shadow-xs"
+              className="hidden sm:inline-flex items-center gap-1.5 rounded-xl bg-accent-lime text-[#0A0A0A] text-xs font-bold px-4 py-2 hover:bg-accent-lime/90 transition-colors"
             >
-              Let&apos;s Talk →
+              <span>Let&apos;s Talk</span>
+              <LuArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
             </Link>
 
             {/* Theme Toggle */}
             <ThemeToggle />
 
-            {/* Mobile Hamburger Toggle */}
+            {/* Mobile Navigation Toggle Button */}
             <button
               id="mobile-menu-toggle"
               type="button"
-              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
               onClick={() => setMenuOpen((prev) => !prev)}
-              className={`inline-flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-full border border-border-primary bg-background dark:bg-card-bg shadow-2xs transition-colors duration-200 hover:border-foreground/30 hover:bg-hover-bg lg:hidden ${FOCUS_RING} cursor-pointer`}
+              className={`inline-flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-xl border border-border-primary bg-background dark:bg-card-bg transition-colors hover:border-foreground/30 hover:bg-hover-bg lg:hidden ${FOCUS_RING} cursor-pointer`}
             >
               <span
-                className={`block h-0.5 w-5 origin-center rounded-full bg-foreground transition-transform duration-300 motion-reduce:transition-none ${
+                className={`block h-0.5 w-5 origin-center rounded-full bg-foreground transition-transform duration-200 motion-reduce:transition-none ${
                   menuOpen ? "rotate-45 translate-y-2" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 rounded-full bg-foreground transition-opacity duration-300 motion-reduce:transition-none ${
+                className={`block h-0.5 w-5 rounded-full bg-foreground transition-opacity duration-200 motion-reduce:transition-none ${
                   menuOpen ? "opacity-0 scale-x-0" : ""
                 }`}
               />
               <span
-                className={`block h-0.5 w-5 origin-center rounded-full bg-foreground transition-transform duration-300 motion-reduce:transition-none ${
+                className={`block h-0.5 w-5 origin-center rounded-full bg-foreground transition-transform duration-200 motion-reduce:transition-none ${
                   menuOpen ? "-rotate-45 -translate-y-2" : ""
                 }`}
               />
@@ -152,94 +196,138 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Full-Page Overlay */}
+      {/* ── MOBILE SLIDE-DOWN DRAWER & DIRECTORY ───────────────────────────── */}
       <div
         id="mobile-menu"
-        className={`fixed inset-0 z-40 flex flex-col items-center justify-center gap-6 overflow-hidden bg-background/95 backdrop-blur-xl transition-all duration-300 motion-reduce:transition-none lg:hidden ${
+        className={`fixed inset-x-0 top-[76px] bottom-0 z-40 bg-background/98 backdrop-blur-xl border-t border-border-primary transition-all duration-200 motion-reduce:transition-none lg:hidden overflow-y-auto overscroll-contain flex flex-col justify-between ${
           menuOpen
-            ? "visible opacity-100"
-            : "invisible opacity-0 pointer-events-none"
+            ? "visible opacity-100 translate-y-0"
+            : "invisible opacity-0 -translate-y-2 pointer-events-none"
         }`}
       >
-        {/* Atmospheric Depth: Ambient Lime Glow + Geometric Dot Matrix */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -top-32 right-0 h-[350px] w-[350px] bg-[radial-gradient(circle,rgba(184,255,0,0.18)_0%,transparent_65%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(184,255,0,0.09)_0%,transparent_65%)] sm:h-[550px] sm:w-[550px]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(#0A0A0A_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.035] dark:opacity-[0.07]"
-        />
+        <div className="w-full max-w-lg mx-auto px-5 py-6">
+          {/* Header Directory Label */}
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-border-primary">
+            <span className="text-[11px] font-mono uppercase tracking-wider text-text-muted font-bold flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shrink-0" />
+              Navigation Directory
+            </span>
+            <span className="text-[10px] font-mono text-text-muted">
+              Samir Shaikh &bull; AI Backend
+            </span>
+          </div>
 
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase shadow-2xs">
-          <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-          NAVIGATION DIRECTORY
+          {/* Structured Navigation Links */}
+          <nav aria-label="Mobile Navigation" className="space-y-1">
+            {mobileNavLinks.map(({ label, href, badge }) => {
+              const active = pathname === href;
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={active ? "page" : undefined}
+                  className={`flex items-center justify-between gap-3 rounded-xl border p-3 transition-colors ${FOCUS_RING} ${
+                    active
+                      ? "border-accent-lime/60 bg-hover-bg text-foreground font-bold"
+                      : "border-transparent text-foreground hover:border-border-primary hover:bg-hover-bg"
+                  }`}
+                >
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-bold text-foreground">{label}</span>
+                      {badge && (
+                        <span className="text-[10px] font-mono font-bold px-1.5 py-0.2 rounded bg-accent-lime text-[#0A0A0A]">
+                          {badge}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    {active && (
+                      <span
+                        aria-hidden="true"
+                        className="h-2 w-2 rounded-full bg-accent-lime shrink-0"
+                      />
+                    )}
+                    <LuArrowRight className="w-3.5 h-3.5 text-text-muted" />
+                  </div>
+                </Link>
+              );
+            })}
+          </nav>
         </div>
 
-        <nav
-          aria-label="Mobile Navigation"
-          className="flex w-full max-w-xs flex-col items-stretch gap-1.5 px-6"
-        >
-          {links.map(({ label, href }, i) => {
-            const active = pathname === href;
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setMenuOpen(false)}
-                aria-current={active ? "page" : undefined}
-                style={{ transitionDelay: menuOpen ? `${i * 40}ms` : "0ms" }}
-                className={`flex items-center justify-between gap-3 rounded-2xl border px-4 py-3 text-base font-bold tracking-tight transition-all duration-300 motion-reduce:transition-none ${FOCUS_RING} ${
-                  menuOpen
-                    ? "translate-y-0 opacity-100"
-                    : "translate-y-4 opacity-0"
-                } ${
-                  active
-                    ? "border-border-primary bg-hover-bg text-foreground dark:bg-card-bg dark:border-accent-lime/40"
-                    : "border-transparent text-text-secondary hover:border-border-primary hover:bg-hover-bg hover:text-foreground"
-                }`}
-              >
-                <span className="flex items-center gap-3">
-                  <span
-                    aria-hidden="true"
-                    className={`h-5 w-1 rounded-full transition-colors duration-200 ${
-                      active ? "bg-accent-lime" : "bg-transparent"
-                    }`}
-                  />
-                  {label}
-                </span>
-                {active && (
-                  <span
-                    aria-hidden="true"
-                    className="h-2 w-2 rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]"
-                  />
-                )}
-              </Link>
-            );
-          })}
-        </nav>
+        {/* Mobile Action Footer & Direct Channels */}
+        <div className="w-full max-w-lg mx-auto px-5 py-6 border-t border-border-primary bg-background dark:bg-card-bg/50 mt-auto">
+          {/* Quick Contact & Hire Buttons */}
+          <div className="grid grid-cols-2 gap-2.5 mb-4">
+            <Link
+              href="/hire"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center justify-center gap-2 rounded-xl border border-border-primary bg-background dark:bg-card-bg text-foreground text-xs font-mono font-bold py-3 px-3 hover:bg-hover-bg transition-colors text-center"
+            >
+              <span className="w-2 h-2 rounded-full bg-accent-lime shrink-0" />
+              <span>Hire (0d Notice)</span>
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center justify-center gap-1.5 rounded-xl bg-accent-lime text-[#0A0A0A] text-xs font-bold py-3 px-3 hover:bg-accent-lime/90 transition-colors text-center"
+            >
+              <span>Contact Samir</span>
+              <LuArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
 
-        {/* Mobile Fast-Track & Contact CTAs */}
-        <div className="w-full max-w-xs px-6 pt-2 space-y-2">
-          <Link
-            href="/hire"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center justify-center gap-2 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground text-xs font-mono font-bold py-2.5 px-5 shadow-2xs hover:bg-hover-bg hover:border-foreground/30 transition-all text-center w-full"
-          >
-            <span className="w-2 h-2 rounded-full bg-accent-lime animate-pulse" />
-            <span>Hire Fast-Track &bull; Available</span>
-          </Link>
-          <Link
-            href="/contact"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center justify-center gap-2 rounded-full bg-accent-lime text-[#0A0A0A] text-sm font-extrabold py-3.5 px-6 shadow-xs hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] active:scale-[0.98] transition-all text-center w-full"
-          >
-            Let&apos;s Talk →
-          </Link>
+          {/* Direct Channels Strip */}
+          <div className="flex items-center justify-between text-xs text-text-muted pt-2 border-t border-border-primary/60">
+            <span className="font-mono text-[11px]">Direct Channels:</span>
+            <div className="flex items-center gap-3">
+              <a
+                href={`mailto:${AUTHOR_EMAIL}`}
+                title="Email Samir directly"
+                className="p-2 rounded-lg text-text-secondary hover:text-foreground hover:bg-hover-bg transition-colors"
+                aria-label="Send Email"
+              >
+                <LuMail className="w-4 h-4" />
+              </a>
+              <a
+                href={`https://wa.me/${AUTHOR_PHONE.replace(/[^0-9]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="WhatsApp Samir directly"
+                className="p-2 rounded-lg text-text-secondary hover:text-[#25D366] hover:bg-hover-bg transition-colors"
+                aria-label="Chat on WhatsApp"
+              >
+                <FaWhatsapp className="w-4 h-4" />
+              </a>
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="View LinkedIn Profile"
+                className="p-2 rounded-lg text-text-secondary hover:text-foreground hover:bg-hover-bg transition-colors"
+                aria-label="LinkedIn Profile"
+              >
+                <FaLinkedin className="w-4 h-4" />
+              </a>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="View GitHub Profile"
+                className="p-2 rounded-lg text-text-secondary hover:text-foreground hover:bg-hover-bg transition-colors"
+                aria-label="GitHub Profile"
+              >
+                <FaGithub className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Spacer so content doesn't hide under fixed navbar */}
+      {/* Spacer matching fixed navbar height */}
       <div className="h-[var(--navbar-h)]" />
     </>
   );
