@@ -314,10 +314,10 @@ export function ProjectLinks({
         </div>
       )}
 
-      <div className="relative mt-6 overflow-hidden rounded-2xl border border-border-primary bg-background p-6 sm:p-8 dark:bg-card-bg">
+      <div className="relative mt-8 rounded-3xl border border-border-primary/80 bg-background dark:bg-card-bg p-6 sm:p-8 md:p-10 shadow-2xs">
         <div
           aria-hidden="true"
-          className="absolute -top-24 right-0 h-56 w-56 bg-[radial-gradient(circle,rgba(184,255,0,0.18)_0%,transparent_65%)] blur-3xl dark:bg-[radial-gradient(circle,rgba(184,255,0,0.09)_0%,transparent_65%)]"
+          className="hidden"
         />
         <div className="relative max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-background/90 px-3.5 py-1.5 text-xs font-semibold backdrop-blur-xs dark:bg-card-bg/90">
@@ -325,10 +325,10 @@ export function ProjectLinks({
               aria-hidden="true"
               className="h-2 w-2 animate-pulse rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)] motion-reduce:animate-none"
             />
-            Available for Freelance &amp; Advisory
+            Technical Architecture &amp; System Consulting
           </span>
           <h3 className="mt-4 text-2xl font-black tracking-tight text-foreground sm:text-3xl">
-            Need a similar AI or backend system?
+            Have a system that needs designing or scaling?
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-text-muted sm:text-base">
             I architect, benchmark, and deploy production AI triage pipelines, RAG systems, and
@@ -339,7 +339,7 @@ export function ProjectLinks({
               href="/contact"
               className={`inline-flex items-center justify-center gap-2 rounded-full bg-accent-lime px-6 py-3 text-sm font-extrabold text-[#0A0A0A] shadow-xs transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none ${FOCUS_RING}`}
             >
-              Discuss Your Project
+              Discuss Your Architecture
               <FiArrowRight aria-hidden="true" className="h-4 w-4" />
             </Link>
             <Link

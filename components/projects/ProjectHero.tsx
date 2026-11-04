@@ -1,6 +1,5 @@
-import Image from "next/image";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
-import { optimizeCloudinaryUrl } from "@/lib/cloudinary-utils";
+import { FiExternalLink, FiGithub, FiArrowDown } from "react-icons/fi";
+import ProjectCoverImage from "./ProjectCoverImage";
 
 const FOCUS_RING =
   "focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-background";
@@ -28,100 +27,95 @@ export default function ProjectHero({
   demoLink,
   isCaseStudy,
 }: ProjectHeroProps) {
-  const badgeLabel = badge ?? (isCaseStudy ? "Case Study" : "Project");
-  const onlyGithub = Boolean(githubLink) && !demoLink;
+  const badgeLabel = badge ?? (isCaseStudy ? "Case Study" : "Production System");
 
   return (
     <header className="relative">
-      <div
-        aria-hidden="true"
-        className="absolute -top-32 right-0 h-[320px] w-[320px] bg-[radial-gradient(circle,rgba(184,255,0,0.18)_0%,transparent_65%)] blur-3xl sm:h-[520px] sm:w-[520px] dark:bg-[radial-gradient(circle,rgba(184,255,0,0.09)_0%,transparent_65%)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(#0A0A0A_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.035] dark:opacity-[0.07]"
-      />
-
-      <div className="relative overflow-hidden rounded-3xl border border-border-primary bg-background p-5 shadow-sm sm:p-8 sm:shadow-xs md:p-10 dark:bg-card-bg">
-        <div className="flex flex-wrap items-center gap-2.5">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border-primary bg-background/90 px-3.5 py-1.5 text-[11px] font-semibold backdrop-blur-xs sm:text-xs dark:bg-card-bg/90">
+      {/* Editorial Container */}
+      <div className="relative rounded-3xl border border-border-primary/80 bg-background dark:bg-card-bg p-6 sm:p-10 md:p-12 shadow-2xs">
+        {/* Kicker & Meta Badges */}
+        <div className="flex flex-wrap items-center gap-2.5 mb-6">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border-primary/80 bg-hover-bg/70 px-3.5 py-1.5 text-[11px] font-mono font-medium text-foreground tracking-wider uppercase">
             <span
               aria-hidden="true"
               className="h-1.5 w-1.5 rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]"
             />
             {badgeLabel}
           </span>
-          {category ? (
-            <span className="rounded-full border border-border-primary bg-hover-bg px-3.5 py-1.5 text-[11px] font-medium text-text-secondary sm:text-xs">
+          {category && (
+            <span className="rounded-full border border-border-primary/60 bg-hover-bg/40 px-3 py-1 text-xs font-mono text-text-muted">
               {category}
             </span>
-          ) : null}
-          <time className="font-mono text-[11px] uppercase tracking-wider text-text-muted sm:text-xs">
-            {publishedDate}
+          )}
+          <time className="font-mono text-xs text-text-muted ml-auto hidden sm:inline-block">
+            Published {publishedDate}
           </time>
         </div>
 
-        <h1 className="mt-5 text-3xl font-black leading-[1.12] tracking-tight text-foreground break-words sm:text-4xl md:text-5xl lg:text-6xl">
+        {/* Headline */}
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-tight text-foreground break-words max-w-4xl">
           {title}
         </h1>
 
-        {excerpt ? (
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-text-secondary sm:text-lg">
+        {/* Problem & Context Excerpt */}
+        {excerpt && (
+          <p className="mt-5 max-w-3xl text-base sm:text-lg md:text-xl leading-relaxed text-text-secondary">
             {excerpt}
           </p>
-        ) : null}
-
-        {(demoLink || githubLink) && (
-          <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-            {demoLink ? (
-              <a
-                href={demoLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center gap-2 rounded-full bg-accent-lime px-6 py-3 text-sm font-extrabold text-[#0A0A0A] shadow-xs transition-all duration-200 hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none ${FOCUS_RING}`}
-              >
-                Live Demo
-                <FiExternalLink aria-hidden="true" className="h-4 w-4" />
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            ) : null}
-            {githubLink ? (
-              <a
-                href={githubLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`inline-flex items-center justify-center gap-2 rounded-full border px-6 py-3 text-sm font-extrabold shadow-xs transition-all duration-200 active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none ${FOCUS_RING} ${
-                  onlyGithub
-                    ? "border-accent-lime bg-accent-lime text-[#0A0A0A] hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(184,255,0,0.5)]"
-                    : "border-border-primary bg-background text-foreground hover:border-foreground/30 hover:bg-hover-bg dark:bg-card-bg"
-                }`}
-              >
-                <FiGithub aria-hidden="true" className="h-4 w-4" />
-                Source Code
-                <span className="sr-only">(opens in a new tab)</span>
-              </a>
-            ) : null}
-          </div>
         )}
 
-        {coverImageUrl ? (
+        {/* Primary Actions */}
+        <div className="mt-8 flex flex-wrap items-center gap-3 pt-6 border-t border-border-primary/60">
+          {demoLink && (
+            <a
+              href={demoLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center justify-center gap-2 rounded-full bg-accent-lime px-6 py-2.5 text-xs sm:text-sm font-extrabold text-[#0A0A0A] shadow-2xs hover:brightness-105 active:scale-[0.98] transition-all motion-reduce:transform-none ${FOCUS_RING}`}
+            >
+              <span>Live System</span>
+              <FiExternalLink aria-hidden="true" className="h-4 w-4" />
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+          {githubLink && (
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-flex items-center justify-center gap-2 rounded-full border border-border-primary bg-background dark:bg-card-bg px-6 py-2.5 text-xs sm:text-sm font-bold text-foreground hover:border-foreground/40 hover:bg-hover-bg/70 active:scale-[0.98] transition-all motion-reduce:transform-none ${FOCUS_RING}`}
+            >
+              <FiGithub aria-hidden="true" className="h-4 w-4" />
+              <span>Inspect Source Code</span>
+              <span className="sr-only">(opens in a new tab)</span>
+            </a>
+          )}
+          <a
+            href="#work"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-mono text-text-muted hover:text-foreground transition-colors px-3 py-2"
+          >
+            <FiArrowDown className="w-3.5 h-3.5" />
+            <span>Architecture Breakdown</span>
+          </a>
+        </div>
+
+        {/* Cover Image with Fallback Card */}
+        {coverImageUrl && (
           <figure className="mt-8 sm:mt-10">
-            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl border border-border-primary bg-footer-bg sm:aspect-[2/1]">
-              <Image
-                src={optimizeCloudinaryUrl(coverImageUrl, { width: 1200 })}
-                alt={`Interface of ${title}`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1104px"
-                priority
-              />
-            </div>
-            <figcaption className="mt-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-wider text-text-muted sm:text-[11px]">
+            <ProjectCoverImage
+              coverImageUrl={coverImageUrl}
+              title={title}
+              category={category}
+              badge={badge}
+              aspectRatio="hero"
+              priority={true}
+            />
+            <figcaption className="mt-3 flex items-center gap-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-wider text-text-muted">
               <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-accent-lime" />
-              Interface preview
+              Production Architecture &amp; System Flow
             </figcaption>
           </figure>
-        ) : null}
+        )}
       </div>
     </header>
   );

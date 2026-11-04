@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { db } from "@/lib/db";
 import { projects as projectsSchema } from "@/lib/schema";
 import { eq, desc, asc } from "drizzle-orm";
-import PageHeader from "@/components/layout/PageHeader";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import ProjectList, { Project } from "@/components/projects/ProjectList";
 import { APP_URL } from "@/lib/site-config";
@@ -87,29 +86,67 @@ export default async function ProjectsPage() {
   });
 
   return (
-    <main className="flex-1 px-6 md:px-10 pb-16">
+    <main className="flex-1 px-5 sm:px-8 md:px-10 pb-20 pt-6 sm:pt-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
       />
-      <div className="max-w-6xl mx-auto">
-        <div className="pt-6 md:pt-10">
-          <Breadcrumbs
-            items={[
-              { name: "Home", href: "/" },
-              { name: "Projects", href: "/projects" },
-            ]}
-          />
-        </div>
-        <PageHeader
-          title="Selected Work & Case Studies"
-          subtitle="Production-grade AI systems, high-throughput backends, and full-stack applications engineered for reliability."
+      <div className="max-w-6xl mx-auto space-y-10">
+        {/* Breadcrumb Navigation */}
+        <Breadcrumbs
+          items={[
+            { name: "Home", href: "/" },
+            { name: "Selected Work", href: "/projects" },
+          ]}
         />
-        {projects.length === 0 ? (
-          <p className="text-gray-400">No projects yet.</p>
-        ) : (
-          <ProjectList initialProjects={projects} />
-        )}
+
+        {/* ── EDITORIAL HEADER ──────────────────────────────────────────────── */}
+        <div className="border-b border-border-primary/80 pb-10">
+          <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+            <span>01 / SELECTED WORK &amp; CASE STUDIES</span>
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.1]">
+            Proof Over Years:{" "}
+            <span
+              className="font-normal italic"
+              style={{ fontFamily: "var(--font-playfair), Georgia, serif" }}
+            >
+              Case Studies &amp; Flagship Systems
+            </span>
+          </h1>
+
+          <p className="mt-4 max-w-3xl text-base sm:text-lg text-text-secondary leading-relaxed">
+            Judge my engineering ability by what I can build, how I think, and the problems I solve &mdash; not simply by the number of years I&apos;ve worked.
+          </p>
+
+          {/* Quick Fact Ribbon (Verified Only) */}
+          <div className="mt-6 pt-5 border-t border-border-primary/60 flex flex-wrap items-center gap-y-2 gap-x-6 text-xs font-mono text-text-muted">
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-foreground dark:bg-accent-lime" />
+              <span>3 Flagship Case Studies</span>
+            </span>
+            <span className="text-border-primary hidden sm:inline">&bull;</span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-border-primary" />
+              <span>14 Verified Technologies</span>
+            </span>
+            <span className="text-border-primary hidden sm:inline">&bull;</span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-border-primary" />
+              <span>100% Production TypeScript &amp; Go/Node</span>
+            </span>
+            <span className="text-border-primary hidden sm:inline">&bull;</span>
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-border-primary" />
+              <span>Open Source &amp; Verifiable</span>
+            </span>
+          </div>
+        </div>
+
+        {/* ── PROJECT DIRECTORY LIST ────────────────────────────────────────── */}
+        <ProjectList initialProjects={projects} />
       </div>
     </main>
   );

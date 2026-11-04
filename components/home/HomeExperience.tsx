@@ -80,6 +80,15 @@ const VERIFIED_EXPERIENCES: ExperienceItem[] = [
   },
 ];
 
+function formatExpDate(dateStr: string | null) {
+  if (!dateStr) return "";
+  const trimmed = dateStr.trim();
+  if (/^[A-Za-z]{3,}\s+\d{4}$/.test(trimmed) || /^\d{4}$/.test(trimmed)) return trimmed;
+  const date = new Date(trimmed);
+  if (isNaN(date.getTime())) return trimmed;
+  return date.toLocaleDateString("en-US", { month: "short", year: "numeric" });
+}
+
 export default function HomeExperience({ experiences }: HomeExperienceProps) {
   // Use passed database records if available, otherwise use verified portfolio timeline
   const items: ExperienceItem[] =
@@ -153,7 +162,9 @@ export default function HomeExperience({ experiences }: HomeExperienceProps) {
         {/* ── EDITORIAL TIMELINE ─────────────────────────────────────────────── */}
         <div className="relative border-l-2 border-border-primary/80 ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-10 md:space-y-12">
           {items.map((exp, index) => {
-            const dateStr = exp.endDate ? `${exp.startDate} – ${exp.endDate}` : `${exp.startDate} – Present`;
+            const startFormatted = formatExpDate(exp.startDate);
+            const endFormatted = exp.isCurrent ? "Present" : exp.endDate ? formatExpDate(exp.endDate) : "Present";
+            const dateStr = `${startFormatted} – ${endFormatted}`;
 
             return (
               <div key={exp.id || index} className="relative group">
