@@ -57,7 +57,13 @@ export default function Hero() {
         <div className="space-y-6 md:space-y-8 max-w-4xl">
           {/* Main Statement */}
           <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-black text-foreground tracking-tight leading-[1.05]">
-            I build software that solves real problems.
+            I build software that solves{" "}
+            <span
+              className="font-serif italic font-normal text-text-secondary dark:text-text-secondary"
+              style={{ fontFamily: "var(--font-playfair)" }}
+            >
+              real problems.
+            </span>
           </h1>
 
           {/* Supporting Headline */}

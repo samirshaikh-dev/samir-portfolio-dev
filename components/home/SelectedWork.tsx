@@ -18,7 +18,7 @@ interface CaseStudyDetails {
 }
 
 const CASE_STUDY_METADATA: Record<string, CaseStudyDetails> = {
-  "ai-ticket-triage": {
+  "ai-customer-ticket-triage": {
     challenge: "Process and categorize high-volume support tickets asynchronously without blocking user-facing API threads.",
     decisions: [
       "BullMQ + Redis background worker isolation",
@@ -27,7 +27,7 @@ const CASE_STUDY_METADATA: Record<string, CaseStudyDetails> = {
     ],
     outcome: "74% automated triage routing with sub-1.8s background execution.",
   },
-  "whatsapp-campaign-platform": {
+  "whatsapp-campaigner": {
     challenge: "Deliver high-concurrency broadcast campaigns reliably while adhering strictly to third-party rate limits.",
     decisions: [
       "Token-bucket rate limiter with Redis distributed state",
@@ -35,6 +35,15 @@ const CASE_STUDY_METADATA: Record<string, CaseStudyDetails> = {
       "Automated delivery retries with exponential backoff",
     ],
     outcome: "Zero data-loss at peak concurrency with 99.8% webhook delivery confirmation.",
+  },
+  "eventify": {
+    challenge: "Prevent overselling and concurrency collisions during high-traffic ticket checkouts.",
+    decisions: [
+      "ACID transactional seat locking in PostgreSQL",
+      "Role-Based Access Control (RBAC) across organizers & attendees",
+      "Normalized relational schema with indexed lookup paths",
+    ],
+    outcome: "Zero ticket double-booking incidents across multi-tenant events.",
   },
   "smart-rag-assistant": {
     challenge: "Minimize hallucination in contextual enterprise Q&A while maintaining interactive streaming latency.",
@@ -45,21 +54,12 @@ const CASE_STUDY_METADATA: Record<string, CaseStudyDetails> = {
     ],
     outcome: "Sub-300ms vector retrieval with strict grounding and zero out-of-domain answers.",
   },
-  "event-management-platform": {
-    challenge: "Prevent overselling and concurrency collisions during high-traffic ticket checkouts.",
-    decisions: [
-      "ACID transactional seat locking in PostgreSQL",
-      "Role-Based Access Control (RBAC) across organizers & attendees",
-      "Normalized relational schema with indexed lookup paths",
-    ],
-    outcome: "Zero ticket double-booking incidents across multi-tenant events.",
-  },
 };
 
 function getCaseStudyMeta(project: Project): CaseStudyDetails {
   const slug = (project.slug || "").toLowerCase();
   for (const [key, meta] of Object.entries(CASE_STUDY_METADATA)) {
-    if (slug.includes(key)) {
+    if (slug.includes(key) || key.includes(slug)) {
       return meta;
     }
   }

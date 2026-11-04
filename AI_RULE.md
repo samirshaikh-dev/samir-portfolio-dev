@@ -40,6 +40,33 @@ Load **every** skill whose task area the change touches — they compose, and ea
 
 ---
 
+
+### 1.1 Code Review Graph — Primary Codebase Intelligence
+
+Code Review Graph is the primary codebase intelligence tool for this project. See `code-review-install-guide.txt` for setup and usage.
+
+Before making any change:
+1. Inspect the existing codebase graph (`.code-review-graph/graph.db`).
+2. Understand the architecture, modules, dependencies, and execution flows relevant to the task.
+3. Identify affected components and dependencies before modifying files.
+4. Use graph-based context to avoid unnecessary repository-wide exploration.
+
+When making changes:
+1. Consider the impact on dependent components.
+2. Identify potentially affected tests.
+3. Follow the existing architecture and coding conventions.
+4. Avoid unnecessary refactoring.
+
+After making changes:
+1. Update the code graph if needed.
+2. Analyze the change impact and potential regressions.
+3. Report affected files, dependencies, and testing recommendations.
+
+Do not assume the graph contains up-to-date information. Check its status when necessary.
+
+---
+
+
 ## 2. Tooling, CLI & Execution Guardrails
 
 - **Package Manager:** Exclusively use **`pnpm`** (`packageManager: pnpm@10`). Never run `npm`, `npx` (unless with pnpm dlx), or `yarn`.

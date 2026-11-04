@@ -84,30 +84,40 @@ export default function HomeExperience({ experiences }: HomeExperienceProps) {
   // Use passed database records if available, otherwise use verified portfolio timeline
   const items: ExperienceItem[] =
     experiences && experiences.length > 0
-      ? experiences.map((exp) => {
-          const cleanExpName = (exp.companyName || "").toLowerCase().replace(/[^a-z0-9]/g, "");
-          const matchingVerified = VERIFIED_EXPERIENCES.find((v) => {
-            const cleanVerifiedName = v.companyName.toLowerCase().replace(/[^a-z0-9]/g, "");
-            return (
-              cleanVerifiedName.includes(cleanExpName) ||
-              cleanExpName.includes(cleanVerifiedName)
-            );
-          });
+      ? [
+          ...experiences.map((exp) => {
+            const cleanExpName = (exp.companyName || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+            const matchingVerified = VERIFIED_EXPERIENCES.find((v) => {
+              const cleanVerifiedName = v.companyName.toLowerCase().replace(/[^a-z0-9]/g, "");
+              return (
+                cleanVerifiedName.includes(cleanExpName) ||
+                cleanExpName.includes(cleanVerifiedName)
+              );
+            });
 
-          return {
-            id: exp.id,
-            companyName: exp.companyName,
-            logoUrl: exp.logoUrl || null,
-            position: exp.position,
-            employmentType: matchingVerified?.employmentType || "Production Engineering",
-            startDate: exp.startDate,
-            endDate: exp.endDate,
-            isCurrent: exp.isCurrent,
-            description: exp.description || matchingVerified?.description || null,
-            contributions: matchingVerified?.contributions || [],
-            outcome: matchingVerified?.outcome || undefined,
-          };
-        })
+            return {
+              id: exp.id,
+              companyName: exp.companyName,
+              logoUrl: exp.logoUrl || null,
+              position: exp.position,
+              employmentType: matchingVerified?.employmentType || "Production Engineering",
+              startDate: exp.startDate,
+              endDate: exp.endDate,
+              isCurrent: exp.isCurrent,
+              description: exp.description || matchingVerified?.description || null,
+              contributions: matchingVerified?.contributions || [],
+              outcome: matchingVerified?.outcome || undefined,
+            };
+          }),
+          ...VERIFIED_EXPERIENCES.filter(
+            (v) =>
+              v.id === "utu" &&
+              !experiences.some((exp) => {
+                const c = (exp.companyName || "").toLowerCase();
+                return c.includes("tarsadia") || c.includes("utu");
+              })
+          ),
+        ]
       : VERIFIED_EXPERIENCES;
 
   return (
