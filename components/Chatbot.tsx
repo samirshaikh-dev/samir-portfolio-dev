@@ -45,10 +45,22 @@ type FollowUpMessage = UIMessage<
 const STORAGE_KEY = 'samir_portfolio_chat_messages_v1';
 
 const STARTERS = [
-  { label: 'Core Tech Stack', question: "What is Samir's primary backend and AI tech stack?" },
-  { label: 'Featured Projects', question: "What are Samir's most complex full-stack and AI projects?" },
-  { label: 'Engineering Sprints', question: 'What engineering services and sprint models does Samir offer?' },
-  { label: 'How to Collaborate', question: 'How does Samir collaborate with remote teams and startups?' },
+  {
+    label: 'Can you build a website for my requirements?',
+    question: 'Can you build a custom website or web application tailored to my specific business requirements?',
+  },
+  {
+    label: 'Can we add AI into my existing website or SaaS?',
+    question: 'Can we add an AI chatbot, semantic search, or custom RAG knowledge base directly into my existing website or SaaS?',
+  },
+  {
+    label: 'Can you audit or fix my backend / MVP?',
+    question: 'Can you audit, fix, or optimize the performance and queries of my existing codebase or broken MVP?',
+  },
+  {
+    label: 'What are your project timelines & pricing?',
+    question: 'How do you price engineering sprint projects, and what are your typical delivery timelines?',
+  },
 ];
 
 function getFriendlyErrorMessage(err: Error | undefined): FriendlyError {
@@ -392,16 +404,16 @@ export default function Chatbot() {
               </div>
               <div className="space-y-1">
                 <h3 className="text-sm sm:text-base font-bold text-foreground tracking-tight">
-                  Ask About Architecture, Sprints &amp; Systems
+                  Have a Project or Technical Requirement?
                 </h3>
                 <p className="text-xs text-text-secondary max-w-xs leading-relaxed">
-                  Grounded directly in Samir&apos;s verified case studies, PostgreSQL pgvector retrieval, and engineering services.
+                  Ask about custom web development, adding AI into your product, codebase audits, or hiring Samir.
                 </p>
               </div>
 
               <div className="w-full pt-2 space-y-2 text-left">
                 <p className="text-[10px] uppercase tracking-wider font-mono font-semibold text-text-muted text-center">
-                  Suggested Questions
+                  Common Inquiries
                 </p>
                 <div className="flex flex-col gap-2 w-full">
                   {STARTERS.map((s, idx) => (
