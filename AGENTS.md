@@ -1,6 +1,6 @@
 # AGENTS.md — Universal AI Agent Directives & Operational Standards
 
-> This document is the single, universal operating standard for all AI coding agents, CLIs, and assistant tools (including Antigravity, OpenCode, Claude Code, Cursor, Windsurf, Trae, Aider, and GitHub Copilot) working in this repository. Companion directives and rule configurations include [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md), [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md), [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md), [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md), and [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc).
+> This document is the single, universal operating standard for all AI coding agents, CLIs, and assistant tools (including Antigravity, OpenCode, Claude Code, Cursor, Windsurf, Trae, Aider, and GitHub Copilot) working in this repository. Companion directives and rule configurations include [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md), [`AVOID.md`](file:///s:/portfolio/samir-portfolio-dev/AVOID.md), [`psychology.md`](file:///s:/portfolio/samir-portfolio-dev/psychology.md), [`code-review-install-guide.txt`](file:///s:/portfolio/samir-portfolio-dev/code-review-install-guide.txt), [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md), [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md), [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md), and [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc).
 
 ---
 
@@ -18,7 +18,7 @@
 
 > [!CAUTION]
 > ### STRICT REQUIREMENT FOR ALL AI TOOLS & CLIS
-> **Before proposing, designing, creating, or editing ANY code or content, you MUST ALWAYS load and review the relevant specialized skill file(s) in `agents/skills/`.**
+> **Before proposing, designing, creating, or editing ANY code or content, you MUST ALWAYS load and review the relevant specialized skill file(s) in `.agents/skills/`.**
 
 ### Discipline Routing Matrix
 
@@ -26,22 +26,22 @@ Load **every** skill whose Task Area the change touches — they compose, and ea
 
 | Task Area | Required Skill File | Core Focus |
 | :--- | :--- | :--- |
-| **UI & Visual Design** | [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) | Visual hierarchy, spacing, typography, theme contrast, interactive widgets, design tokens |
-| **Accessibility & WCAG** | [`agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/accessibility-engineer/SKILL.md) | Keyboard operability, focus management, accessible names, live regions, contrast, `prefers-reduced-motion` |
-| **Frontend & Components** | [`agents/skills/frontend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer/SKILL.md) | React 19 / Next.js 16 patterns, Server vs Client boundaries, zero CLS, form handling, error states |
-| **Backend, APIs & Server Logic** | [`agents/skills/backend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/backend-engineer/SKILL.md) | Route handlers, validation, error/status contracts, authz boundaries, pagination, idempotency, cache invalidation |
-| **Database & Data Modeling** | [`agents/skills/database-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/database-engineer/SKILL.md) | Drizzle schema, indexes, migrations, query plans, pgvector/vector storage, data integrity |
-| **AI, RAG & LLM Systems** | [`agents/skills/ai-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ai-engineer/SKILL.md) | Prompts, chunking, embeddings, retrieval thresholds, grounding, evals, model routing, token cost |
-| **Security & Abuse** | [`agents/skills/security-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/security-engineer/SKILL.md) | Authn/authz, secrets, input trust boundaries, XSS/SSRF/injection, rate limiting, upload safety |
-| **DevOps, CI/CD & Environments** | [`agents/skills/devops-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/devops-engineer/SKILL.md) | GitHub Actions, Vercel/build config, env var & secret provisioning, caching/CDN, rollback |
-| **Performance & Latency** | [`agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md) | Core Web Vitals, SSR/ISR caching, Cloudinary optimization, pgvector search latency, bundle size |
-| **Technical SEO & AEO/GEO** | [`agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md) | Schema.org JSON-LD integrity, dynamic OpenGraph, XML sitemaps, robots.txt, AI citation readability |
-| **Keywords & Content Strategy** | [`agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md) | Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, anti-cannibalization, content depth |
-| **Professional Profile Optimization** | [`agents/skills/personal-seo-profile-optimizer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/personal-seo-profile-optimizer/SKILL.md) | LinkedIn/GitHub/resume/bio keyword research, recruiter-facing positioning, profile audits |
+| **UI & Visual Design** | [`.agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/ui-ux-engineer/SKILL.md) | Visual hierarchy, spacing, typography, theme contrast, interactive widgets, design tokens |
+| **Accessibility & WCAG** | [`.agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/accessibility-engineer/SKILL.md) | Keyboard operability, focus management, accessible names, live regions, contrast, `prefers-reduced-motion` |
+| **Frontend & Components** | [`.agents/skills/frontend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/frontend-engineer/SKILL.md) | React 19 / Next.js 16 patterns, Server vs Client boundaries, zero CLS, form handling, error states |
+| **Backend, APIs & Server Logic** | [`.agents/skills/backend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/backend-engineer/SKILL.md) | Route handlers, validation, error/status contracts, authz boundaries, pagination, idempotency, cache invalidation |
+| **Database & Data Modeling** | [`.agents/skills/database-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/database-engineer/SKILL.md) | Drizzle schema, indexes, migrations, query plans, pgvector/vector storage, data integrity |
+| **AI, RAG & LLM Systems** | [`.agents/skills/ai-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/ai-engineer/SKILL.md) | Prompts, chunking, embeddings, retrieval thresholds, grounding, evals, model routing, token cost |
+| **Security & Abuse** | [`.agents/skills/security-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/security-engineer/SKILL.md) | Authn/authz, secrets, input trust boundaries, XSS/SSRF/injection, rate limiting, upload safety |
+| **DevOps, CI/CD & Environments** | [`.agents/skills/devops-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/devops-engineer/SKILL.md) | GitHub Actions, Vercel/build config, env var & secret provisioning, caching/CDN, rollback |
+| **Performance & Latency** | [`.agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/performance-engineer/SKILL.md) | Core Web Vitals, SSR/ISR caching, Cloudinary optimization, pgvector search latency, bundle size |
+| **Technical SEO & AEO/GEO** | [`.agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/seo-engineer/SKILL.md) | Schema.org JSON-LD integrity, dynamic OpenGraph, XML sitemaps, robots.txt, AI citation readability |
+| **Keywords & Content Strategy** | [`.agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/seo-keyword-research-implementation/SKILL.md) | Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, anti-cannibalization, content depth |
+| **Professional Profile Optimization** | [`.agents/skills/personal-seo-profile-optimizer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/personal-seo-profile-optimizer/SKILL.md) | LinkedIn/GitHub/resume/bio keyword research, recruiter-facing positioning, profile audits |
 
 ### Required Step-by-Step Workflow for AI Agents:
 1. **Identify:** Determine which of the 12 skills above govern the requested change.
-2. **Read:** Explicitly view/read the applicable skill file (`agents/skills/<skill-name>/SKILL.md`) before planning or editing.
+2. **Read:** Explicitly view/read the applicable skill file (`.agents/skills/<skill-name>/SKILL.md`) before planning or editing.
 3. **Verify:** Check your proposed solution against the non-negotiable rules and engineering principles of that skill.
 4. **Implement:** Write code that strictly adheres to the skill guidelines, citing the relevant principle in your explanation.
 
@@ -161,7 +161,7 @@ samir-portfolio-dev/
 │   ├── site-config.ts          # Centralized configuration & identity constants
 │   ├── chat/                   # System prompt, retrieval, and security/rate-limiting
 │   └── seo/                    # Metadata & JSON-LD structured data generators
-├── agents/
+├── .agents/
 │   └── skills/                 # The 12 specialized engineering skills (MUST READ FIRST)
 ├── scripts/
 │   └── blog/                   # Modular automated blog generation pipeline
@@ -182,7 +182,7 @@ samir-portfolio-dev/
 
 ## 6. Non-Negotiable Agent Rules Summary
 
-1. **Skills First:** Never write code or propose changes without reading the relevant file(s) in `agents/skills/`.
+1. **Skills First:** Never write code or propose changes without reading the relevant file(s) in `.agents/skills/`.
 2. **Secrets Safe:** Never commit or expose `.env` credentials.
 3. **Use pnpm:** Never invoke `npm` or `yarn`.
 4. **Server Components:** Default to server components with `revalidate = 3600`.

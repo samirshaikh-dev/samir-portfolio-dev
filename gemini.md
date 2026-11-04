@@ -21,19 +21,27 @@ Personal portfolio, technical publication platform, and interactive engineering 
 ## Mandatory Pre-Implementation Protocol: ALWAYS Load & Use Agents Skills
 
 > [!CAUTION]
-> ### STRICT ENFORCEMENT: ZERO IMPLEMENTATION WITHOUT READING SKILLS
-> Before proposing any changes, writing a single line of code, creating new files, or editing existing files, the AI **MUST ALWAYS load and read the applicable skill file(s) from `agents/skills/` using `view_file`**.
+> ### STRICT ENFORCEMENT: ZERO IMPLEMENTATION WITHOUT READING SKILLS & COMPANION DIRECTIVES
+> Before proposing any changes, writing a single line of code, creating new files, or editing existing files, the AI **MUST ALWAYS load and read the applicable skill file(s) from .agents/skills/ using iew_file**.
+>
+> In addition, whenever touching UI, styling, layout, components, or copy, you **MUST ALWAYS read and adhere to:**
+> - [AVOID.md](file:///s:/portfolio/samir-portfolio-dev/AVOID.md) — UI/UX design anti-patterns, generic AI SaaS slop prevention, cards discipline, typography scales, purposeful motion, and clean aesthetic guardrails.
+> - [psychology.md](file:///s:/portfolio/samir-portfolio-dev/psychology.md) — Customer psychology, buyer-centric framing, trust building, verifiable evidence over hype, and low-friction conversion journeys.
+>
+> For codebase structural context, architecture understanding, and impact analysis:
+> - **Always use Code Review Graph** as outlined in [code-review-install-guide.txt](file:///s:/portfolio/samir-portfolio-dev/code-review-install-guide.txt) (.code-review-graph/graph.db via CLI or MCP) instead of repetitive, token-heavy file scans.
 >
 > **Mandatory Execution Pipeline:**
 > 1. **Identify Applicable Discipline(s):**
->    - **UI/UX Direction & Visual Design:** [agents/skills/ui-ux-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md) (Layout, spacing, typography, theme contrast, interactive widget ergonomics, accessibility)
->    - **Frontend & App Router Architecture:** [agents/skills/frontend-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer/SKILL.md) (React 19 / Next.js 16 components, Server vs Client boundaries, zero CLS, form handling, error states)
->    - **Technical SEO, Schema & AEO/GEO:** [agents/skills/seo-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md) (Schema.org JSON-LD integrity, dynamic OpenGraph cards, sitemaps, robots.txt, machine readability)
->    - **Keyword Strategy & Content Layer:** [agents/skills/seo-keyword-research-implementation/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md) (Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, on-page optimization, anti-cannibalization)
->    - **Performance & Optimization:** [agents/skills/performance-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md) (Core Web Vitals, SSR/ISR caching, Cloudinary transformations, pgvector search latency, bundle size)
-> 2. **Load the Skill File(s):** Call `view_file` on every relevant skill document to read its purpose, scope, non-negotiable rules, and workflow before formulating a solution.
-> 3. **Evaluate & Comply:** Cross-reference the proposed implementation against the skill's engineering principles, constraints, and checklists.
-> 4. **Implement with Justification:** Apply changes in strict accordance with the loaded skill's standards.
+>    - **UI/UX Direction & Visual Design:** [.agents/skills/ui-ux-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/ui-ux-engineer/SKILL.md) & [AVOID.md](file:///s:/portfolio/samir-portfolio-dev/AVOID.md) (Layout, spacing, typography, theme contrast, interactive widget ergonomics, accessibility, zero AI slop)
+>    - **Frontend & App Router Architecture:** [.agents/skills/frontend-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/frontend-engineer/SKILL.md) (React 19 / Next.js 16 components, Server vs Client boundaries, zero CLS, form handling, error states)
+>    - **Technical SEO, Schema & AEO/GEO:** [.agents/skills/seo-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/seo-engineer/SKILL.md) (Schema.org JSON-LD integrity, dynamic OpenGraph cards, sitemaps, robots.txt, machine readability)
+>    - **Keyword Strategy & Content Layer:** [.agents/skills/seo-keyword-research-implementation/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/seo-keyword-research-implementation/SKILL.md) & [psychology.md](file:///s:/portfolio/samir-portfolio-dev/psychology.md) (Search intent, customer/recruiter psychology, proof-over-claims framing, AI SDE/RAG/FDE keyword mapping)
+>    - **Performance & Optimization:** [.agents/skills/performance-engineer/SKILL.md](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/performance-engineer/SKILL.md) (Core Web Vitals, SSR/ISR caching, Cloudinary transformations, pgvector search latency, bundle size)
+> 2. **Load the Skill File(s) & Directives:** Call iew_file on every relevant skill document, AVOID.md, and psychology.md to read purpose, constraints, and checklists before formulating a solution.
+> 3. **Inspect Codebase Context:** Query Code Review Graph (.code-review-graph/graph.db via CLI or MCP) to identify affected components and execution flows.
+> 4. **Evaluate & Comply:** Cross-reference the proposed implementation against the skill's engineering principles, constraints, and checklists.
+> 5. **Implement with Justification:** Apply changes in strict accordance with the loaded skill's standards.
 >
 > **This protocol applies unconditionally to ALL tasks — including bug fixes, component styling, content updates, schema tweaks, and API refactoring.**
 
@@ -67,18 +75,22 @@ Personal portfolio, technical publication platform, and interactive engineering 
 
 ## Core Architecture & Operational Rules
 
-1. **Strict AI Directives Compliance:** Always strictly comply with [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) and [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md). Never bypass the pre-implementation skill loading protocol.
-2. **Always Load and Apply `agents/skills/` Before Any Implementation:** Absolute requirement. Never propose or implement changes without first reading and evaluating against the relevant specialized skill(s) via `view_file`.
-3. **Never Commit Secrets:** All credentials, keys, and tokens live strictly in `.env`.
-4. **Server Components by Default:** Fetch data directly in server components (`page.tsx`) using Drizzle queries with ISR (`export const revalidate = 3600`).
-5. **Client Component Boundaries:** Group heavy, client-only interactive widgets (`Chatbot`, `PushSettings`, `CloudTransition`) into `components/LazyClientComponents.tsx` loaded with `ssr: false` to eliminate hydration mismatches.
-6. **Dual-Mode API Authentication:** Write endpoints callable by automation (`POST /api/blogs`, `POST /api/push/send`) use `isAuthorized()` from `lib/api-auth.ts`, supporting either cookie-based admin sessions or `Authorization: Bearer <BLOG_AUTOMATION_TOKEN>`.
-7. **Sanitized Rich Content:** Blog and project contents are stored as sanitized HTML (from TipTap or converted from Markdown via `rehype-sanitize`) and rendered on the client via `HtmlParser` or `ContentWithToc`.
-8. **Automatic Vector Indexing:** Creating, modifying, or deleting blogs/projects automatically triggers pgvector indexing or cleanup in `content_chunks`.
-9. **Cloudinary Asset Delivery:** Always wrap Cloudinary URLs with `optimizeCloudinaryUrl()` from `lib/cloudinary.ts` to enforce automatic modern formats (`f_auto`) and quality compression (`q_auto`).
-10. **Breadcrumb Consistency:** Always use `components/layout/Breadcrumbs.tsx` to maintain unified UI navigation and synchronous `BreadcrumbList` schema markup.
-11. **Single Source of Truth for Metadata:** Import canonical URLs, social handles, and identity info from `lib/site-config.ts`.
-12. **Package Management:** Always use `pnpm` (`packageManager: pnpm@10`). Never use `npm` or `yarn`.
+1. **Strict AI Directives Compliance:** Always strictly comply with [AGENTS.md](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) and [AI_RULE.md](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md). Never bypass the pre-implementation skill loading protocol.
+2. **Always Load and Apply .agents/skills/ Before Any Implementation:** Absolute requirement. Never propose or implement changes without first reading and evaluating against the relevant specialized skill(s) via iew_file.
+3. **Anti-Slop & Psychology Directives:** Strictly enforce [AVOID.md](file:///s:/portfolio/samir-portfolio-dev/AVOID.md) (no generic AI aesthetics, no card nesting/neon clutter) and [psychology.md](file:///s:/portfolio/samir-portfolio-dev/psychology.md) (visitor trust, proof over hype, buyer-centric framing) whenever modifying UI, layout, components, or copy.
+4. **Codebase Context via Code Review Graph:** For architectural context, dependencies, and impact analysis, always use Code Review Graph (.code-review-graph/graph.db and [code-review-install-guide.txt](file:///s:/portfolio/samir-portfolio-dev/code-review-install-guide.txt)) rather than repetitive, token-heavy file scans.
+5. **Never Commit Secrets:** All credentials, keys, and tokens live strictly in .env.
+6. **Server Components by Default:** Fetch data directly in server components (page.tsx) using Drizzle queries with ISR (export const revalidate = 3600).
+7. **Client Component Boundaries:** Group heavy, client-only interactive widgets (Chatbot, PushSettings, CloudTransition) into components/LazyClientComponents.tsx loaded with ssr: false to eliminate hydration mismatches.
+8. **Dual-Mode API Authentication:** Write endpoints callable by automation (POST /api/blogs, POST /api/push/send) use isAuthorized() from lib/api-auth.ts, supporting either cookie-based admin sessions or Authorization: Bearer <BLOG_AUTOMATION_TOKEN>.
+9. **Sanitized Rich Content:** Blog and project contents are stored as sanitized HTML (from TipTap or converted from Markdown via 
+ehype-sanitize) and rendered on the client via HtmlParser or ContentWithToc.
+10. **Automatic Vector Indexing:** Creating, modifying, or deleting blogs/projects automatically triggers pgvector indexing or cleanup in content_chunks.
+11. **Cloudinary Asset Delivery:** Always wrap Cloudinary URLs with optimizeCloudinaryUrl() from lib/cloudinary.ts to enforce automatic modern formats (_auto) and quality compression (q_auto).
+12. **Breadcrumb Consistency:** Always use components/layout/Breadcrumbs.tsx to maintain unified UI navigation and synchronous BreadcrumbList schema markup.
+13. **Single Source of Truth for Metadata:** Import canonical URLs, social handles, and identity info from lib/site-config.ts.
+14. **Package Management:** Always use pnpm (packageManager: pnpm@10). Never use 
+pm or yarn.
 
 ## Identity & Professional Profile
 - **Name:** Samir Shaikh

@@ -354,7 +354,7 @@ Schema is defined in `lib/schema.ts`; four generated migrations are applied (`dr
 
 ## Critical Rules & Gotchas
 1. **Strict AI Directives Compliance:** All AI models and tools must adhere strictly to [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) and [`AI_RULE.md`](file:///s:/portfolio/samir-portfolio-dev/AI_RULE.md). Never bypass the pre-implementation skill loading protocol.
-2. **Always Load and Follow `agents/skills/` Before Any Implementation:** Mandatory pre-requisite. Before proposing or implementing any changes (frontend, UI/UX, SEO, performance, or backend), the AI MUST explicitly view and evaluate against the relevant skill(s) in `agents/skills/` via `view_file` (`frontend-engineer/SKILL.md`, `performance-engineer/SKILL.md`, `personal-seo-profile-optimizer/SKILL.md`, `seo-engineer/SKILL.md`, `seo-keyword-research-implementation/SKILL.md`, `ui-ux-engineer/SKILL.md`).
+2. **Always Load and Follow `.agents/skills/` Before Any Implementation:** Mandatory pre-requisite. Before proposing or implementing any changes (frontend, UI/UX, SEO, performance, or backend), the AI MUST explicitly view and evaluate against the relevant skill(s) in `.agents/skills/` via `view_file` (`frontend-engineer/SKILL.md`, `performance-engineer/SKILL.md`, `personal-seo-profile-optimizer/SKILL.md`, `seo-engineer/SKILL.md`, `seo-keyword-research-implementation/SKILL.md`, `ui-ux-engineer/SKILL.md`).
 3. **Never commit secrets** — all credentials remain strictly in `.env`.
 4. **Server components for reads, client components for interactivity** — keep data fetching in server components with ISR (`revalidate = 3600`).
 5. **Use pnpm** — do not use npm or yarn (`packageManager: pnpm@10`).
@@ -373,3 +373,4 @@ Schema is defined in `lib/schema.ts`; four generated migrations are applied (`dr
 18. **`.kilo/worktrees/puzzle-piranha/` is a stale duplicate** of an older snapshot committed into the tree. It is not part of the app; never edit or trust it as source of truth.
 19. **Dead dependency** — `bcryptjs` is installed but no longer imported anywhere; admin credentials are compared in plaintext against env vars in `lib/auth.ts`.
 20. **Migrations** — four Drizzle migrations (`drizzle/0000`–`0003`) are applied. `drizzle-kit` is a regular dependency, so use `pnpm drizzle-kit generate|migrate` (there is no npm script alias).
+21. **Codebase context via Code Review Graph** — for architectural context, dependencies, and change impact, use Code Review Graph (`.code-review-graph/graph.db` and [`code-review-install-guide.txt`](file:///s:/portfolio/samir-portfolio-dev/code-review-install-guide.txt)) rather than repetitive, token-heavy file scans.

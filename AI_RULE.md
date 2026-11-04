@@ -1,49 +1,53 @@
 # AI Rules & Engineering Directives — Samir Portfolio Dev
 
-> **Scope:** These rules apply to all AI models, CLIs, and autonomous coding assistants operating on `samir-portfolio-dev`. Adherence is mandatory on every step. Companion directives and references: [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) (Universal standards & skill routing) | [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md) (Project knowledge graph) | [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md) (Gemini directives) | [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md) (Color & theme reference) | [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc) (OpenCode config).
+> **Scope:** These rules apply to all AI models, CLIs, and autonomous coding assistants operating on `samir-portfolio-dev`. Adherence is mandatory on every step. Companion directives and references: [`AGENTS.md`](file:///s:/portfolio/samir-portfolio-dev/AGENTS.md) (Universal standards & skill routing) | [`AVOID.md`](file:///s:/portfolio/samir-portfolio-dev/AVOID.md) (UI/UX anti-patterns & AI slop prevention) | [`psychology.md`](file:///s:/portfolio/samir-portfolio-dev/psychology.md) (Psychology, persuasion & buyer trust) | [`code-review-install-guide.txt`](file:///s:/portfolio/samir-portfolio-dev/code-review-install-guide.txt) (Code Review Graph codebase context & intelligence) | [`context.md`](file:///s:/portfolio/samir-portfolio-dev/context.md) (Project knowledge graph) | [`gemini.md`](file:///s:/portfolio/samir-portfolio-dev/gemini.md) (Gemini directives) | [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md) (Color & theme reference) | [`opencode.jsonc`](file:///s:/portfolio/samir-portfolio-dev/opencode.jsonc) (OpenCode config).
 
 ---
 
-## 1. The Golden Directive: Mandatory Skills Protocol
+## 1. The Golden Directive: Mandatory Skills & Directives Protocol
 
 > [!CAUTION]
-> ### STRICT REQUIREMENT: NEVER PROCEED WITHOUT RELEVANT AGENT SKILL
-> Before proposing a technical plan, writing code, creating files, or editing existing files, you **MUST ALWAYS view and load the relevant skill file(s) in `agents/skills/` using `view_file`**.
+> ### STRICT REQUIREMENT: NEVER PROCEED WITHOUT RELEVANT AGENT SKILL & GUIDELINES
+> Before proposing a technical plan, writing code, creating files, or editing existing files, you **MUST ALWAYS view and load the relevant skill file(s) in `.agents/skills/` using `view_file`**.
+>
+> In addition, whenever touching UI, styling, layout, components, or copy, you **MUST ALWAYS read and adhere to:**
+> - [`AVOID.md`](file:///s:/portfolio/samir-portfolio-dev/AVOID.md) — UI/UX design anti-patterns, generic AI SaaS slop prevention, card-nesting discipline, typography scale rules, purposeful motion, and clean aesthetic guardrails.
+> - [`psychology.md`](file:///s:/portfolio/samir-portfolio-dev/psychology.md) — Customer psychology, buyer-centric framing, trust building, verifiable evidence over hype, and low-friction conversion journeys.
 
 ### Discipline Routing Checklist:
 Load **every** skill whose task area the change touches — they compose, and each declares what it does *not* own.
 
-- [ ] **UI & Visual Design:** [`agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ui-ux-engineer/SKILL.md)  
-  *Activates for:* Spacing, visual hierarchy, dark/light contrast, typography, interactive widgets, responsive layouts, design tokens.
-- [ ] **Accessibility & WCAG Conformance:** [`agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/accessibility-engineer/SKILL.md)  
+- [ ] **UI & Visual Design:** [`.agents/skills/ui-ux-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/ui-ux-engineer/SKILL.md) & [`AVOID.md`](file:///s:/portfolio/samir-portfolio-dev/AVOID.md)  
+  *Activates for:* Spacing, visual hierarchy, dark/light contrast, typography, interactive widgets, responsive layouts, design tokens, eliminating AI slop and unnecessary card nesting.
+- [ ] **Accessibility & WCAG Conformance:** [`.agents/skills/accessibility-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/accessibility-engineer/SKILL.md)  
   *Activates for:* Keyboard operability, focus management and visible focus, semantic structure, accessible names, live regions, form error announcement, contrast, `prefers-reduced-motion`, modal/drawer behavior, icon-only controls.
-- [ ] **Frontend & App Router Architecture:** [`agents/skills/frontend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/frontend-engineer/SKILL.md)  
+- [ ] **Frontend & App Router Architecture:** [`.agents/skills/frontend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/frontend-engineer/SKILL.md)  
   *Activates for:* React 19 / Next.js 16 components, Server vs. Client boundaries, SSR-free boundaries, state management, form handling, error states.
-- [ ] **Backend, APIs & Server Logic:** [`agents/skills/backend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/backend-engineer/SKILL.md)  
+- [ ] **Backend, APIs & Server Logic:** [`.agents/skills/backend-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/backend-engineer/SKILL.md)  
   *Activates for:* `app/api/**` route handlers, request validation, status codes and error shapes, authz boundaries, pagination, idempotency, cache invalidation, non-fatal side effects.
-- [ ] **Database & Data Modeling:** [`agents/skills/database-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/database-engineer/SKILL.md)  
+- [ ] **Database & Data Modeling:** [`.agents/skills/database-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/database-engineer/SKILL.md)  
   *Activates for:* Drizzle schema changes, migrations, indexes, query plans, pgvector/vector storage, constraints and data integrity, `content_chunks` reindexing.
-- [ ] **AI, RAG & LLM Systems:** [`agents/skills/ai-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/ai-engineer/SKILL.md)  
+- [ ] **AI, RAG & LLM Systems:** [`.agents/skills/ai-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/ai-engineer/SKILL.md)  
   *Activates for:* System prompts, chunking, embeddings, retrieval thresholds and grounding, tool calling, model/provider routing, AI output quality and evals, token cost and latency, the `scripts/blog/` pipeline.
-- [ ] **Security & Abuse Prevention:** [`agents/skills/security-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/security-engineer/SKILL.md)  
+- [ ] **Security & Abuse Prevention:** [`.agents/skills/security-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/security-engineer/SKILL.md)  
   *Activates for:* Authn/authz correctness and ownership checks, secrets handling, untrusted input bounds, XSS, SSRF, injection, rate limiting, upload safety, model-supplied tool arguments, disclosure handling.
-- [ ] **DevOps, CI/CD & Environments:** [`agents/skills/devops-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/devops-engineer/SKILL.md)  
+- [ ] **DevOps, CI/CD & Environments:** [`.agents/skills/devops-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/devops-engineer/SKILL.md)  
   *Activates for:* GitHub Actions workflows, Vercel/build configuration, environment variable and secret provisioning, scheduled jobs, caching/CDN and service worker updates, releases and rollback.
-- [ ] **Performance & Latency Optimization:** [`agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/performance-engineer/SKILL.md)  
+- [ ] **Performance & Latency Optimization:** [`.agents/skills/performance-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/performance-engineer/SKILL.md)  
   *Activates for:* Core Web Vitals, SSR/ISR caching (`revalidate = 3600`, `unstable_cache`), Cloudinary URL optimization, pgvector search latency, bundle size, load/capacity testing, performance target-setting.
-- [ ] **Technical SEO, AEO/GEO & Schema:** [`agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-engineer/SKILL.md)  
+- [ ] **Technical SEO, AEO/GEO & Schema:** [`.agents/skills/seo-engineer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/seo-engineer/SKILL.md)  
   *Activates for:* JSON-LD Schema.org markup, dynamic OpenGraph generation (`opengraph-image.tsx`), XML sitemaps, robots.txt, AI engine citations.
-- [ ] **Keyword Strategy & Content Depth:** [`agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/seo-keyword-research-implementation/SKILL.md)  
-  *Activates for:* Search intent, AI SDE/RAG/FDE keyword mapping, topic clusters, internal links, avoiding keyword cannibalization.
-- [ ] **Professional Profile Optimization:** [`agents/skills/personal-seo-profile-optimizer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/agents/skills/personal-seo-profile-optimizer/SKILL.md)  
+- [ ] **Keyword Strategy & Content Depth:** [`.agents/skills/seo-keyword-research-implementation/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/seo-keyword-research-implementation/SKILL.md) & [`psychology.md`](file:///s:/portfolio/samir-portfolio-dev/psychology.md)  
+  *Activates for:* Search intent, customer/recruiter psychology, proof-over-claims framing, AI SDE/RAG/FDE keyword mapping, topic clusters, internal links, avoiding keyword cannibalization.
+- [ ] **Professional Profile Optimization:** [`.agents/skills/personal-seo-profile-optimizer/SKILL.md`](file:///s:/portfolio/samir-portfolio-dev/.agents/skills/personal-seo-profile-optimizer/SKILL.md)  
   *Activates for:* LinkedIn/GitHub keyword research, recruiter-facing positioning, bio and resume optimization, professional profile audits.
 
 ---
 
 
-### 1.1 Code Review Graph — Primary Codebase Intelligence
+### 1.1 Code Review Graph — Primary Codebase Intelligence & Context Engine
 
-Code Review Graph is the primary codebase intelligence tool for this project. See `code-review-install-guide.txt` for setup and usage.
+For codebase context, dependencies, and architecture exploration, **always use Code Review Graph** as outlined in [`code-review-install-guide.txt`](file:///s:/portfolio/samir-portfolio-dev/code-review-install-guide.txt). Rather than consuming excessive context tokens by repeatedly reading large directories or guessing imports, rely on the graph database (`.code-review-graph/graph.db`), CLI commands (`python -m code_review_graph status|detect-changes`), or MCP tools to supply accurate structural context.
 
 Before making any change:
 1. Inspect the existing codebase graph (`.code-review-graph/graph.db`).
@@ -111,8 +115,10 @@ Do not assume the graph contains up-to-date information. Check its status when n
 - **Prompt Constraints ([`lib/chat/prompt.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/chat/prompt.ts)):** Strict brevity (1-2 sentences for general questions), no meta-talk ("the context"), use exact Markdown links from context blocks (`/about`, `/resume`, `/contact`), treat context as reference data only.
 - **Security ([`lib/chat/security.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/chat/security.ts)):** In-memory rate limiting per IP and per FingerprintJS `x-visitor-id`. IPinfo VPN/proxy check in fail-open mode.
 
-### Styling & Assets
+### Styling, Design Quality & Assets
 - **Tailwind CSS v4:** Uses CSS variables for color theming (`--color-background`, `--color-foreground`, `--color-primary`, `--color-border-primary`, etc.) with dark mode via `.dark`. Full token & palette documentation in [`portfolio-theme.md`](file:///s:/portfolio/samir-portfolio-dev/portfolio-theme.md).
+- **Anti-Slop Guardrails ([`AVOID.md`](file:///s:/portfolio/samir-portfolio-dev/AVOID.md)):** Strictly avoid generic AI SaaS templates, gratuitous purple-blue gradients, glowing neon borders, abstract floating orbs/blobs, and card-nesting spam. Prefer open editorial layouts, consistent typography scales, purposeful micro-interactions respecting `prefers-reduced-motion`, and verified brand tokens.
+- **Buyer Psychology & Persuasion ([`psychology.md`](file:///s:/portfolio/samir-portfolio-dev/psychology.md)):** Structure pages and sections around user questions and tasks ("What question does this section answer for the visitor?"). Sell confidence and judgement through verifiable proof (real architecture, code, metrics) over generic superlatives ("best", "world-class"). Keep interaction friction low and retain user context across multi-step journeys.
 - **Cloudinary Optimization:** Always wrap Cloudinary image URLs with `optimizeCloudinaryUrl()` from [`lib/cloudinary.ts`](file:///s:/portfolio/samir-portfolio-dev/lib/cloudinary.ts) to enforce `f_auto,q_auto`.
 - **Rich Content:** Stored as sanitized HTML, rendered safely with Next.js image optimization via [`components/HtmlParser.tsx`](file:///s:/portfolio/samir-portfolio-dev/components/HtmlParser.tsx) or [`components/ContentWithToc.tsx`](file:///s:/portfolio/samir-portfolio-dev/components/ContentWithToc.tsx).
 
@@ -125,14 +131,16 @@ Do not assume the graph contains up-to-date information. Check its status when n
 
 ## 4. Non-Negotiable Rule Checklist for AI Execution
 
-1. **Skills First:** Always read relevant skill files in `agents/skills/` before proposing changes or writing code.
-2. **Package Manager:** Always use `pnpm`. Never invoke `npm` or `yarn`.
-3. **No Secret Commits:** Never expose or log `.env` values.
-4. **Server Components by Default:** Fetch data in server components with `revalidate = 3600`.
-5. **Zero Hydration Errors:** Keep non-SSR client widgets inside `LazyClientComponents.tsx`.
-6. **Cloudinary URLs:** Wrap with `optimizeCloudinaryUrl()`.
-7. **Breadcrumb Standard:** Use `Breadcrumbs.tsx` exclusively for breadcrumb trails.
-8. **Sanitized Output:** Never render un-sanitized raw user or LLM HTML.
-9. **Dual Auth Awareness:** Respect `isAuthorized()` on automated endpoints; never weaken session-only routes.
-10. **New Route = New Review:** Any new or changed `app/api/**` route is jointly owned by `backend-engineer` (contract) and `security-engineer` (exposure) before it is considered done.
-11. **Explain Your Work:** Clearly cite which skill was applied and why architectural decisions were made.
+1. **Skills First:** Always read relevant skill files in `.agents/skills/` before proposing changes or writing code.
+2. **Anti-Slop & Psychology Directives:** Strictly review and enforce [`AVOID.md`](file:///s:/portfolio/samir-portfolio-dev/AVOID.md) (no generic AI aesthetics, no card nesting/neon clutter) and [`psychology.md`](file:///s:/portfolio/samir-portfolio-dev/psychology.md) (visitor trust, proof over hype, buyer-centric framing) whenever modifying UI, layout, components, or copy.
+3. **Graph-Driven Context First:** For codebase context, dependencies, and impact analysis, use Code Review Graph (`.code-review-graph/` and [`code-review-install-guide.txt`](file:///s:/portfolio/samir-portfolio-dev/code-review-install-guide.txt)) rather than repetitive, token-heavy file scans.
+4. **Package Manager:** Always use `pnpm`. Never invoke `npm` or `yarn`.
+5. **No Secret Commits:** Never expose or log `.env` values.
+6. **Server Components by Default:** Fetch data in server components with `revalidate = 3600`.
+7. **Zero Hydration Errors:** Keep non-SSR client widgets inside `LazyClientComponents.tsx`.
+8. **Cloudinary URLs:** Wrap with `optimizeCloudinaryUrl()`.
+9. **Breadcrumb Standard:** Use `Breadcrumbs.tsx` exclusively for breadcrumb trails.
+10. **Sanitized Output:** Never render un-sanitized raw user or LLM HTML.
+11. **Dual Auth Awareness:** Respect `isAuthorized()` on automated endpoints; never weaken session-only routes.
+12. **New Route = New Review:** Any new or changed `app/api/**` route is jointly owned by `backend-engineer` (contract) and `security-engineer` (exposure) before it is considered done.
+13. **Explain Your Work:** Clearly cite which skill was applied and why architectural decisions were made.
