@@ -16,7 +16,7 @@ export default function BlogStarInteraction({ slug, initialStars }: BlogStarInte
     if (typeof window !== 'undefined') {
       const starred = localStorage.getItem(`starred_${slug}`);
       if (starred) {
-        setHasStarred(true);
+        requestAnimationFrame(() => setHasStarred(true));
       } else {
         const showTimer = setTimeout(() => setShowTooltip(true), 2000);
         const hideTimer = setTimeout(() => setShowTooltip(false), 8000);

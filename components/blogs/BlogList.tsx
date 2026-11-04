@@ -2,8 +2,8 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { optimizeCloudinaryUrl } from "@/lib/cloudinary-utils";
+import { FiArrowUpRight, FiSearch, FiX, FiClock, FiStar } from "react-icons/fi";
+import BlogCoverImage from "./BlogCoverImage";
 
 export interface Blog {
   id: string;
@@ -33,7 +33,7 @@ function formatDate(dateStr: string) {
 function estimateReadingTime(text: string | null): string {
   if (!text) return "3 min read";
   const words = text.trim().split(/\s+/).length;
-  const minutes = Math.max(2, Math.round(words / 40));
+  const minutes = Math.max(3, Math.round(words / 40));
   return `${minutes} min read`;
 }
 
@@ -61,7 +61,6 @@ export default function BlogList({ initialBlogs, hideSearch = false }: BlogListP
       const tagMatch = blog.tags?.some((t) => t.toLowerCase().includes(query)) || false;
 
       const matchesSearch = !query || titleMatch || excerptMatch || tagMatch;
-
       if (!matchesSearch) return false;
 
       if (activeTag === "all") return true;
@@ -75,277 +74,306 @@ export default function BlogList({ initialBlogs, hideSearch = false }: BlogListP
   const gridBlogs = isDefaultView && filteredBlogs.length > 0 ? filteredBlogs.slice(1) : filteredBlogs;
 
   return (
-    <div className="space-y-10">
-      {/* Search & Topic Filters */}
-      {!hideSearch && (
-        <div className="space-y-5">
-          {/* Accessible Search Input */}
-          <div className="relative w-full group">
-            <label htmlFor="blog-search" className="sr-only">
-              Search articles
-            </label>
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg
-                className="h-5 w-5 text-text-muted group-focus-within:text-foreground transition-colors"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
+    <div className="space-y-12">
+      {/* ── SEARCH & TOPIC FILTERS ────────────────────────────────────────── */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-4 rounded-2xl border border-border-primary/80 bg-background dark:bg-card-bg shadow-2xs">
+        {/* Topic Filter Pills */}
+        {filterTabs.length > 1 && (
+          <div
+            className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 scrollbar-none"
+            role="tablist"
+            aria-label="Filter articles by topic"
+          >
+            {filterTabs.map((tab) => {
+              const isActive = activeTag === tab;
+              const label = tab === "all" ? "All Topics" : tab;
+              return (
+                <button
+                  key={tab}
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActiveTag(tab)}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-mono font-medium transition-all whitespace-nowrap border ${
+                    isActive
+                      ? "bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] border-foreground dark:border-accent-lime shadow-2xs"
+                      : "bg-hover-bg/50 text-text-secondary border-border-primary/60 hover:border-foreground/30 hover:text-foreground"
+                  }`}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        )}
+
+        {/* Monospace Search Bar with Keyboard Focus Shortcut */}
+        {!hideSearch && (
+          <div className="relative w-full md:w-80 group">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-text-muted group-focus-within:text-foreground transition-colors">
+              <FiSearch className="h-4 w-4" />
             </div>
             <input
-              id="blog-search"
-              type="search"
-              className="block w-full pl-12 pr-4 py-3.5 sm:py-4 text-sm sm:text-base text-foreground bg-hover-bg border border-border-primary rounded-2xl focus:bg-background focus:ring-4 focus:ring-border-primary focus:border-text-muted focus:outline-none transition-all placeholder-text-muted"
-              placeholder="Search articles by topic, architecture, or keyword..."
+              type="text"
+              className="block w-full pl-10 pr-9 py-2 text-xs sm:text-sm text-foreground bg-hover-bg/60 border border-border-primary/80 rounded-xl focus:bg-background focus:ring-2 focus:ring-accent-lime focus:border-foreground/40 focus:outline-none transition-all placeholder:text-text-muted/70 font-mono"
+              placeholder="Search by topic, architecture..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
+            {searchQuery ? (
+              <button
+                onClick={() => setSearchQuery("")}
+                aria-label="Clear search"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-text-muted hover:text-foreground"
+              >
+                <FiX className="h-4 w-4" />
+              </button>
+            ) : (
+              <span className="hidden sm:flex absolute inset-y-0 right-0 pr-3 items-center pointer-events-none">
+                <kbd className="text-[10px] font-mono text-text-muted bg-background/80 border border-border-primary/70 px-1.5 py-0.5 rounded">
+                  /
+                </kbd>
+              </span>
+            )}
           </div>
+        )}
+      </div>
 
-          {/* Category Filter Pills (Section 6.1 in new-theme.md) */}
-          {filterTabs.length > 1 && (
-            <div
-              className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none"
-              role="tablist"
-              aria-label="Filter articles by topic"
-            >
-              {filterTabs.map((tab) => {
-                const isActive = activeTag === tab;
-                const label = tab === "all" ? "All Topics" : tab;
-                return (
-                  <button
-                    key={tab}
-                    role="tab"
-                    aria-selected={isActive}
-                    onClick={() => setActiveTag(tab)}
-                    className={`px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all whitespace-nowrap border ${
-                      isActive
-                        ? "bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] border-foreground dark:border-accent-lime shadow-xs font-bold"
-                        : "bg-background dark:bg-card-bg text-text-secondary border-border-primary hover:border-foreground/30 hover:text-foreground"
-                    }`}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
-            </div>
-          )}
-
-          {/* ARIA live region announcing filtered count */}
-          <div aria-live="polite" className="sr-only">
-            {filteredBlogs.length} articles found
-          </div>
-        </div>
-      )}
-
-      {/* Empty State */}
-      {filteredBlogs.length === 0 ? (
-        <div className="text-center py-16 bg-footer-bg rounded-2xl border border-border-primary">
-          <p className="text-text-muted text-base sm:text-lg">
+      {/* ── EMPTY STATE ──────────────────────────────────────────────────────── */}
+      {filteredBlogs.length === 0 && (
+        <div className="text-center py-20 px-6 rounded-2xl border border-border-primary/80 bg-hover-bg/30">
+          <p className="text-base sm:text-lg font-bold text-foreground">
             No articles found matching &ldquo;{searchQuery || activeTag}&rdquo;
+          </p>
+          <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-sm mx-auto">
+            Try adjusting your search terms or clearing the active topic filter.
           </p>
           <button
             onClick={() => {
               setSearchQuery("");
               setActiveTag("all");
             }}
-            className="mt-4 text-sm font-semibold text-foreground underline hover:text-text-secondary transition-colors"
+            className="mt-5 inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-mono font-bold bg-foreground text-background hover:opacity-90 transition-opacity"
           >
-            Reset filters
+            Reset Filters
           </button>
         </div>
-      ) : (
-        <div className="space-y-12">
-          {/* FEATURED POST SHOWCASE (Bento Editorial Style) */}
+      )}
+
+      {/* ── ARTICLES ARCHIVE CONTENT ────────────────────────────────────────── */}
+      {filteredBlogs.length > 0 && (
+        <div className="space-y-16">
+          {/* FEATURED PUBLICATION SHOWCASE (Bento Editorial Style) */}
           {featuredBlog && (
             <article
-              className="group relative flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-8 bg-background dark:bg-card-bg border border-border-primary rounded-3xl p-6 sm:p-8 hover:border-foreground/30 hover:shadow-xl transition-all duration-300"
-              aria-label={`Featured post: ${featuredBlog.title}`}
+              className="group rounded-3xl border border-border-primary/80 bg-background dark:bg-card-bg p-6 sm:p-8 md:p-10 hover:border-foreground/30 transition-all duration-200 shadow-2xs"
+              aria-label={`Featured article: ${featuredBlog.title}`}
             >
-              <Link
-                href={`/blogs/${featuredBlog.slug}`}
-                className="lg:col-span-7 relative aspect-[16/10] sm:aspect-[16/9] lg:aspect-[16/10] rounded-2xl overflow-hidden bg-hover-bg border border-border-primary/80 block"
-              >
-                {featuredBlog.cover_image_url ? (
-                  <Image
-                    src={optimizeCloudinaryUrl(featuredBlog.cover_image_url, { width: 1000 })}
-                    alt={`Cover image for ${featuredBlog.title}`}
-                    fill
-                    priority
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                  />
-                ) : (
-                  <div className="absolute inset-0 flex items-center justify-center bg-radial-gradient text-border-primary">
-                    <span
-                      className="text-7xl font-bold opacity-30"
-                      style={{ fontFamily: "var(--font-playfair)" }}
-                    >
-                      {featuredBlog.title.charAt(0)}
-                    </span>
-                  </div>
-                )}
-              </Link>
-
-              <div className="lg:col-span-5 flex flex-col justify-between py-1">
-                <div>
-                  <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase shadow-2xs">
-                      <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-                      FEATURED ARTICLE
-                    </span>
-                    <span className="text-[10px] font-mono font-medium text-text-muted uppercase tracking-wider">
-                      {formatDate(featuredBlog.published_at)}
-                    </span>
-                  </div>
-
-                  <Link href={`/blogs/${featuredBlog.slug}`} className="block group/title">
-                    <h2 className="text-2xl sm:text-3xl font-black text-foreground group-hover/title:text-text-secondary transition-colors leading-tight mb-3">
-                      {featuredBlog.title}
-                    </h2>
-                  </Link>
-
-                  {featuredBlog.excerpt && (
-                    <p className="text-sm sm:text-base text-text-muted line-clamp-3 sm:line-clamp-4 leading-relaxed mb-4">
-                      {featuredBlog.excerpt}
-                    </p>
-                  )}
-                </div>
-
-                <div className="pt-4 border-t border-border-primary flex items-center justify-between mt-auto">
-                  <div className="flex items-center gap-3 text-xs text-text-muted font-mono">
-                    <span>{estimateReadingTime(featuredBlog.excerpt)}</span>
-                    <span>•</span>
-                    <span className="inline-flex items-center gap-1">
-                      <svg className="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                      </svg>
-                      {featuredBlog.stars ?? 0}
-                    </span>
-                  </div>
-
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* Cover Image */}
+                <div className="lg:col-span-6 overflow-hidden rounded-2xl">
                   <Link
                     href={`/blogs/${featuredBlog.slug}`}
-                    className="inline-flex items-center gap-2 rounded-full bg-accent-lime text-[#0A0A0A] text-xs sm:text-sm font-extrabold px-5 py-2.5 shadow-xs hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all"
+                    className="block group/img focus:outline-none"
+                    tabIndex={-1}
+                    aria-hidden="true"
                   >
-                    Read Article →
+                    <BlogCoverImage
+                      coverImageUrl={featuredBlog.cover_image_url}
+                      title={featuredBlog.title}
+                      tag={featuredBlog.tags?.[0]}
+                      aspectRatio="card"
+                      priority={true}
+                    />
                   </Link>
+                </div>
+
+                {/* Content Column */}
+                <div className="lg:col-span-6 flex flex-col justify-between h-full space-y-5">
+                  <div>
+                    {/* Meta Badges */}
+                    <div className="flex flex-wrap items-center gap-2 mb-3">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary/80 bg-hover-bg/70 text-[10px] font-mono font-medium tracking-wider text-foreground uppercase">
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+                        FEATURED ESSAY
+                      </span>
+                      {featuredBlog.tags?.[0] && (
+                        <span className="text-xs font-mono text-text-muted bg-hover-bg/40 border border-border-primary/50 px-2.5 py-0.5 rounded-full">
+                          {featuredBlog.tags[0]}
+                        </span>
+                      )}
+                      <span className="text-xs font-mono text-text-muted ml-auto">
+                        {formatDate(featuredBlog.published_at)}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <Link href={`/blogs/${featuredBlog.slug}`}>
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground tracking-tight hover:text-text-secondary transition-colors leading-[1.15]">
+                        {featuredBlog.title}
+                      </h2>
+                    </Link>
+
+                    {/* Excerpt */}
+                    {featuredBlog.excerpt && (
+                      <p className="mt-4 text-sm sm:text-base text-text-secondary leading-relaxed">
+                        {featuredBlog.excerpt}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Actions & Telemetry Footer */}
+                  <div className="pt-4 border-t border-border-primary/60 flex flex-wrap items-center justify-between gap-4 mt-auto">
+                    <div className="flex items-center gap-3 text-xs font-mono text-text-muted">
+                      <span className="flex items-center gap-1">
+                        <FiClock className="w-3.5 h-3.5" />
+                        <span>{estimateReadingTime(featuredBlog.excerpt)}</span>
+                      </span>
+                      <span>&bull;</span>
+                      <span className="flex items-center gap-1">
+                        <FiStar className="w-3.5 h-3.5 text-accent-lime fill-accent-lime/20" />
+                        <span>{featuredBlog.stars ?? 0}</span>
+                      </span>
+                    </div>
+
+                    <Link
+                      href={`/blogs/${featuredBlog.slug}`}
+                      className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full text-xs font-bold bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] hover:opacity-90 transition-opacity"
+                    >
+                      <span>Read Breakdown</span>
+                      <FiArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </article>
           )}
 
-          {/* GRID OF ARTICLES */}
+          {/* ALL ARTICLES GRID */}
           {gridBlogs.length > 0 && (
-            <div className="space-y-6">
+            <section aria-labelledby="all-articles-heading" className="space-y-6">
               {featuredBlog && (
-                <div className="border-b border-border-primary/80 pb-3">
-                  <h3 className="text-lg sm:text-xl font-bold tracking-tight text-foreground">
-                    All Publications
+                <div className="flex items-baseline justify-between border-b border-border-primary/80 pb-3">
+                  <h3
+                    id="all-articles-heading"
+                    className="text-xl sm:text-2xl font-black tracking-tight text-foreground"
+                  >
+                    All Publications &amp; Technical Logs
                   </h3>
+                  <span className="text-xs font-mono text-text-muted">
+                    {gridBlogs.length} {gridBlogs.length === 1 ? "Article" : "Articles"}
+                  </span>
                 </div>
               )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {gridBlogs.map((blog, index) => (
                   <article
                     key={blog.id}
-                    className="group flex flex-col bg-background dark:bg-card-bg border border-border-primary rounded-2xl overflow-hidden hover:border-foreground/30 hover:shadow-md transition-all duration-300"
+                    className="group rounded-3xl border border-border-primary/80 bg-background dark:bg-card-bg p-5 sm:p-6 hover:border-foreground/30 transition-all duration-200 shadow-2xs flex flex-col justify-between"
                   >
-                    <Link
-                      href={`/blogs/${blog.slug}`}
-                      className="block relative aspect-[16/10] bg-hover-bg overflow-hidden border-b border-border-primary"
-                    >
-                      {blog.cover_image_url ? (
-                        <Image
-                          src={optimizeCloudinaryUrl(blog.cover_image_url, { width: 700 })}
-                          alt={`Cover image for ${blog.title}`}
-                          fill
-                          priority={index === 0 && !featuredBlog}
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    <div>
+                      {/* Cover Thumbnail */}
+                      <Link
+                        href={`/blogs/${blog.slug}`}
+                        className="block overflow-hidden rounded-2xl mb-4 focus:outline-none"
+                        tabIndex={-1}
+                        aria-hidden="true"
+                      >
+                        <BlogCoverImage
+                          coverImageUrl={blog.cover_image_url}
+                          title={blog.title}
+                          tag={blog.tags?.[0]}
+                          aspectRatio="card"
+                          priority={index < 2 && !featuredBlog}
                         />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center text-border-primary">
-                          <span
-                            className="text-5xl font-bold opacity-30"
-                            style={{ fontFamily: "var(--font-playfair)" }}
-                          >
-                            {blog.title.charAt(0)}
-                          </span>
-                        </div>
-                      )}
-                    </Link>
+                      </Link>
 
-                    <div className="flex flex-col flex-1 p-6">
-                      {/* Meta badges row */}
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span className="text-[10px] font-mono font-medium tracking-wide uppercase text-text-muted bg-hover-bg/80 border border-border-primary/60 px-2 py-0.5 rounded-md">
+                      {/* Meta Tags */}
+                      <div className="flex flex-wrap items-center gap-2 mb-2.5">
+                        <span className="text-[11px] font-mono text-text-muted">
                           {formatDate(blog.published_at)}
                         </span>
-                        {blog.tags && blog.tags[0] && (
-                          <span className="text-[10px] font-mono font-medium tracking-wide uppercase text-text-secondary bg-hover-bg/80 border border-border-primary/60 px-2 py-0.5 rounded-md">
-                            {blog.tags[0]}
-                          </span>
+                        {blog.tags?.[0] && (
+                          <>
+                            <span className="text-border-primary">&bull;</span>
+                            <span className="text-[10px] font-mono text-foreground bg-hover-bg/70 border border-border-primary/60 px-2 py-0.5 rounded-full">
+                              {blog.tags[0]}
+                            </span>
+                          </>
                         )}
-                        <span className="text-[10px] font-mono font-medium flex items-center gap-1 text-text-muted bg-hover-bg/80 border border-border-primary/60 px-2 py-0.5 rounded-md ml-auto">
-                          <svg className="w-3 h-3 text-amber-400" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                          </svg>
-                          {blog.stars ?? 0}
+                        <span className="text-[11px] font-mono text-text-muted ml-auto flex items-center gap-1">
+                          <FiStar className="w-3 h-3 text-accent-lime" />
+                          <span>{blog.stars ?? 0}</span>
                         </span>
                       </div>
 
                       {/* Title */}
-                      <Link href={`/blogs/${blog.slug}`} className="block group-hover:text-text-secondary transition-colors">
-                        <h3 className="text-xl font-bold text-foreground mb-2.5 leading-snug line-clamp-2">
+                      <Link href={`/blogs/${blog.slug}`}>
+                        <h4 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-text-secondary transition-colors leading-snug line-clamp-2">
                           {blog.title}
-                        </h3>
+                        </h4>
                       </Link>
 
                       {/* Excerpt */}
                       {blog.excerpt && (
-                        <p className="text-xs sm:text-sm text-text-muted line-clamp-2 mb-4 flex-1 leading-relaxed">
+                        <p className="mt-2 text-xs sm:text-sm text-text-secondary leading-relaxed line-clamp-3">
                           {blog.excerpt}
                         </p>
                       )}
+                    </div>
 
-                      {/* Card Footer */}
-                      <div className="flex items-center justify-between pt-4 mt-auto border-t border-border-primary">
-                        <span className="text-[11px] font-mono text-text-muted">
-                          {estimateReadingTime(blog.excerpt)}
-                        </span>
-                        <Link
-                          href={`/blogs/${blog.slug}`}
-                          className="text-xs font-bold text-foreground hover:text-text-secondary transition-colors flex items-center gap-1.5 group/link"
-                        >
-                          Read Article
-                          <svg
-                            className="w-3 h-3 transition-transform group-hover/link:translate-x-1"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
-                        </Link>
-                      </div>
+                    {/* Card Footer */}
+                    <div className="mt-5 pt-3.5 border-t border-border-primary/60 flex items-center justify-between">
+                      <span className="text-[11px] font-mono text-text-muted">
+                        {estimateReadingTime(blog.excerpt)}
+                      </span>
+                      <Link
+                        href={`/blogs/${blog.slug}`}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors"
+                      >
+                        <span>Read Article</span>
+                        <FiArrowUpRight className="w-3.5 h-3.5" />
+                      </Link>
                     </div>
                   </article>
                 ))}
               </div>
-            </div>
+            </section>
           )}
         </div>
       )}
+
+      {/* ── CLOSING EDITORIAL SUBSCRIPTION & DISCUSSION BOX ─────────────────── */}
+      <section className="rounded-3xl border border-border-primary/80 bg-background dark:bg-card-bg p-8 sm:p-10 md:p-12 shadow-2xs">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-2 text-[10px] sm:text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
+            <span>KNOWLEDGE SHARING &amp; TECHNICAL EXCHANGES</span>
+          </div>
+          <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground tracking-tight">
+            Have a question on these architectures or want to collaborate?
+          </h3>
+          <p className="mt-3 text-sm sm:text-base text-text-secondary leading-relaxed">
+            I regularly publish practical engineering breakdowns on backend infrastructure, vector search, and agentic workflows. Reach out to discuss system challenges or suggest topics.
+          </p>
+
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full text-xs sm:text-sm font-bold bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] hover:opacity-90 transition-opacity"
+            >
+              <span>Get in Touch</span>
+              <FiArrowUpRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/projects"
+              className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full text-xs sm:text-sm font-mono font-medium text-foreground border border-border-primary/80 hover:border-foreground/30 bg-hover-bg/30 transition-colors"
+            >
+              <span>Explore Case Studies</span>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
