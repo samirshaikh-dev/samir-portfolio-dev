@@ -22,33 +22,33 @@ export default async function ExperienceTimeline() {
   }
 
   return (
-    <section className="mt-20" aria-label="Work Experience">
+    <section className="mt-16" aria-label="Work Experience">
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-border-primary/80">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-4 border-b border-border-primary">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-            CAREER HISTORY
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+            <span>CAREER HISTORY</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground">
-            Work Experience
+          <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+            Work Experience &amp; Engineering Roles
           </h2>
-          <p className="text-text-muted text-sm sm:text-base mt-1.5 max-w-xl leading-relaxed">
-            Hands-on engineering roles building AI agents, scalable RAG pipelines, and high-throughput backend microservices.
+          <p className="text-text-muted text-xs sm:text-sm mt-1 max-w-xl leading-relaxed">
+            Hands-on production roles building AI systems, RAG pipelines, and high-throughput backend services.
           </p>
         </div>
 
         <Link
           href="/resume"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-foreground hover:text-accent-lime transition-colors underline-offset-4 hover:underline self-start sm:self-auto whitespace-nowrap"
+          className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-foreground hover:text-text-secondary transition-colors underline-offset-4 hover:underline self-start sm:self-auto whitespace-nowrap"
         >
           <span>View full PDF resume</span>
-          <LuArrowRight className="w-3.5 h-3.5" />
+          <LuArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
         </Link>
       </div>
 
-      {/* Timeline Track */}
-      <div className="relative border-l-2 border-border-primary ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-8">
+      {/* Timeline Track — Open Editorial Layout */}
+      <div className="relative border-l border-border-primary ml-3 sm:ml-4 pl-6 sm:pl-8 space-y-8">
         {experiences.map((exp, index) => {
           const startDateStr = formatDate(exp.startDate);
           const endDateStr = exp.isCurrent ? "Present" : formatDate(exp.endDate);
@@ -58,9 +58,9 @@ export default async function ExperienceTimeline() {
             <div key={exp.id || index} className="relative group">
               {/* Timeline Track Node */}
               <div
-                className={`absolute -left-[35px] sm:-left-[43px] top-6 flex items-center justify-center w-8 h-8 rounded-full border bg-background dark:bg-card-bg shadow-2xs transition-all duration-300 group-hover:scale-110 ${
+                className={`absolute -left-[31px] sm:-left-[39px] top-6 flex items-center justify-center w-7 h-7 rounded-full border bg-background dark:bg-card-bg transition-colors ${
                   exp.isCurrent
-                    ? "border-foreground dark:border-accent-lime ring-4 ring-background dark:ring-card-bg"
+                    ? "border-foreground dark:border-accent-lime"
                     : "border-border-primary"
                 }`}
               >
@@ -68,52 +68,43 @@ export default async function ExperienceTimeline() {
                   <Image
                     src={exp.logoUrl}
                     alt={`${exp.companyName} logo`}
-                    width={20}
-                    height={20}
-                    className="w-5 h-5 rounded-md object-cover"
+                    width={18}
+                    height={18}
+                    className="w-4 h-4 rounded object-cover"
                   />
                 ) : exp.isCurrent ? (
-                  <span className="w-2.5 h-2.5 rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]" />
+                  <span className="w-2 h-2 rounded-full bg-accent-lime" />
                 ) : (
-                  <span className="w-2 h-2 rounded-full bg-border-primary group-hover:bg-foreground transition-colors" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-border-primary group-hover:bg-foreground transition-colors" />
                 )}
               </div>
 
-              {/* Elevated Experience Card */}
+              {/* Editorial Experience Article */}
               <article
-                className={`relative rounded-2xl border bg-background dark:bg-card-bg p-6 sm:p-7 shadow-2xs hover:shadow-md hover:border-foreground/30 transition-all duration-300 overflow-hidden ${
+                className={`rounded-2xl border p-5 sm:p-6 transition-colors ${
                   exp.isCurrent
-                    ? "border-border-secondary ring-1 ring-border-primary/60 dark:shadow-[0_0_24px_rgba(184,255,0,0.06)]"
-                    : "border-border-primary"
+                    ? "border-border-primary bg-background dark:bg-card-bg"
+                    : "border-border-primary/80 bg-background dark:bg-card-bg/60 hover:border-foreground/30"
                 }`}
               >
-                {/* Electric Lime Accent for Current Role */}
-                {exp.isCurrent && (
-                  <span
-                    aria-hidden="true"
-                    className="absolute top-0 left-6 sm:left-8 w-12 sm:w-16 h-[2px] bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]"
-                  />
-                )}
-
                 {/* Role & Company Header */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2.5 mb-3">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                   <div>
-                    <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-foreground/90 transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold text-foreground">
                       {exp.position}
                     </h3>
-                    <div className="text-sm sm:text-base font-semibold text-text-secondary mt-0.5">
+                    <div className="text-xs sm:text-sm font-semibold text-text-secondary mt-0.5">
                       {exp.companyName}
                     </div>
                   </div>
 
                   <div className="flex items-center gap-2 self-start sm:self-auto flex-shrink-0">
-                    {exp.isCurrent ? (
-                      <span className="inline-flex items-center gap-1.5 font-mono text-[11px] font-extrabold px-3 py-1 rounded-full border border-foreground/20 bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] dark:border-accent-lime shadow-2xs">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent-lime dark:bg-[#0A0A0A] animate-pulse" />
-                        Present
+                    {exp.isCurrent && (
+                      <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A]">
+                        CURRENT
                       </span>
-                    ) : null}
-                    <span className="font-mono text-xs text-text-muted whitespace-nowrap px-2.5 py-1 rounded-full border border-border-primary/70 bg-hover-bg/50">
+                    )}
+                    <span className="font-mono text-xs text-text-muted px-2 py-0.5 rounded border border-border-primary/70 bg-hover-bg/40">
                       {dateRange}
                     </span>
                   </div>
@@ -121,10 +112,10 @@ export default async function ExperienceTimeline() {
 
                 {/* Role Description */}
                 {exp.description && (
-                  <div className="pt-3 border-t border-border-primary/50">
+                  <div className="pt-3 border-t border-border-primary/60 text-xs sm:text-sm text-text-secondary">
                     <HtmlParser
                       html={exp.description}
-                      className="prose prose-sm prose-gray dark:prose-invert max-w-none text-text-secondary dark:text-text-secondary leading-relaxed [&_p]:my-2 [&_ul]:my-2 [&_li]:my-1 [&_li]:text-text-secondary [&_strong]:text-foreground [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-accent-lime transition-colors"
+                      className="prose prose-sm max-w-none text-text-secondary dark:text-text-secondary leading-relaxed [&_p]:my-1.5 [&_ul]:my-1.5 [&_li]:my-1 [&_li]:text-text-secondary [&_strong]:text-foreground [&_a]:text-foreground [&_a]:underline hover:[&_a]:text-accent-lime transition-colors"
                     />
                   </div>
                 )}

@@ -8,63 +8,63 @@ export default function FAQ() {
   const faqs = [
     {
       id: "primary-tech-stack",
-      question: "What is your primary tech stack?",
+      question: "What is your primary engineering stack?",
       answer:
-        "My core stack is Node.js, TypeScript, Next.js, React, and PostgreSQL (with pgvector), plus Express, NestJS, Redis, Docker, Apache Kafka, and BullMQ for distributed, event-driven architecture. On the AI side I build production RAG pipelines, LLM integration, semantic search, and agentic AI workflows with the Vercel AI SDK and Gemini. I operate as an AI-Enabled Full Stack Developer — backend-first, shipping with AI coding agents (Cursor, GitHub Copilot, Claude Code) that I keep inside a review, test, and CI gate.",
+        "My core stack is Node.js, TypeScript, Next.js, React, and PostgreSQL with pgvector, plus Express, NestJS, Redis, Docker, Apache Kafka, and BullMQ for distributed, event-driven backends. For AI systems, I build production RAG pipelines, LLM integration, semantic search, and agentic workflows using the Vercel AI SDK and Gemini. I operate as an AI-Enabled Full Stack Developer — backend-first, pairing with AI coding agents (Cursor, Copilot, Claude Code) inside strict code review, typing, and automated testing gates.",
     },
     {
       id: "ai-enabled-full-stack-meaning",
-      question: "What does an AI-Enabled Full Stack Developer mean?",
+      question: "What does 'AI-Enabled Full Stack Developer' mean in practice?",
       answer:
-        "It means a full stack engineer with a backend-first foundation who uses modern AI tools to deliver faster without trading away quality. AI coding assistants handle boilerplate and repetitive work; I personally own architecture, security, testing, and critical logic. The result is rapid prototyping plus production-ready, maintainable code.",
+        "It means a full stack engineer with deep backend foundations who leverages modern AI tooling to accelerate delivery without sacrificing code quality or security. AI coding assistants handle boilerplate, scaffold migrations, and test drafts; I personally own system boundaries, data integrity, security boundaries, and critical business logic. The outcome is rapid development with enterprise-grade reliability.",
     },
     {
       id: "ai-rag-experience",
-      question: "Do you have experience building AI-powered applications and RAG systems?",
+      question: "What is your hands-on experience building production RAG systems?",
       answer:
-        "Yes — I build production RAG systems, including this portfolio's AI assistant. It indexes ~10,000 document chunks with PostgreSQL pgvector and Gemini 3072-dimensional embeddings, achieving sub-300ms retrieval latencies with strict relevance filtering (cosine distance <= 0.5), and grounded, structured outputs to minimize hallucination. I also build agentic AI workflows with tool execution, structured outputs, and guardrails.",
+        "I build end-to-end production RAG pipelines, including the AI assistant on this portfolio. It indexes ~10,000 document chunks in PostgreSQL pgvector using 3072-dimensional Gemini embeddings, achieving sub-300ms retrieval latencies with strict cosine distance filtering (<= 0.5) to reject irrelevant queries and eliminate hallucinated answers. I also build agentic workflows with deterministic tool calling and rate-limiting guardrails.",
     },
     {
       id: "fde-roles-interest",
-      question: "Are you interested in Forward Deployed Engineer (FDE) roles?",
+      question: "What makes you well-suited for Forward Deployed Engineer (FDE) roles?",
       answer:
-        "Yes — I'm targeting Forward Deployed Engineer roles that combine backend depth with direct customer ownership: navigating ambiguous requirements, conducting technical discovery with stakeholders, prototyping AI solutions in days, and taking end-to-end accountability for production deployments.",
+        "Forward Deployed Engineer roles require a balance of technical backend depth and customer-embedded problem solving. I thrive in navigating ambiguous requirements directly with stakeholders, rapidly prototyping production-viable solutions in days, and taking end-to-end ownership from initial scoping to live deployment handover.",
     },
     {
       id: "remote-freelance-availability",
-      question: "Are you open to remote work or freelance projects?",
+      question: "What is your availability for remote, freelance, or full-time roles?",
       answer:
-        "Yes — remote AI-Enabled Full Stack Developer, AI Backend Engineer, and Forward Deployed Engineer roles globally, plus contract or freelance AI and full stack projects, and on-site or hybrid opportunities in India.",
+        "I am actively available for remote AI Backend Engineer, AI Full Stack Developer, and Forward Deployed Engineer roles globally, as well as contract sprints, codebase audits, and select freelance architecture consulting.",
     },
     {
       id: "who-is-samir",
       question: "Who is Samir Shaikh?",
       answer:
-        "Samir Shaikh is an AI-Enabled Full Stack Developer (backend-first) based in Gujarat, India — B.Tech in IT from Uka Tarsadia University (2026), with production experience at Xira Infotech (Full Stack Engineer) and LOGICWIND (Backend Developer) building RAG pipelines, LLM-integrated applications, microservices, and full stack web platforms.",
-    },
-    {
-      id: "contact-methods",
-      question: "How can I contact Samir?",
-      answer:
-        "You can reach Samir via email at shaikh.samir.work@gmail.com, through the contact form on this website, or on LinkedIn at linkedin.com/in/samirshaikh-dev. He typically responds within 24-48 hours.",
+        "Samir Shaikh is an AI Backend & Full Stack Engineer based in Gujarat, India, completing a B.Tech in Information Technology from Uka Tarsadia University (2026). His industry experience includes roles at Xira Infotech (Full Stack Engineer Intern) and LOGICWIND (Backend Developer Intern), engineering scalable RAG pipelines, microservices, and web platforms.",
     },
     {
       id: "production-projects",
-      question: "What kind of production projects have you worked on?",
+      question: "What kind of production systems have you delivered?",
       answer:
-        "Key projects include a dynamic job portal with Next.js, PostgreSQL, and RBAC at Xira Infotech; a production RAG assistant with Gemini embeddings and pgvector; an active WhatsApp campaign platform processing 1,000+ messages/week; an event-driven AI ticket triage system with Kafka, BullMQ, and OpenTelemetry; and a transactional event management GraphQL platform (Eventify) — delivered end-to-end with an AI-assisted workflow.",
+        "Key projects include a dynamic recruitment platform with Next.js and RBAC at Xira Infotech; an active WhatsApp automation platform delivering 1,000+ messages/week; an event-driven AI ticket triage system with Kafka and BullMQ; and Eventify, a transactional GraphQL event management engine.",
     },
     {
       id: "devops-deployment-experience",
-      question: "What is your experience with DevOps and deployment?",
+      question: "How do you handle DevOps, containerization, and observability?",
       answer:
-        "I regularly containerize microservices using Docker and Docker Compose, build automated CI/CD workflows with GitHub Actions, and implement full-stack observability with OpenTelemetry, Prometheus, and Grafana.",
+        "I containerize microservices using Docker and Docker Compose, orchestrate automated CI/CD pipelines via GitHub Actions, and instrument systems for full observability using Prometheus, Grafana, and structured logging.",
+    },
+    {
+      id: "contact-methods",
+      question: "What is the best way to get in touch?",
+      answer:
+        "You can email me directly at shaikh.samir.work@gmail.com, submit an inquiry through the contact form on this site, or connect on LinkedIn (linkedin.com/in/samirshaikh-dev). I typically respond within 24 hours.",
     },
     {
       id: "location-based",
-      question: "Where are you based?",
+      question: "Where are you based and how do you handle international time zones?",
       answer:
-        "I am based in Vapi / Surat, Gujarat, India, and work effectively with remote engineering teams across global time zones.",
+        "I am based in Gujarat, India (IST, UTC+5:30), and maintain clean overlap with US East/West, UK, and European business hours through asynchronous-first communication, clear daily PR summaries, and structured milestone handovers.",
     },
   ];
 
@@ -104,24 +104,24 @@ export default function FAQ() {
   };
 
   return (
-    <section className="mt-20" aria-label="Frequently Asked Questions">
+    <section className="mt-16" aria-label="Frequently Asked Questions">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* Section Header */}
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 pb-4 border-b border-border-primary/80">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 pb-4 border-b border-border-primary">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-3 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-            ENGINEER FAQ
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+            <span>ENGINEER FAQ</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground">
+          <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
             Frequently Asked Questions
           </h2>
-          <p className="text-text-muted text-sm sm:text-base mt-1.5 max-w-xl">
-            Key details about my engineering background, technical stack, and collaboration model.
+          <p className="text-text-muted text-xs sm:text-sm mt-1 max-w-xl">
+            Core details regarding engineering philosophy, primary tech stack, and collaboration.
           </p>
         </div>
 
@@ -130,25 +130,25 @@ export default function FAQ() {
             type="button"
             onClick={expandAll}
             aria-label="Expand all FAQ items"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-border-primary bg-background dark:bg-card-bg text-text-secondary hover:text-foreground hover:border-foreground/30 hover:bg-hover-bg transition-all cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium border border-border-primary bg-background dark:bg-card-bg text-text-secondary hover:text-foreground hover:bg-hover-bg transition-colors"
           >
-            <LuChevronsUpDown className="w-3.5 h-3.5" />
+            <LuChevronsUpDown className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Expand all</span>
           </button>
           <button
             type="button"
             onClick={collapseAll}
             aria-label="Collapse all FAQ items"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border border-border-primary bg-background dark:bg-card-bg text-text-secondary hover:text-foreground hover:border-foreground/30 hover:bg-hover-bg transition-all cursor-pointer shadow-2xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium border border-border-primary bg-background dark:bg-card-bg text-text-secondary hover:text-foreground hover:bg-hover-bg transition-colors"
           >
-            <LuChevronUp className="w-3.5 h-3.5" />
+            <LuChevronUp className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Collapse all</span>
           </button>
         </div>
       </div>
 
-      {/* Accordion List */}
-      <div className="flex flex-col gap-3">
+      {/* Accordion List — Clean Open Layout */}
+      <div className="space-y-2">
         {faqs.map((faq, index) => {
           const isOpen = openIds.has(faq.id);
           const contentId = `about-faq-content-${faq.id}`;
@@ -158,59 +158,33 @@ export default function FAQ() {
           return (
             <article
               key={faq.id}
-              className={`group relative rounded-2xl border transition-all duration-300 overflow-hidden ${
+              className={`rounded-xl border transition-colors ${
                 isOpen
-                  ? "border-border-secondary bg-background dark:bg-card-bg shadow-sm ring-1 ring-border-primary/60 dark:shadow-[0_0_24px_rgba(184,255,0,0.06)]"
-                  : "border-border-primary bg-background/80 dark:bg-card-bg/60 hover:bg-hover-bg/30 hover:border-border-secondary hover:shadow-2xs"
+                  ? "border-border-primary bg-background dark:bg-card-bg"
+                  : "border-border-primary/70 bg-background dark:bg-card-bg/60 hover:border-foreground/30"
               }`}
             >
-              {/* Electric Lime Accent Line when Open */}
-              {isOpen && (
-                <span
-                  aria-hidden="true"
-                  className="absolute top-0 left-6 sm:left-8 w-12 sm:w-16 h-[2px] bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]"
-                />
-              )}
-
               {/* Accordion Header */}
-              <div className="w-full flex items-start justify-between text-left p-5 sm:p-6 gap-4">
-                <h3 className="m-0 flex-1">
-                  <button
-                    id={headerId}
-                    type="button"
-                    aria-expanded={isOpen}
-                    aria-controls={contentId}
-                    onClick={() => toggleAccordion(faq.id)}
-                    className="w-full flex flex-col gap-1.5 text-left cursor-pointer rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:ring-offset-2"
-                  >
+              <div className="w-full flex items-center justify-between text-left p-4 sm:p-5 gap-4">
+                <button
+                  id={headerId}
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-controls={contentId}
+                  onClick={() => toggleAccordion(faq.id)}
+                  className="w-full flex items-center justify-between gap-3 text-left rounded-lg focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-lime"
+                >
+                  <div className="flex items-center gap-3">
                     <span className="font-mono text-xs font-semibold text-text-muted">
                       {formattedIndex}
                     </span>
-                    <span
-                      className={`text-base sm:text-lg font-bold tracking-tight leading-snug transition-colors ${
-                        isOpen
-                          ? "text-foreground"
-                          : "text-foreground group-hover:text-foreground/90"
-                      }`}
-                    >
+                    <span className="text-sm sm:text-base font-bold text-foreground leading-snug">
                       {faq.question}
                     </span>
-                  </button>
-                </h3>
-
-                <button
-                  type="button"
-                  onClick={() => toggleAccordion(faq.id)}
-                  aria-label={isOpen ? "Collapse question" : "Expand question"}
-                  className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 cursor-pointer border flex-shrink-0 mt-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime ${
-                    isOpen
-                      ? "bg-foreground text-background border-foreground shadow-2xs dark:bg-accent-lime dark:text-[#0A0A0A] dark:border-accent-lime dark:shadow-[0_0_12px_rgba(184,255,0,0.45)]"
-                      : "bg-background dark:bg-card-bg border-border-primary text-text-muted group-hover:text-foreground group-hover:border-foreground/30 hover:bg-hover-bg"
-                  }`}
-                >
+                  </div>
                   <LuChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ease-in-out motion-reduce:transition-none stroke-[2.5] ${
-                      isOpen ? "rotate-180" : ""
+                    className={`w-4 h-4 text-text-muted shrink-0 transition-transform duration-200 ease-in-out motion-reduce:transition-none ${
+                      isOpen ? "rotate-180 text-foreground" : ""
                     }`}
                     aria-hidden="true"
                   />
@@ -218,40 +192,36 @@ export default function FAQ() {
               </div>
 
               {/* Accordion Content Panel */}
-              <div
-                id={contentId}
-                role="region"
-                aria-labelledby={headerId}
-                className={`grid transition-all duration-300 ease-in-out motion-reduce:transition-none ${
-                  isOpen
-                    ? "grid-rows-[1fr] opacity-100 pb-6 px-5 sm:px-6 pt-0"
-                    : "grid-rows-[0fr] opacity-0 px-5 sm:px-6 py-0"
-                }`}
-              >
-                <div className="overflow-hidden">
-                  <div className="pt-3 border-t border-border-primary/50 text-sm sm:text-base text-text-secondary leading-relaxed">
-                    <p className="whitespace-pre-line">{faq.answer}</p>
-                  </div>
+              {isOpen && (
+                <div
+                  id={contentId}
+                  role="region"
+                  aria-labelledby={headerId}
+                  className="pb-5 px-4 sm:px-5 pt-0 border-t border-border-primary/60"
+                >
+                  <p className="pt-3 text-xs sm:text-sm text-text-secondary leading-relaxed">
+                    {faq.answer}
+                  </p>
                 </div>
-              </div>
+              )}
             </article>
           );
         })}
       </div>
 
       {/* Commercial FAQ Referral Bridge */}
-      <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl border border-border-primary bg-background/80 dark:bg-card-bg/80 backdrop-blur-xs shadow-2xs">
+      <div className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl border border-border-primary bg-background dark:bg-card-bg">
         <div className="flex items-center gap-2">
-          <LuSparkles className="w-4 h-4 text-accent-lime flex-shrink-0" />
+          <LuSparkles className="w-4 h-4 text-accent-lime flex-shrink-0" aria-hidden="true" />
           <span className="text-xs sm:text-sm text-text-secondary">
-            Looking for pricing, project milestones, or commercial guarantees?
+            Looking for fixed-price sprint rates, project milestones, or commercial guarantees?
           </span>
         </div>
         <Link
-          href="/faq"
-          className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-accent-lime transition-colors underline-offset-4 hover:underline whitespace-nowrap self-start sm:self-auto"
+          href="/services"
+          className="inline-flex items-center gap-1 text-xs font-mono font-bold text-foreground hover:text-text-secondary transition-colors underline underline-offset-4 whitespace-nowrap self-start sm:self-auto"
         >
-          <span>View all 20+ Commercial FAQs &rarr;</span>
+          <span>Explore 13 Engineering Blueprints &rarr;</span>
         </Link>
       </div>
     </section>
