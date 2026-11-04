@@ -40,8 +40,34 @@ const VERIFIED_PROJECT_METRICS: Record<string, string[]> = {
   "eventify": ["10k+ concurrent users", "Sub-100ms API response", "Role-based multi-tenancy"],
   "ai-ticket-triage": ["74% automated routing", "< 1.8s LLM triage", "92% intent accuracy"],
   "whatsapp-campaign-platform": ["1,200 req/s throughput", "99.8% webhook delivery", "Zero message loss"],
+  "event-management-platform": ["10k+ concurrent users", "Sub-100ms API response", "Role-based multi-tenancy"],
   "smart-rag-assistant": ["< 280ms vector retrieval", "3072d Gemini embeddings", "Zero hallucination cutoff"],
 };
+
+const JUNK_TAGS = new Set([
+  "real-time",
+  "scalable",
+  "secure",
+  "production-ready",
+  "production ready",
+  "full stack",
+  "full-stack",
+]);
+
+/**
+ * Filter out generic non-technical buzzwords and return the core architectural technologies.
+ */
+export function getCleanTechnologies(technologies: string[] | null | undefined, max: number = 4): string[] {
+  if (!technologies || !Array.isArray(technologies)) return [];
+  const cleaned = technologies.filter((t) => !JUNK_TAGS.has(t.toLowerCase().trim()));
+  return cleaned.slice(0, max);
+}
+
+export function getExtraTechCount(technologies: string[] | null | undefined, max: number = 4): number {
+  if (!technologies || !Array.isArray(technologies)) return 0;
+  const cleaned = technologies.filter((t) => !JUNK_TAGS.has(t.toLowerCase().trim()));
+  return Math.max(0, cleaned.length - max);
+}
 
 export function getProjectMetrics(project: Project): string[] {
   if (project.metrics && project.metrics.length > 0) {
@@ -63,6 +89,20 @@ export function getProjectMetrics(project: Project): string[] {
     return ["100% TypeScript typed", "Sub-100ms API latency", "Clean relational schema"];
   }
   return [];
+}
+
+/**
+ * Identifies flagship deep-dive case studies vs targeted production builds.
+ */
+export function isCaseStudyProject(p: Project): boolean {
+  if (Boolean(p.is_case_study) || p.badge === "Case Study") return true;
+  const s = (p.slug || "").toLowerCase();
+  const t = (p.title || "").toLowerCase();
+
+  const isTriage = s.includes("ticket") || s.includes("triage") || t.includes("ticket") || t.includes("triage");
+  const isWhatsApp = s.includes("whatsapp") || t.includes("whatsapp");
+
+  return isTriage || isWhatsApp;
 }
 
 export default function ProjectList({ initialProjects, hideSearch = false }: ProjectListProps) {
@@ -88,7 +128,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
 
       // 2. Tab Filter
       if (activeFilter === "all") return true;
-      if (activeFilter === "case-studies") return Boolean(project.is_case_study);
+      if (activeFilter === "case-studies") return isCaseStudyProject(project);
       if (activeFilter === "ai") {
         return (
           project.category?.toLowerCase().includes("ai") ||
@@ -120,20 +160,17 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
     });
   }, [initialProjects, searchQuery, activeFilter]);
 
-  // Split into Tier 1 (Featured Case Studies) and Tier 2 (Other Builds)
-  const isCaseStudyProject = (p: Project) =>
-    Boolean(p.is_case_study) ||
-    p.badge === "Case Study" ||
-    ["ai-customer-ticket-triage", "whatsapp-campaigner", "eventify"].includes(p.slug);
-
+  // Guaranteed Partitioning: Zero duplicate items across tiers
   const caseStudies = useMemo(() => {
     const list = filteredProjects.filter(isCaseStudyProject);
-    return list.length > 0 ? list : filteredProjects;
+    if (list.length > 0) return list;
+    return filteredProjects.slice(0, 2);
   }, [filteredProjects]);
 
   const regularProjects = useMemo(() => {
-    return filteredProjects.filter((p) => !isCaseStudyProject(p));
-  }, [filteredProjects]);
+    const caseStudyIds = new Set(caseStudies.map((c) => c.id));
+    return filteredProjects.filter((p) => !caseStudyIds.has(p.id));
+  }, [filteredProjects, caseStudies]);
 
   const showTwoTierView = activeFilter === "all" && !searchQuery;
 
@@ -243,6 +280,8 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
               <div className="space-y-8">
                 {caseStudies.map((project, index) => {
                   const displayMetrics = getProjectMetrics(project);
+                  const cleanTech = getCleanTechnologies(project.technologies, 5);
+                  const extraCount = getExtraTechCount(project.technologies, 5);
                   const indexStr = String(index + 1).padStart(2, "0");
 
                   return (
@@ -251,7 +290,7 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                       className="group rounded-3xl border border-border-primary/80 bg-background dark:bg-card-bg p-6 sm:p-8 md:p-10 hover:border-foreground/30 transition-all duration-200 shadow-2xs"
                     >
                       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        {/* Cover Image & Quick Action Links */}
+                        {/* Cover Image / Architectural Schematic & Action Links */}
                         <div className="lg:col-span-5 flex flex-col gap-4">
                           <Link
                             href={`/projects/${project.slug}`}
@@ -358,13 +397,13 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                             </div>
                           )}
 
-                          {/* Stack Chips */}
+                          {/* Stack Chips (Curated, no buzzwords) */}
                           <div className="pt-2">
                             <div className="text-[10px] font-mono uppercase tracking-wider text-text-muted font-semibold mb-2">
-                              System Stack &amp; Technologies:
+                              Core Architecture Stack:
                             </div>
-                            <div className="flex flex-wrap gap-1.5">
-                              {project.technologies?.map((tech, i) => (
+                            <div className="flex flex-wrap items-center gap-1.5">
+                              {cleanTech.map((tech, i) => (
                                 <span
                                   key={i}
                                   className="text-xs font-mono text-text-secondary bg-hover-bg/70 px-2.5 py-1 rounded-md border border-border-primary/50"
@@ -372,6 +411,11 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                                   {tech}
                                 </span>
                               ))}
+                              {extraCount > 0 && (
+                                <span className="text-[11px] font-mono text-text-muted px-2 py-0.5">
+                                  +{extraCount} more
+                                </span>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -402,21 +446,24 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                 </p>
               </div>
 
-              {/* Minimalist Editorial Row List (No Card Clutter per AVOID.md) */}
-              <div className="divide-y divide-border-primary/80 border-y border-border-primary/80">
-                {regularProjects.map((project) => {
+              {/* Clean Editorial Card Grid / List (Zero AI Slop per AVOID.md) */}
+              <div className="space-y-4">
+                {regularProjects.map((project, idx) => {
                   const displayMetrics = getProjectMetrics(project);
+                  const cleanTech = getCleanTechnologies(project.technologies, 4);
+                  const extraCount = getExtraTechCount(project.technologies, 4);
+                  const indexStr = String(caseStudies.length + idx + 1).padStart(2, "0");
 
                   return (
                     <article
                       key={project.id}
-                      className="py-6 flex flex-col md:flex-row md:items-center justify-between gap-6 group hover:bg-hover-bg/20 transition-colors px-2 rounded-xl"
+                      className="group rounded-2xl border border-border-primary/80 bg-background dark:bg-card-bg p-5 sm:p-6 hover:border-foreground/30 transition-all duration-200 shadow-2xs flex flex-col md:flex-row md:items-center justify-between gap-6"
                     >
-                      <div className="flex flex-col sm:flex-row items-start gap-4 flex-1">
+                      <div className="flex flex-col sm:flex-row items-start gap-5 flex-1 min-w-0">
                         {/* Cover Thumbnail */}
                         <Link
                           href={`/projects/${project.slug}`}
-                          className="w-full sm:w-44 flex-shrink-0 overflow-hidden rounded-xl block focus:outline-none"
+                          className="w-full sm:w-52 md:w-56 shrink-0 overflow-hidden rounded-xl block focus:outline-none"
                           tabIndex={-1}
                           aria-hidden="true"
                         >
@@ -425,13 +472,15 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                             title={project.title}
                             category={project.category}
                             badge={project.badge}
+                            indexStr={indexStr}
                             aspectRatio="card"
                           />
                         </Link>
 
+                        {/* Details */}
                         <div className="space-y-2 flex-1 min-w-0">
                           <div className="flex flex-wrap items-center gap-2">
-                            <span className="text-[11px] font-mono text-text-muted uppercase">
+                            <span className="text-[11px] font-mono text-text-muted uppercase tracking-wider">
                               {project.category || "Full Stack"}
                             </span>
                             {project.badge && (
@@ -458,42 +507,51 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                             </p>
                           )}
 
-                          <div className="flex flex-wrap gap-1.5 pt-1">
-                            {project.technologies?.map((tech, i) => (
+                          {/* Curated Technology Chips */}
+                          <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                            {cleanTech.map((tech, i) => (
                               <span
                                 key={i}
-                                className="text-[11px] font-mono text-text-muted bg-hover-bg/60 px-2 py-0.5 rounded"
+                                className="text-[11px] font-mono text-text-muted bg-hover-bg/70 px-2.5 py-0.5 rounded border border-border-primary/40"
                               >
                                 {tech}
                               </span>
                             ))}
+                            {extraCount > 0 && (
+                              <span className="text-[10px] font-mono text-text-muted">
+                                +{extraCount} more
+                              </span>
+                            )}
                           </div>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 self-start md:self-center flex-shrink-0">
-                        {project.demo_link && (
-                          <a
-                            href={project.demo_link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-mono font-medium text-text-muted hover:text-foreground transition-colors"
-                          >
-                            <span>Demo</span>
-                            <FiExternalLink className="w-3 h-3" />
-                          </a>
-                        )}
-                        {project.github_link && (
-                          <a
-                            href={project.github_link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-xs font-mono font-medium text-text-muted hover:text-foreground transition-colors"
-                          >
-                            <FiGithub className="w-3.5 h-3.5" />
-                            <span>Code</span>
-                          </a>
-                        )}
+                      {/* Action Links */}
+                      <div className="flex items-center gap-3 self-start md:self-center shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-border-primary/60 w-full md:w-auto justify-between md:justify-end">
+                        <div className="flex items-center gap-3">
+                          {project.demo_link && (
+                            <a
+                              href={project.demo_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-text-muted hover:text-foreground transition-colors"
+                            >
+                              <span>Demo</span>
+                              <FiExternalLink className="w-3 h-3" />
+                            </a>
+                          )}
+                          {project.github_link && (
+                            <a
+                              href={project.github_link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 text-xs font-mono font-medium text-text-muted hover:text-foreground transition-colors"
+                            >
+                              <FiGithub className="w-3.5 h-3.5" />
+                              <span>Code</span>
+                            </a>
+                          )}
+                        </div>
                         <Link
                           href={`/projects/${project.slug}`}
                           className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors ml-2"
@@ -532,6 +590,8 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filteredProjects.map((project, index) => {
               const displayMetrics = getProjectMetrics(project);
+              const cleanTech = getCleanTechnologies(project.technologies, 4);
+              const extraCount = getExtraTechCount(project.technologies, 4);
 
               return (
                 <article
@@ -592,37 +652,56 @@ export default function ProjectList({ initialProjects, hideSearch = false }: Pro
                     )}
                   </div>
 
-                  <div className="mt-6 pt-4 border-t border-border-primary/60 flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      {project.demo_link && (
-                        <a
-                          href={project.demo_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs font-mono text-text-muted hover:text-foreground transition-colors"
+                  <div className="mt-6 pt-4 border-t border-border-primary/60 flex flex-col gap-3">
+                    {/* Tech Chips */}
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      {cleanTech.map((tech, i) => (
+                        <span
+                          key={i}
+                          className="text-[11px] font-mono text-text-muted bg-hover-bg/70 px-2 py-0.5 rounded"
                         >
-                          Demo ↗
-                        </a>
-                      )}
-                      {project.github_link && (
-                        <a
-                          href={project.github_link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-xs font-mono text-text-muted hover:text-foreground transition-colors"
-                        >
-                          Code ↗
-                        </a>
+                          {tech}
+                        </span>
+                      ))}
+                      {extraCount > 0 && (
+                        <span className="text-[10px] font-mono text-text-muted">
+                          +{extraCount} more
+                        </span>
                       )}
                     </div>
 
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors"
-                    >
-                      <span>Deep Dive</span>
-                      <FiArrowUpRight className="w-3.5 h-3.5" />
-                    </Link>
+                    <div className="flex items-center justify-between pt-1">
+                      <div className="flex items-center gap-3">
+                        {project.demo_link && (
+                          <a
+                            href={project.demo_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-mono text-text-muted hover:text-foreground transition-colors"
+                          >
+                            Demo ↗
+                          </a>
+                        )}
+                        {project.github_link && (
+                          <a
+                            href={project.github_link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-xs font-mono text-text-muted hover:text-foreground transition-colors"
+                          >
+                            Code ↗
+                          </a>
+                        )}
+                      </div>
+
+                      <Link
+                        href={`/projects/${project.slug}`}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-foreground hover:text-text-secondary transition-colors"
+                      >
+                        <span>Deep Dive</span>
+                        <FiArrowUpRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </article>
               );

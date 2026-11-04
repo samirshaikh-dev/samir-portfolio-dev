@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumbs from "@/components/layout/Breadcrumbs";
-import HowIWork from "@/components/HowIWork";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import ServicesList from "@/components/services/ServicesList";
 import { APP_URL, AUTHOR_EMAIL } from "@/lib/site-config";
 import {
   getServiceJsonLd,
@@ -15,13 +15,22 @@ import {
   ENGAGEMENT_MODELS,
   SERVICES_FAQS,
 } from "@/lib/data/services";
+import {
+  FiArrowUpRight,
+  FiCheckCircle,
+  FiShield,
+  FiGitPullRequest,
+  FiClock,
+  FiChevronDown,
+  FiMail,
+} from "react-icons/fi";
 
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "Freelance AI Developer, Backend Engineer & Codebase Rescue | Samir Shaikh",
+  title: "Engineering Services & Architecture Consulting | Samir Shaikh",
   description:
-    "Hire Samir Shaikh — freelance AI developer, backend engineer & Forward Deployed Engineer. Codebase audits, emergency rescue sprints, SaaS AI augmentation, performance optimization, and custom Next.js web applications.",
+    "Direct engineering engagements by Samir Shaikh — AI backend architecture, autonomous agent workflows, PostgreSQL pgvector retrieval, high-throughput microservices, and codebase rescue sprints. Fixed milestones, 100% IP transfer, and 14-day warranty.",
   keywords: [
     ...LONGTAIL_KEYWORDS.slice(0, 15),
     "codebase audit service",
@@ -53,17 +62,17 @@ export const metadata: Metadata = {
     canonical: `${APP_URL}/services`,
   },
   openGraph: {
-    title: "Freelance AI Developer, Backend Engineer & Codebase Rescue | Samir Shaikh",
+    title: "Engineering Services & Architecture Consulting | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI developer, backend engineer & Forward Deployed Engineer. Codebase audits, emergency rescue sprints, SaaS AI augmentation, performance optimization, and custom Next.js web applications.",
+      "Direct engineering engagements by Samir Shaikh — AI backend architecture, autonomous agent workflows, PostgreSQL pgvector retrieval, high-throughput microservices, and codebase rescue sprints.",
     url: `${APP_URL}/services`,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Freelance AI Developer, Backend Engineer & Codebase Rescue | Samir Shaikh",
+    title: "Engineering Services & Architecture Consulting | Samir Shaikh",
     description:
-      "Hire Samir Shaikh — freelance AI developer, backend engineer & Forward Deployed Engineer. Codebase audits, emergency rescue sprints, SaaS AI augmentation, performance optimization, and custom Next.js web applications.",
+      "Direct engineering engagements by Samir Shaikh — AI backend architecture, autonomous agent workflows, PostgreSQL pgvector retrieval, and codebase rescue sprints.",
   },
 };
 
@@ -83,20 +92,56 @@ export default function ServicesPage() {
     })),
   };
 
+  // Group FAQs logically to reduce buyer cognitive load
+  const faqCategories = [
+    {
+      groupTitle: "Code Ownership & Working Workflow",
+      items: SERVICES_FAQS.filter((f) =>
+        [
+          "faq-code-ip-ownership",
+          "faq-how-i-work-with-startups",
+          "faq-availability-for-projects",
+          "faq-how-to-get-started",
+        ].includes(f.id)
+      ),
+    },
+    {
+      groupTitle: "AI Systems & RAG Architecture",
+      items: SERVICES_FAQS.filter((f) =>
+        [
+          "faq-stop-chatbot-hallucinating",
+          "faq-add-ai-to-existing-product",
+          "faq-custom-knowledge-base-ai",
+          "faq-production-grade-ai-definition",
+          "faq-freelance-vs-off-the-shelf-chatbots",
+        ].includes(f.id)
+      ),
+    },
+    {
+      groupTitle: "Codebase Takeover, Audits & Retainers",
+      items: SERVICES_FAQS.filter((f) =>
+        [
+          "faq-existing-codebase-takeover",
+          "faq-codebase-audit-deliverables",
+          "faq-fractional-retainer-model",
+          "faq-forward-deployed-engineer",
+        ].includes(f.id)
+      ),
+    },
+    {
+      groupTitle: "Full-Stack Engineering & Integrations",
+      items: SERVICES_FAQS.filter((f) =>
+        [
+          "faq-whatsapp-and-integrations",
+          "faq-technical-seo-deliverables",
+          "faq-full-stack-capabilities",
+        ].includes(f.id)
+      ),
+    },
+  ];
+
   return (
-    <main className="relative flex flex-col flex-1 px-5 sm:px-8 md:px-10 pb-24 overflow-hidden">
-      {/* 5.1 Ambient Radiant Glow (Top-Right) */}
-      <div
-        aria-hidden="true"
-        className="absolute -top-32 right-0 w-[550px] h-[550px] bg-[radial-gradient(circle,rgba(184,255,0,0.18)_0%,transparent_65%)] dark:bg-[radial-gradient(circle,rgba(184,255,0,0.08)_0%,transparent_65%)] blur-3xl pointer-events-none -z-10"
-      />
-
-      {/* 5.2 Geometric Dot Matrix Texture (Canvas Overlay) */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(#0A0A0A_1px,transparent_1px)] [background-size:24px_24px] opacity-[0.035] dark:opacity-[0.07] pointer-events-none -z-10"
-      />
-
+    <main className="flex flex-col flex-1 px-5 sm:px-8 md:px-10 pb-24 pt-6 sm:pt-10">
       {/* Schema.org JSON-LD */}
       <script
         type="application/ld+json"
@@ -113,256 +158,148 @@ export default function ServicesPage() {
         }}
       />
 
-      <div className="max-w-6xl mx-auto w-full">
-        {/* Breadcrumbs */}
-        <div className="pt-6 md:pt-10 mb-6">
-          <Breadcrumbs
-            items={[
-              { name: "Home", href: "/" },
-              { name: "Services", href: "/services" },
-            ]}
-          />
-        </div>
+      <div className="max-w-6xl mx-auto w-full space-y-16">
+        {/* Breadcrumbs Navigation */}
+        <Breadcrumbs
+          items={[
+            { name: "Home", href: "/" },
+            { name: "Capabilities & Services", href: "/services" },
+          ]}
+        />
 
-        {/* Editorial Section Hero Header */}
-        <header className="mb-10 sm:mb-12 pb-8 border-b border-border-primary/80">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[11px] font-mono font-medium tracking-wider text-text-muted uppercase mb-4 shadow-2xs">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-            ENGINEERING SERVICES &amp; CONSULTING
+        {/* ── EDITORIAL HEADER ──────────────────────────────────────────────── */}
+        <header className="border-b border-border-primary pb-10">
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+            <span>03 / ENGINEERING CAPABILITIES &amp; SPRINT BLUEPRINTS</span>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.12] text-foreground">
-            Freelance AI &amp; Engineering
-            <span
-              className="block sm:inline font-normal italic text-text-secondary sm:ml-3"
-              style={{ fontFamily: "var(--font-playfair)" }}
-            >
-              — Services
-            </span>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-foreground leading-[1.12]">
+            Engineering Sprints, Systems Architecture &amp; Production AI
           </h1>
 
-          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-text-secondary max-w-2xl leading-relaxed">
-            Add AI to existing products, rescue broken MVPs, audit inherited codebases, tune slow backends, and scale with dedicated retainers.
+          <p className="mt-4 max-w-3xl text-base sm:text-lg text-text-secondary leading-relaxed">
+            Direct engineering engagements by Samir Shaikh for high-throughput backends, deterministic AI pipelines, and codebase modernizations. Transparent milestone pricing, code committed directly to your private repository, verifiable benchmarks on staging, and zero vendor lock-in.
           </p>
+
+          {/* Quick Callout Actions */}
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] hover:opacity-90 transition-opacity"
+            >
+              <span>Schedule Technical Discovery</span>
+              <FiArrowUpRight className="w-4 h-4" />
+            </Link>
+            <a
+              href="#engagement-models"
+              className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl text-xs sm:text-sm font-mono font-medium text-foreground border border-border-primary hover:bg-hover-bg transition-colors"
+            >
+              <span>Review Engagement Models</span>
+            </a>
+            <a
+              href={`mailto:${AUTHOR_EMAIL}`}
+              className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl text-xs sm:text-sm font-mono text-text-muted hover:text-foreground transition-colors"
+              title="Email Samir Shaikh directly"
+            >
+              <FiMail className="w-4 h-4" />
+              <span>{AUTHOR_EMAIL}</span>
+            </a>
+          </div>
         </header>
 
-        {/* Hero Value Banner */}
-        <div className="relative overflow-hidden rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-10 mb-12 shadow-2xs hover:border-foreground/30 hover:shadow-md transition-all duration-300 group">
-          <span
-            aria-hidden="true"
-            className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-lime border border-foreground/30 shadow-[0_0_6px_rgba(184,255,0,0.7)]"
-          />
-
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-            <div className="max-w-2xl">
-              <span className="inline-flex items-center gap-2 text-xs font-semibold px-3.5 py-1.5 rounded-full border border-border-primary bg-hover-bg text-text-secondary mb-4 shadow-2xs">
-                <span className="w-2 h-2 rounded-full animate-pulse bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)]" />
-                Available for Audits, Rescue Sprints, Feature Builds &amp; Retainers
-              </span>
-
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-foreground mb-4 leading-tight">
-                Audit, rescue, scale, or augment your software with{" "}
-                <span className="relative inline-block px-3 py-0.5 rounded-xl bg-accent-lime text-[#0A0A0A] font-black -rotate-1 shadow-xs border border-black/10">
-                  production-grade AI
-                </span>
-              </h2>
-
-              <p className="service-desc text-text-secondary text-sm sm:text-base leading-relaxed">
-                Whether you need to add an AI chatbot or smart search to an existing SaaS, rescue an MVP after a developer disappeared, audit an inherited codebase, optimize slow API queries, or hire an embedded backend engineer on retainer — I deliver clean, tested TypeScript code committed directly to your repository.
+        {/* ── RISK REVERSAL & ENGINEERING GUARANTEES (THE CONFIDENCE LAYER) ──── */}
+        <section aria-label="Engineering engagement guarantees">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-y border-border-primary divide-y sm:divide-y-0 sm:divide-x divide-border-primary py-4 sm:py-6">
+            <div className="p-4 sm:p-5 space-y-2">
+              <div className="flex items-center gap-2 text-foreground font-mono text-xs font-bold">
+                <FiClock className="w-4 h-4 text-accent-lime" aria-hidden="true" />
+                <span>3–5 Day Initial Audit</span>
+              </div>
+              <p className="text-xs text-text-muted leading-relaxed">
+                Low-risk fixed-scope technical assessment and bottleneck diagnosis before committing larger capital.
               </p>
             </div>
 
-            <div className="flex-shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3.5">
-              <Link
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent-lime text-[#0A0A0A] text-sm font-extrabold px-7 py-3.5 shadow-xs hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all text-center"
-              >
-                Discuss a Project →
-              </Link>
-              <a
-                href={`mailto:${AUTHOR_EMAIL}`}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground text-sm font-bold px-7 py-3.5 hover:bg-hover-bg hover:border-foreground/30 shadow-2xs transition-all text-center"
-              >
-                Email Directly
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Pricing & Delivery Guarantee Bar */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-20">
-          <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-border-primary bg-background dark:bg-card-bg shadow-2xs">
-            <span className="w-8 h-8 rounded-full bg-accent-lime/20 dark:bg-accent-lime/20 text-foreground dark:text-accent-lime flex items-center justify-center font-bold text-xs flex-shrink-0">
-              ✓
-            </span>
-            <div>
-              <p className="text-xs font-bold text-foreground">3–5 Day Codebase Audit</p>
-              <p className="text-[11px] text-text-muted mt-0.5">Low-risk fixed-price assessment before committing to larger work</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-border-primary bg-background dark:bg-card-bg shadow-2xs">
-            <span className="w-8 h-8 rounded-full bg-accent-lime/20 dark:bg-accent-lime/20 text-foreground dark:text-accent-lime flex items-center justify-center font-bold text-xs flex-shrink-0">
-              ✓
-            </span>
-            <div>
-              <p className="text-xs font-bold text-foreground">48h Scope &amp; Rapid Triage</p>
-              <p className="text-[11px] text-text-muted mt-0.5">Clear milestone proposals or immediate emergency fix-it responses</p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3.5 p-4 rounded-2xl border border-border-primary bg-background dark:bg-card-bg shadow-2xs">
-            <span className="w-8 h-8 rounded-full bg-accent-lime/20 dark:bg-accent-lime/20 text-foreground dark:text-accent-lime flex items-center justify-center font-bold text-xs flex-shrink-0">
-              ✓
-            </span>
-            <div>
-              <p className="text-xs font-bold text-foreground">100% Code &amp; IP Ownership</p>
-              <p className="text-[11px] text-text-muted mt-0.5">Committed directly to your private GitHub or GitLab repos</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Service Categories Section */}
-        <div className="mb-20 space-y-20">
-          {SERVICE_CATEGORIES.map((category, catIdx) => (
-            <section key={category.id} id={category.id} aria-labelledby={`category-heading-${category.id}`}>
-              {/* Category Header */}
-              <div className="mb-8 pb-4 border-b border-border-primary/80">
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
-                  CATEGORY {String(catIdx + 1).padStart(2, "0")}
-                </div>
-                <h2
-                  id={`category-heading-${category.id}`}
-                  className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1"
-                >
-                  {category.title}
-                </h2>
-                <p className="text-sm text-text-secondary mt-1.5 max-w-2xl leading-relaxed">
-                  {category.subtitle}
-                </p>
+            <div className="p-4 sm:p-5 space-y-2">
+              <div className="flex items-center gap-2 text-foreground font-mono text-xs font-bold">
+                <FiGitPullRequest className="w-4 h-4 text-accent-lime" aria-hidden="true" />
+                <span>100% Repository Transfer</span>
               </div>
-
-              {/* Service Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {category.services.map((service) => (
-                  <article
-                    key={service.id}
-                    id={service.id}
-                    className="group relative flex flex-col justify-between rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-8 hover:border-foreground/30 hover:shadow-md transition-all duration-300 shadow-2xs overflow-hidden"
-                  >
-                    <span
-                      aria-hidden="true"
-                      className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-lime border border-foreground/30 shadow-[0_0_6px_rgba(184,255,0,0.7)] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
-
-                    <div>
-                      <div className="flex items-center justify-between gap-2 mb-3">
-                        <span className="font-mono text-[10px] sm:text-[11px] font-semibold text-text-muted tracking-wider uppercase">
-                          {service.badge}
-                        </span>
-                        {service.startingPrice && (
-                          <span className="font-mono text-xs font-bold px-3 py-0.5 rounded-full bg-hover-bg text-foreground border border-border-primary dark:border-accent-lime/30 dark:text-accent-lime shadow-2xs">
-                            {service.startingPrice}
-                          </span>
-                        )}
-                      </div>
-
-                      <h3 className="text-xl sm:text-2xl font-black text-foreground mb-2 group-hover:text-text-secondary transition-colors">
-                        <Link
-                          href={`/services/${service.id}`}
-                          className="hover:text-foreground dark:hover:text-accent-lime transition-colors"
-                        >
-                          {service.title}
-                        </Link>
-                      </h3>
-                      <p className="text-xs font-mono text-text-muted mb-4 italic">
-                        {service.tagline}
-                      </p>
-                      <p className="text-sm text-text-secondary leading-relaxed mb-6">
-                        {service.description}
-                      </p>
-
-                      <div className="mb-6">
-                        <h4 className="text-xs font-mono uppercase tracking-wider font-semibold text-foreground mb-3 flex items-center gap-1.5">
-                          <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
-                          Key Deliverables
-                        </h4>
-                        <ul className="space-y-2">
-                          {service.deliverables.map((item, idx) => (
-                            <li key={idx} className="flex items-start gap-2.5 text-xs text-text-muted">
-                              <span className="text-foreground dark:text-accent-lime font-bold mt-0.5">✓</span>
-                              <span className="leading-relaxed">{item}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    <div>
-                      {/* Tech stack badges */}
-                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border-primary mb-5">
-                        {service.techStack.map((tech) => (
-                          <span
-                            key={tech}
-                            className="font-mono text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-md bg-hover-bg border border-border-primary/80 text-text-muted font-medium"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                        <Link
-                          href={`/services/${service.id}`}
-                          className="text-xs font-mono font-bold text-foreground hover:text-text-secondary dark:hover:text-accent-lime underline underline-offset-4 decoration-border-primary inline-flex items-center gap-1 transition-colors"
-                        >
-                          View Scope & Architecture →
-                        </Link>
-                        <Link
-                          href={`/contact?service=${encodeURIComponent(service.id)}&scope=standard`}
-                          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] text-xs font-extrabold hover:scale-[1.02] active:scale-[0.98] transition-all shadow-2xs dark:shadow-[0_0_12px_rgba(184,255,0,0.35)] ml-auto"
-                        >
-                          Request quote →
-                        </Link>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          ))}
-        </div>
-
-        {/* 4-Stage Delivery Process */}
-        <section aria-labelledby="process-heading" className="mb-20">
-          <div className="mb-8">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-              STRUCTURED ENGAGEMENT
+              <p className="text-xs text-text-muted leading-relaxed">
+                Clean, tested TypeScript committed directly to your private GitHub or GitLab with atomic PRs and passing CI.
+              </p>
             </div>
-            <h2 id="process-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1">
-              Engineering Delivery Process
+
+            <div className="p-4 sm:p-5 space-y-2">
+              <div className="flex items-center gap-2 text-foreground font-mono text-xs font-bold">
+                <FiCheckCircle className="w-4 h-4 text-accent-lime" aria-hidden="true" />
+                <span>Staging Benchmark Verification</span>
+              </div>
+              <p className="text-xs text-text-muted leading-relaxed">
+                Verifiable latency, vector retrieval, and throughput metrics tested against staging before sign-off.
+              </p>
+            </div>
+
+            <div className="p-4 sm:p-5 space-y-2">
+              <div className="flex items-center gap-2 text-foreground font-mono text-xs font-bold">
+                <FiShield className="w-4 h-4 text-accent-lime" aria-hidden="true" />
+                <span>14-Day Bug Warranty</span>
+              </div>
+              <p className="text-xs text-text-muted leading-relaxed">
+                Hands-on post-deployment bug fixing and zero-downtime deployment handover support included.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── CORE CAPABILITIES & OFFERING BLUEPRINTS ───────────────────────── */}
+        <section aria-label="Available engineering capabilities">
+          <div className="border-b border-border-primary pb-4 mb-8">
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+              <span>CAPABILITIES DIRECTORY</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+              Core Capabilities &amp; Sprint Blueprints
             </h2>
-            <p className="text-sm text-text-secondary mt-1.5 max-w-2xl leading-relaxed">
-              A structured, low-friction engineering process designed to eliminate ambiguity and deliver dependable software.
+            <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl">
+              Filter by engineering domain below to inspect architectural scopes, concrete deliverables, and typical durations.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <ServicesList categories={SERVICE_CATEGORIES} />
+        </section>
+
+        {/* ── 4-STAGE DELIVERY PROCESS (PSYCHOLOGY TRANSPARENCY) ─────────────── */}
+        <section aria-labelledby="process-heading" className="pt-8 border-t border-border-primary">
+          <div className="mb-8">
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+              <span>TRANSPARENT WORKFLOW</span>
+            </div>
+            <h2 id="process-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+              How Engagements Are Executed
+            </h2>
+            <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl leading-relaxed">
+              A predictable, low-friction engineering process designed to eliminate ambiguity, protect your timeline, and deliver dependable software.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {PROCESS_STEPS.map((step) => (
               <div
                 key={step.step}
-                className="group relative rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 flex flex-col justify-between hover:border-foreground/30 hover:shadow-md transition-all duration-300 shadow-2xs"
+                className="rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 flex flex-col justify-between"
               >
                 <div>
-                  <span className="font-mono text-3xl font-black text-text-secondary/30 block mb-3 group-hover:text-foreground/40 transition-colors">
+                  <span className="font-mono text-2xl font-black text-text-muted/40 block mb-2">
                     {step.step}
                   </span>
                   <h3 className="text-base font-bold text-foreground mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-xs text-text-muted leading-relaxed">
+                  <p className="text-xs text-text-secondary leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -371,127 +308,162 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        {/* Engagement Models */}
-        <section aria-labelledby="engagement-models-heading" className="mb-20">
+        {/* ── ENGAGEMENT MODELS ──────────────────────────────────────────────── */}
+        <section
+          id="engagement-models"
+          aria-labelledby="engagement-models-heading"
+          className="pt-8 border-t border-border-primary scroll-mt-20"
+        >
           <div className="mb-8">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-              FLEXIBLE COLLABORATION
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+              <span>STRUCTURED COLLABORATION</span>
             </div>
-            <h2 id="engagement-models-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1">
-              Engagement Models
+            <h2 id="engagement-models-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+              Engagement Models &amp; Pricing Structures
             </h2>
+            <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl leading-relaxed">
+              Choose the collaboration structure that fits your project maturity — from an isolated diagnostic audit to fixed-scope sprints or fractional engineering retainers.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {ENGAGEMENT_MODELS.map((model) => (
               <div
                 key={model.title}
-                className="group relative rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-8 flex flex-col justify-between hover:border-foreground/30 hover:shadow-md transition-all duration-300 shadow-2xs"
+                className="rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-7 flex flex-col justify-between hover:border-foreground/30 transition-colors"
               >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="font-mono text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-full border border-border-primary text-text-muted font-semibold uppercase tracking-wider inline-block">
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="font-mono text-[10px] px-2.5 py-0.5 rounded border border-border-primary text-text-muted font-semibold uppercase tracking-wider inline-block">
                       {model.badge}
                     </span>
                     {model.startingPrice && (
-                      <span className="font-mono text-xs font-bold text-foreground dark:text-accent-lime">
+                      <span className="font-mono text-xs font-bold text-foreground">
                         {model.startingPrice}
                       </span>
                     )}
                   </div>
-                  <h3 className="text-lg sm:text-xl font-bold text-foreground mb-1">
-                    {model.title}
-                  </h3>
-                  <p className="text-xs text-text-muted mb-6">
-                    {model.subtitle}
-                  </p>
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground">
+                      {model.title}
+                    </h3>
+                    <p className="text-xs text-text-muted mt-1 leading-relaxed">
+                      {model.subtitle}
+                    </p>
+                  </div>
 
-                  <ul className="space-y-2.5 mb-8">
+                  <ul className="space-y-2 pt-3 border-t border-border-primary">
                     {model.highlights.map((highlight, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs text-text-secondary leading-relaxed">
-                        <span className="w-1.5 h-1.5 rounded-full bg-accent-lime mt-1.5 flex-shrink-0" />
+                      <li key={idx} className="flex items-start gap-2 text-xs text-text-secondary leading-relaxed">
+                        <FiCheckCircle className="w-3.5 h-3.5 text-accent-lime shrink-0 mt-0.5" aria-hidden="true" />
                         <span>{highlight}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <Link
-                  href="/contact"
-                  className="w-full text-center py-2.5 px-4 rounded-full border border-border-primary bg-background dark:bg-card-bg hover:bg-hover-bg hover:border-foreground/30 text-xs font-mono font-bold text-foreground transition-all shadow-2xs"
-                >
-                  Inquire Now →
-                </Link>
+                <div className="pt-6 mt-6 border-t border-border-primary">
+                  <Link
+                    href={`/contact?model=${encodeURIComponent(model.title)}`}
+                    className="block w-full text-center py-2.5 px-4 rounded-xl border border-border-primary bg-background dark:bg-card-bg hover:bg-hover-bg text-xs font-mono font-bold text-foreground transition-colors"
+                  >
+                    Inquire About This Model &rarr;
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* How I Work Section */}
-        <div className="mb-20">
-          <HowIWork variant="full" />
-        </div>
-
-        {/* Testimonials Section */}
-        <div className="mb-20">
+        {/* ── TESTIMONIALS & VERIFIED EVIDENCE ───────────────────────────────── */}
+        <div className="pt-8 border-t border-border-primary">
           <TestimonialsSection variant="services" />
         </div>
 
-        {/* Services FAQ */}
-        <section aria-labelledby="faq-heading" className="mb-20">
+        {/* ── SERVICES FAQ (GROUPED TO REDUCE COGNITIVE LOAD) ────────────────── */}
+        <section aria-labelledby="faq-heading" className="pt-8 border-t border-border-primary">
           <div className="mb-8">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-background dark:bg-card-bg text-[10px] font-mono font-medium tracking-wider text-text-muted uppercase mb-2 shadow-2xs">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime shadow-[0_0_6px_rgba(184,255,0,0.8)]" />
-              QUESTIONS &amp; ANSWERS
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+              <span>DUE DILIGENCE &amp; FREQUENT QUESTIONS</span>
             </div>
-            <h2 id="faq-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground mt-1">
-              Frequently Asked Questions
+            <h2 id="faq-heading" className="text-2xl sm:text-3xl font-black tracking-tight text-foreground">
+              Technical Due Diligence &amp; Answers
             </h2>
+            <p className="text-xs sm:text-sm text-text-muted mt-1 max-w-2xl leading-relaxed">
+              Clear answers to common questions from CTOs, founders, and engineering managers regarding contracts, code ownership, and communication.
+            </p>
           </div>
 
-          <div className="rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-6 sm:p-8 divide-y divide-border-primary shadow-2xs">
-            {SERVICES_FAQS.map((faq, idx) => (
-              <div key={idx} className="py-6 first:pt-0 last:pb-0">
-                <h3 className="text-base sm:text-lg font-bold text-foreground mb-2">
-                  {faq.question}
+          <div className="space-y-8">
+            {faqCategories.map((cat) => (
+              <div key={cat.groupTitle} className="space-y-3">
+                <h3 className="text-sm font-mono uppercase tracking-wider text-text-muted font-bold pb-2 border-b border-border-primary">
+                  {cat.groupTitle}
                 </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  {faq.answer}
-                </p>
+                <div className="space-y-2">
+                  {cat.items.map((faq) => (
+                    <details
+                      key={faq.id}
+                      className="group rounded-xl border border-border-primary bg-background dark:bg-card-bg p-4 transition-colors open:bg-hover-bg/30"
+                    >
+                      <summary className="cursor-pointer font-bold text-xs sm:text-sm text-foreground list-none flex items-center justify-between gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-lime rounded-lg">
+                        <span>{faq.question}</span>
+                        <FiChevronDown
+                          className="w-4 h-4 text-text-muted shrink-0 transition-transform group-open:rotate-180"
+                          aria-hidden="true"
+                        />
+                      </summary>
+                      <p className="mt-3 text-xs sm:text-sm text-text-secondary leading-relaxed border-t border-border-primary/60 pt-3">
+                        {faq.answer}
+                      </p>
+                    </details>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Final High-Impact CTA Banner */}
-        <div className="relative overflow-hidden rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-8 sm:p-12 text-center shadow-2xs">
-          <span
-            aria-hidden="true"
-            className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-accent-lime border border-foreground/30 shadow-[0_0_6px_rgba(184,255,0,0.7)]"
-          />
+        {/* ── CLOSING CONVERSION SECTION ────────────────────────────────────── */}
+        <section className="rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-8 sm:p-10 md:p-12">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 text-xs font-mono font-medium tracking-wider text-text-muted uppercase mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
+              <span>START A DIRECT ENGAGEMENT</span>
+            </div>
+            <h3 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight">
+              Ready to architect, audit, or scale your software?
+            </h3>
+            <p className="mt-3 text-sm sm:text-base text-text-secondary leading-relaxed">
+              Send over your current architecture overview, repository, or problem statement. We&apos;ll schedule a 20-minute technical discovery call to evaluate feasibility and propose concrete sprint milestones with zero obligations.
+            </p>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-foreground tracking-tight mb-3">
-            Have a project or opportunity in mind?
-          </h2>
-          <p className="text-text-secondary text-sm sm:text-base max-w-xl mx-auto mb-8 leading-relaxed">
-            Whether you need a 3–5 day codebase audit, emergency bug rescue, AI chatbot for your SaaS, or a dedicated backend engineer on retainer, let&apos;s talk through your goals.
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-accent-lime text-[#0A0A0A] font-extrabold text-sm shadow-xs hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] hover:scale-[1.02] active:scale-[0.98] transition-all"
-            >
-              Get in Touch →
-            </Link>
-            <Link
-              href="/resume"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground font-bold text-sm hover:bg-hover-bg hover:border-foreground/30 shadow-2xs transition-all"
-            >
-              View Full Resume
-            </Link>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-1.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-bold bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] hover:opacity-90 transition-opacity"
+              >
+                <span>Schedule Discovery Call</span>
+                <FiArrowUpRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/projects"
+                className="inline-flex items-center gap-1.5 px-5 py-3 rounded-xl text-xs sm:text-sm font-mono font-medium text-foreground border border-border-primary hover:bg-hover-bg transition-colors"
+              >
+                <span>Inspect Verified Projects</span>
+              </Link>
+              <a
+                href={`mailto:${AUTHOR_EMAIL}`}
+                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl text-xs sm:text-sm font-mono text-text-muted hover:text-foreground transition-colors"
+              >
+                <FiMail className="w-4 h-4" />
+                <span>Email Directly</span>
+              </a>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     </main>
   );
