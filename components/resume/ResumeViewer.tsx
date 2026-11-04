@@ -7,7 +7,6 @@ import {
   LuDownload,
   LuExternalLink,
   LuFileText,
-  LuLayers,
   LuSparkles,
   LuBriefcase,
   LuGraduationCap,
@@ -18,13 +17,13 @@ import {
 const DynamicPDFViewer = dynamic(() => import("./PDFViewer"), {
   ssr: false,
   loading: () => (
-    <div className="flex flex-col items-center justify-center rounded-2xl border border-border-primary bg-background/50 dark:bg-card-bg/50 py-32">
+    <div className="flex flex-col items-center justify-center rounded-2xl border border-border-primary bg-background dark:bg-card-bg py-28">
       <span
         className="w-6 h-6 rounded-full border-2 border-border-primary border-t-foreground animate-spin mb-3"
         aria-hidden="true"
       />
       <span className="text-xs sm:text-sm font-mono uppercase tracking-wider text-text-muted">
-        Loading Document Viewer...
+        Loading Document Canvas...
       </span>
     </div>
   ),
@@ -54,18 +53,18 @@ export default function ResumeViewer({ url }: { url: string }) {
 
   if (!url) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-12 text-center my-8 shadow-sm">
+      <div className="flex flex-col items-center justify-center rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-12 text-center my-8">
         <div className="w-12 h-12 rounded-xl border border-border-primary bg-hover-bg flex items-center justify-center text-text-muted mb-4">
           <LuFileText className="w-6 h-6 text-foreground" />
         </div>
-        <h3 className="text-xl font-bold text-foreground mb-2">Resume Document Coming Soon</h3>
-        <p className="text-sm text-text-secondary max-w-md leading-relaxed mb-6">
-          The verified PDF document is currently undergoing revision. You can explore Samir&apos;s
-          production projects or view full work history in the meantime.
+        <h3 className="text-lg font-bold text-foreground mb-2">Resume Document Coming Soon</h3>
+        <p className="text-xs sm:text-sm text-text-secondary max-w-md leading-relaxed mb-6">
+          The verified PDF document is currently undergoing update. In the meantime, explore Samir&apos;s
+          production projects or view his work history.
         </p>
         <Link
           href="/about"
-          className="inline-flex items-center gap-2 rounded-full bg-accent-lime text-[#0A0A0A] text-xs sm:text-sm font-extrabold px-6 py-3 shadow-xs hover:shadow-[0_0_20px_rgba(184,255,0,0.5)] transition-all"
+          className="inline-flex items-center gap-2 rounded-xl bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] text-xs sm:text-sm font-bold px-5 py-2.5 hover:opacity-90 transition-opacity"
         >
           <span>Explore Work History</span>
           <LuArrowRight className="w-4 h-4" />
@@ -78,35 +77,32 @@ export default function ResumeViewer({ url }: { url: string }) {
 
   return (
     <div className="flex flex-col gap-6">
-      {/* ── TOP VIEWER TOOLBAR ────────────────────────────────────────────────── */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3.5 sm:px-5 rounded-2xl border border-border-primary bg-background/90 dark:bg-card-bg/90 backdrop-blur-xs shadow-2xs">
+      {/* ── VIEWER TOOLBAR ─────────────────────────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-3.5 sm:px-5 rounded-2xl border border-border-primary bg-background dark:bg-card-bg">
         {/* Left Status & Telemetry */}
-        <div className="flex items-center gap-2.5">
-          <span
-            aria-hidden="true"
-            className="w-2 h-2 rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)] animate-pulse"
-          />
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-accent-lime" aria-hidden="true" />
           <span className="text-[11px] sm:text-xs font-mono font-medium uppercase tracking-wider text-text-muted">
             Official Curriculum Vitae &bull; PDF 1.7
           </span>
         </div>
 
-        {/* Right Controls: Mode Toggle & Direct Actions */}
+        {/* Right Controls: Mode Toggle & Actions */}
         <div className="flex flex-wrap items-center gap-2">
           {/* View Mode Toggle */}
           <div
             role="tablist"
             aria-label="Resume display mode"
-            className="inline-flex items-center p-1 rounded-full border border-border-primary bg-hover-bg/50"
+            className="inline-flex items-center p-1 rounded-xl border border-border-primary bg-hover-bg/40"
           >
             <button
               type="button"
               role="tab"
               aria-selected={viewMode === "canvas"}
               onClick={() => setViewMode("canvas")}
-              className={`px-3 py-1 rounded-full text-xs transition-all font-semibold cursor-pointer ${
+              className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors font-medium cursor-pointer ${
                 viewMode === "canvas"
-                  ? "bg-foreground text-background shadow-2xs dark:bg-accent-lime dark:text-[#0A0A0A]"
+                  ? "bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] font-bold"
                   : "text-text-muted hover:text-foreground"
               }`}
             >
@@ -117,9 +113,9 @@ export default function ResumeViewer({ url }: { url: string }) {
               role="tab"
               aria-selected={viewMode === "text"}
               onClick={() => setViewMode("text")}
-              className={`px-3 py-1 rounded-full text-xs transition-all font-semibold cursor-pointer ${
+              className={`px-3 py-1 rounded-lg text-xs font-mono transition-colors font-medium cursor-pointer ${
                 viewMode === "text"
-                  ? "bg-foreground text-background shadow-2xs dark:bg-accent-lime dark:text-[#0A0A0A]"
+                  ? "bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] font-bold"
                   : "text-text-muted hover:text-foreground"
               }`}
             >
@@ -133,9 +129,9 @@ export default function ResumeViewer({ url }: { url: string }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Download Samir Shaikh resume PDF file"
-            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-border-primary bg-background dark:bg-card-bg text-foreground text-xs font-bold hover:bg-hover-bg hover:border-foreground/30 shadow-2xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] text-xs font-bold hover:opacity-90 transition-opacity cursor-pointer"
           >
-            <LuDownload className="w-3.5 h-3.5 text-accent-lime stroke-[2.5]" />
+            <LuDownload className="w-3.5 h-3.5" />
             <span>Download PDF</span>
           </a>
 
@@ -145,7 +141,7 @@ export default function ResumeViewer({ url }: { url: string }) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume document directly in Google Drive"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border-primary bg-background dark:bg-card-bg text-text-secondary text-xs font-medium hover:text-foreground hover:bg-hover-bg shadow-2xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-border-primary bg-background dark:bg-card-bg text-text-secondary text-xs font-mono hover:text-foreground hover:bg-hover-bg transition-colors cursor-pointer"
           >
             <span>Drive</span>
             <LuExternalLink className="w-3 h-3 text-text-muted" />
@@ -154,13 +150,7 @@ export default function ResumeViewer({ url }: { url: string }) {
       </div>
 
       {/* ── VIEWER CONTAINER ─────────────────────────────────────────────────── */}
-      <div className="relative rounded-3xl border border-border-primary bg-background dark:bg-card-bg p-4 sm:p-7 md:p-8 shadow-sm overflow-hidden">
-        {/* Subtle Ambient Radial Center Glow */}
-        <div
-          aria-hidden="true"
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-[radial-gradient(circle,rgba(184,255,0,0.12)_0%,transparent_65%)] dark:bg-[radial-gradient(circle,rgba(184,255,0,0.06)_0%,transparent_65%)] blur-3xl pointer-events-none -z-10"
-        />
-
+      <div className="rounded-2xl border border-border-primary bg-background dark:bg-card-bg p-4 sm:p-6 md:p-8 overflow-hidden">
         {viewMode === "canvas" ? (
           /* Canvas Render Mode */
           <div className="w-full">
@@ -168,133 +158,114 @@ export default function ResumeViewer({ url }: { url: string }) {
           </div>
         ) : (
           /* Text-Accessible Alternative Mode (WCAG 2.2 AA / Screen Reader Friendly) */
-          <div className="w-full max-w-3xl mx-auto py-4 space-y-10">
+          <div className="w-full max-w-3xl mx-auto py-2 space-y-8">
             {/* Header Identity */}
-            <div className="pb-6 border-b border-border-primary/80">
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border-primary bg-hover-bg/60 text-[10px] font-mono font-semibold uppercase tracking-wider text-text-muted mb-2">
+            <div className="pb-6 border-b border-border-primary">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded border border-border-primary bg-hover-bg/50 text-[10px] font-mono font-semibold uppercase tracking-wider text-text-muted mb-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-accent-lime" />
                 ACCESSIBLE RESUME SUMMARY
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-foreground">Samir Shaikh</h2>
-              <p className="text-sm font-semibold text-text-secondary mt-1">
-                AI Developer (Backend-First) &bull; Forward Deployed Engineer &bull; Gujarat, India
+              <p className="text-xs sm:text-sm font-semibold text-text-secondary mt-1">
+                AI Backend Engineer &bull; Systems Architect &bull; Gujarat, India
               </p>
-              <p className="text-xs text-text-muted mt-2 leading-relaxed">
+              <p className="text-xs text-text-muted mt-2 font-mono">
                 shaikh.samir.work@gmail.com &bull; linkedin.com/in/samirshaikh-dev &bull; github.com/samirshaikh-dev
               </p>
             </div>
 
             {/* Professional Summary */}
             <div>
-              <h3 className="text-base font-bold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
+              <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-foreground mb-2 flex items-center gap-2">
                 <LuSparkles className="w-4 h-4 text-accent-lime" />
                 Professional Summary
               </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                AI Developer with a strong backend-first foundation specializing in autonomous agents,
-                production RAG pipelines with PostgreSQL (pgvector) and Gemini 3072-dimensional embeddings,
-                event-driven microservices (Kafka, BullMQ, Redis), and high-throughput Node.js/TypeScript
-                systems. Operates with an agentic workflow using Cursor and Claude Code under strict CI and
-                manual security review.
+              <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">
+                AI Backend Engineer specializing in autonomous agent workflows, production RAG pipelines with PostgreSQL (pgvector) and Gemini 3072d embeddings, event-driven microservices (Kafka, BullMQ, Redis), and high-throughput Node.js/TypeScript architectures. Operates an agent-assisted workflow with Cursor and Claude Code governed by strict test coverage and manual security review.
               </p>
             </div>
 
-            {/* Core Technical Stack */}
+            {/* Core Competencies */}
             <div>
-              <h3 className="text-base font-bold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
-                <LuLayers className="w-4 h-4 text-accent-lime" />
-                Core Technical Competencies
+              <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
+                <LuCheck className="w-4 h-4 text-accent-lime" />
+                Technical Competencies
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="p-3.5 rounded-xl border border-border-primary bg-hover-bg/30">
-                  <span className="font-bold text-foreground block mb-1">AI &amp; RAG Systems</span>
-                  <span className="text-text-secondary">
-                    Gemini Embeddings (3072d), pgvector, Vercel AI SDK, Groq, Prompt Engineering, Agentic Tool Execution.
-                  </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-text-secondary">
+                <div className="space-y-1">
+                  <div className="font-bold text-foreground font-mono text-[11px] uppercase">
+                    Languages &amp; Runtimes:
+                  </div>
+                  <div>TypeScript, JavaScript (ESNext), Node.js, Python, SQL</div>
                 </div>
-                <div className="p-3.5 rounded-xl border border-border-primary bg-hover-bg/30">
-                  <span className="font-bold text-foreground block mb-1">Backend &amp; Distributed</span>
-                  <span className="text-text-secondary">
-                    Node.js, TypeScript, Express, NestJS, Apache Kafka, BullMQ, Redis, WebSockets, OpenTelemetry.
-                  </span>
+                <div className="space-y-1">
+                  <div className="font-bold text-foreground font-mono text-[11px] uppercase">
+                    Frameworks &amp; Backend:
+                  </div>
+                  <div>Next.js (App Router), Express.js, NestJS, React 19, REST, GraphQL</div>
                 </div>
-                <div className="p-3.5 rounded-xl border border-border-primary bg-hover-bg/30">
-                  <span className="font-bold text-foreground block mb-1">Databases &amp; ORMs</span>
-                  <span className="text-text-secondary">
-                    PostgreSQL, Neon Serverless, Drizzle ORM, Prisma, MongoDB, Vector Indexing.
-                  </span>
+                <div className="space-y-1">
+                  <div className="font-bold text-foreground font-mono text-[11px] uppercase">
+                    Databases &amp; Queues:
+                  </div>
+                  <div>PostgreSQL (pgvector), Neon, Redis, MongoDB, Apache Kafka, BullMQ</div>
                 </div>
-                <div className="p-3.5 rounded-xl border border-border-primary bg-hover-bg/30">
-                  <span className="font-bold text-foreground block mb-1">Frontend &amp; DevOps</span>
-                  <span className="text-text-secondary">
-                    Next.js (App Router), React 19, Tailwind CSS v4, Docker, Docker Compose, GitHub Actions CI/CD.
-                  </span>
+                <div className="space-y-1">
+                  <div className="font-bold text-foreground font-mono text-[11px] uppercase">
+                    AI &amp; Cloud:
+                  </div>
+                  <div>Vercel AI SDK, Gemini 2.0, Groq, Docker, GitHub Actions, AWS</div>
                 </div>
               </div>
             </div>
 
-            {/* Work History */}
+            {/* Experience Summary */}
             <div>
-              <h3 className="text-base font-bold uppercase tracking-wider text-foreground mb-4 flex items-center gap-2">
+              <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
                 <LuBriefcase className="w-4 h-4 text-accent-lime" />
                 Work Experience
               </h3>
-              <div className="space-y-6">
-                <div className="space-y-1.5">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between">
-                    <span className="font-bold text-foreground text-sm">Full Stack Engineer &bull; Xira Infotech</span>
+              <div className="space-y-4">
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-foreground text-sm">
+                      Full Stack Engineer Intern &bull; Xira Infotech
+                    </span>
                     <span className="font-mono text-xs text-text-muted">Jan 2026 – Present</span>
                   </div>
                   <p className="text-xs text-text-secondary leading-relaxed">
-                    Architected enterprise job portal with Next.js, PostgreSQL, and strict RBAC. Built production RAG
-                    assistants with pgvector indexing, reducing support search latency by 45%.
+                    Engineered dynamic web applications, role-based access control, and automated API workflows using Next.js, Node.js, and PostgreSQL.
                   </p>
                 </div>
-
-                <div className="space-y-1.5">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between">
-                    <span className="font-bold text-foreground text-sm">Backend Developer Intern &bull; LOGICWIND</span>
-                    <span className="font-mono text-xs text-text-muted">Jun 2025 – Dec 2025</span>
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <span className="font-bold text-foreground text-sm">
+                      Back End Developer Intern &bull; LOGICWIND
+                    </span>
+                    <span className="font-mono text-xs text-text-muted">May 2025 – Jun 2025</span>
                   </div>
                   <p className="text-xs text-text-secondary leading-relaxed">
-                    Designed high-throughput GraphQL microservices and transactional database schemas. Containerized
-                    services with Docker and built automated CI test pipelines.
+                    Developed scalable backend microservices, optimized SQL queries, and integrated third-party messaging APIs.
                   </p>
                 </div>
               </div>
             </div>
 
             {/* Education */}
-            <div>
-              <h3 className="text-base font-bold uppercase tracking-wider text-foreground mb-3 flex items-center gap-2">
+            <div className="pt-2 border-t border-border-primary">
+              <h3 className="text-sm font-mono font-bold uppercase tracking-wider text-foreground mb-2 flex items-center gap-2">
                 <LuGraduationCap className="w-4 h-4 text-accent-lime" />
-                Education &amp; Credentials
+                Education
               </h3>
-              <div className="p-4 rounded-xl border border-border-primary bg-hover-bg/30">
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between">
-                  <span className="font-bold text-foreground text-sm">
-                    B.Tech in Information Technology
-                  </span>
-                  <span className="font-mono text-xs text-text-muted">2022 – 2026</span>
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="font-bold text-foreground text-sm">
+                    B.Tech in Information Technology &bull; 8.44 CGPA
+                  </div>
+                  <div className="text-xs text-text-secondary">Uka Tarsadia University</div>
                 </div>
-                <p className="text-xs text-text-secondary mt-1">
-                  Uka Tarsadia University &bull; CGPA: 8.44/10
-                </p>
+                <div className="font-mono text-xs text-text-muted">2022 – 2026</div>
               </div>
-            </div>
-
-            {/* Verification Link */}
-            <div className="pt-4 border-t border-border-primary/80 flex items-center justify-between">
-              <span className="text-xs text-text-muted flex items-center gap-1.5">
-                <LuCheck className="text-accent-lime w-4 h-4 stroke-[2.5]" />
-                Full verified accreditations viewable online
-              </span>
-              <Link
-                href="/certificates"
-                className="text-xs font-bold text-foreground hover:text-accent-lime transition-colors underline-offset-4 hover:underline"
-              >
-                View 8+ Verified Certificates &rarr;
-              </Link>
             </div>
           </div>
         )}
