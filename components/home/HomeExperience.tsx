@@ -85,11 +85,15 @@ export default function HomeExperience({ experiences }: HomeExperienceProps) {
   const items: ExperienceItem[] =
     experiences && experiences.length > 0
       ? experiences.map((exp) => {
-          const matchingVerified = VERIFIED_EXPERIENCES.find(
-            (v) =>
-              v.companyName.toLowerCase().includes(exp.companyName.toLowerCase()) ||
-              exp.companyName.toLowerCase().includes(v.companyName.toLowerCase())
-          );
+          const cleanExpName = (exp.companyName || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+          const matchingVerified = VERIFIED_EXPERIENCES.find((v) => {
+            const cleanVerifiedName = v.companyName.toLowerCase().replace(/[^a-z0-9]/g, "");
+            return (
+              cleanVerifiedName.includes(cleanExpName) ||
+              cleanExpName.includes(cleanVerifiedName)
+            );
+          });
+
           return {
             id: exp.id,
             companyName: exp.companyName,
@@ -100,7 +104,7 @@ export default function HomeExperience({ experiences }: HomeExperienceProps) {
             endDate: exp.endDate,
             isCurrent: exp.isCurrent,
             description: exp.description || matchingVerified?.description || null,
-            contributions: exp.description ? [] : (matchingVerified?.contributions || []),
+            contributions: matchingVerified?.contributions || [],
             outcome: matchingVerified?.outcome || undefined,
           };
         })
