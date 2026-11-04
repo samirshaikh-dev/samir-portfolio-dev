@@ -3,15 +3,13 @@
 import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { FaWhatsapp } from "react-icons/fa";
+import { LuSend, LuCheck, LuCircleAlert } from "react-icons/lu";
 import { AUTHOR_PHONE } from "@/lib/site-config";
 import { analyticsEvents } from "@/lib/analytics/events";
 import { trackEvent } from "@/lib/analytics/trackEvent";
 
-const FOCUS_RING =
-  "focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none focus-visible:ring-offset-2 focus-visible:ring-offset-background";
-
 const INPUT_BASE =
-  "w-full rounded-xl bg-background dark:bg-card-bg border border-border-primary px-4 py-3 text-sm text-foreground placeholder-text-muted outline-none transition-all duration-200 disabled:opacity-50 focus:border-foreground/40 dark:focus:border-accent-lime/50 focus:ring-1 focus:ring-foreground/20 dark:focus:ring-accent-lime/20";
+  "w-full rounded-xl bg-background dark:bg-card-bg border border-border-primary px-4 py-3 text-sm text-foreground placeholder:text-text-muted outline-none transition-colors disabled:opacity-50 focus:border-foreground/40 focus:ring-1 focus:ring-foreground/20";
 
 const PROJECT_TYPES = [
   "Full-Time / Remote Role (AI Backend / Full Stack)",
@@ -51,10 +49,10 @@ const BUDGET_RANGES = [
 ];
 
 const TIMELINES = [
-  "ASAP (Rush Project)",
+  "Immediate / ASAP",
+  "1-2 Weeks",
   "1-2 Months",
   "3-4 Months",
-  "6+ Months",
   "Flexible Timeline",
 ];
 
@@ -84,7 +82,7 @@ const SERVICE_ID_TO_DETAILS: Record<
     title: "Codebase Audit & Architecture Review",
     projectType: "Codebase Audit & Architecture Review ($450 Fixed)",
     defaultBudget: "< $1,000",
-    defaultTimeline: "ASAP (Rush Project)",
+    defaultTimeline: "Immediate / ASAP",
   },
   "cloud-migration": {
     title: "Cloud & Database Migration",
@@ -102,7 +100,7 @@ const SERVICE_ID_TO_DETAILS: Record<
     title: "Database Architecture & Query Optimization",
     projectType: "Database Architecture & Query Optimization",
     defaultBudget: "< $1,000",
-    defaultTimeline: "ASAP (Rush Project)",
+    defaultTimeline: "Immediate / ASAP",
   },
   "full-stack-web": {
     title: "Full-Stack Web Application Sprint",
@@ -126,19 +124,19 @@ const SERVICE_ID_TO_DETAILS: Record<
     title: "DevOps & CI/CD Pipeline Modernization",
     projectType: "DevOps & CI/CD Pipeline Modernization",
     defaultBudget: "< $1,000",
-    defaultTimeline: "ASAP (Rush Project)",
+    defaultTimeline: "Immediate / ASAP",
   },
   "security-audit": {
     title: "Security Hardening & Penetration Testing",
     projectType: "Security Hardening & Penetration Testing",
     defaultBudget: "$1,000 – $3,000",
-    defaultTimeline: "ASAP (Rush Project)",
+    defaultTimeline: "Immediate / ASAP",
   },
   "system-rescue": {
     title: "Emergency System Rescue & Stabilization",
     projectType: "Emergency System Rescue & Stabilization",
     defaultBudget: "$1,000 – $3,000",
-    defaultTimeline: "ASAP (Rush Project)",
+    defaultTimeline: "Immediate / ASAP",
   },
 };
 
@@ -160,10 +158,39 @@ function ContactFormInner() {
   const [configuredScopeTier, setConfiguredScopeTier] = useState<string | null>(null);
 
   useEffect(() => {
+    const intentParam = searchParams.get("intent");
     const serviceParam = searchParams.get("service");
     const scopeParam = searchParams.get("scope");
 
-    if (serviceParam && SERVICE_ID_TO_DETAILS[serviceParam]) {
+    if (intentParam === "full-time") {
+      setConfiguredServiceTitle("Full-Time Remote Engineering Role");
+      setConfiguredScopeTier("Dedicated Headcount");
+      setProjectType("Full-Time / Remote Role (AI Backend / Full Stack)");
+      setPriority("High Priority");
+      setBudget("Competitive Salary / Full-Time Role");
+      setTimeline("Immediate / ASAP");
+      setMessage(
+        "Hi Samir, I would like to discuss a full-time engineering role with our team.\n\n" +
+        "• Target Role: AI Backend Engineer / AI SDE / FDE\n" +
+        "• Company & Stage: [Company Name & Stage]\n" +
+        "• Core Tech Stack: [e.g. Node.js, TypeScript, PostgreSQL, AI agents]\n" +
+        "• Timezone & Location: [e.g. Remote Worldwide / US Overlap]\n" +
+        "• Next Steps: [e.g. Intro screen or technical challenge]"
+      );
+    } else if (intentParam === "contract") {
+      setConfiguredServiceTitle("Fixed-Scope Production Sprint");
+      setConfiguredScopeTier("Milestone Contract");
+      setProjectType("Autonomous AI Agents & Workflows");
+      setPriority("Medium Priority");
+      setBudget("$1,000 – $3,000");
+      setTimeline("1-2 Weeks");
+      setMessage(
+        "Hi Samir, I would like to discuss a fixed-scope engineering sprint.\n\n" +
+        "• Feature / Objective: [Briefly describe what you need built or audited]\n" +
+        "• Existing Tech Stack: [e.g. Next.js, Node.js, PostgreSQL]\n" +
+        "• Target Delivery Window: [e.g. 1-2 weeks]"
+      );
+    } else if (serviceParam && SERVICE_ID_TO_DETAILS[serviceParam]) {
       const info = SERVICE_ID_TO_DETAILS[serviceParam];
       const isCustom = scopeParam === "custom";
 
@@ -176,9 +203,9 @@ function ContactFormInner() {
 
       setMessage(
         `Hi Samir, I would like to discuss the ${info.title} (${isCustom ? "Custom Scope / Retainer" : "Standard Sprint"}).\n\n` +
-        `• Current Tech Stack: [e.g. Next.js, Node.js, PostgreSQL]\n` +
-        `• Target Launch Timeline: [e.g. 2-3 weeks]\n` +
-        `• Key Objectives / Bottlenecks: [Briefly outline what you need built, audited, or rescued]`
+        "• Current Tech Stack: [e.g. Next.js, Node.js, PostgreSQL]\n" +
+        "• Target Launch Timeline: [e.g. 2-3 weeks]\n" +
+        "• Key Objectives: [Briefly outline what you need built, audited, or rescued]"
       );
     }
   }, [searchParams]);
@@ -242,9 +269,6 @@ function ContactFormInner() {
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(whatsappText)}`;
     setWhatsappLink(whatsappUrl);
 
-    // Open WhatsApp immediately inside direct user gesture to bypass browser popup blockers
-    window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -255,18 +279,12 @@ function ContactFormInner() {
       const resData = await res.json().catch(() => ({}));
 
       if (!res.ok) {
-        throw new Error(resData.error || "Failed to save inquiry");
+        throw new Error(resData.error || "Failed to submit inquiry");
       }
 
-      if (resData.emailSent) {
-        setSuccessMessage(
-          "Project inquiry received! A confirmation email has been dispatched to your inbox. You can also continue the conversation directly on WhatsApp."
-        );
-      } else {
-        setSuccessMessage(
-          "Project inquiry received! You can also continue the conversation directly on WhatsApp."
-        );
-      }
+      setSuccessMessage(
+        "Inquiry received successfully! A confirmation email has been dispatched to your inbox. Samir will review your requirements and respond within 12–24 hours."
+      );
 
       trackEvent(analyticsEvents.contactSubmitSuccess, {
         email_sent: Boolean(resData.emailSent),
@@ -280,7 +298,7 @@ function ContactFormInner() {
         inquiry_type: data.projectType,
       });
       setSuccessMessage(
-        "Your project inquiry was prepared for WhatsApp! If the chat did not open automatically, click the button below to message Samir directly."
+        "Your inquiry details were compiled successfully! You can dispatch it directly to Samir via WhatsApp using the button below."
       );
     } finally {
       setLoading(false);
@@ -296,25 +314,20 @@ function ContactFormInner() {
         stroke="currentColor"
         aria-hidden="true"
       >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="1.5"
-          d="M6 8l4 4 4-4"
-        />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M6 8l4 4 4-4" />
       </svg>
     </div>
   );
 
   return (
     <form ref={formRef} className="flex flex-col gap-5" onSubmit={handleSubmit} noValidate>
-      {/* Service Pre-configuration Banner */}
+      {/* Service / Intent Pre-configuration Indicator */}
       {configuredServiceTitle && (
-        <div className="flex items-center justify-between gap-3 p-3.5 rounded-2xl border border-accent-lime/40 bg-accent-lime/10 text-xs text-foreground shadow-2xs">
-          <div className="flex items-center gap-2.5 min-w-0">
-            <span className="w-2 h-2 rounded-full bg-accent-lime shadow-[0_0_8px_rgba(184,255,0,0.8)] animate-pulse shrink-0" />
+        <div className="flex items-center justify-between gap-3 p-3.5 rounded-xl border border-border-primary bg-hover-bg text-xs text-foreground">
+          <div className="flex items-center gap-2 min-w-0">
+            <span className="w-2 h-2 rounded-full bg-accent-lime shrink-0" />
             <span className="truncate">
-              Pre-filled for: <strong className="font-bold">{configuredServiceTitle}</strong> ({configuredScopeTier})
+              Pre-configured: <strong className="font-bold">{configuredServiceTitle}</strong> ({configuredScopeTier})
             </span>
           </div>
           <button
@@ -327,40 +340,43 @@ function ContactFormInner() {
         </div>
       )}
 
-      {/* Success Banner */}
+      {/* Success Notification */}
       {successMessage && (
         <div
           role="status"
           aria-live="polite"
-          className="rounded-2xl border border-accent-lime/30 bg-accent-lime/5 dark:bg-accent-lime/10 p-4 text-sm text-foreground flex flex-col gap-3"
+          className="rounded-xl border border-border-primary bg-background dark:bg-card-bg p-5 text-sm text-foreground flex flex-col gap-3"
         >
           <div className="flex items-start gap-2.5">
-            <span className="mt-0.5 w-4 h-4 rounded-full bg-accent-lime text-[#0A0A0A] flex items-center justify-center text-[10px] font-black flex-shrink-0">
-              ✓
+            <span className="w-5 h-5 rounded-md bg-accent-lime text-[#0A0A0A] flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
+              <LuCheck className="w-3.5 h-3.5 stroke-[3]" />
             </span>
-            <p className="text-sm text-text-secondary leading-snug">{successMessage}</p>
+            <p className="text-xs sm:text-sm text-text-secondary leading-relaxed">{successMessage}</p>
           </div>
           {whatsappLink && (
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`self-start inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-neutral-950 font-bold px-4 py-2 text-xs transition-colors shadow-xs ${FOCUS_RING}`}
-            >
-              <FaWhatsapp className="text-sm flex-shrink-0" aria-hidden="true" />
-              <span>Open in WhatsApp</span>
-            </a>
+            <div className="pt-2 border-t border-border-primary/60 flex items-center gap-3">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-xl bg-hover-bg border border-border-primary text-foreground text-xs font-bold px-4 py-2 hover:bg-hover-bg/80 transition-colors"
+              >
+                <FaWhatsapp className="text-[#25D366] text-sm shrink-0" aria-hidden="true" />
+                <span>Continue on WhatsApp (Optional) &rarr;</span>
+              </a>
+            </div>
           )}
         </div>
       )}
 
-      {/* Error Banner */}
+      {/* Error Notification */}
       {error && (
         <div
           role="alert"
-          className="rounded-2xl border border-red-500/30 bg-red-50 dark:bg-red-900/10 p-4 text-sm text-red-700 dark:text-red-400"
+          className="rounded-xl border border-red-500/40 bg-red-500/10 p-4 text-xs sm:text-sm text-red-600 dark:text-red-400 flex items-center gap-2"
         >
-          {error}
+          <LuCircleAlert className="w-4 h-4 shrink-0" />
+          <span>{error}</span>
         </div>
       )}
 
@@ -398,11 +414,11 @@ function ContactFormInner() {
         </div>
       </div>
 
-      {/* Row 2: Company/Organization (Optional) + Project Type */}
+      {/* Row 2: Company + Project Type */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
           <label htmlFor="contact-company" className="block text-xs font-semibold text-text-secondary mb-1.5">
-            Company / Organization <span className="text-text-muted font-normal ml-1">(Optional)</span>
+            Company / Organization <span className="text-text-muted font-normal text-[11px]">(Optional)</span>
           </label>
           <input
             type="text"
@@ -410,13 +426,13 @@ function ContactFormInner() {
             name="company"
             autoComplete="organization"
             className={INPUT_BASE}
-            placeholder="Your Company Name (Optional)"
+            placeholder="Acme Corp"
             disabled={loading}
           />
         </div>
         <div>
           <label htmlFor="contact-project-type" className="block text-xs font-semibold text-text-secondary mb-1.5">
-            Project Type <span className="text-accent-lime" aria-hidden="true">*</span>
+            Inquiry Type <span className="text-accent-lime" aria-hidden="true">*</span>
           </label>
           <div className="relative">
             <select
@@ -429,7 +445,7 @@ function ContactFormInner() {
               className={`${INPUT_BASE} appearance-none pr-10 cursor-pointer`}
             >
               <option value="" disabled className="text-text-muted bg-background dark:bg-[#18181b]">
-                Select project type
+                Select inquiry type
               </option>
               {PROJECT_TYPES.map((type) => (
                 <option key={type} value={type} className="bg-background dark:bg-[#18181b] text-foreground">
@@ -469,7 +485,7 @@ function ContactFormInner() {
         </div>
         <div>
           <label htmlFor="contact-budget" className="block text-xs font-semibold text-text-secondary mb-1.5">
-            Budget Range <span className="text-accent-lime" aria-hidden="true">*</span>
+            Budget / Compensation <span className="text-accent-lime" aria-hidden="true">*</span>
           </label>
           <div className="relative">
             <select
@@ -482,7 +498,7 @@ function ContactFormInner() {
               className={`${INPUT_BASE} appearance-none pr-10 cursor-pointer`}
             >
               <option value="" disabled className="text-text-muted bg-background dark:bg-[#18181b]">
-                Select budget range
+                Select range
               </option>
               {BUDGET_RANGES.map((range) => (
                 <option key={range} value={range} className="bg-background dark:bg-[#18181b] text-foreground">
@@ -498,7 +514,7 @@ function ContactFormInner() {
       {/* Row 4: Timeline */}
       <div>
         <label htmlFor="contact-timeline" className="block text-xs font-semibold text-text-secondary mb-1.5">
-          Timeline <span className="text-accent-lime" aria-hidden="true">*</span>
+          Expected Timeline / Start Date <span className="text-accent-lime" aria-hidden="true">*</span>
         </label>
         <div className="relative">
           <select
@@ -523,10 +539,10 @@ function ContactFormInner() {
         </div>
       </div>
 
-      {/* Row 5: Project Description */}
+      {/* Row 5: Description */}
       <div>
         <label htmlFor="contact-message" className="block text-xs font-semibold text-text-secondary mb-1.5">
-          Project Description <span className="text-accent-lime" aria-hidden="true">*</span>
+          Project or Role Description <span className="text-accent-lime" aria-hidden="true">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -535,38 +551,25 @@ function ContactFormInner() {
           required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className={`${INPUT_BASE} resize-y min-h-[120px]`}
-          placeholder="Describe your project goals, technical requirements, stack, or any specific constraints…"
+          className={`${INPUT_BASE} resize-y min-h-[130px] font-mono text-xs`}
+          placeholder="Outline your requirements, tech stack, deliverables, or role expectations…"
           disabled={loading}
         />
       </div>
 
-      {/* Privacy note + CTA */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-1">
+      {/* Action Footer */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pt-2">
         <p className="text-[11px] text-text-muted leading-snug max-w-xs">
-          Your details are never sold or shared. By submitting you agree to a free discovery discussion.
+          Direct engineer communication. All details are kept confidential under mutual NDA upon request.
         </p>
 
         <button
           type="submit"
           disabled={loading}
-          aria-label="Send inquiry via WhatsApp"
-          className={`inline-flex items-center justify-center gap-2.5 rounded-full bg-foreground text-background dark:bg-accent-lime dark:text-[#0A0A0A] font-extrabold px-6 py-3 text-sm hover:shadow-[0_0_16px_rgba(184,255,0,0.45)] hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:pointer-events-none shadow-xs cursor-pointer whitespace-nowrap shrink-0 ${FOCUS_RING}`}
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent-lime text-[#0A0A0A] font-bold px-6 py-3.5 text-xs sm:text-sm hover:bg-accent-lime/90 transition-colors disabled:opacity-50 disabled:pointer-events-none cursor-pointer whitespace-nowrap shrink-0"
         >
-          <FaWhatsapp className="text-base flex-shrink-0" aria-hidden="true" />
-          <span>{loading ? "Sending…" : "Send via WhatsApp"}</span>
-          {!loading && (
-            <svg
-              className="w-3.5 h-3.5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2.5}
-              aria-hidden="true"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          )}
+          <LuSend className="w-4 h-4 stroke-[2.5]" />
+          <span>{loading ? "Transmitting…" : "Submit Inquiry"}</span>
         </button>
       </div>
     </form>
