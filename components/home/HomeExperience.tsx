@@ -1,9 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
+import HtmlParser from "@/components/HtmlParser";
 import { FiArrowUpRight, FiBriefcase } from "react-icons/fi";
 
 interface ExperienceItem {
   id: string;
   companyName: string;
+  logoUrl?: string | null;
   position: string;
   employmentType?: string;
   startDate: string;
@@ -18,6 +21,7 @@ interface HomeExperienceProps {
   experiences?: Array<{
     id: string;
     companyName: string;
+    logoUrl?: string | null;
     position: string;
     startDate: string;
     endDate: string | null;
@@ -89,13 +93,14 @@ export default function HomeExperience({ experiences }: HomeExperienceProps) {
           return {
             id: exp.id,
             companyName: exp.companyName,
+            logoUrl: exp.logoUrl || null,
             position: exp.position,
             employmentType: matchingVerified?.employmentType || "Production Engineering",
             startDate: exp.startDate,
             endDate: exp.endDate,
             isCurrent: exp.isCurrent,
             description: exp.description || matchingVerified?.description || null,
-            contributions: matchingVerified?.contributions || [],
+            contributions: exp.description ? [] : (matchingVerified?.contributions || []),
             outcome: matchingVerified?.outcome || undefined,
           };
         })
@@ -139,8 +144,19 @@ export default function HomeExperience({ experiences }: HomeExperienceProps) {
             return (
               <div key={exp.id || index} className="relative group">
                 {/* Timeline node */}
-                <div className="absolute -left-[33px] sm:-left-[41px] top-6 flex items-center justify-center w-8 h-8 rounded-full border border-border-primary bg-background dark:bg-card-bg shadow-2xs group-hover:border-foreground transition-colors">
-                  <FiBriefcase className="w-3.5 h-3.5 text-text-muted group-hover:text-foreground transition-colors" />
+                <div className="absolute -left-[33px] sm:-left-[41px] top-6 flex items-center justify-center w-8 h-8 rounded-full border border-border-primary bg-background dark:bg-card-bg shadow-2xs group-hover:border-foreground transition-colors overflow-hidden">
+                  {exp.logoUrl ? (
+                    <Image
+                      src={exp.logoUrl}
+                      alt={`${exp.companyName} logo`}
+                      width={22}
+                      height={22}
+                      unoptimized
+                      className="w-5 h-5 rounded-md object-contain"
+                    />
+                  ) : (
+                    <FiBriefcase className="w-3.5 h-3.5 text-text-muted group-hover:text-foreground transition-colors" />
+                  )}
                 </div>
 
                 {/* Experience Card */}
@@ -174,9 +190,12 @@ export default function HomeExperience({ experiences }: HomeExperienceProps) {
 
                   {/* Summary */}
                   {exp.description && (
-                    <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                      {exp.description}
-                    </p>
+                    <div className="mb-4">
+                      <HtmlParser
+                        html={exp.description}
+                        className="prose prose-sm prose-gray dark:prose-invert max-w-none text-sm text-text-secondary dark:text-text-secondary leading-relaxed [&_p]:my-1.5 [&_ul]:my-2 [&_li]:my-1 [&_strong]:text-foreground [&_p:empty]:hidden"
+                      />
+                    </div>
                   )}
 
                   {/* Key Contributions */}

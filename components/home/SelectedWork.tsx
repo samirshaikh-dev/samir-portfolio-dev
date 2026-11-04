@@ -1,7 +1,6 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Project } from "@/components/projects/ProjectList";
-import { optimizeCloudinaryUrl } from "@/lib/cloudinary-utils";
+import ProjectCoverImage from "./ProjectCoverImage";
 import { FiArrowUpRight, FiGithub, FiExternalLink } from "react-icons/fi";
 
 interface SelectedWorkProps {
@@ -238,28 +237,16 @@ export default function SelectedWork({ projects }: SelectedWorkProps) {
                   <div className="lg:col-span-5 w-full">
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="block relative aspect-16/10 w-full overflow-hidden rounded-xl md:rounded-2xl border border-border-primary/80 bg-hover-bg/20 focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none group/img"
+                      className="block focus-visible:ring-2 focus-visible:ring-accent-lime focus-visible:outline-none group/img rounded-xl md:rounded-2xl"
                       tabIndex={-1}
                       aria-hidden="true"
                     >
-                      {project.cover_image_url ? (
-                        <Image
-                          src={optimizeCloudinaryUrl(project.cover_image_url, { width: 800, quality: 85 })}
-                          alt={`${project.title} architectural overview`}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover/img:scale-102 motion-reduce:transform-none"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 500px"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-                          <span className="text-3xl font-mono font-black text-text-muted mb-2">
-                            {indexStr}
-                          </span>
-                          <span className="text-xs font-mono text-text-muted">
-                            Architecture Overview
-                          </span>
-                        </div>
-                      )}
+                      <ProjectCoverImage
+                        coverImageUrl={project.cover_image_url}
+                        title={project.title}
+                        category={project.category}
+                        indexStr={indexStr}
+                      />
                     </Link>
                   </div>
                 </div>
