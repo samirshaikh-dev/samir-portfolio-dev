@@ -12,9 +12,13 @@ import {
 
 interface RecruiterCheatSheetProps {
   className?: string;
+  hideHireLink?: boolean;
 }
 
-export default function RecruiterCheatSheet({ className = "" }: RecruiterCheatSheetProps) {
+export default function RecruiterCheatSheet({
+  className = "",
+  hideHireLink = false,
+}: RecruiterCheatSheetProps) {
   return (
     <section
       aria-labelledby="recruiter-fast-track-heading"
@@ -164,12 +168,21 @@ export default function RecruiterCheatSheet({ className = "" }: RecruiterCheatSh
           >
             View Sprint Blueprints &rarr;
           </Link>
-          <Link
-            href="/hire"
-            className="text-foreground hover:text-text-secondary font-bold underline underline-offset-4"
-          >
-            Dedicated Hiring Hub &rarr;
-          </Link>
+          {hideHireLink ? (
+            <Link
+              href="/resume"
+              className="text-foreground hover:text-text-secondary font-bold underline underline-offset-4"
+            >
+              Resume &bull; PDF &rarr;
+            </Link>
+          ) : (
+            <Link
+              href="/hire"
+              className="text-foreground hover:text-text-secondary font-bold underline underline-offset-4"
+            >
+              Dedicated Hiring Hub &rarr;
+            </Link>
+          )}
         </div>
       </div>
     </section>
